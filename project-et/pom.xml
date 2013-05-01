@@ -13,5 +13,13 @@
         <module>../project-et-ejb</module>
     </modules>
 
+    <!--<repositories>-->
+        <!--<repository>-->
+            <!--<id>JBoss</id>-->
+            <!--<name>JBoss Repository</name>-->
+            <!--<layout>default</layout>-->
+            <!--<url>http://repository.jboss.org/nexus/content/groups/public</url>-->
+        <!--</repository>-->
+    <!--</repositories>-->
 
 </project>
