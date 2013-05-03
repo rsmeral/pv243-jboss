@@ -1,10 +1,23 @@
 package cz.muni.fi.pv243.et.model;
 
-public class MoneyTransfer {
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 
+@Entity
+public class MoneyTransfer extends Transaction implements Serializable {
+
+    @Id
+    @GeneratedValue
     private Long id;
-    private Transaction transaction;
+
+    @ManyToOne(optional = false)
     private ExpenseReport report;
+
+    @OneToOne(optional = false)
     private Person creator;
 
     public Long getId() {
@@ -13,14 +26,6 @@ public class MoneyTransfer {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public Transaction getTransaction() {
-        return transaction;
-    }
-
-    public void setTransaction(Transaction transaction) {
-        this.transaction = transaction;
     }
 
     public ExpenseReport getReport() {
@@ -40,26 +45,32 @@ public class MoneyTransfer {
     }
 
     @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        MoneyTransfer that = (MoneyTransfer) o;
-
-        if (!creator.equals(that.creator)) return false;
-        if (!id.equals(that.id)) return false;
-        if (!report.equals(that.report)) return false;
-        if (transaction != null ? !transaction.equals(that.transaction) : that.transaction != null) return false;
-
-        return true;
+    public int hashCode() {
+        int hash = 3;
+        hash = 97 * hash + (this.id != null ? this.id.hashCode() : 0);
+        hash = 97 * hash + (this.report != null ? this.report.hashCode() : 0);
+        hash = 97 * hash + (this.creator != null ? this.creator.hashCode() : 0);
+        return hash;
     }
 
     @Override
-    public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + (transaction != null ? transaction.hashCode() : 0);
-        result = 31 * result + report.hashCode();
-        result = 31 * result + creator.hashCode();
-        return result;
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final MoneyTransfer other = (MoneyTransfer) obj;
+        if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
+            return false;
+        }
+        if (this.report != other.report && (this.report == null || !this.report.equals(other.report))) {
+            return false;
+        }
+        if (this.creator != other.creator && (this.creator == null || !this.creator.equals(other.creator))) {
+            return false;
+        }
+        return true;
     }
 }

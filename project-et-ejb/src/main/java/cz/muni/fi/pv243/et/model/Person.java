@@ -1,16 +1,35 @@
 package cz.muni.fi.pv243.et.model;
 
-public class Person {
+import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.validation.constraints.Digits;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.Email;
 
+@Entity
+public class Person implements Serializable {
+
+    @Id
+    @GeneratedValue
     private Long id;
+
+    @Size(min = 2, max = 50)
     private String firstName;
+
+    @Size(min = 2, max = 50)
     private String lastName;
+
+    @Email
+    @NotNull
     private String email;
     //private Role role;
-
     // add validation
-    private String bankAccount;
 
+    @Digits(integer = 9, fraction = 0)
+    private String bankAccount;
 
     public Long getId() {
         return id;
@@ -55,16 +74,30 @@ public class Person {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Person person = (Person) o;
 
-        if (bankAccount != null ? !bankAccount.equals(person.bankAccount) : person.bankAccount != null) return false;
-        if (email != null ? !email.equals(person.email) : person.email != null) return false;
-        if (firstName != null ? !firstName.equals(person.firstName) : person.firstName != null) return false;
-        if (id != null ? !id.equals(person.id) : person.id != null) return false;
-        if (lastName != null ? !lastName.equals(person.lastName) : person.lastName != null) return false;
+        if (bankAccount != null ? !bankAccount.equals(person.bankAccount) : person.bankAccount != null) {
+            return false;
+        }
+        if (email != null ? !email.equals(person.email) : person.email != null) {
+            return false;
+        }
+        if (firstName != null ? !firstName.equals(person.firstName) : person.firstName != null) {
+            return false;
+        }
+        if (id != null ? !id.equals(person.id) : person.id != null) {
+            return false;
+        }
+        if (lastName != null ? !lastName.equals(person.lastName) : person.lastName != null) {
+            return false;
+        }
 
         return true;
     }
@@ -78,5 +111,4 @@ public class Person {
         result = 31 * result + (bankAccount != null ? bankAccount.hashCode() : 0);
         return result;
     }
-
 }

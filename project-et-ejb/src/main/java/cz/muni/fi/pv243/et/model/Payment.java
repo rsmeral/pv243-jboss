@@ -1,19 +1,27 @@
 package cz.muni.fi.pv243.et.model;
 
-import java.util.Currency;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
+import javax.persistence.ManyToOne;
+import javax.validation.constraints.NotNull;
 
-public class Payment {
+@Entity
+public class Payment extends Transaction {
 
+    @Id
+    @GeneratedValue
     private Long id;
-    //private BigDecimal value;
-    //private Date date;
-    private Transaction transaction;
-    private Currency currency;
+
+    @ManyToOne(optional = false)
+    @NotNull
     private Purpose purpose;
+
+    @ManyToOne
     private Receipt receipt;
+
+    @ManyToOne(optional = false)
     private ExpenseReport report;
-
-
 
     public Long getId() {
 
@@ -22,22 +30,6 @@ public class Payment {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-//    public BigDecimal getValue() {
-//        return value;
-//    }
-//
-//    public void setValue(BigDecimal value) {
-//        this.value = value;
-//    }
-
-    public Currency getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(Currency currency) {
-        this.currency = currency;
     }
 
     public Purpose getPurpose() {
@@ -64,33 +56,37 @@ public class Payment {
         this.report = report;
     }
 
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        Payment payment = (Payment) o;
-
-        if (!currency.equals(payment.currency)) return false;
-        if (!id.equals(payment.id)) return false;
-        if (purpose != null ? !purpose.equals(payment.purpose) : payment.purpose != null) return false;
-        if (receipt != null ? !receipt.equals(payment.receipt) : payment.receipt != null) return false;
-        if (report != null ? !report.equals(payment.report) : payment.report != null) return false;
-        if (transaction != null ? !transaction.equals(payment.transaction) : payment.transaction != null) return false;
-
-        return true;
-    }
-
     @Override
     public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + (transaction != null ? transaction.hashCode() : 0);
-        result = 31 * result + currency.hashCode();
-        result = 31 * result + (purpose != null ? purpose.hashCode() : 0);
-        result = 31 * result + (receipt != null ? receipt.hashCode() : 0);
-        result = 31 * result + (report != null ? report.hashCode() : 0);
-        return result;
+        int hash = 7;
+        hash = 53 * hash + (this.id != null ? this.id.hashCode() : 0);
+        hash = 53 * hash + (this.purpose != null ? this.purpose.hashCode() : 0);
+        hash = 53 * hash + (this.receipt != null ? this.receipt.hashCode() : 0);
+        hash = 53 * hash + (this.report != null ? this.report.hashCode() : 0);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final Payment other = (Payment) obj;
+        if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
+            return false;
+        }
+        if (this.purpose != other.purpose && (this.purpose == null || !this.purpose.equals(other.purpose))) {
+            return false;
+        }
+        if (this.receipt != other.receipt && (this.receipt == null || !this.receipt.equals(other.receipt))) {
+            return false;
+        }
+        if (this.report != other.report && (this.report == null || !this.report.equals(other.report))) {
+            return false;
+        }
+        return true;
     }
 }
-
