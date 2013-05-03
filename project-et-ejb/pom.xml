@@ -17,6 +17,14 @@
         <version.jboss.bom>1.0.4.Final</version.jboss.bom>
     </properties>
 
+    <repositories>
+        <repository>
+            <id>JBoss</id>
+            <name>JBoss Repository</name>
+            <layout>default</layout>
+            <url>http://repository.jboss.org/nexus/content/groups/public</url>
+        </repository>
+    </repositories>
 
     <dependencyManagement>
         <dependencies>
@@ -157,6 +165,27 @@
             <groupId>org.jboss.arquillian.protocol</groupId>
             <artifactId>arquillian-protocol-servlet</artifactId>
             <scope>test</scope>
+        </dependency>
+
+        <!--OGM Hibernate Persistence Project-->
+        <dependency>
+            <groupId>org.hibernate.ogm</groupId>
+            <artifactId>hibernate-ogm-infinispan</artifactId>
+            <version>4.0.0.Beta2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.jboss.spec.javax.transaction</groupId>
+            <artifactId>jboss-transaction-api_1.1_spec</artifactId>
+            <version>1.0.1.Final</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- JBoss Transactions dependency -->
+        <dependency>
+            <groupId>org.jboss.jbossts</groupId>
+            <artifactId>jbossjta</artifactId>
+            <version>4.16.4.Final</version>
         </dependency>
 
     </dependencies>
