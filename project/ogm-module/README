@@ -1,0 +1,6 @@
+OGM needs custom AS module
+- put the folder to $JBOSS_HOME/modules
+
+TODO: create maven installer for the module
+
+https://forum.hibernate.org/viewtopic.php?p=2465957&sid=44d15edb4fdca6aa156d2aa650dac6c5#p2465957
