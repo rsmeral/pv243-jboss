@@ -4,29 +4,22 @@
              xsi:schemaLocation="http://java.sun.com/xml/ns/persistence http://java.sun.com/xml/ns/persistence/persistence_2_0.xsd"
              version="2.0">
 
-    
-    
     <persistence-unit name="et-pu" transaction-type="JTA">
         <!-- Use Hibernate OGM provider: configuration will be transparent -->
         <provider>org.hibernate.ogm.jpa.HibernateOgmPersistence</provider>
-        <class>cz.muni.fi.pv243.et.model.Person</class>
         
+        <class>cz.muni.fi.pv243.et.model.Person</class>
+        <jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source>
+        
+        
+        <!-- property optional if you plan and use Infinispan, otherwise adjust to your favorite
+        NoSQL Datastore provider. -->
         <properties>
-            <!-- property optional if you plan and use Infinispan, otherwise adjust to your favorite
-                NoSQL Datastore provider. -->
-            <property name="hibernate.ogm.datastore.provider"
-                      value="org.hibernate.ogm.datastore.infinispan.impl.InfinispanDatastoreProvider"/>
-
-            <property name="jboss.as.jpa.providerModule" value="org.hibernate:ogm"/>
-            <property name="jboss.as.jpa.adapterModule" value="org.jboss.as.jpa.hibernate:4"/>
-            
-            <property name="hibernate.transaction.manager_lookup_class" 
-                      value="org.hibernate.transaction.JBossTSStandaloneTransactionManagerLookup" />
-            
-<!--             defines which JTA Transaction we plan to use     HOW TO SET THIS to use automatic transactions?!
             <property name="hibernate.transaction.jta.platform"
-                      value="org.hibernate.service.jta.platform.internal.JBossStandAloneJtaPlatform"/>-->
-                                   
+                      value="org.hibernate.service.jta.platform.internal.JBossAppServerJtaPlatform" />
+            <property name="hibernate.ogm.datastore.provider"
+                      value="infinispan" />
         </properties>
+        
     </persistence-unit>
 </persistence>
