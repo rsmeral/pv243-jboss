@@ -26,7 +26,7 @@ public class Transaction {
     private BigDecimal value;
 
     @NotNull
-    private Currency currency;
+    private String currency;// TODO: how to represent currency? OGM doesn't like java.util.Currency
 
     public Date getDate() {
         return date;
@@ -44,11 +44,11 @@ public class Transaction {
         this.value = value;
     }
 
-    public Currency getCurrency() {
+    public String getCurrency() {
         return currency;
     }
 
-    public void setCurrency(Currency currency) {
+    public void setCurrency(String currency) {
         this.currency = currency;
     }
 
