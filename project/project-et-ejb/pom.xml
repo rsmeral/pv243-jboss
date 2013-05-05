@@ -145,6 +145,14 @@
                 <artifactId>maven-ejb-plugin</artifactId>
                 <version>${version.ejb.plugin}</version>
                 <configuration>
+                    <!--    hack for a Hibernate 4.0.1 bug
+                    we need to include dependency on envers
+                    https://community.jboss.org/message/647343 -->
+                    <archive>
+                        <manifestEntries>
+                            <Dependencies>org.hibernate.envers</Dependencies>
+                        </manifestEntries>
+                    </archive>
                     <ejbVersion>3.1</ejbVersion>
                 </configuration>
             </plugin>
