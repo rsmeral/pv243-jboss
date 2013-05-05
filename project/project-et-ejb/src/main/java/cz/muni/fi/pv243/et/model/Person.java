@@ -111,4 +111,11 @@ public class Person implements Serializable {
         result = 31 * result + (bankAccount != null ? bankAccount.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Person{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", bankAccount=" + bankAccount + '}';
+    }
+    
+    
 }
