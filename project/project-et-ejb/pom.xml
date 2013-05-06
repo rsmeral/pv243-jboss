@@ -112,13 +112,27 @@
         <dependency>
             <groupId>org.hibernate.ogm</groupId>
             <artifactId>hibernate-ogm-core</artifactId>
-            <version>4.0.0.Beta2</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.hibernate</groupId>
+                    <artifactId>hibernate-core</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>org.hibernate</groupId>
+                    <artifactId>hibernate-entitymanager</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         
         <dependency>
             <groupId>org.hibernate.ogm</groupId>
             <artifactId>hibernate-ogm-infinispan</artifactId>
-            <version>4.0.0.Beta2</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.hibernate</groupId>
+                    <artifactId>hibernate-entitymanager</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
 
         <dependency>
@@ -145,14 +159,6 @@
                 <artifactId>maven-ejb-plugin</artifactId>
                 <version>${version.ejb.plugin}</version>
                 <configuration>
-                    <!--    hack for a Hibernate 4.0.1 bug
-                    we need to include dependency on envers
-                    https://community.jboss.org/message/647343 -->
-                    <archive>
-                        <manifestEntries>
-                            <Dependencies>org.hibernate.envers</Dependencies>
-                        </manifestEntries>
-                    </archive>
                     <ejbVersion>3.1</ejbVersion>
                 </configuration>
             </plugin>

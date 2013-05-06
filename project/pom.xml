@@ -32,6 +32,8 @@
         <version.ejb.plugin>2.3</version.ejb.plugin>
         <version.surefire.plugin>2.4.3</version.surefire.plugin>
         <version.war.plugin>2.1.1</version.war.plugin>
+        
+        <version.hibernate.ogm>4.0.0.Beta2</version.hibernate.ogm>
 
         <!-- maven-compiler-plugin -->
         <maven.compiler.target>1.6</maven.compiler.target>
@@ -61,6 +63,18 @@
                 <version>${version.jboss.bom}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+            
+            <dependency>
+                <groupId>org.hibernate.ogm</groupId>
+                <artifactId>hibernate-ogm-core</artifactId>
+                <version>${version.hibernate.ogm}</version>
+            </dependency>
+        
+            <dependency>
+                <groupId>org.hibernate.ogm</groupId>
+                <artifactId>hibernate-ogm-infinispan</artifactId>
+                <version>${version.hibernate.ogm}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
