@@ -10,7 +10,9 @@ import org.hibernate.search.query.DatabaseRetrievalMethod;
 import org.hibernate.search.query.ObjectLookupMethod;
 import org.hibernate.search.query.dsl.QueryBuilder;
 
+
 import javax.ejb.Stateless;
+import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.Collection;
@@ -19,7 +21,7 @@ import java.util.List;
 @Stateless
 public class PersonDAOImpl implements PersonDAO {
 
-    @PersistenceContext
+    @Inject
     private EntityManager em;
 
     @Override

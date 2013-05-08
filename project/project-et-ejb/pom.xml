@@ -191,6 +191,34 @@
             <artifactId>jbossjta</artifactId>
             <version>4.16.4.Final</version>
         </dependency>
+
+
+        <!-- The DeltaSpike libraries, we use compile scope as these are
+           not provided by JBoss AS 7, and need to be packaged in the application -->
+        <!--<dependency>-->
+            <!--<groupId>org.apache.deltaspike.modules</groupId>-->
+            <!--<artifactId>deltaspike-jpa-module-api</artifactId>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>org.apache.deltaspike.modules</groupId>-->
+            <!--<artifactId>deltaspike-jpa-module-impl</artifactId>-->
+            <!--<scope>runtime</scope>-->
+        <!--</dependency>-->
+
+        <dependency>
+            <groupId>org.apache.deltaspike.core</groupId>
+            <artifactId>deltaspike-core-api</artifactId>
+            <version>0.3-incubating</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.deltaspike.core</groupId>
+            <artifactId>deltaspike-core-impl</artifactId>
+            <version>0.3-incubating</version>
+            <scope>runtime</scope>
+        </dependency>
+
     </dependencies>
 
 

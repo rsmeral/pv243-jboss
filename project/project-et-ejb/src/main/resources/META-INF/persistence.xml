@@ -28,4 +28,27 @@
         </properties>
         
     </persistence-unit>
+
+
+    <persistence-unit name="TestPU" transaction-type="RESOURCE_LOCAL">
+        <non-jta-data-source>java:jboss/datasources/ExampleDS</non-jta-data-source>
+        <!-- If you are running in a production environment, add a managed
+           data source, this example data source is just for development and testing! -->
+        <!-- The datasource is deployed as WEB-INF/kitchensink-quickstart-ds.xml, you
+           can find it in the source at src/main/webapp/WEB-INF/kitchensink-quickstart-ds.xml -->
+        <properties>
+            <!-- Properties for Hibernate -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="create-drop" />
+            <property name="hibernate.show_sql" value="false" />
+
+            <!-- Properties for Hibernate Search -->
+            <!--<property name="hibernate.search.default.directory_provider" value="infinispan"/>-->
+            <!--<property name="hibernate.search.infinispan.configuration_resourcename" value="infinispan.xml"/>-->
+
+
+        </properties>
+    </persistence-unit>
 </persistence>
+
+

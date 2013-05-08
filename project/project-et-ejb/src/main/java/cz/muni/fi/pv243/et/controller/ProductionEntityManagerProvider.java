@@ -1,11 +1,22 @@
 package cz.muni.fi.pv243.et.controller;
 
-/**
- * Created with IntelliJ IDEA.
- * User: mtoth
- * Date: 5/8/13
- * Time: 7:02 PM
- * To change this template use File | Settings | File Templates.
- */
+
+import org.apache.deltaspike.core.api.exclude.annotation.Exclude;
+
+import javax.enterprise.inject.Produces;
+import javax.faces.application.ProjectStage;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import static org.apache.deltaspike.core.api.projectstage.ProjectStage.Production;
+
+@Exclude(exceptIfProjectStage = Production.class)
 public class ProductionEntityManagerProvider {
+
+    @PersistenceContext(unitName="et-pu")
+    private EntityManager entityManager;
+
+    @Produces
+    public EntityManager getEntityManager() {
+        return entityManager;
+    }
 }
