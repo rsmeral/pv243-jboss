@@ -7,9 +7,11 @@ import javax.persistence.Id;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+import org.apache.lucene.analysis.KeywordAnalyzer;
 
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.search.annotations.Analyze;
+import org.hibernate.search.annotations.Analyzer;
 import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.validator.constraints.Email;
@@ -31,7 +33,7 @@ public class Person implements Serializable {
 
     @Email
     @NotNull
-    @Field(analyze = Analyze.YES)
+    @Field(analyze = Analyze.YES, analyzer=@Analyzer(impl=KeywordAnalyzer.class))
     private String email;
     //private Role role;
     // add validation
