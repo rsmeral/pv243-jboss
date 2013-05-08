@@ -15,6 +15,27 @@
     <artifactId>project-et-web</artifactId>
     <name>Project ET Web</name>
     
+    <dependencies>
+        <dependency>
+            <groupId>cz.muni.fi.pv243.project-et</groupId>
+            <artifactId>project-et-ejb</artifactId>
+            <version>${project.version}</version>
+            <scope>provided</scope>
+        </dependency>
+        
+        <!-- Import the CDI API, we use provided scope as the API is included in JBoss AS 7 -->
+        <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+        </dependency>
+        
+        <!-- Import the JSF API, we use provided scope as the API is included in JBoss AS 7 -->
+      <dependency>
+         <groupId>org.jboss.spec.javax.faces</groupId>
+         <artifactId>jboss-jsf-api_2.1_spec</artifactId>
+         <scope>provided</scope>
+      </dependency>
+    </dependencies>
     
     <build>
         <finalName>${project.artifactId}</finalName>

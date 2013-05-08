@@ -1,7 +1,10 @@
 package cz.muni.fi.pv243.et.dao;
 
 import cz.muni.fi.pv243.et.model.Person;
-import org.apache.lucene.search.MatchAllDocsQuery;
+import java.util.Collection;
+import javax.ejb.Stateless;
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
 import org.apache.lucene.search.Query;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.FullTextQuery;
@@ -9,14 +12,6 @@ import org.hibernate.search.jpa.Search;
 import org.hibernate.search.query.DatabaseRetrievalMethod;
 import org.hibernate.search.query.ObjectLookupMethod;
 import org.hibernate.search.query.dsl.QueryBuilder;
-
-
-import javax.ejb.Stateless;
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import java.util.Collection;
-import java.util.List;
 
 @Stateless
 public class PersonDAOImpl implements PersonDAO {
@@ -42,6 +37,8 @@ public class PersonDAOImpl implements PersonDAO {
             throw new IllegalArgumentException("person id is not null");
         }
         em.persist(person);
+//        em.flush();
+        System.out.println("persons flushed");
     }
 
     @Override
@@ -84,7 +81,7 @@ public class PersonDAOImpl implements PersonDAO {
         FullTextEntityManager ftem = Search.getFullTextEntityManager(em);
         //
         final QueryBuilder qb = getQueryBuilder(ftem);
-        final Query query = qb.keyword().onField("email").matching(email).createQuery();
+        final Query query = qb.keyword().onFields("email").matching(email).createQuery();
 
         return ftem
                 .createFullTextQuery(query, Person.class)

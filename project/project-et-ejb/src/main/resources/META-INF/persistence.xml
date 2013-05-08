@@ -30,8 +30,8 @@
     </persistence-unit>
 
 
-    <persistence-unit name="TestPU" transaction-type="RESOURCE_LOCAL">
-        <non-jta-data-source>java:jboss/datasources/ExampleDS</non-jta-data-source>
+    <persistence-unit name="TestPU">
+        <jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source>
         <!-- If you are running in a production environment, add a managed
            data source, this example data source is just for development and testing! -->
         <!-- The datasource is deployed as WEB-INF/kitchensink-quickstart-ds.xml, you
