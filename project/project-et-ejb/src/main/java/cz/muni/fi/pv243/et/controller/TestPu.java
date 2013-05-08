@@ -1,18 +1,19 @@
 package cz.muni.fi.pv243.et.controller;
 
+import cz.muni.fi.pv243.et.dao.PersonDAO;
 import cz.muni.fi.pv243.et.model.Person;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
+import javax.inject.Inject;
 
 @Singleton
 @Startup
 public class TestPu {
 
-    @PersistenceContext
-    private EntityManager em;
+    @Inject
+    private PersonDAO dao;
 
     @PostConstruct
     public void addPerson() {
@@ -20,14 +21,24 @@ public class TestPu {
 
         person.setFirstName("Test");
         person.setLastName("Test");
-        person.setEmail("test@test.com");
+        person.setEmail("test2@test.com");
         person.setBankAccount("123456789");
 
-        em.persist(person);
-        em.flush();
+        dao.create(person);
 
-        Person person2 = em.find(Person.class, person.getId());
 
-        System.out.println(person2.getId());
+        Person personNew = new Person();
+        personNew.setFirstName("Test");
+        personNew.setLastName("Test");
+        personNew.setEmail("test@test.com");
+        personNew.setBankAccount("123456789");
+
+        dao.create(personNew);
+
+        System.out.println(dao.load(person.getId()));
+        System.out.println(dao.load(personNew.getId()));
+
+        System.out.println(dao.findAll());
+        System.out.println(dao.findByEmail("test@test.com"));
     }
 }

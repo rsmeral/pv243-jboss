@@ -7,14 +7,21 @@ import javax.persistence.Id;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.search.annotations.Analyze;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
 import org.hibernate.validator.constraints.Email;
 
+@Indexed
 @Entity
 public class Person implements Serializable {
 
     @Id
-    @GeneratedValue
-    private Long id;
+    @GeneratedValue(generator = "uuid")
+    @GenericGenerator(name="uuid", strategy="uuid2")
+    private String id;
 
     @Size(min = 2, max = 50)
     private String firstName;
@@ -24,6 +31,7 @@ public class Person implements Serializable {
 
     @Email
     @NotNull
+    @Field(analyze = Analyze.YES)
     private String email;
     //private Role role;
     // add validation
@@ -31,11 +39,11 @@ public class Person implements Serializable {
     @Digits(integer = 9, fraction = 0)
     private String bankAccount;
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
@@ -114,7 +122,7 @@ public class Person implements Serializable {
 
     @Override
     public String toString() {
-        return "Person{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", bankAccount=" + bankAccount + '}';
+        return "Person{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", bankAccount=" + bankAccount + "}\n";
     }
     
     

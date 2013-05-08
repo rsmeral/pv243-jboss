@@ -15,10 +15,16 @@
         <!-- property optional if you plan and use Infinispan, otherwise adjust to your favorite
         NoSQL Datastore provider. -->
         <properties>
+            <property name="hibernate.ogm.datastore.provider"
+                      value="infinispan"/>
+            <property name="hibernate.ogm.infinispan.configuration_resourcename" value="infinispan-ogm-config.xml"/>
+
+            <!-- Properties for Hibernate Search -->
+            <property name="hibernate.search.default.directory_provider" value="infinispan"/>
+            <property name="hibernate.search.infinispan.configuration_resourcename" value="infinispan.xml"/>
+
             <property name="hibernate.transaction.jta.platform"
                       value="org.hibernate.service.jta.platform.internal.JBossAppServerJtaPlatform" />
-            <property name="hibernate.ogm.datastore.provider"
-                      value="infinispan" />
         </properties>
         
     </persistence-unit>
