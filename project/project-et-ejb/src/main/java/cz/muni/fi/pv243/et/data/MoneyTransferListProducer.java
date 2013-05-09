@@ -4,9 +4,11 @@ import cz.muni.fi.pv243.et.model.ExpenseReport;
 import cz.muni.fi.pv243.et.model.MoneyTransfer;
 import cz.muni.fi.pv243.et.model.Transaction;
 import org.joda.time.DateTime;
-
+import javax.ejb.Local;
+import java.util.Collection;
 import java.util.List;
 
+@Local
 public interface MoneyTransferListProducer {
 
     public MoneyTransfer getMoneyTransfer(Long id);
@@ -15,9 +17,9 @@ public interface MoneyTransferListProducer {
 
     public MoneyTransfer getMoneyTransfer(Transaction transaction);
 
-    public List<MoneyTransfer> getMoneyTransfers(ExpenseReport expenseReport);
+    public Collection<MoneyTransfer> getMoneyTransfers(ExpenseReport expenseReport);
 
     public List<MoneyTransfer> getMoneyTransfersBetweenDates(DateTime fromDate, DateTime toDate);
 
-    public List<MoneyTransfer> getAllMoneyTransfers();
+    public Collection<MoneyTransfer> getAllMoneyTransfers();
 }

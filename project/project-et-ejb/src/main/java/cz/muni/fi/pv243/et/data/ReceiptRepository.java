@@ -1,9 +1,10 @@
 package cz.muni.fi.pv243.et.data;
 
-
 import cz.muni.fi.pv243.et.model.Person;
 import cz.muni.fi.pv243.et.model.Receipt;
+import javax.ejb.Local;
 
+@Local
 public interface ReceiptRepository {
 
     public void createReceipt(Receipt receipt);
