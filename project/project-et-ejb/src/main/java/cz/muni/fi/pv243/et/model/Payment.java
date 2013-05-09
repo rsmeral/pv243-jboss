@@ -1,5 +1,8 @@
 package cz.muni.fi.pv243.et.model;
 
+import org.hibernate.search.annotations.Field;
+import org.joda.time.DateTime;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -23,8 +26,8 @@ public class Payment extends Transaction {
     @ManyToOne(optional = false)
     private ExpenseReport report;
 
-    public Long getId() {
 
+    public Long getId() {
         return id;
     }
 

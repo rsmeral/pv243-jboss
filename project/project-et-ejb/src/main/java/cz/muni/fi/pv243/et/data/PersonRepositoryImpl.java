@@ -1,4 +1,4 @@
-package cz.muni.fi.pv243.et.dao;
+package cz.muni.fi.pv243.et.data;
 
 import cz.muni.fi.pv243.et.model.Person;
 import java.util.Collection;
@@ -14,19 +14,10 @@ import org.hibernate.search.query.ObjectLookupMethod;
 import org.hibernate.search.query.dsl.QueryBuilder;
 
 @Stateless
-public class PersonDAOImpl implements PersonDAO {
+public class PersonRepositoryImpl implements PersonRepository {
 
     @Inject
     private EntityManager em;
-
-    @Override
-    public Person load(String id) {
-        if (id == null) {
-            throw new IllegalArgumentException("id is null");
-        }
-
-        return em.find(Person.class, id);
-    }
 
     @Override
     public void create(Person person) {
@@ -63,33 +54,5 @@ public class PersonDAOImpl implements PersonDAO {
         em.remove(em.find(Person.class, person.getId()));
     }
 
-    @Override
-    public Collection<Person> findAll() {
-        FullTextEntityManager ftem = Search.getFullTextEntityManager(em);
-        // match all
-        final QueryBuilder qb = getQueryBuilder(ftem);
-        final Query query = qb.all().createQuery();
-        //
-        FullTextQuery ftq = ftem.createFullTextQuery(query, Person.class);
-        ftq.initializeObjectsWith(ObjectLookupMethod.SKIP, DatabaseRetrievalMethod.FIND_BY_ID);
 
-        return ftq.getResultList();
-    }
-
-    @Override
-    public Collection<Person> findByEmail(String email) {
-        FullTextEntityManager ftem = Search.getFullTextEntityManager(em);
-        //
-        final QueryBuilder qb = getQueryBuilder(ftem);
-        final Query query = qb.keyword().onFields("email").matching(email).createQuery();
-
-        return ftem
-                .createFullTextQuery(query, Person.class)
-                .initializeObjectsWith(ObjectLookupMethod.SKIP, DatabaseRetrievalMethod.FIND_BY_ID)
-                .getResultList();
-    }
-
-    private QueryBuilder getQueryBuilder(FullTextEntityManager ftem) {
-        return ftem.getSearchFactory().buildQueryBuilder().forEntity(Person.class).get();
-    }
 }

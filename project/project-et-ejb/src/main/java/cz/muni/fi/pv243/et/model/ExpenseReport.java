@@ -1,7 +1,8 @@
 package cz.muni.fi.pv243.et.model;
 
+import org.joda.time.DateTime;
+
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -36,10 +37,10 @@ public class ExpenseReport implements Serializable {
     private List<MoneyTransfer> moneyTransfers;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date lastSubmittedDate;
+    private DateTime lastSubmittedDate;
 
     @Temporal(TemporalType.TIMESTAMP)
-    private Date approvedDate;
+    private DateTime approvedDate;
 
     @Enumerated(EnumType.ORDINAL)
     private ReportStatus status;
@@ -84,19 +85,19 @@ public class ExpenseReport implements Serializable {
         this.moneyTransfers = moneyTransfers;
     }
 
-    public Date getLastSubmittedDate() {
+    public DateTime getLastSubmittedDate() {
         return lastSubmittedDate;
     }
 
-    public void setLastSubmittedDate(Date lastSubmittedDate) {
+    public void setLastSubmittedDate(DateTime lastSubmittedDate) {
         this.lastSubmittedDate = lastSubmittedDate;
     }
 
-    public Date getApprovedDate() {
+    public DateTime getApprovedDate() {
         return approvedDate;
     }
 
-    public void setApprovedDate(Date approvedDate) {
+    public void setApprovedDate(DateTime approvedDate) {
         this.approvedDate = approvedDate;
     }
 

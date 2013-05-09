@@ -1,7 +1,7 @@
 package cz.muni.fi.pv243.et.controller;
 
-import cz.muni.fi.pv243.et.dao.PersonDAO;
-import cz.muni.fi.pv243.et.model.Person;
+import cz.muni.fi.pv243.et.data.PersonRepository;
+
 import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
@@ -12,7 +12,7 @@ import javax.inject.Inject;
 public class TestPu {
 
     @Inject
-    private PersonDAO dao;
+    private PersonRepository dao;
 
     @PostConstruct
     public void addPerson() {

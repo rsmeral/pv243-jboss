@@ -1,7 +1,8 @@
 package cz.muni.fi.pv243.et.model;
 
+import org.hibernate.search.annotations.Field;
+import org.joda.time.DateTime;
 import java.io.Serializable;
-import java.util.Date;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -16,12 +17,14 @@ public class Receipt implements Serializable {
     private Long id;
 
     @Temporal(javax.persistence.TemporalType.DATE)
-    private Date importDate;
+    private DateTime importDate;
 
     @OneToOne(optional = false)
     private Person importedBy;
 
+    @Field
     private String document;// WHAT THE @#*&^*$@ ?
+
 
     public Long getId() {
         return id;
@@ -31,11 +34,11 @@ public class Receipt implements Serializable {
         this.id = id;
     }
 
-    public Date getImportDate() {
+    public DateTime getImportDate() {
         return importDate;
     }
 
-    public void setImportDate(Date importDate) {
+    public void setImportDate(DateTime importDate) {
         this.importDate = importDate;
     }
 

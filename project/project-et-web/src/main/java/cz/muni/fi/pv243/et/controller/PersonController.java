@@ -4,7 +4,7 @@
  */
 package cz.muni.fi.pv243.et.controller;
 
-import cz.muni.fi.pv243.et.dao.PersonDAO;
+import cz.muni.fi.pv243.et.data.PersonRepository;
 import cz.muni.fi.pv243.et.model.Person;
 import java.util.Collection;
 import javax.enterprise.inject.Model;
@@ -18,7 +18,7 @@ import javax.inject.Inject;
 public class PersonController {
 
     @Inject
-    private PersonDAO pd;
+    private PersonRepository pd;
 
     public String createPersons() {
         
