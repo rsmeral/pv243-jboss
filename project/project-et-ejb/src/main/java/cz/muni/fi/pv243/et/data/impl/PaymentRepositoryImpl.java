@@ -1,4 +1,4 @@
-package cz.muni.fi.pv243.et.data;
+package cz.muni.fi.pv243.et.data.impl;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;

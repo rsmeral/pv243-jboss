@@ -1,5 +1,6 @@
-package cz.muni.fi.pv243.et.data;
+package cz.muni.fi.pv243.et.data.impl;
 
+import cz.muni.fi.pv243.et.data.PersonRepository;
 import cz.muni.fi.pv243.et.model.Person;
 import java.util.Collection;
 import javax.ejb.Stateless;

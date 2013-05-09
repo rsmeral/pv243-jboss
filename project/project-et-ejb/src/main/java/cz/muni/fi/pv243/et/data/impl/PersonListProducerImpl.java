@@ -1,5 +1,6 @@
-package cz.muni.fi.pv243.et.data;
+package cz.muni.fi.pv243.et.data.impl;
 
+import cz.muni.fi.pv243.et.data.PersonListProducer;
 import cz.muni.fi.pv243.et.model.Person;
 import org.apache.lucene.search.Query;
 import org.hibernate.search.jpa.FullTextEntityManager;
