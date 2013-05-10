@@ -1,8 +1,10 @@
 package cz.muni.fi.pv243.et.model;
 
+import org.joda.time.DateTime;
+
 import java.math.BigDecimal;
 import java.util.Currency;
-import java.util.Date;
+
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
@@ -19,7 +21,7 @@ public class Transaction {
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "datum")
-    private Date date;
+    private DateTime date;
 
     @NotNull
     @Column(name = "val")
@@ -28,11 +30,11 @@ public class Transaction {
     @NotNull
     private String currency;// TODO: how to represent currency? OGM doesn't like java.util.Currency
 
-    public Date getDate() {
+    public DateTime getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(DateTime date) {
         this.date = date;
     }
 

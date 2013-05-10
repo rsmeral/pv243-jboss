@@ -4,6 +4,7 @@
  */
 package cz.muni.fi.pv243.et.controller;
 
+import cz.muni.fi.pv243.et.data.PersonListProducer;
 import cz.muni.fi.pv243.et.data.PersonRepository;
 import cz.muni.fi.pv243.et.model.Person;
 import java.util.Collection;
@@ -19,6 +20,7 @@ public class PersonController {
 
     @Inject
     private PersonRepository pd;
+    private PersonListProducer plp;
 
     public String createPersons() {
         
@@ -46,6 +48,6 @@ public class PersonController {
     public Collection<Person> getPersons() {
         System.out.println("getPersons");
 //        return pd.findAll();
-        return pd.findByEmail("test2@test.com");
+        return plp.findByEmail("test2@test.com");
     }
 }

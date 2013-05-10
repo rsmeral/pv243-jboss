@@ -12,7 +12,7 @@ public interface PaymentRepository {
 
     public void updatePayment(Payment payment);
 
-    public boolean removePayment(Long id);
+    public void removePayment(Payment payment);
 
 
 }

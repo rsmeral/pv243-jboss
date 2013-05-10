@@ -6,7 +6,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
 import org.apache.lucene.analysis.KeywordAnalyzer;
 
 import org.hibernate.annotations.GenericGenerator;
@@ -22,18 +24,20 @@ public class Person implements Serializable {
 
     @Id
     @GeneratedValue(generator = "uuid")
-    @GenericGenerator(name="uuid", strategy="uuid2")
+    @GenericGenerator(name = "uuid", strategy = "uuid2")
     private String id;
 
     @Size(min = 2, max = 50)
+    @Pattern(regexp = "[A-Z][a-z]*")
     private String firstName;
 
     @Size(min = 2, max = 50)
+    @Pattern(regexp = "[A-Z][a-z]*")
     private String lastName;
 
     @Email
     @NotNull
-    @Field(analyze = Analyze.YES, analyzer=@Analyzer(impl=KeywordAnalyzer.class))
+    @Field(analyze = Analyze.YES, analyzer = @Analyzer(impl = KeywordAnalyzer.class))
     private String email;
     //private Role role;
     // add validation
@@ -126,6 +130,6 @@ public class Person implements Serializable {
     public String toString() {
         return "Person{" + "id=" + id + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", bankAccount=" + bankAccount + "}\n";
     }
-    
-    
+
+
 }

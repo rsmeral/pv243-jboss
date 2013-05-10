@@ -26,7 +26,6 @@ public class Payment extends Transaction {
     @ManyToOne(optional = false)
     private ExpenseReport report;
 
-
     public Long getId() {
         return id;
     }
