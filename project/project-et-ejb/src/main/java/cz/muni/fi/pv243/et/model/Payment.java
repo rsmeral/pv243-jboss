@@ -1,7 +1,6 @@
 package cz.muni.fi.pv243.et.model;
 
 import org.hibernate.search.annotations.Field;
-import org.joda.time.DateTime;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;

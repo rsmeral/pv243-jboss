@@ -8,6 +8,7 @@ import cz.muni.fi.pv243.et.data.PersonListProducer;
 import cz.muni.fi.pv243.et.data.PersonRepository;
 import cz.muni.fi.pv243.et.model.Person;
 import java.util.Collection;
+import java.util.List;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 
@@ -20,6 +21,8 @@ public class PersonController {
 
     @Inject
     private PersonRepository pd;
+
+    @Inject
     private PersonListProducer plp;
 
     public String createPersons() {
@@ -46,8 +49,13 @@ public class PersonController {
     }
 
     public Collection<Person> getPersons() {
+        System.out.println(plp.findAll());
+
         System.out.println("getPersons");
 //        return pd.findAll();
-        return plp.findByEmail("test2@test.com");
+        Collection<Person> people = plp.findByEmail("test2@test.com");
+        System.out.println("Person=" + people);
+
+        return people;
     }
 }

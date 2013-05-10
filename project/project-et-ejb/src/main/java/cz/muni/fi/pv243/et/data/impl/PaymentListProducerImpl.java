@@ -65,7 +65,7 @@ public class PaymentListProducerImpl implements PaymentListProducer {
     @Override
     public List<Payment> getPaymentsBetweenDates(DateTime fromDate, DateTime toDate) {
         QueryBuilder qb = getQueryBuilder(ftem, Payment.class);
-        // ??
+        // ?? Transaction.date or date
         Query lucene = qb.range().onField("Transaction.date").from(fromDate).to(toDate).createQuery();
 
         return (List<Payment>) ftem.createFullTextQuery(lucene).getSingleResult();

@@ -29,7 +29,7 @@ public class PersonRepositoryImpl implements PersonRepository {
             throw new IllegalArgumentException("person id is not null");
         }
         em.persist(person);
-//        em.flush();
+        em.flush();
         System.out.println("persons flushed");
     }
 

@@ -16,7 +16,7 @@ public class Receipt implements Serializable {
     @GeneratedValue
     private Long id;
 
-    @Temporal(javax.persistence.TemporalType.DATE)
+    //@Temporal(javax.persistence.TemporalType.DATE)
     private DateTime importDate;
 
     @OneToOne(optional = false)

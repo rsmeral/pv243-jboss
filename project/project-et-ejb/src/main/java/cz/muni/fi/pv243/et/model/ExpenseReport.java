@@ -36,10 +36,10 @@ public class ExpenseReport implements Serializable {
     @OneToMany(mappedBy = "report")
     private List<MoneyTransfer> moneyTransfers;
 
-    @Temporal(TemporalType.TIMESTAMP)
+//    @Temporal(TemporalType.TIMESTAMP)
     private DateTime lastSubmittedDate;
 
-    @Temporal(TemporalType.TIMESTAMP)
+//    @Temporal(TemporalType.TIMESTAMP)
     private DateTime approvedDate;
 
     @Enumerated(EnumType.ORDINAL)

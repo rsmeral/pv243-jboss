@@ -19,7 +19,7 @@ import javax.validation.constraints.NotNull;
 public class Transaction {
 
     @NotNull
-    @Temporal(TemporalType.TIMESTAMP)
+//    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "datum")
     private DateTime date;
 
