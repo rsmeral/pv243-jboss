@@ -1,6 +1,10 @@
 package cz.muni.fi.pv243.et.model;
 
+import org.apache.lucene.analysis.KeywordAnalyzer;
+import org.hibernate.search.annotations.Analyze;
+import org.hibernate.search.annotations.Analyzer;
 import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
 import org.joda.time.DateTime;
 import java.io.Serializable;
 import javax.persistence.Entity;
@@ -10,6 +14,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 
 @Entity
+@Indexed
 public class Receipt implements Serializable {
 
     @Id
@@ -17,14 +22,15 @@ public class Receipt implements Serializable {
     private Long id;
 
     //@Temporal(javax.persistence.TemporalType.DATE)
+    // exists DateAnalyzer??
+    @Field(analyze = Analyze.YES, analyzer = @Analyzer(impl = KeywordAnalyzer.class))
     private DateTime importDate;
 
     @OneToOne(optional = false)
+    @Field(analyze = Analyze.YES, analyzer = @Analyzer(impl = KeywordAnalyzer.class))
     private Person importedBy;
 
-    @Field
     private String document;// WHAT THE @#*&^*$@ ?
-
 
     public Long getId() {
         return id;

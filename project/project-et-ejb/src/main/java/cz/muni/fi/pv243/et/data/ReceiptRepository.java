@@ -7,9 +7,9 @@ import javax.ejb.Local;
 @Local
 public interface ReceiptRepository {
 
-    public void createReceipt(Receipt receipt);
+    public void create(Receipt receipt);
 
-    public void updateReceipt(Long id);
+    public void update(Receipt receipt);
 
-    public void removeReceipt(Long id);
+    public void remove(Receipt receipt);
 }

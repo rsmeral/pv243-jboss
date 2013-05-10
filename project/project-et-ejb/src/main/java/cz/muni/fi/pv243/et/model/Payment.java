@@ -1,6 +1,10 @@
 package cz.muni.fi.pv243.et.model;
 
+import org.apache.lucene.analysis.KeywordAnalyzer;
+import org.hibernate.search.annotations.Analyze;
+import org.hibernate.search.annotations.Analyzer;
 import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -9,6 +13,7 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@Indexed
 public class Payment extends Transaction {
 
     @Id
@@ -20,6 +25,7 @@ public class Payment extends Transaction {
     private Purpose purpose;
 
     @ManyToOne
+    //@Field(analyze = Analyze.YES, analyzer = @Analyzer(impl = KeywordAnalyzer.class))
     private Receipt receipt;
 
     @ManyToOne(optional = false)

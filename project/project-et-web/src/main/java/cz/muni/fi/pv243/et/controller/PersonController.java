@@ -4,11 +4,11 @@
  */
 package cz.muni.fi.pv243.et.controller;
 
-import cz.muni.fi.pv243.et.data.PersonListProducer;
-import cz.muni.fi.pv243.et.data.PersonRepository;
-import cz.muni.fi.pv243.et.model.Person;
+import cz.muni.fi.pv243.et.data.*;
+import cz.muni.fi.pv243.et.model.*;
+
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 
@@ -24,6 +24,18 @@ public class PersonController {
 
     @Inject
     private PersonListProducer plp;
+
+//    @Inject
+//    private PaymentRepository paymentRepo;
+//
+//    @Inject
+//    private PaymentListProducer paymentListProducer;
+
+    @Inject
+    private PurposeRepository purposeRepo;
+
+    @Inject
+    private PurposeListProducer purposeList;
 
     public String createPersons() {
         
@@ -45,16 +57,57 @@ public class PersonController {
 
         pd.create(personNew);
         System.out.println("createPersons");
+
+
+        Purpose purp = new Purpose();
+        purp.setDescription("Blabol");
+        purp.setName("TestPurp");
+        purposeRepo.create(purp);
+
+
+
+//
+//        // create test payments entities
+//        Payment payment = new Payment();
+
+//
+//        ExpenseReport report = new ExpenseReport();
+//        report.setSubmitter(personNew);
+//        report.setId(2L);
+//
+//        Receipt rec = new Receipt();
+//        rec.setId(1L);
+//        rec.setImportDate(DateTime.now());
+//
+//        System.out.println("Created Purpose");
+//        payment.setPurpose(purp);
+//        payment.setReport(report);
+//        payment.setReceipt(rec);
+//
+//        payment.setCurrency("$");
+//        payment.setValue(BigDecimal.valueOf(150));
+//        payment.setDate(DateTime.now());
+//
+//        System.out.println("Payment set");
+//        paymentRepo.create(payment);
+
+        System.out.println("Persisted");
+
         return "created";
     }
 
-    public Collection<Person> getPersons() {
+    public Collection<Object> getPersons() {
         System.out.println(plp.findAll());
 
         System.out.println("getPersons");
 //        return pd.findAll();
-        Collection<Person> people = plp.findByEmail("test2@test.com");
+        Collection<Object> people = new ArrayList<Object>();
+        people.add(plp.findByEmail("test2@test.com"));
         System.out.println("Person=" + people);
+        System.out.println("Purpose=" + purposeList.get(1L));
+
+        people.add(purposeList.getAll());
+        //System.out.println("Payments=" + paymentListProducer.getAllPayments());
 
         return people;
     }

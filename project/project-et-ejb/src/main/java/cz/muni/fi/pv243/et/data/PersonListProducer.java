@@ -11,7 +11,7 @@ public interface PersonListProducer {
 
     public Collection<Person> findAll();
 
-    public Collection<Person> findByEmail(String email);
+    public Person findByEmail(String email);
 
     public Collection<Person> findByName(String firstName, String lastName);
 

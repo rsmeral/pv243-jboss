@@ -8,10 +8,10 @@ import java.util.Collection;
 @Local
 public interface PurposeListProducer {
 
-    public Purpose getPurpose(Long id);
+    public Purpose get(Long id);
 
-    public Purpose getPurpose(Payment payment);
+    public Purpose get(Payment payment);
 
-    public Collection<Purpose> getAllPurposes();
+    public Collection<Purpose> getAll();
 
 }

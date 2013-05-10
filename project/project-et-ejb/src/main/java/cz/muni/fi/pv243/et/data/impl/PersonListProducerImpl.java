@@ -1,5 +1,6 @@
 package cz.muni.fi.pv243.et.data.impl;
 
+import cz.muni.fi.pv243.et.data.HibernateSearchUtil;
 import cz.muni.fi.pv243.et.data.PersonListProducer;
 import cz.muni.fi.pv243.et.model.Person;
 import org.apache.lucene.search.Query;
@@ -9,11 +10,13 @@ import org.hibernate.search.jpa.Search;
 import org.hibernate.search.query.DatabaseRetrievalMethod;
 import org.hibernate.search.query.ObjectLookupMethod;
 import org.hibernate.search.query.dsl.QueryBuilder;
+
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import java.util.Collection;
 
-
+@Stateless
 public class PersonListProducerImpl implements PersonListProducer {
 
     @Inject
@@ -32,7 +35,7 @@ public class PersonListProducerImpl implements PersonListProducer {
     public Collection<Person> findAll() {
         FullTextEntityManager ftem = Search.getFullTextEntityManager(em);
         // match all
-        final QueryBuilder qb = getQueryBuilder(ftem);
+        final QueryBuilder qb = HibernateSearchUtil.getQueryBuilder(ftem, Person.class);
         final Query query = qb.all().createQuery();
         //
         FullTextQuery ftq = ftem.createFullTextQuery(query, Person.class);
@@ -42,16 +45,22 @@ public class PersonListProducerImpl implements PersonListProducer {
     }
 
     @Override
-    public Collection<Person> findByEmail(String email) {
+    public Person findByEmail(String email) {
         FullTextEntityManager ftem = Search.getFullTextEntityManager(em);
         //
-        final QueryBuilder qb = getQueryBuilder(ftem);
+        final QueryBuilder qb = HibernateSearchUtil.getQueryBuilder(ftem, Person.class);
         final Query query = qb.keyword().onFields("email").matching(email).createQuery();
 
-        return ftem
+//        return ftem
+//                .createFullTextQuery(query, Person.class)
+//                .initializeObjectsWith(ObjectLookupMethod.SKIP, DatabaseRetrievalMethod.FIND_BY_ID)
+//                .getResultList();
+        return (Person) ftem
                 .createFullTextQuery(query, Person.class)
                 .initializeObjectsWith(ObjectLookupMethod.SKIP, DatabaseRetrievalMethod.FIND_BY_ID)
-                .getResultList();
+                .getSingleResult();
+
+
     }
 
     @Override
@@ -59,9 +68,4 @@ public class PersonListProducerImpl implements PersonListProducer {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
     }
 
-
-
-    private QueryBuilder getQueryBuilder(FullTextEntityManager ftem) {
-        return ftem.getSearchFactory().buildQueryBuilder().forEntity(Person.class).get();
-    }
 }

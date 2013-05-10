@@ -1,5 +1,11 @@
 package cz.muni.fi.pv243.et.model;
 
+import org.apache.lucene.analysis.KeywordAnalyzer;
+import org.hibernate.search.annotations.Analyze;
+import org.hibernate.search.annotations.Analyzer;
+import org.hibernate.search.annotations.Field;
+import org.hibernate.search.annotations.Indexed;
+
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,6 +14,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
+@Indexed
 public class Purpose implements Serializable {
 
     @Id
@@ -16,6 +23,7 @@ public class Purpose implements Serializable {
 
     @Size(max = 25)
     @NotNull
+//    @Field(analyze = Analyze.YES, analyzer = @Analyzer(impl = KeywordAnalyzer.class))
     private String name;
 
     @Size(max = 100)
@@ -71,5 +79,14 @@ public class Purpose implements Serializable {
         int result = name.hashCode();
         result = 31 * result + (description != null ? description.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Purpose{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                '}';
     }
 }
