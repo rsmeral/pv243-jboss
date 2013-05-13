@@ -18,7 +18,7 @@ public class ReceiptRepositoryImpl implements ReceiptRepository {
         if (receipt == null) {
             throw new IllegalArgumentException("receipt is null");
         }
-        if (receipt.getId() != null) {
+        if (receipt.getReceiptId() != null) {
             throw new IllegalArgumentException("receipt.id is not null");
         }
         em.persist(receipt);
@@ -29,7 +29,7 @@ public class ReceiptRepositoryImpl implements ReceiptRepository {
         if (receipt == null) {
             throw new IllegalArgumentException("receipt is null");
         }
-        if (receipt.getId() == null) {
+        if (receipt.getReceiptId() == null) {
             throw new IllegalArgumentException("receipt.id is null");
         }
         em.merge(receipt);
@@ -40,7 +40,7 @@ public class ReceiptRepositoryImpl implements ReceiptRepository {
         if (receipt == null) {
             throw new IllegalArgumentException("receipt is null");
         }
-        if (receipt.getId() == null) {
+        if (receipt.getReceiptId() == null) {
             throw new IllegalArgumentException("receipt.id is null -> not persisted");
         }
         em.remove(receipt);

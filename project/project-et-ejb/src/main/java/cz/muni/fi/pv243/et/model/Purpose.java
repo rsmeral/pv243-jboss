@@ -1,14 +1,13 @@
 package cz.muni.fi.pv243.et.model;
 
 import org.apache.lucene.analysis.KeywordAnalyzer;
-import org.hibernate.search.annotations.Analyze;
-import org.hibernate.search.annotations.Analyzer;
-import org.hibernate.search.annotations.Field;
-import org.hibernate.search.annotations.Indexed;
+import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.search.annotations.*;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -18,12 +17,14 @@ import javax.validation.constraints.Size;
 public class Purpose implements Serializable {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    //@GenericGenerator(name = "sequence", strategy=GenericGenerator)
+    @DocumentId
     private Long id;
 
     @Size(max = 25)
     @NotNull
-//    @Field(analyze = Analyze.YES, analyzer = @Analyzer(impl = KeywordAnalyzer.class))
+    @Field(analyze = Analyze.YES, analyzer = @Analyzer(impl = KeywordAnalyzer.class))
     private String name;
 
     @Size(max = 100)

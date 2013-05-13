@@ -24,8 +24,7 @@ public class ReceiptListProducerImpl implements ReceiptListProducer {
     @Inject
     private EntityManager em;
 
-    private final FullTextEntityManager ftem = Search.getFullTextEntityManager(em);
-    private final QueryBuilder qb = HibernateSearchUtil.getQueryBuilder(ftem, Receipt.class);
+
 
     @Override
     public Receipt getReceipt(Long id) {
@@ -38,7 +37,9 @@ public class ReceiptListProducerImpl implements ReceiptListProducer {
     @Override
     @SuppressWarnings(value = "unchecked")
     public Collection<Receipt> getReceipts(Person importedBy) {
-        final Query luceneQuery = qb.keyword().onField("person").matching(importedBy).createQuery();
+        final FullTextEntityManager ftem = Search.getFullTextEntityManager(em);
+        final QueryBuilder qb = HibernateSearchUtil.getQueryBuilder(ftem, Receipt.class);
+        Query luceneQuery = qb.keyword().onField("person").matching(importedBy).createQuery();
 
         return ftem.createFullTextQuery(luceneQuery)
                 .initializeObjectsWith(ObjectLookupMethod.SECOND_LEVEL_CACHE, DatabaseRetrievalMethod.FIND_BY_ID)
@@ -47,7 +48,9 @@ public class ReceiptListProducerImpl implements ReceiptListProducer {
 
     @Override
     public List<Receipt> getReceiptsFromDate(DateTime fromDate) {
-        final Query luceneQuery = qb.range().onField("fromDate").from(fromDate).to(DateTime.now()).createQuery();
+        final FullTextEntityManager ftem = Search.getFullTextEntityManager(em);
+        final QueryBuilder qb = HibernateSearchUtil.getQueryBuilder(ftem, Receipt.class);
+        Query luceneQuery = qb.range().onField("fromDate").from(fromDate).to(DateTime.now()).createQuery();
 
         return ftem.createFullTextQuery(luceneQuery)
                 .initializeObjectsWith(ObjectLookupMethod.SECOND_LEVEL_CACHE, DatabaseRetrievalMethod.FIND_BY_ID)
@@ -56,7 +59,9 @@ public class ReceiptListProducerImpl implements ReceiptListProducer {
 
     @Override
     public Collection<Receipt> getAllReceipts() {
-        final Query luceneQuery = qb.all().createQuery();
+        final FullTextEntityManager ftem = Search.getFullTextEntityManager(em);
+        final QueryBuilder qb = HibernateSearchUtil.getQueryBuilder(ftem, Receipt.class);
+        Query luceneQuery = qb.all().createQuery();
 
         return ftem.createFullTextQuery(luceneQuery)
                 .initializeObjectsWith(ObjectLookupMethod.SECOND_LEVEL_CACHE, DatabaseRetrievalMethod.FIND_BY_ID)

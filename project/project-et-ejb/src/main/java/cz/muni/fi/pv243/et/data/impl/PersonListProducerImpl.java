@@ -23,7 +23,7 @@ public class PersonListProducerImpl implements PersonListProducer {
     private EntityManager em;
 
     @Override
-    public Person getPerson(String id) {
+    public Person getPerson(Long id) {
         if (id == null) {
             throw new IllegalArgumentException("id is null");
         }

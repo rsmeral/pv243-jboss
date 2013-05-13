@@ -7,7 +7,7 @@ import java.util.Collection;
 @Local
 public interface PersonListProducer {
 
-    public Person getPerson(String id);
+    public Person getPerson(Long id);
 
     public Collection<Person> findAll();
 

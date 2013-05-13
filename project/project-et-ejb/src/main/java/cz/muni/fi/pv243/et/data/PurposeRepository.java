@@ -11,5 +11,5 @@ public interface PurposeRepository {
 
     public void update(Purpose purpose);
 
-    public void remove(Purpose purpose);
+    public void remove(Long id);
 }

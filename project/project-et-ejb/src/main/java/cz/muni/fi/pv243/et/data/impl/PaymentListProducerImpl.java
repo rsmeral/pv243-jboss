@@ -8,6 +8,8 @@ import org.apache.lucene.search.Query;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.FullTextQuery;
 import org.hibernate.search.jpa.Search;
+import org.hibernate.search.query.DatabaseRetrievalMethod;
+import org.hibernate.search.query.ObjectLookupMethod;
 import org.hibernate.search.query.dsl.QueryBuilder;
 import org.joda.time.DateTime;
 
@@ -59,7 +61,9 @@ public class PaymentListProducerImpl implements PaymentListProducer {
         QueryBuilder qb = getQueryBuilder(ftem, Payment.class);
         Query lucene = qb.keyword().onField("person").matching(person).createQuery();
 
-        return (List<Payment>) ftem.createFullTextQuery(lucene).getSingleResult();
+        return (List<Payment>) ftem.createFullTextQuery(lucene)
+                .initializeObjectsWith(ObjectLookupMethod.SECOND_LEVEL_CACHE, DatabaseRetrievalMethod.FIND_BY_ID)
+                .getSingleResult();
     }
 
     @Override
@@ -68,6 +72,8 @@ public class PaymentListProducerImpl implements PaymentListProducer {
         // ?? Transaction.date or date
         Query lucene = qb.range().onField("Transaction.date").from(fromDate).to(toDate).createQuery();
 
-        return (List<Payment>) ftem.createFullTextQuery(lucene).getSingleResult();
+        return (List<Payment>) ftem.createFullTextQuery(lucene)
+                .initializeObjectsWith(ObjectLookupMethod.SECOND_LEVEL_CACHE, DatabaseRetrievalMethod.FIND_BY_ID)
+                .getSingleResult();
     }
 }

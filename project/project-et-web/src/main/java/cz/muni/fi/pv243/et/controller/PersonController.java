@@ -6,9 +6,11 @@ package cz.muni.fi.pv243.et.controller;
 
 import cz.muni.fi.pv243.et.data.*;
 import cz.muni.fi.pv243.et.model.*;
+import org.joda.time.DateTime;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 
@@ -37,6 +39,12 @@ public class PersonController {
     @Inject
     private PurposeListProducer purposeList;
 
+    @Inject
+    private ReceiptRepository receiptRepo;
+
+    @Inject
+    private ReceiptListProducer receiptList;
+
     public String createPersons() {
         
         Person person = new Person();
@@ -58,12 +66,25 @@ public class PersonController {
         pd.create(personNew);
         System.out.println("createPersons");
 
-
+        // PURPOSES
         Purpose purp = new Purpose();
         purp.setDescription("Blabol");
         purp.setName("TestPurp");
         purposeRepo.create(purp);
 
+        Purpose purp2 = new Purpose();
+        purp2.setDescription("Blabol");
+        purp2.setName("TestPurp");
+        purposeRepo.create(purp2);
+
+
+        // RECEIPTS
+        Receipt rec = new Receipt();
+        Date date = new Date();
+        System.out.println("Date-time=" + date.getTime());
+        rec.setImportDate(date);
+        rec.setImportedBy(person);
+        receiptRepo.create(rec);
 
 
 //
@@ -75,9 +96,7 @@ public class PersonController {
 //        report.setSubmitter(personNew);
 //        report.setId(2L);
 //
-//        Receipt rec = new Receipt();
-//        rec.setId(1L);
-//        rec.setImportDate(DateTime.now());
+
 //
 //        System.out.println("Created Purpose");
 //        payment.setPurpose(purp);
@@ -97,18 +116,44 @@ public class PersonController {
     }
 
     public Collection<Object> getPersons() {
-        System.out.println(plp.findAll());
-
+//        System.out.println(plp.findAll());
         System.out.println("getPersons");
 //        return pd.findAll();
-        Collection<Object> people = new ArrayList<Object>();
-        people.add(plp.findByEmail("test2@test.com"));
-        System.out.println("Person=" + people);
+
+        Collection<Object> entities = new ArrayList<Object>();
+
+        //entities.add(plp.findByEmail("test2@test.com"));
+        entities.add(plp.findAll());
+        System.out.println("Person=" + entities);
         System.out.println("Purpose=" + purposeList.get(1L));
 
-        people.add(purposeList.getAll());
+        System.out.println("All purposes " + purposeList.getAll());
+        entities.add(purposeList.getAll());
+
+
+        System.out.println("\nReceipt=" + receiptList.getAllReceipts() + "\n");
+        entities.add(receiptList.getAllReceipts());
+
+
+        // TESTING Remove entities :-)
+        /*
+        for (Person p : plp.findAll()) {
+            System.out.println("\n Removing" + p);
+            pd.remove(p);
+        }
+
+        System.out.println("Deleted persons");
+        for (Purpose p : purposeList.getAll()) {
+            System.out.println("\n Removing" + p);
+            purposeRepo.remove(p.getId());
+        }
+
+        System.out.println("Deleted purposes");
+        */
+
+
         //System.out.println("Payments=" + paymentListProducer.getAllPayments());
 
-        return people;
+        return entities;
     }
 }

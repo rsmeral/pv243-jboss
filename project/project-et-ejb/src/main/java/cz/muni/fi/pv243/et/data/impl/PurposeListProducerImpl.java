@@ -44,7 +44,8 @@ public class PurposeListProducerImpl implements PurposeListProducer {
 
         Query luceneQuery = qb.all().createQuery();
 
-        // .initializeObjectsWith(ObjectLookupMethod.SECOND_LEVEL_CACHE, DatabaseRetrievalMethod.FIND_BY_ID) ?? - How to set as default hibernateSearchSetting?
-        return ftem.createFullTextQuery(luceneQuery, Purpose.class).getResultList();
+        return ftem.createFullTextQuery(luceneQuery, Purpose.class)
+                .initializeObjectsWith(ObjectLookupMethod.SECOND_LEVEL_CACHE, DatabaseRetrievalMethod.FIND_BY_ID)
+                .getResultList();
     }
 }
