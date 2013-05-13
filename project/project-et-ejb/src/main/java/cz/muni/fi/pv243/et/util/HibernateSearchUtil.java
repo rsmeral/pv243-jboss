@@ -1,4 +1,4 @@
-package cz.muni.fi.pv243.et.data;
+package cz.muni.fi.pv243.et.util;
 
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.query.dsl.QueryBuilder;

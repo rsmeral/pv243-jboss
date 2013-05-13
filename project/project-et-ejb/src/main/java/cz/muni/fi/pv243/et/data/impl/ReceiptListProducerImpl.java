@@ -1,6 +1,6 @@
 package cz.muni.fi.pv243.et.data.impl;
 
-import cz.muni.fi.pv243.et.data.HibernateSearchUtil;
+import cz.muni.fi.pv243.et.util.HibernateSearchUtil;
 import cz.muni.fi.pv243.et.data.ReceiptListProducer;
 import cz.muni.fi.pv243.et.model.Person;
 import cz.muni.fi.pv243.et.model.Receipt;

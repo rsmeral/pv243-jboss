@@ -1,22 +1,18 @@
 package cz.muni.fi.pv243.et.model;
 
+import org.hibernate.search.annotations.Indexed;
 import org.joda.time.DateTime;
 
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
-import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 
 @Entity
+@Indexed
+@Embeddable
 public class ExpenseReport implements Serializable {
 
     @Id
@@ -37,10 +33,10 @@ public class ExpenseReport implements Serializable {
     private List<MoneyTransfer> moneyTransfers;
 
 //    @Temporal(TemporalType.TIMESTAMP)
-    private DateTime lastSubmittedDate;
+    private Date lastSubmittedDate;
 
 //    @Temporal(TemporalType.TIMESTAMP)
-    private DateTime approvedDate;
+    private Date approvedDate;
 
     @Enumerated(EnumType.ORDINAL)
     private ReportStatus status;
@@ -85,19 +81,19 @@ public class ExpenseReport implements Serializable {
         this.moneyTransfers = moneyTransfers;
     }
 
-    public DateTime getLastSubmittedDate() {
+    public Date getLastSubmittedDate() {
         return lastSubmittedDate;
     }
 
-    public void setLastSubmittedDate(DateTime lastSubmittedDate) {
+    public void setLastSubmittedDate(Date lastSubmittedDate) {
         this.lastSubmittedDate = lastSubmittedDate;
     }
 
-    public DateTime getApprovedDate() {
+    public Date getApprovedDate() {
         return approvedDate;
     }
 
-    public void setApprovedDate(DateTime approvedDate) {
+    public void setApprovedDate(Date approvedDate) {
         this.approvedDate = approvedDate;
     }
 
@@ -159,5 +155,19 @@ public class ExpenseReport implements Serializable {
         result = 31 * result + (approvedDate != null ? approvedDate.hashCode() : 0);
         result = 31 * result + status.hashCode();
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "ExpenseReport{" +
+                "id=" + id +
+                ", submitter=" + submitter +
+//                ", verifier=" + verifier +
+//                ", payments=" + payments +
+//                ", moneyTransfers=" + moneyTransfers +
+                ", lastSubmittedDate=" + lastSubmittedDate +
+//                ", approvedDate=" + approvedDate +
+                ", status=" + status +
+                '}';
     }
 }

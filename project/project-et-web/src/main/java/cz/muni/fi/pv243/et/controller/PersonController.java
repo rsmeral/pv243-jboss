@@ -8,6 +8,7 @@ import cz.muni.fi.pv243.et.data.*;
 import cz.muni.fi.pv243.et.model.*;
 import org.joda.time.DateTime;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
@@ -27,11 +28,11 @@ public class PersonController {
     @Inject
     private PersonListProducer plp;
 
-//    @Inject
-//    private PaymentRepository paymentRepo;
-//
-//    @Inject
-//    private PaymentListProducer paymentListProducer;
+    @Inject
+    private PaymentRepository paymentRepo;
+
+    @Inject
+    private PaymentListProducer paymentListProducer;
 
     @Inject
     private PurposeRepository purposeRepo;
@@ -44,6 +45,12 @@ public class PersonController {
 
     @Inject
     private ReceiptListProducer receiptList;
+
+    @Inject
+    private ExpenseReportRepository expenseRepo;
+
+    //@Inject
+    //private ExpenseReportListProducer expenseList;
 
     public String createPersons() {
         
@@ -87,28 +94,26 @@ public class PersonController {
         receiptRepo.create(rec);
 
 
-//
-//        // create test payments entities
-//        Payment payment = new Payment();
+        // REPORTS
+        ExpenseReport report = new ExpenseReport();
+        report.setSubmitter(personNew);
+        report.setLastSubmittedDate(new Date(113, 0, 0) );
+//        report.setApprovedDate(new Date(System.currentTimeMillis() + 1000000000));
+        report.setStatus(ReportStatus.OPEN);
+        expenseRepo.create(report);
 
-//
-//        ExpenseReport report = new ExpenseReport();
-//        report.setSubmitter(personNew);
-//        report.setId(2L);
-//
+        // PAYMENTS
+        Payment payment = new Payment();
+        payment.setPurpose(purp);
+        payment.setReport(report);
+        payment.setReceipt(rec);
 
-//
-//        System.out.println("Created Purpose");
-//        payment.setPurpose(purp);
-//        payment.setReport(report);
-//        payment.setReceipt(rec);
-//
-//        payment.setCurrency("$");
-//        payment.setValue(BigDecimal.valueOf(150));
-//        payment.setDate(DateTime.now());
-//
-//        System.out.println("Payment set");
-//        paymentRepo.create(payment);
+        payment.setCurrency("$");
+        payment.setValue(BigDecimal.valueOf(150));
+        payment.setDate(new Date(System.currentTimeMillis()) );
+
+        System.out.println("Payment set");
+        paymentRepo.create(payment);
 
         System.out.println("Persisted");
 

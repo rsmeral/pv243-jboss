@@ -1,10 +1,7 @@
 package cz.muni.fi.pv243.et.model;
 
 import org.apache.lucene.analysis.KeywordAnalyzer;
-import org.hibernate.search.annotations.Analyze;
-import org.hibernate.search.annotations.Analyzer;
-import org.hibernate.search.annotations.Field;
-import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.*;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -22,13 +19,16 @@ public class Payment extends Transaction {
 
     @ManyToOne(optional = false)
     @NotNull
+    @IndexedEmbedded(targetElement = Purpose.class)
     private Purpose purpose;
 
     @ManyToOne
     //@Field(analyze = Analyze.YES, analyzer = @Analyzer(impl = KeywordAnalyzer.class))
+    @IndexedEmbedded(targetElement = Receipt.class)
     private Receipt receipt;
 
     @ManyToOne(optional = false)
+    @IndexedEmbedded(targetElement = ExpenseReport.class)
     private ExpenseReport report;
 
     public Long getId() {
@@ -73,6 +73,7 @@ public class Payment extends Transaction {
         return hash;
     }
 
+
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -95,5 +96,16 @@ public class Payment extends Transaction {
             return false;
         }
         return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Payment{" +
+                "id=" + id +
+                ", purpose=" + purpose +
+                ", receipt=" + receipt +
+                ", report=" + report +
+                "," + super.toString() +
+                '}';
     }
 }

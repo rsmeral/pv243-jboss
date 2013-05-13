@@ -1,6 +1,6 @@
 package cz.muni.fi.pv243.et.data.impl;
 
-import cz.muni.fi.pv243.et.data.HibernateSearchUtil;
+import cz.muni.fi.pv243.et.util.HibernateSearchUtil;
 import cz.muni.fi.pv243.et.data.PurposeListProducer;
 import cz.muni.fi.pv243.et.model.Payment;
 import cz.muni.fi.pv243.et.model.Purpose;
@@ -11,10 +11,12 @@ import org.hibernate.search.query.DatabaseRetrievalMethod;
 import org.hibernate.search.query.ObjectLookupMethod;
 import org.hibernate.search.query.dsl.QueryBuilder;
 
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import java.util.Collection;
 
+@Stateless
 public class PurposeListProducerImpl implements PurposeListProducer {
 
     @Inject

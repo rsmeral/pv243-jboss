@@ -13,11 +13,13 @@ import org.hibernate.search.query.ObjectLookupMethod;
 import org.hibernate.search.query.dsl.QueryBuilder;
 import org.joda.time.DateTime;
 
+import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import java.util.Collection;
 import java.util.List;
 
+@Stateless
 public class PaymentListProducerImpl implements PaymentListProducer {
 
     @Inject

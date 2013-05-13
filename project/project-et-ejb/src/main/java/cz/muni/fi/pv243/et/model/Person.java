@@ -37,9 +37,8 @@ public class Person implements Serializable {
 
     @Email
     @NotNull
-    @Field(analyze = Analyze.YES, analyzer = @Analyzer(impl = KeywordAnalyzer.class))
-    // ADD UNIQUE RESTRICTION!!
-    //@DocumentId ??
+    @Field(index = Index.YES, store = Store.NO, analyze = Analyze.NO)//YES, analyzer = @Analyzer(impl = KeywordAnalyzer.class))
+    @Column(unique = true)
     private String email;
     //private Role role;
     // add validation

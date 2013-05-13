@@ -7,9 +7,9 @@ import javax.ejb.Local;
 @Local
 public interface ExpenseReportRepository {
 
-    public void createExpenseReport(ExpenseReport report);
+    public void create(ExpenseReport report);
 
-    public void updateExpenseReport(ExpenseReport report);
+    public void update(ExpenseReport report);
 
-    public void removeExpenseReport(ExpenseReport report);
+    public void remove(ExpenseReport report);
 }

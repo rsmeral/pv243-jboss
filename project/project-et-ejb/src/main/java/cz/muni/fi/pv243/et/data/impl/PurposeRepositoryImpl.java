@@ -38,15 +38,15 @@ public class PurposeRepositoryImpl implements PurposeRepository {
     }
 
     @Override
-    public void remove(Long id) {
-        if (id == null) {
+    public void remove(Purpose purpose) {
+        if (purpose == null) {
             throw new IllegalArgumentException("purpose is null");
         }
 
-        if (id == null) {
+        if (purpose == null) {
             throw new IllegalArgumentException("not persisted entity");
         }
-        em.remove(em.find(Purpose.class, id));
-        //em.remove(purpose);
+//        em.remove(em.find(Purpose.class, purpose));
+        em.remove(purpose);
     }
 }

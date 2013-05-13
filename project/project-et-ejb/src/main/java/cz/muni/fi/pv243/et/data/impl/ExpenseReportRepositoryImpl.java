@@ -1,52 +1,50 @@
 package cz.muni.fi.pv243.et.data.impl;
 
-import cz.muni.fi.pv243.et.data.PaymentRepository;
-import cz.muni.fi.pv243.et.model.Payment;
+import cz.muni.fi.pv243.et.data.ExpenseReportRepository;
+import cz.muni.fi.pv243.et.model.ExpenseReport;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
-
 @Stateless
-public class PaymentRepositoryImpl implements PaymentRepository {
+public class ExpenseReportRepositoryImpl implements ExpenseReportRepository {
 
     @Inject
     private EntityManager em;
 
     @Override
-    public void create(Payment payment) {
-        if (payment == null) {
+    public void create(ExpenseReport report) {
+        if (report == null) {
             throw new IllegalArgumentException("payment is null");
         }
-        if (payment.getId() != null) {
+        if (report.getId() != null) {
             throw new IllegalArgumentException("payment.id is not null");
         }
-        em.persist(payment);
+        em.persist(report);
     }
 
     @Override
-    public void update(Payment payment) {
-        if (payment == null) {
+    public void update(ExpenseReport report) {
+        if (report == null) {
             throw new IllegalArgumentException("payment is null");
         }
-        if (payment.getId() == null) {
+        if (report.getId() == null) {
             throw new IllegalArgumentException("payment.id is null - not persisted");
         }
-        em.merge(payment);
+        em.merge(report);
 //        em.flush();
     }
 
     @Override
-    public void remove(Payment payment) {
-        if (payment == null) {
+    public void remove(ExpenseReport report) {
+        if (report == null) {
             throw new IllegalArgumentException("payment is null");
         }
-        if (payment.getId() == null) {
+        if (report.getId() == null) {
             throw new IllegalArgumentException("payment.id is null - not persisted");
         }
-//        em.remove(em.find(Payment.class, payment.getId()));
-        em.remove(payment);
-//        em.flush();
+        em.remove(report);
+//        em.flush()
     }
 }
