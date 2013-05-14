@@ -35,10 +35,15 @@
         <version.infinispan>5.2.6.Final</version.infinispan>
         
         <version.hibernate.ogm>4.0.0.Beta2</version.hibernate.ogm>
+        
+        <version.jboss.maven.plugin>7.3.Final</version.jboss.maven.plugin>
 
         <!-- maven-compiler-plugin -->
         <maven.compiler.target>1.6</maven.compiler.target>
         <maven.compiler.source>1.6</maven.compiler.source>
+        
+            
+        <maven.deploy.skip>true</maven.deploy.skip>
     </properties>
 
     <dependencyManagement>

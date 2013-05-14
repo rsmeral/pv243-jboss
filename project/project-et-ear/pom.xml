@@ -48,8 +48,26 @@
                     <fileNameMapping>no-version</fileNameMapping>
                 </configuration>
             </plugin>
+            
+            <plugin>
+                <groupId>org.jboss.as.plugins</groupId>
+                <artifactId>jboss-as-maven-plugin</artifactId>
+                <version>${version.jboss.maven.plugin}</version>
+                <configuration>
+                    <force>true</force>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>deploy-to-as</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
 
         </plugins>
     </build>
-
+    
 </project>
