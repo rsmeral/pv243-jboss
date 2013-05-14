@@ -6,6 +6,7 @@ package cz.muni.fi.pv243.et.controller;
 
 import cz.muni.fi.pv243.et.data.*;
 import cz.muni.fi.pv243.et.model.*;
+import org.hibernate.Session;
 import org.joda.time.DateTime;
 
 import java.math.BigDecimal;
@@ -14,6 +15,7 @@ import java.util.Collection;
 import java.util.Date;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
+import javax.persistence.EntityManager;
 
 /**
  *
@@ -21,6 +23,9 @@ import javax.inject.Inject;
  */
 @Model
 public class PersonController {
+
+    @Inject
+    private EntityManager em;
 
     @Inject
     private PersonRepository pd;
@@ -49,8 +54,14 @@ public class PersonController {
     @Inject
     private ExpenseReportRepository expenseRepo;
 
-    //@Inject
-    //private ExpenseReportListProducer expenseList;
+    @Inject
+    private ExpenseReportListProducer expenseList;
+
+    @Inject
+    private MoneyTransferRepository moneyRepo;
+
+    @Inject
+    private MoneyTransferListProducer moneyList;
 
     public String createPersons() {
         
@@ -117,6 +128,13 @@ public class PersonController {
 
         System.out.println("Persisted");
 
+
+        Session session = (Session) em.getDelegate();
+
+        System.out.println("=============\n\n\n\n\n===============");
+        System.out.println(session.createQuery("SELECT r from Receipt r where r.importedBy.email like 'test2%' ").list() );
+
+        System.out.println("=============\n\n\n\n\n===============");
         return "created";
     }
 

@@ -11,15 +11,11 @@ import java.util.List;
 @Local
 public interface MoneyTransferListProducer {
 
-    public MoneyTransfer getMoneyTransfer(Long id);
+    public MoneyTransfer get(Long id);
 
-    public MoneyTransfer getMoneyTransfer(MoneyTransfer moneyTransfer);
+    public Collection<MoneyTransfer> get(ExpenseReport expenseReport);
 
-    public MoneyTransfer getMoneyTransfer(Transaction transaction);
+    public List<MoneyTransfer> getAllBetweenDates(DateTime fromDate, DateTime toDate);
 
-    public Collection<MoneyTransfer> getMoneyTransfers(ExpenseReport expenseReport);
-
-    public List<MoneyTransfer> getMoneyTransfersBetweenDates(DateTime fromDate, DateTime toDate);
-
-    public Collection<MoneyTransfer> getAllMoneyTransfers();
+    public Collection<MoneyTransfer> getAll();
 }

@@ -13,8 +13,6 @@ public interface PaymentListProducer {
 
     public Payment getPayment(Long id);
 
-    public Payment getPayment(Transaction transaction);
-
     public Collection<Payment> getAllPayments();
 
     public Collection<Payment> getAllPayments(Person person);

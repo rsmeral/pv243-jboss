@@ -8,15 +8,11 @@ import java.util.Collection;
 @Local
 public interface ExpenseReportListProducer {
 
-    public ExpenseReport getExpenseReport(Long id);
+    public ExpenseReport get(Long id);
 
-    public Collection<ExpenseReport> getExpenseReports(Person person);
+    public Collection<ExpenseReport> getAllForSubmitter(Person submitter);
 
-    public Collection<ExpenseReport> getExpenseReports(MoneyTransfer moneyTransfer);
+    public Collection<ExpenseReport> getAllBy(ReportStatus status);
 
-    public Collection<ExpenseReport> getExpenseReports(Payment payment);
-
-    public Collection<ExpenseReport> getExpenseReports(ReportStatus status);
-
-    public Collection<ExpenseReport> getAllExpenseReports();
+    public Collection<ExpenseReport> getAll();
 }

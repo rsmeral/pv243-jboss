@@ -21,10 +21,7 @@ public class PersonRepositoryImpl implements PersonRepository {
         if (person.getPersonId() != null) {
             throw new IllegalArgumentException("person id is not null");
         }
-
         em.persist(person);
-//        em.flush();
-//        System.out.println("person flushed");
     }
 
     @Override

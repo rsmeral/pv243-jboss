@@ -1,4 +1,4 @@
-package cz.muni.fi.pv243.et.controller;
+package cz.muni.fi.pv243.et.persistence;
 
 
 import org.apache.deltaspike.core.api.exclude.annotation.Exclude;
@@ -7,12 +7,12 @@ import javax.enterprise.inject.Produces;
 import javax.faces.application.ProjectStage;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import static org.apache.deltaspike.core.api.projectstage.ProjectStage.Development;
+import static org.apache.deltaspike.core.api.projectstage.ProjectStage.Production;
 
-@Exclude(exceptIfProjectStage = Development.class)
-public class TestEntityManagerProvider {
+@Exclude(exceptIfProjectStage = Production.class)
+public class ProductionEntityManagerProvider {
 
-    @PersistenceContext(unitName="TestPU")
+    @PersistenceContext(unitName="et-pu")
     private EntityManager entityManager;
 
     @Produces
