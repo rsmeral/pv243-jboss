@@ -1,8 +1,5 @@
 package cz.muni.fi.pv243.et.model;
 
-import org.apache.lucene.analysis.KeywordAnalyzer;
-import org.hibernate.search.annotations.*;
-
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -10,7 +7,6 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
-@Indexed
 public class Payment extends Transaction {
 
     @Id
@@ -19,16 +15,12 @@ public class Payment extends Transaction {
 
     @ManyToOne(optional = false)
     @NotNull
-    @IndexedEmbedded(targetElement = Purpose.class)
     private Purpose purpose;
 
     @ManyToOne
-    //@Field(analyze = Analyze.YES, analyzer = @Analyzer(impl = KeywordAnalyzer.class))
-    @IndexedEmbedded(targetElement = Receipt.class)
     private Receipt receipt;
 
     @ManyToOne(optional = false)
-    @IndexedEmbedded(targetElement = ExpenseReport.class)
     private ExpenseReport report;
 
     public Long getId() {

@@ -1,31 +1,22 @@
 package cz.muni.fi.pv243.et.model;
 
-import org.hibernate.search.annotations.*;
 import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
 @Entity
-@Indexed
-@Embeddable
 public class Receipt implements Serializable {
 
     @Id
     @GeneratedValue
     private Long receiptId;
 
-    //@Temporal(javax.persistence.TemporalType.DATE)
-    //@DateBridge(resolution = Resolution.DAY)
-    @Field
+    @Temporal(javax.persistence.TemporalType.DATE)
     private Date importDate;
 
     @OneToOne(optional = false)//, targetEntity = Person.class)
-    //@Field(analyze = Analyze.YES, analyzer = @Analyzer(impl = KeywordAnalyzer.class))
-    @IndexedEmbedded(targetElement = Person.class)
-    //@Target(Person.class)
     private Person importedBy;
 
-    @Field
     private String document;// WHAT THE @#*&^*$@ ?
 
     public Long getReceiptId() {
@@ -88,11 +79,11 @@ public class Receipt implements Serializable {
 
     @Override
     public String toString() {
-        return "Receipt{" +
-                "receiptId=" + receiptId +
-                ", importDate=" + importDate +
-                ", importedBy=" + importedBy.getEmail() +
-                ", document='" + document + '\'' +
-                '}';
+        return "Receipt{"
+                + "receiptId=" + receiptId
+                + ", importDate=" + importDate
+                + ", importedBy=" + importedBy.getEmail()
+                + ", document='" + document + '\''
+                + '}';
     }
 }

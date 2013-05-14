@@ -6,45 +6,31 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
-
-import org.apache.lucene.analysis.KeywordAnalyzer;
-
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.search.annotations.*;
 import org.hibernate.validator.constraints.Email;
 
 @Entity
-@Indexed
-@Embeddable
 public class Person implements Serializable {
 
     @Id
-//    @GeneratedValue(generator = "uuid")
-//    @GenericGenerator(name = "uuid", strategy = "uuid2")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @DocumentId
+    @GeneratedValue
     private Long personId;
 
     @Size(min = 2, max = 50)
     @Pattern(regexp = "[A-Z][a-z]*")
-    @Field
     private String firstName;
 
     @Size(min = 2, max = 50)
     @Pattern(regexp = "[A-Z][a-z]*")
-    @Field
     private String lastName;
 
     @Email
     @NotNull
-    @Field(index = Index.YES, store = Store.NO, analyze = Analyze.NO)//YES, analyzer = @Analyzer(impl = KeywordAnalyzer.class))
     @Column(unique = true)
     private String email;
     //private Role role;
     // add validation
 
     @Digits(integer = 9, fraction = 0)
-    @Field
     private String bankAccount;
 
     public Long getPersonId() {
@@ -132,6 +118,4 @@ public class Person implements Serializable {
     public String toString() {
         return "Person{" + "id=" + personId + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", bankAccount=" + bankAccount + "}\n";
     }
-
-
 }

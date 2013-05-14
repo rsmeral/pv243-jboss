@@ -1,27 +1,19 @@
 package cz.muni.fi.pv243.et.model;
 
-import org.apache.lucene.analysis.KeywordAnalyzer;
-import org.hibernate.annotations.GenericGenerator;
-import org.hibernate.search.annotations.*;
-
 import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
-@Indexed
-@Embeddable
 public class Purpose implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @DocumentId
     private Long id;
 
     @Size(max = 25)
     @NotNull
-    //@Field(analyze = Analyze.YES, analyzer = @Analyzer(impl = KeywordAnalyzer.class))
     private String name;
 
     @Size(max = 100)
@@ -74,17 +66,18 @@ public class Purpose implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = name.hashCode();
-        result = 31 * result + (description != null ? description.hashCode() : 0);
-        return result;
+        int hash = 3;
+        hash = 53 * hash + (this.name != null ? this.name.hashCode() : 0);
+        hash = 53 * hash + (this.description != null ? this.description.hashCode() : 0);
+        return hash;
     }
 
     @Override
     public String toString() {
-        return "Purpose{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                '}';
+        return "Purpose{"
+                + "id=" + id
+                + ", name='" + name + '\''
+                + ", description='" + description + '\''
+                + '}';
     }
 }

@@ -1,14 +1,9 @@
 package cz.muni.fi.pv243.et.model;
 
-import org.hibernate.search.annotations.Indexed;
-import org.hibernate.search.annotations.IndexedEmbedded;
-
 import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
-@Indexed
-@Embeddable
 public class MoneyTransfer extends Transaction implements Serializable {
 
     @Id
@@ -16,11 +11,9 @@ public class MoneyTransfer extends Transaction implements Serializable {
     private Long id;
 
     @ManyToOne(optional = false)
-    @IndexedEmbedded(targetElement = ExpenseReport.class)
     private ExpenseReport report;
 
     @OneToOne(optional = false)
-    @IndexedEmbedded(targetElement = Person.class)
     private Person creator;
 
     public Long getId() {

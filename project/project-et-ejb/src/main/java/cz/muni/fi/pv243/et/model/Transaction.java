@@ -1,11 +1,7 @@
 package cz.muni.fi.pv243.et.model;
 
-import org.joda.time.DateTime;
-
 import java.math.BigDecimal;
-import java.util.Currency;
 import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.MappedSuperclass;
 import javax.persistence.Temporal;
@@ -20,7 +16,7 @@ import javax.validation.constraints.NotNull;
 public class Transaction {
 
     @NotNull
-//    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "datum")
     private Date date;
 
@@ -87,10 +83,10 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return "Transaction{" +
-                "date=" + date +
-                ", value=" + value +
-                ", currency='" + currency + '\'' +
-                '}';
+        return "Transaction{"
+                + "date=" + date
+                + ", value=" + value
+                + ", currency='" + currency + '\''
+                + '}';
     }
 }

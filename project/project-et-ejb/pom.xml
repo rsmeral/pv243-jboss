@@ -14,8 +14,7 @@
     <packaging>ejb</packaging>
     <artifactId>project-et-ejb</artifactId>
     <name>Project ET EJB</name>
-
-
+    
     <dependencies>
         <dependency>
             <groupId>junit</groupId>
@@ -112,6 +111,11 @@
             <scope>provided</scope>
         </dependency>
 
+        <dependency>
+            <groupId>org.hibernate</groupId>
+            <artifactId>hibernate-core</artifactId>
+            <scope>provided</scope>
+        </dependency>
         <!--OGM Hibernate Persistence Project-->
         
         <dependency>
@@ -141,42 +145,16 @@
         </dependency>
 
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-search</artifactId>
-        </dependency>
-
-        <dependency>
             <groupId>org.apache.avro</groupId>
             <artifactId>avro</artifactId>
             <version>1.4.0</version>
         </dependency>
 
         <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-search-orm</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-search-engine</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-search-analyzers</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.hibernate</groupId>
-            <artifactId>hibernate-search-infinispan</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.infinispan</groupId>
-            <artifactId>infinispan-lucene-directory</artifactId>
-        </dependency>
-        <dependency>
             <artifactId>infinispan-core</artifactId>
             <groupId>org.infinispan</groupId>
             <scope>provided</scope>
         </dependency>
-
 
         <dependency>
             <groupId>org.jboss.spec.javax.transaction</groupId>
@@ -194,16 +172,16 @@
 
 
         <!-- The DeltaSpike libraries, we use compile scope as these are
-           not provided by JBoss AS 7, and need to be packaged in the application -->
+        not provided by JBoss AS 7, and need to be packaged in the application -->
         <!--<dependency>-->
-            <!--<groupId>org.apache.deltaspike.modules</groupId>-->
-            <!--<artifactId>deltaspike-jpa-module-api</artifactId>-->
+        <!--<groupId>org.apache.deltaspike.modules</groupId>-->
+        <!--<artifactId>deltaspike-jpa-module-api</artifactId>-->
         <!--</dependency>-->
 
         <!--<dependency>-->
-            <!--<groupId>org.apache.deltaspike.modules</groupId>-->
-            <!--<artifactId>deltaspike-jpa-module-impl</artifactId>-->
-            <!--<scope>runtime</scope>-->
+        <!--<groupId>org.apache.deltaspike.modules</groupId>-->
+        <!--<artifactId>deltaspike-jpa-module-impl</artifactId>-->
+        <!--<scope>runtime</scope>-->
         <!--</dependency>-->
 
         <dependency>

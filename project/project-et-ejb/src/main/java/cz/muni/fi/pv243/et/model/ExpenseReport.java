@@ -1,18 +1,12 @@
 package cz.muni.fi.pv243.et.model;
 
-import org.hibernate.search.annotations.Indexed;
-import org.joda.time.DateTime;
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Past;
 
 @Entity
-@Indexed
-@Embeddable
 public class ExpenseReport implements Serializable {
 
     @Id
@@ -32,10 +26,10 @@ public class ExpenseReport implements Serializable {
     @OneToMany(mappedBy = "report")
     private List<MoneyTransfer> moneyTransfers;
 
-//    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date lastSubmittedDate;
 
-//    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.TIMESTAMP)
     private Date approvedDate;
 
     @Enumerated(EnumType.ORDINAL)
@@ -146,16 +140,19 @@ public class ExpenseReport implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = id.hashCode();
-        result = 31 * result + submitter.hashCode();
-        result = 31 * result + (verifier != null ? verifier.hashCode() : 0);
-        result = 31 * result + (payments != null ? payments.hashCode() : 0);
-        result = 31 * result + (moneyTransfers != null ? moneyTransfers.hashCode() : 0);
-        result = 31 * result + lastSubmittedDate.hashCode();
-        result = 31 * result + (approvedDate != null ? approvedDate.hashCode() : 0);
-        result = 31 * result + status.hashCode();
-        return result;
+        int hash = 7;
+        hash = 89 * hash + (this.id != null ? this.id.hashCode() : 0);
+        hash = 89 * hash + (this.submitter != null ? this.submitter.hashCode() : 0);
+        hash = 89 * hash + (this.verifier != null ? this.verifier.hashCode() : 0);
+        hash = 89 * hash + (this.payments != null ? this.payments.hashCode() : 0);
+        hash = 89 * hash + (this.moneyTransfers != null ? this.moneyTransfers.hashCode() : 0);
+        hash = 89 * hash + (this.lastSubmittedDate != null ? this.lastSubmittedDate.hashCode() : 0);
+        hash = 89 * hash + (this.approvedDate != null ? this.approvedDate.hashCode() : 0);
+        hash = 89 * hash + (this.status != null ? this.status.hashCode() : 0);
+        return hash;
     }
+
+    
 
     @Override
     public String toString() {
