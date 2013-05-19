@@ -7,6 +7,9 @@ import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.validator.constraints.Email;
 
 @Entity
@@ -33,6 +36,7 @@ public class Person implements Serializable {
     @Enumerated(value = EnumType.ORDINAL)
     @CollectionTable(name = "PersonRole")
     @Column(name = "roleId")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private Set<Role> roles;
 
     @Digits(integer = 9, fraction = 0)

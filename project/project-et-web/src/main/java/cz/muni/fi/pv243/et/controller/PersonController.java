@@ -6,10 +6,13 @@ package cz.muni.fi.pv243.et.controller;
 
 import cz.muni.fi.pv243.et.data.*;
 import cz.muni.fi.pv243.et.model.*;
+import org.apache.deltaspike.core.api.exception.control.event.ExceptionToCatchEvent;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
+import javax.enterprise.event.Event;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 
@@ -19,6 +22,9 @@ import javax.inject.Inject;
  */
 @Model
 public class PersonController {
+
+    @Inject
+    private Event<ExceptionToCatchEvent> exceptionEvent;
 
     @Inject
     private PersonRepository pd;
@@ -57,6 +63,8 @@ public class PersonController {
     private MoneyTransferListProducer moneyList;
 
     public String createPersons() {
+
+        exceptionEvent.fire(new ExceptionToCatchEvent(new Exception("this is spartaaaaaaaa!")));
 
         Person person = new Person();
 
