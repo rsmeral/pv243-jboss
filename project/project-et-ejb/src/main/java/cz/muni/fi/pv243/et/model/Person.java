@@ -1,6 +1,7 @@
 package cz.muni.fi.pv243.et.model;
 
 import java.io.Serializable;
+import java.util.Set;
 import javax.persistence.*;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
@@ -27,11 +28,18 @@ public class Person implements Serializable {
     @NotNull
     @Column(unique = true)
     private String email;
-    //private Role role;
-    // add validation
+
+    @ElementCollection(targetClass = Role.class)
+    @Enumerated(value = EnumType.ORDINAL)
+    @CollectionTable(name = "PersonRole")
+    @Column(name = "roleId")
+    private Set<Role> roles;
 
     @Digits(integer = 9, fraction = 0)
     private String bankAccount;
+
+    public Person() {
+    }
 
     public Long getPersonId() {
         return personId;
@@ -74,32 +82,27 @@ public class Person implements Serializable {
         this.email = email;
     }
 
+    public Set<Role> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
+
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
         Person person = (Person) o;
 
-        if (bankAccount != null ? !bankAccount.equals(person.bankAccount) : person.bankAccount != null) {
-            return false;
-        }
-        if (email != null ? !email.equals(person.email) : person.email != null) {
-            return false;
-        }
-        if (firstName != null ? !firstName.equals(person.firstName) : person.firstName != null) {
-            return false;
-        }
-        if (personId != null ? !personId.equals(person.personId) : person.personId != null) {
-            return false;
-        }
-        if (lastName != null ? !lastName.equals(person.lastName) : person.lastName != null) {
-            return false;
-        }
+        if (bankAccount != null ? !bankAccount.equals(person.bankAccount) : person.bankAccount != null) return false;
+        if (email != null ? !email.equals(person.email) : person.email != null) return false;
+        if (firstName != null ? !firstName.equals(person.firstName) : person.firstName != null) return false;
+        if (lastName != null ? !lastName.equals(person.lastName) : person.lastName != null) return false;
+        if (personId != null ? !personId.equals(person.personId) : person.personId != null) return false;
+        if (roles != null ? !roles.equals(person.roles) : person.roles != null) return false;
 
         return true;
     }
@@ -110,12 +113,20 @@ public class Person implements Serializable {
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
+        result = 31 * result + (roles != null ? roles.hashCode() : 0);
         result = 31 * result + (bankAccount != null ? bankAccount.hashCode() : 0);
         return result;
     }
 
     @Override
     public String toString() {
-        return "Person{" + "id=" + personId + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", bankAccount=" + bankAccount + "}\n";
+        return "Person{" +
+                "personId=" + personId +
+                ", firstName='" + firstName + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", email='" + email + '\'' +
+                ", roles=" + roles +
+                ", bankAccount='" + bankAccount + '\'' +
+                '}';
     }
 }

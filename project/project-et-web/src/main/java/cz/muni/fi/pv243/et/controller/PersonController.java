@@ -112,7 +112,7 @@ public class PersonController {
         payment.setReport(report);
         payment.setReceipt(rec);
 
-        payment.setCurrency("$");
+        payment.setCurrency(Currency.USD);
         payment.setValue(BigDecimal.valueOf(150));
         payment.setDate(new Date(System.currentTimeMillis()));
 

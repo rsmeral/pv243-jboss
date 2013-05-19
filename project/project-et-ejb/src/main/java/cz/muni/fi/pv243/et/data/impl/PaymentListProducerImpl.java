@@ -34,11 +34,10 @@ public class PaymentListProducerImpl implements PaymentListProducer {
         return session.createQuery("SELECT payment FROM Payment payment").list();
     }
 
-    /// TODO!!
     @Override
     public Collection<Payment> getAllPayments(Person person) {
-        return session.createQuery("SELECT payment FROM Payment payment WHERE payment.report.submitter = :person")
-                .setParameter("person", person).list();
+        return session.createQuery("SELECT payment FROM Payment payment WHERE payment.report.submitter.personId = :personId")
+                .setParameter("personId", person.getPersonId()).list();
     }
 
     @Override

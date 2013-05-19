@@ -17,7 +17,9 @@ public class Receipt implements Serializable {
     @OneToOne(optional = false)//, targetEntity = Person.class)
     private Person importedBy;
 
-    private String document;// WHAT THE @#*&^*$@ ?
+    private byte[] document;
+
+    private String documentName;
 
     public Long getReceiptId() {
         return receiptId;
@@ -41,6 +43,22 @@ public class Receipt implements Serializable {
 
     public void setImportedBy(Person importedBy) {
         this.importedBy = importedBy;
+    }
+
+    public byte[] getDocument() {
+        return document;
+    }
+
+    public void setDocument(byte[] document) {
+        this.document = document;
+    }
+
+    public String getDocumentName() {
+        return documentName;
+    }
+
+    public void setDocumentName(String documentName) {
+        this.documentName = documentName;
     }
 
     @Override

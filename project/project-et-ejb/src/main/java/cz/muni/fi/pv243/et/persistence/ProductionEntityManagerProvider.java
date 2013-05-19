@@ -10,7 +10,7 @@ import org.hibernate.Session;
 
 @Exclude(exceptIfProjectStage = Production.class)
 @Stateless
-public class ProductionEntityManagerProvider {
+public class ProductionEntityManagerProvider extends AbstractEntityManagerProvider {
 
     @PersistenceContext(unitName = "et-pu")
     private EntityManager entityManager;
@@ -22,7 +22,7 @@ public class ProductionEntityManagerProvider {
     public EntityManager getEntityManager() {
         return entityManager;
     }
-    
+
     @Produces
     public Session getSession() {
         return session;

@@ -1,6 +1,7 @@
 package cz.muni.fi.pv243.et.persistence;
 
 import javax.ejb.Stateless;
+import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -10,7 +11,7 @@ import org.hibernate.Session;
 
 @Exclude(exceptIfProjectStage = Development.class)
 @Stateless
-public class TestEntityManagerProvider {
+public class TestEntityManagerProvider extends AbstractEntityManagerProvider {
 
     @PersistenceContext(unitName = "TestPU")
     private EntityManager entityManager;
@@ -22,7 +23,7 @@ public class TestEntityManagerProvider {
     public EntityManager getEntityManager() {
         return entityManager;
     }
-    
+
     @Produces
     public Session getSession() {
         return session;

@@ -2,10 +2,7 @@ package cz.muni.fi.pv243.et.model;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import javax.persistence.Column;
-import javax.persistence.MappedSuperclass;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -25,7 +22,8 @@ public class Transaction {
     private BigDecimal value;
 
     @NotNull
-    private String currency;// TODO: how to represent currency? OGM doesn't like java.util.Currency
+    @Enumerated(EnumType.ORDINAL)
+    private Currency currency;
 
     public Date getDate() {
         return date;
@@ -43,11 +41,11 @@ public class Transaction {
         this.value = value;
     }
 
-    public String getCurrency() {
+    public Currency getCurrency() {
         return currency;
     }
 
-    public void setCurrency(String currency) {
+    public void setCurrency(Currency currency) {
         this.currency = currency;
     }
 
