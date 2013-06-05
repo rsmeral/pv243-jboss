@@ -1,5 +1,7 @@
 package cz.muni.fi.pv243.et.model;
 
+import org.hibernate.search.annotations.Indexed;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -7,6 +9,7 @@ import javax.persistence.ManyToOne;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@Indexed
 public class Payment extends Transaction {
 
     @Id

@@ -7,8 +7,21 @@
     <persistence-unit name="et-pu" transaction-type="JTA">
         <!-- Use Hibernate OGM provider: configuration will be transparent -->
         <provider>org.hibernate.ogm.jpa.HibernateOgmPersistence</provider>
-        
+
+         <!--UGLY SHIT!! HOW TO REMOVE IT!?-->
         <class>cz.muni.fi.pv243.et.model.Person</class>
+        <class>cz.muni.fi.pv243.et.model.Purpose</class>
+        <class>cz.muni.fi.pv243.et.model.Receipt</class>
+        <class>cz.muni.fi.pv243.et.model.Currency</class>
+        <class>cz.muni.fi.pv243.et.model.ExpenseReport</class>
+
+        <class>cz.muni.fi.pv243.et.model.Payment</class>
+        <class>cz.muni.fi.pv243.et.model.MoneyTransfer</class>
+        <class>cz.muni.fi.pv243.et.model.ReportStatus</class>
+        <class>cz.muni.fi.pv243.et.model.Role</class>
+        <class>cz.muni.fi.pv243.et.model.Transaction</class>
+
+
         <jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source>
         
         

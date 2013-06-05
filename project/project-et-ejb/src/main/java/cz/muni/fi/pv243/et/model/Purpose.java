@@ -1,11 +1,14 @@
 package cz.muni.fi.pv243.et.model;
 
+import org.hibernate.search.annotations.Indexed;
+
 import java.io.Serializable;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
+@Indexed
 public class Purpose implements Serializable {
 
     @Id

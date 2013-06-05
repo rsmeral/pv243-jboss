@@ -10,9 +10,11 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.search.annotations.Indexed;
 import org.hibernate.validator.constraints.Email;
 
 @Entity
+@Indexed
 public class Person implements Serializable {
 
     @Id

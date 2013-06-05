@@ -1,5 +1,7 @@
 package cz.muni.fi.pv243.et.model;
 
+import org.hibernate.search.annotations.Indexed;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
@@ -7,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
+@Indexed
 public class ExpenseReport implements Serializable {
 
     @Id

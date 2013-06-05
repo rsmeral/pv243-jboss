@@ -1,9 +1,12 @@
 package cz.muni.fi.pv243.et.model;
 
+import org.hibernate.search.annotations.Indexed;
+
 import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
+@Indexed
 public class MoneyTransfer extends Transaction implements Serializable {
 
     @Id
