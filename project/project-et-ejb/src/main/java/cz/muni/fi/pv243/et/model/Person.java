@@ -17,7 +17,7 @@ public class Person implements Serializable {
 
     @Id
     @GeneratedValue
-    private Long personId;
+    private Long id;
 
     @Size(min = 2, max = 50)
     @Pattern(regexp = "[A-Z][a-z]*")
@@ -45,12 +45,12 @@ public class Person implements Serializable {
     public Person() {
     }
 
-    public Long getPersonId() {
-        return personId;
+    public Long getId() {
+        return id;
     }
 
-    public void setPersonId(Long id) {
-        this.personId = id;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -105,7 +105,7 @@ public class Person implements Serializable {
         if (email != null ? !email.equals(person.email) : person.email != null) return false;
         if (firstName != null ? !firstName.equals(person.firstName) : person.firstName != null) return false;
         if (lastName != null ? !lastName.equals(person.lastName) : person.lastName != null) return false;
-        if (personId != null ? !personId.equals(person.personId) : person.personId != null) return false;
+        if (id != null ? !id.equals(person.id) : person.id != null) return false;
         if (roles != null ? !roles.equals(person.roles) : person.roles != null) return false;
 
         return true;
@@ -113,7 +113,7 @@ public class Person implements Serializable {
 
     @Override
     public int hashCode() {
-        int result = personId != null ? personId.hashCode() : 0;
+        int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
@@ -125,7 +125,7 @@ public class Person implements Serializable {
     @Override
     public String toString() {
         return "Person{" +
-                "personId=" + personId +
+                "personId=" + id +
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +

@@ -1,23 +1,29 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-  Created by IntelliJ IDEA.
-  User: dusan
-  Date: 6/1/13
-  Time: 4:38 PM
--->
-<!DOCTYPE html
-        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html">
-
 <h:head>
-    <title>Simple JSF Facelets page</title>
+    <title>Login Form</title>
 </h:head>
-
 <h:body>
-    Place your content here
+    <h2>Hello, please log in:</h2>
+    <h:form id="login">
+        <h:panelGrid>
+            <h:outputText value="User ID: " styleClass="label" />
+            <h:inputText value="#{username}" />
+            <h:outputText value="Password: " styleClass="label" />
+            <h:inputSecret value="#{password}" />
+        </h:panelGrid>
+        <div>
+            <h:commandButton value="Login"
+                             action="#{loginBean.login(username, password)}"
+                             styleClass="loginBtn" />
+        </div>
+        <p>
+            First access? Please
+            <h:commandLink value="Sign Up" action="signup" />
+            now.
+        </p>
+    </h:form>
 </h:body>
-
 </html>

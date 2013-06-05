@@ -14,6 +14,11 @@ public class ExpenseReport implements Serializable {
     private Long id;
 
     @NotNull
+    private String name;
+
+    private String description;
+
+    @NotNull
     @ManyToOne
     private Person submitter;
 
@@ -31,6 +36,9 @@ public class ExpenseReport implements Serializable {
 
     @Temporal(TemporalType.TIMESTAMP)
     private Date approvedDate;
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date lastChangeDate;
 
     @Enumerated(EnumType.ORDINAL)
     private ReportStatus status;
@@ -97,6 +105,30 @@ public class ExpenseReport implements Serializable {
 
     public void setStatus(ReportStatus status) {
         this.status = status;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Date getLastChangeDate() {
+        return lastChangeDate;
+    }
+
+    public void setLastChangeDate(Date lastChangeDate) {
+        this.lastChangeDate = lastChangeDate;
     }
 
     @Override

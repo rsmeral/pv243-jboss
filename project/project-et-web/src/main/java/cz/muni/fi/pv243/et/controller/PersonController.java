@@ -108,6 +108,7 @@ public class PersonController {
 
         // REPORTS
         ExpenseReport report = new ExpenseReport();
+        report.setName("myReport");
         report.setSubmitter(personNew);
         report.setLastSubmittedDate(new Date(113, 0, 0));
 //        report.setApprovedDate(new Date(System.currentTimeMillis() + 1000000000));

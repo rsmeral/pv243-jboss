@@ -1,7 +1,5 @@
 package cz.muni.fi.pv243.et.persistence;
 
-import org.hibernate.Session;
-
 import javax.ejb.Stateless;
 import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
@@ -15,12 +13,12 @@ public class IdentityManagementEntityManagerProvider {
     private EntityManager identityManager;
 
     @Produces
-    @IdentityManager
+    @IdentityManagementEntityManager
     public EntityManager getIdentityManager() {
         return identityManager;
     }
 
-    public void closeEntityManager(@Disposes EntityManager entityManager) {
+    public void closeEntityManager(@Disposes @IdentityManagementEntityManager EntityManager entityManager) {
         if (entityManager.isOpen()) {
             entityManager.close();
         }

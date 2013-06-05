@@ -38,6 +38,9 @@
         
         <version.jboss.maven.plugin>7.3.Final</version.jboss.maven.plugin>
 
+        <version.picketbox>5.0.0.Final</version.picketbox>
+        <version.picketlink.ext>3.0.0-2013Feb08</version.picketlink.ext>
+
         <!-- maven-compiler-plugin -->
         <maven.compiler.target>1.6</maven.compiler.target>
         <maven.compiler.source>1.6</maven.compiler.source>
@@ -92,6 +95,35 @@
                 <artifactId>infinispan-core</artifactId>
                 <groupId>org.infinispan</groupId>
                 <version>${version.infinispan}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.antlr</groupId>
+                <artifactId>antlr-runtime</artifactId>
+                <version>3.5</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.hibernate.jpql</groupId>
+                <artifactId>hibernate-jpql-parser</artifactId>
+                <version>1.0.0.Alpha1</version>
+            </dependency>
+
+
+            <dependency>
+                <groupId>org.picketbox</groupId>
+                <artifactId>picketbox-core</artifactId>
+                <version>${version.picketbox}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.picketbox</groupId>
+                <artifactId>picketbox-http</artifactId>
+                <version>${version.picketbox}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.picketlink.extensions</groupId>
+                <artifactId>picketlink-extensions-core</artifactId>
+                <version>${version.picketlink.ext}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>
