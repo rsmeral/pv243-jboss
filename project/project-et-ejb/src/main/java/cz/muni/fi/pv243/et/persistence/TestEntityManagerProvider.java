@@ -11,7 +11,7 @@ import org.hibernate.Session;
 
 @Exclude(exceptIfProjectStage = Development.class)
 @Stateless
-public class TestEntityManagerProvider extends AbstractEntityManagerProvider {
+public class TestEntityManagerProvider {
 
     @PersistenceContext(unitName = "TestPU")
     private EntityManager entityManager;

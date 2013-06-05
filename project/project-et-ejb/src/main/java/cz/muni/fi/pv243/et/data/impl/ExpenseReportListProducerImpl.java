@@ -29,8 +29,8 @@ public class ExpenseReportListProducerImpl implements ExpenseReportListProducer 
     }
 
     public Collection<ExpenseReport> getAllForSubmitter(Person submitter) {
-        return session.createQuery("SELECT report FROM ExpenseReport report WHERE report.submitter like :submitter")
-                .setParameter("submitter", submitter).list();
+        return session.createQuery("SELECT report FROM ExpenseReport report WHERE report.submitter.id = :submitterId")
+                .setParameter("submitterId", submitter.getId()).list();
     }
 
 

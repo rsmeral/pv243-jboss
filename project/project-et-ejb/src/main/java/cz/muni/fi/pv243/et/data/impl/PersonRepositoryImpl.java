@@ -18,7 +18,7 @@ public class PersonRepositoryImpl implements PersonRepository {
         if (person == null) {
             throw new IllegalArgumentException("person is null");
         }
-        if (person.getPersonId() != null) {
+        if (person.getId() != null) {
             throw new IllegalArgumentException("person id is not null");
         }
         em.persist(person);
@@ -29,7 +29,7 @@ public class PersonRepositoryImpl implements PersonRepository {
         if (person == null) {
             throw new IllegalArgumentException("person is null");
         }
-        if (person.getPersonId() == null) {
+        if (person.getId() == null) {
             throw new IllegalArgumentException("person id is null");
         }
         em.merge(person);
@@ -40,10 +40,10 @@ public class PersonRepositoryImpl implements PersonRepository {
         if (person == null) {
             throw new IllegalArgumentException("person is null");
         }
-        if (person.getPersonId() == null) {
+        if (person.getId() == null) {
             throw new IllegalArgumentException("person id is null");
         }
-        em.remove(em.find(Person.class, person.getPersonId()));
+        em.remove(em.find(Person.class, person.getId()));
     }
 
 

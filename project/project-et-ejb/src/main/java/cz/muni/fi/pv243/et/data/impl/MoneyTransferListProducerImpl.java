@@ -4,12 +4,12 @@ import cz.muni.fi.pv243.et.data.MoneyTransferListProducer;
 import cz.muni.fi.pv243.et.model.ExpenseReport;
 import cz.muni.fi.pv243.et.model.MoneyTransfer;
 import org.hibernate.Session;
-import org.joda.time.DateTime;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 @Stateless
@@ -42,7 +42,7 @@ public class MoneyTransferListProducerImpl implements MoneyTransferListProducer 
      * @return list of MoneyTransfers from given time period.
      */
     @Override
-    public List<MoneyTransfer> getAllBetweenDates(DateTime fromDate, DateTime toDate) {
+    public List<MoneyTransfer> getAllBetweenDates(Date fromDate, Date toDate) {
         if (fromDate == null && toDate == null) {
             throw new IllegalArgumentException("fromDate and toDate are both null");
         }
@@ -50,13 +50,13 @@ public class MoneyTransferListProducerImpl implements MoneyTransferListProducer 
         List<MoneyTransfer> result;
         // list all entries to toDate  date_interval<0, toDate>
         if (fromDate == null) {
-            result = session.createQuery("SELECT mt FROM MoneyTransfer mt WHERE date < :toDate ")
+            result = session.createQuery("SELECT mt FROM MoneyTransfer mt WHERE mt.date <= :toDate ")
                     .setParameter("toDate", toDate).list();
         } else if (toDate == null) {
-            result = session.createQuery("SELECT mt FROM MoneyTransfer mt WHERE date > :fromDate ")
+            result = session.createQuery("SELECT mt FROM MoneyTransfer mt WHERE mt.date >= :fromDate ")
                     .setParameter("fromDate", fromDate).list();
         } else {
-            result = session.createQuery("SELECT mt FROM MoneyTransfer mt WHERE :fromDate < date and date < :toDate ")
+            result = session.createQuery("SELECT mt FROM MoneyTransfer mt WHERE :fromDate <= mt.date AND mt.date < :toDate ")
                     .setParameter("toDate", toDate).setParameter("fromDate", fromDate).list();
         }
         return result;

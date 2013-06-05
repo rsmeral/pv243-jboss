@@ -8,23 +8,6 @@
         <!-- Use Hibernate OGM provider: configuration will be transparent -->
         <provider>org.hibernate.ogm.jpa.HibernateOgmPersistence</provider>
 
-         <!--UGLY SHIT!! HOW TO REMOVE IT!?-->
-        <class>cz.muni.fi.pv243.et.model.Person</class>
-        <class>cz.muni.fi.pv243.et.model.Purpose</class>
-        <class>cz.muni.fi.pv243.et.model.Receipt</class>
-        <class>cz.muni.fi.pv243.et.model.Currency</class>
-        <class>cz.muni.fi.pv243.et.model.ExpenseReport</class>
-
-        <class>cz.muni.fi.pv243.et.model.Payment</class>
-        <class>cz.muni.fi.pv243.et.model.MoneyTransfer</class>
-        <class>cz.muni.fi.pv243.et.model.ReportStatus</class>
-        <class>cz.muni.fi.pv243.et.model.Role</class>
-        <class>cz.muni.fi.pv243.et.model.Transaction</class>
-
-
-        <jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source>
-        
-        
         <!-- property optional if you plan and use Infinispan, otherwise adjust to your favorite
         NoSQL Datastore provider. -->
         <properties>
@@ -45,6 +28,7 @@
 
     <persistence-unit name="TestPU">
         <jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source>
+
         <!-- If you are running in a production environment, add a managed
            data source, this example data source is just for development and testing! -->
         <!-- The datasource is deployed as WEB-INF/kitchensink-quickstart-ds.xml, you
@@ -60,6 +44,26 @@
             <!--<property name="hibernate.search.infinispan.configuration_resourcename" value="infinispan.xml"/>-->
 
 
+        </properties>
+    </persistence-unit>
+
+    <persistence-unit name="IdentityManagementPU">
+        <jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source>
+
+        <class>org.picketlink.idm.jpa.schema.IdentityObject</class>
+        <class>org.picketlink.idm.jpa.schema.PartitionObject</class>
+        <class>org.picketlink.idm.jpa.schema.RelationshipObject</class>
+        <class>org.picketlink.idm.jpa.schema.RelationshipIdentityObject</class>
+        <class>org.picketlink.idm.jpa.schema.RelationshipObjectAttribute</class>
+        <class>org.picketlink.idm.jpa.schema.IdentityObjectAttribute</class>
+        <class>org.picketlink.idm.jpa.schema.CredentialObject</class>
+        <class>org.picketlink.idm.jpa.schema.CredentialObjectAttribute</class>
+
+        <exclude-unlisted-classes>true</exclude-unlisted-classes>
+        <properties>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
+            <property name="hibernate.hbm2ddl.auto" value="create-drop" />
+            <property name="hibernate.show_sql" value="false" />
         </properties>
     </persistence-unit>
 </persistence>
