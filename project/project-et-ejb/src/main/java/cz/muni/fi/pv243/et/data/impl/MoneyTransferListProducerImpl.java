@@ -44,10 +44,13 @@ public class MoneyTransferListProducerImpl implements MoneyTransferListProducer,
 
         System.out.println("search MT for entity " + expenseReport);
 
-        Collection<MoneyTransfer> result = session.createQuery("SELECT mt FROM MoneyTransfer mt WHERE mt.report = :report ORDER BY mt.date ASC")
+        Collection<MoneyTransfer> result = session.createQuery("SELECT mt FROM MoneyTransfer mt WHERE mt.report = :report")
                 .setParameter("report", expenseReport).list();
 
-        System.out.println("result=" + result);
+        Collection<MoneyTransfer> all = session.createQuery("SELECT mt FROM MoneyTransfer mt").list();
+
+        System.out.println("\nall=" + all);
+        System.out.println("\nresult=" + result);
         return result;
     }
 

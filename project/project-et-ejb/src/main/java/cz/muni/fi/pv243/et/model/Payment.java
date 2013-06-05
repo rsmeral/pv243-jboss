@@ -23,9 +23,6 @@ public class Payment extends Transaction {
     @ManyToOne
     private Receipt receipt;
 
-    @ManyToOne(optional = false)
-    private ExpenseReport report;
-
     public Long getId() {
         return id;
     }
@@ -50,21 +47,12 @@ public class Payment extends Transaction {
         this.receipt = receipt;
     }
 
-    public ExpenseReport getReport() {
-        return report;
-    }
-
-    public void setReport(ExpenseReport report) {
-        this.report = report;
-    }
-
     @Override
     public int hashCode() {
         int hash = 7;
         hash = 53 * hash + (this.id != null ? this.id.hashCode() : 0);
         hash = 53 * hash + (this.purpose != null ? this.purpose.hashCode() : 0);
         hash = 53 * hash + (this.receipt != null ? this.receipt.hashCode() : 0);
-        hash = 53 * hash + (this.report != null ? this.report.hashCode() : 0);
         return hash;
     }
 
@@ -87,9 +75,6 @@ public class Payment extends Transaction {
         if (this.receipt != other.receipt && (this.receipt == null || !this.receipt.equals(other.receipt))) {
             return false;
         }
-        if (this.report != other.report && (this.report == null || !this.report.equals(other.report))) {
-            return false;
-        }
         return true;
     }
 
@@ -99,7 +84,6 @@ public class Payment extends Transaction {
                 "id=" + id +
                 ", purpose=" + purpose +
                 ", receipt=" + receipt +
-                ", report=" + report +
                 "," + super.toString() +
                 '}';
     }

@@ -25,6 +25,18 @@ public class Transaction {
     @Enumerated(EnumType.ORDINAL)
     private Currency currency;
 
+    @ManyToOne(optional = false)
+    private ExpenseReport report;
+
+
+    public ExpenseReport getReport() {
+        return report;
+    }
+
+    public void setReport(ExpenseReport report) {
+        this.report = report;
+    }
+
     public Date getDate() {
         return date;
     }
@@ -81,10 +93,11 @@ public class Transaction {
 
     @Override
     public String toString() {
-        return "Transaction{"
-                + "date=" + date
-                + ", value=" + value
-                + ", currency='" + currency + '\''
-                + '}';
+        return "Transaction{" +
+                "date=" + date +
+                ", value=" + value +
+                ", currency=" + currency +
+                ", report=" + report +
+                '}';
     }
 }

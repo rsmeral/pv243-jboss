@@ -13,9 +13,6 @@ public class MoneyTransfer extends Transaction implements Serializable {
     @GeneratedValue
     private Long id;
 
-    @ManyToOne(optional = false)
-    private ExpenseReport report;
-
     @OneToOne(optional = false)
     private Person creator;
 
@@ -25,14 +22,6 @@ public class MoneyTransfer extends Transaction implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public ExpenseReport getReport() {
-        return report;
-    }
-
-    public void setReport(ExpenseReport report) {
-        this.report = report;
     }
 
     public Person getCreator() {
@@ -47,7 +36,6 @@ public class MoneyTransfer extends Transaction implements Serializable {
     public int hashCode() {
         int hash = 3;
         hash = 97 * hash + (this.id != null ? this.id.hashCode() : 0);
-        hash = 97 * hash + (this.report != null ? this.report.hashCode() : 0);
         hash = 97 * hash + (this.creator != null ? this.creator.hashCode() : 0);
         return hash;
     }
@@ -62,9 +50,6 @@ public class MoneyTransfer extends Transaction implements Serializable {
         }
         final MoneyTransfer other = (MoneyTransfer) obj;
         if (this.id != other.id && (this.id == null || !this.id.equals(other.id))) {
-            return false;
-        }
-        if (this.report != other.report && (this.report == null || !this.report.equals(other.report))) {
             return false;
         }
         if (this.creator != other.creator && (this.creator == null || !this.creator.equals(other.creator))) {
