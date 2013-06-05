@@ -36,11 +36,19 @@
     <navigation-rule>
         <from-view-id>/create.xhtml</from-view-id>
         <navigation-case>
-            <from-action>#{personController.initialize}</from-action>
+            <from-action>#{testController.initialize}</from-action>
             <from-outcome>created</from-outcome>
-            <to-view-id>/persons.xhtml</to-view-id>
+            <to-view-id>/reports.xhtml</to-view-id>
         </navigation-case>
     </navigation-rule>
 
+    <!--<navigation-rule>-->
+        <!--<from-view-id>/reports.xhtml</from-view-id>-->
+        <!--<navigation-case>-->
+            <!--<from-action>#{expenseController.showSingleReport}</from-action>-->
+            <!--<from-outcome>showSingleReport</from-outcome>-->
+            <!--<to-view-id>/report.xhtml</to-view-id>-->
+        <!--</navigation-case>-->
+    <!--</navigation-rule>-->
 
 </faces-config>
