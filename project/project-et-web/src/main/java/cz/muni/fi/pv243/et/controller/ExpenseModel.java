@@ -1,28 +1,41 @@
 package cz.muni.fi.pv243.et.controller;
 
 import cz.muni.fi.pv243.et.data.ExpenseReportListProducer;
+import cz.muni.fi.pv243.et.data.MoneyTransferListProducer;
 import cz.muni.fi.pv243.et.model.ExpenseReport;
+import cz.muni.fi.pv243.et.model.MoneyTransfer;
 import cz.muni.fi.pv243.et.model.Person;
 
+import javax.ejb.Singleton;
 import javax.ejb.Stateful;
+import javax.enterprise.context.RequestScoped;
+import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Produces;
-import javax.faces.bean.SessionScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 
-//@Stateful
+
+/**
+ * Service layer (?)
+ */
+
 @SessionScoped
-@Named
 public class ExpenseModel implements Serializable {
 
 
     private ExpenseReport report;
+    private List<MoneyTransfer> mts;
 
 
     @Inject
     private ExpenseReportListProducer erlp;
+
+    @Inject
+    private MoneyTransferListProducer mtlp;
+
 
     @Produces
     @Named("expenseReports")
@@ -39,15 +52,26 @@ public class ExpenseModel implements Serializable {
     public void setExpenseReport(Long id) {
         System.out.println("Setting report to id=" + id);
         ExpenseReport rep = erlp.get(id);
-        System.out.println("report=" + rep);
         this.report = rep;
     }
 
     @Produces
+    @RequestScoped
     @Named("singleReport")
     public ExpenseReport getExpenseReport(){
         System.out.println("Producing single report " + this.report);
         return this.report;
+    }
+
+    @Produces
+    @RequestScoped
+    @Named("moneyTransfers")
+    public List<MoneyTransfer> getMoneyTransfers() {
+        if (this.report == null) {
+            throw new NullPointerException("report is null");
+        }
+        return (List) mtlp.get(report);
+
     }
 
 }

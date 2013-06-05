@@ -22,6 +22,8 @@ import java.io.Serializable;
 public class ExpenseController implements Serializable {
     private static long serialVersionUID = 1234243242343424L; //not generated value!!
 
+
+
     @Inject
     private PersonListProducer plp;
 
@@ -40,15 +42,7 @@ public class ExpenseController implements Serializable {
 
         expenseModel.setExpenseReport(id);
 
-
-//        try {
-//            FacesContext.getCurrentInstance().getExternalContext()
-//                    .redirect("report.xhtml");
-//        } catch (IOException ex) {
-//            System.out.println("error while showing single report" + ex);
-//        }
-
-        return "showSingleReport";
+        return "report";
     }
 
 }

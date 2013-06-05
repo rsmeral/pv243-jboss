@@ -5,23 +5,80 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
       xml:lang="en" lang="en">
 <head>
-    <title>Report Name</title>
+    <title>Report Details</title>
+    <style type="text/css">
+        table {
+            border: 1px solid #CCCCCC;
+        }
+
+        th, td {
+            border: 1px solid #CCCCCC;
+        }
+    </style>
+
 </head>
 
 
 <body>
-<h1>#{expenseModel.expenseReport.name}</h1>
+<h1>#{singleReport.name}</h1>
 
-<h:dataTable value="#{expenseModel.expenseReport}" var="report">
-    <h:column>
-        <f:facet name="header">Name</f:facet>
-        #{expenseModel.expenseReport.name}
-    </h:column>
+<h:form>
+<h:dataTable value="#{singleReport}">
+
     <h:column>
         <f:facet name="header">Status</f:facet>
-        #{report.status}
+        #{singleReport.status}
+    </h:column>
+
+    <h:column>
+        <f:facet name="header">Verifier</f:facet>
+        #{singleReport.verifier.firstName} #{singleReport.verifier.lastName}
+    </h:column>
+
+
+    <h:column>
+        <f:facet name="header">Submitter</f:facet>
+        #{singleReport.submitter}
+    </h:column>
+
+
+
+    <h:column>
+        <f:facet name="header">Description</f:facet>
+        #{singleReport.description}
     </h:column>
 
 </h:dataTable>
+
+<h:dataTable value="#{moneyTransfers}" var="mt">
+    <h:column>
+        <f:facet name="header">Creator</f:facet>
+        #{mt.creator}
+    </h:column>
+
+    <h:column>
+        <f:facet name="header">Report</f:facet>
+        #{mt.report}
+    </h:column>
+
+    <h:column>
+        <f:facet name="header">Value</f:facet>
+        #{mt.value}
+    </h:column>
+
+    <h:column>
+        <f:facet name="header">Date</f:facet>
+        #{mt.date}
+    </h:column>
+    <h:column>
+        <f:facet name="header">Currency</f:facet>
+        #{mt.currency}
+    </h:column>
+
+</h:dataTable>
+
+
+<h:commandLink action="reports" value="Back"/>
+</h:form>
 </body>
 </html>

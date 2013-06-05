@@ -8,12 +8,13 @@ import org.hibernate.Session;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
 @Stateless
-public class MoneyTransferListProducerImpl implements MoneyTransferListProducer {
+public class MoneyTransferListProducerImpl implements MoneyTransferListProducer, Serializable {
 
     @Inject
     private EntityManager em;
@@ -29,16 +30,32 @@ public class MoneyTransferListProducerImpl implements MoneyTransferListProducer 
         return em.find(MoneyTransfer.class, id);
     }
 
+    /**
+     * Return all associated money transfers with given expense report.
+     *
+     * @param expenseReport to look for in money transfers
+     * @return collection of moneyTransfers associated with expenseReport or null.
+     */
     @Override
     public Collection<MoneyTransfer> get(ExpenseReport expenseReport) {
-       return null;
+        if (expenseReport == null) {
+            throw new IllegalArgumentException("expenseReport is null");
+        }
+
+        System.out.println("search MT for entity " + expenseReport);
+
+        Collection<MoneyTransfer> result = session.createQuery("SELECT mt FROM MoneyTransfer mt WHERE mt.report = :report ORDER BY mt.date ASC")
+                .setParameter("report", expenseReport).list();
+
+        System.out.println("result=" + result);
+        return result;
     }
 
     /**
      * Single parameter could be null, but not both.
      *
      * @param fromDate - if null, list all moneyTransfers toDate
-     * @param toDate - if null, list all fromDate to now
+     * @param toDate   - if null, list all fromDate to now
      * @return list of MoneyTransfers from given time period.
      */
     @Override

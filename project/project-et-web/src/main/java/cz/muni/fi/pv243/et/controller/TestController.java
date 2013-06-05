@@ -63,7 +63,7 @@ public class TestController {
         HashSet<Role> roles = new HashSet<Role>();
 
         roles.add(Role.APPLICANT);
-        Person personTom = createPerson("Tomas", "Lukasovic", "test@test.cz", "123456789", roles);
+        Person personTom = createPerson("Tomas", "Applicantovic", "test@test.cz", "123456789", roles);
 
 //        // create user
 //        NewUser newUser = new NewUser();
@@ -80,16 +80,21 @@ public class TestController {
         roles.add(Role.APPROVER);
         Person personJana = createPerson("Jana", "Nova", "nova.jana@test.cz", "789313244", roles);
 
+        roles.clear();
+        roles.add(Role.APPROVER);
+        Person personApprover = createPerson("Hermiona", "Approverova", "herim@ona.cz", "120313244", roles);
 
         System.out.println("created Persons");
 
         // PURPOSES
         Purpose purp1 = createPurpose("TestPurp", "Purpose 2 Desctipriton");
-        Purpose purp2 = createPurpose("Purpose 2", "Purpose tesxt asdasdsa");
+        Purpose purp2 = createPurpose("Purpose 2", "Purpose of not writing nice Java code");
+        Purpose purp3 = createPurpose("Purpose 3", "Arquillian not testing purpose - give us some money bicth!");
 
 
         // RECEIPTS
         Receipt rec = createReceipt(personTom, new Date(System.currentTimeMillis() - 100000), "Platba za vlak a autobus");
+        Receipt rec2 = createReceipt(personJana, new Date(System.currentTimeMillis() - 20000), "Way there and back");
 
 
         // REPORTS
@@ -99,9 +104,20 @@ public class TestController {
         ExpenseReport report2 =
                 createExpenseReport("Munich 2012 FUD Conference", personTom, null, ReportStatus.APPROVED, "Conference in Munich" );
 
+
+        ExpenseReport report3 =
+                createExpenseReport("Non Testing in Arquillian 2012", personJana, personApprover, ReportStatus.REJECTED, "Why are we not testing in Arquillian?" );
+
+        // MONEY TRANSFERS
+        MoneyTransfer mt = createMoneyTransfer(personApprover, report2, BigDecimal.valueOf(2400), Currency.USD, new Date(System.currentTimeMillis() + 20));
+        MoneyTransfer mt2 = createMoneyTransfer(personApprover, report3, BigDecimal.valueOf(200), Currency.EUR, new Date(System.currentTimeMillis() - 15000));
+
         // PAYMENTS
         Payment payment = createPayment(report, purp1, rec, BigDecimal.valueOf(1500), Currency.EUR);
         Payment payment2 = createPayment(report2, purp2, rec, BigDecimal.valueOf(2345), Currency.USD);
+        Payment payment3 = createPayment(report3, purp3, rec2, BigDecimal.valueOf(300), Currency.EUR);
+
+
 
 
         return "created";
@@ -187,5 +203,17 @@ public class TestController {
         paymentRepo.create(payment);
 
         return payment;
+    }
+
+    private MoneyTransfer createMoneyTransfer(Person creator, ExpenseReport report, BigDecimal value, Currency currency, Date date) {
+        MoneyTransfer mt = new MoneyTransfer();
+        mt.setReport(report);
+        mt.setCreator(creator);
+        mt.setValue(value);
+        mt.setCurrency(currency);
+        mt.setDate(date);
+        moneyRepo.create(mt);
+
+        return mt;
     }
 }

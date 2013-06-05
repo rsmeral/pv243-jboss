@@ -42,13 +42,5 @@
         </navigation-case>
     </navigation-rule>
 
-    <!--<navigation-rule>-->
-        <!--<from-view-id>/reports.xhtml</from-view-id>-->
-        <!--<navigation-case>-->
-            <!--<from-action>#{expenseController.showSingleReport}</from-action>-->
-            <!--<from-outcome>showSingleReport</from-outcome>-->
-            <!--<to-view-id>/report.xhtml</to-view-id>-->
-        <!--</navigation-case>-->
-    <!--</navigation-rule>-->
 
 </faces-config>

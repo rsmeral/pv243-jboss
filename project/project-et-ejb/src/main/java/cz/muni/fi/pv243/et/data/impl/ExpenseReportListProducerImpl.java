@@ -9,10 +9,11 @@ import org.hibernate.Session;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import java.io.Serializable;
 import java.util.Collection;
 
 @Stateless
-public class ExpenseReportListProducerImpl implements ExpenseReportListProducer {
+public class ExpenseReportListProducerImpl implements ExpenseReportListProducer, Serializable {
 
     @Inject
     private EntityManager em;
