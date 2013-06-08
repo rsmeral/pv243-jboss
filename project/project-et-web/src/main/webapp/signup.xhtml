@@ -9,24 +9,24 @@
     <h:form>
         <h:messages/>
         <h:panelGrid>
-            <h:outputText value="User ID: " styleClass="label"/>
-            <h:inputText value="#{newUser.userName}" label="User ID"/>
-            <h:outputText value="First Name: " styleClass="label"/>
-            <h:inputText value="#{newUser.firstName}" label="First Name"/>
-            <h:outputText value="Last Name: " styleClass="label"/>
-            <h:inputText value="#{newUser.lastName}" label="Last Name"/>
+            <h:outputText value="Username: " styleClass="label"/>
+            <h:inputText value="#{newUser.userName}" label="Username"/>
+            <h:outputText value="First name: " styleClass="label"/>
+            <h:inputText value="#{newUser.firstName}" label="First name"/>
+            <h:outputText value="Last name: " styleClass="label"/>
+            <h:inputText value="#{newUser.lastName}" label="Last name"/>
+            <h:outputText value="Bank account: " styleClass="label"/>
+            <h:inputText value="#{newUser.bankAccount}" label="Bank account"/>
             <h:outputText value="Email: " styleClass="label"/>
             <h:inputText value="#{newUser.email}" label="Email"/>
             <h:outputText value="Password: " styleClass="label"/>
             <h:inputSecret value="#{newUser.password}" label="Password"/>
             <h:outputText value="Password Confirmation: " styleClass="label"/>
-            <h:inputSecret value="#{newUser.passwordConfirmation}"
-                           label="Password Confirmation"/>
+            <h:inputSecret value="#{newUser.passwordConfirmation}" label="Password Confirmation"/>
         </h:panelGrid>
 
         <div id="loginBtnContainer">
-            <h:commandButton value="Ok" action="#{signUpBean.signUp()}"
-                             styleClass="loginBtn"/>
+            <h:commandButton value="Ok" action="#{signUpBean.signUp()}" styleClass="loginBtn"/>
         </div>
 
     </h:form>

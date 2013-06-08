@@ -2,7 +2,6 @@ package cz.muni.fi.pv243.et.data.impl;
 
 import cz.muni.fi.pv243.et.data.PersonListProducer;
 import cz.muni.fi.pv243.et.model.Person;
-import cz.muni.fi.pv243.et.model.Role;
 import org.hibernate.Session;
 
 import javax.ejb.Stateless;
@@ -48,13 +47,6 @@ public class PersonListProducerImpl implements PersonListProducer {
         List<Person> result = session.createQuery(
                 "SELECT p from Person p where p.firstName like :firstName and p.lastName like :lastName")
                 .setParameter("firstName", firstName).setParameter("lastName", lastName).list();
-        return result;
-    }
-
-    @Override
-    public Collection<Person> findByRole(Role role) {
-        List<Person> result = session.createQuery("SELECT p FROM Person p WHERE :role MEMBER OF p.roles")
-                .setParameter("role", role).list();
         return result;
     }
 

@@ -29,6 +29,11 @@
             <artifactId>cdi-api</artifactId>
         </dependency>
 
+        <dependency>
+            <groupId>org.jboss.solder</groupId>
+            <artifactId>solder-tooling</artifactId>
+        </dependency>
+
         <!-- Import the JSF API, we use provided scope as the API is included in JBoss AS 7 -->
 
         <dependency>

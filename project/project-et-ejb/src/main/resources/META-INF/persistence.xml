@@ -18,7 +18,7 @@
         <class>cz.muni.fi.pv243.et.model.Payment</class>
         <class>cz.muni.fi.pv243.et.model.MoneyTransfer</class>
         <class>cz.muni.fi.pv243.et.model.ReportStatus</class>
-        <class>cz.muni.fi.pv243.et.model.Role</class>
+        <class>cz.muni.fi.pv243.et.model.PersonRole</class>
         <class>cz.muni.fi.pv243.et.model.Transaction</class>
 
 
@@ -62,6 +62,7 @@
     </persistence-unit>
 
     <persistence-unit name="IdentityManagementPU">
+        <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source>
 
         <class>org.picketlink.idm.jpa.schema.IdentityObject</class>
@@ -76,7 +77,7 @@
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
-            <property name="hibernate.hbm2ddl.auto" value="create-drop" />
+            <property name="hibernate.hbm2ddl.auto" value="create" />
             <property name="hibernate.show_sql" value="false" />
         </properties>
     </persistence-unit>

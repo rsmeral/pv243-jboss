@@ -55,6 +55,8 @@
                 <version>${version.jboss.maven.plugin}</version>
                 <configuration>
                     <force>true</force>
+                    <execCommands/>
+                    <execute-commands/>
                 </configuration>
                 <executions>
                     <execution>

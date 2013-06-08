@@ -3,9 +3,7 @@ package cz.muni.fi.pv243.et.controller;
 import cz.muni.fi.pv243.et.data.*;
 import cz.muni.fi.pv243.et.model.*;
 import cz.muni.fi.pv243.et.model.Currency;
-import cz.muni.fi.pv243.et.security.NewUser;
 import org.apache.deltaspike.core.api.exception.control.event.ExceptionToCatchEvent;
-import org.picketlink.idm.IdentityManager;
 
 import java.math.BigDecimal;
 import java.util.*;
@@ -60,29 +58,9 @@ public class TestController {
     private MoneyTransferListProducer moneyList;
 
     public String initialize() {
-        HashSet<Role> roles = new HashSet<Role>();
-
-        roles.add(Role.APPLICANT);
-        Person personTom = createPerson("Tomas", "Applicantovic", "test@test.cz", "123456789", roles);
-
-//        // create user
-//        NewUser newUser = new NewUser();
-//        newUser.setEmail("test@test.cz");
-//        newUser.setFirstName("Tomas");
-//        newUser.setLastName("Lukasovic");
-//        newUser.setPassword("asd");
-//        newUser.setPasswordConfirmation("asd");
-//        newUser.setUserName("asd");
-//        //im.add(newUser);
-
-        roles.clear();
-        roles.add(Role.APPLICANT);
-        roles.add(Role.APPROVER);
-        Person personJana = createPerson("Jana", "Nova", "nova.jana@test.cz", "789313244", roles);
-
-        roles.clear();
-        roles.add(Role.APPROVER);
-        Person personApprover = createPerson("Hermiona", "Approverova", "herim@ona.cz", "120313244", roles);
+        Person personTom = createPerson("Tomas", "Applicantovic", "test@test.cz", "123456789");
+        Person personJana = createPerson("Jana", "Nova", "nova.jana@test.cz", "789313244");
+        Person personApprover = createPerson("Hermiona", "Approverova", "herim@ona.cz", "120313244");
 
         System.out.println("created Persons");
 
@@ -117,9 +95,6 @@ public class TestController {
         Payment payment2 = createPayment(report2, purp2, rec, BigDecimal.valueOf(2345), Currency.USD);
         Payment payment3 = createPayment(report3, purp3, rec2, BigDecimal.valueOf(300), Currency.EUR);
 
-
-
-
         return "created";
     }
 
@@ -143,13 +118,12 @@ public class TestController {
         return entities;
     }
 
-    private Person createPerson(String firstName, String lastName, String email, String bankAccount, Set roles) {
+    private Person createPerson(String firstName, String lastName, String email, String bankAccount) {
         Person person = new Person();
         person.setFirstName(firstName);
         person.setLastName(lastName);
         person.setEmail(email);
         person.setBankAccount(bankAccount);
-        person.setRoles(roles);
         pd.create(person);
 
         return person;

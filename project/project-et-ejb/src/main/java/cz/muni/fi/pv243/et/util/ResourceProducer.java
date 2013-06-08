@@ -1,7 +1,6 @@
 package cz.muni.fi.pv243.et.util;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.jboss.solder.logging.Logger;
 
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
@@ -9,7 +8,8 @@ import javax.enterprise.inject.spi.InjectionPoint;
 public class ResourceProducer {
 
     @Produces
-    Logger produceLogger(InjectionPoint injectionPoint) {
-        return LoggerFactory.getLogger(injectionPoint.getMember().getDeclaringClass());
+    public Logger produceLogger(InjectionPoint injectionPoint) {
+        return Logger.getLogger(injectionPoint.getMember().getDeclaringClass());
     }
+
 }

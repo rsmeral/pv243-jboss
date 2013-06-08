@@ -33,6 +33,7 @@
         <version.surefire.plugin>2.4.3</version.surefire.plugin>
         <version.war.plugin>2.1.1</version.war.plugin>
         <version.infinispan>5.2.6.Final</version.infinispan>
+        <version.solder>3.2.0.Final</version.solder>
         
         <version.hibernate.ogm>4.0.0.Beta2</version.hibernate.ogm>
         
@@ -98,17 +99,22 @@
             </dependency>
 
             <dependency>
-                <groupId>org.antlr</groupId>
-                <artifactId>antlr-runtime</artifactId>
-                <version>3.5</version>
+                <groupId>org.jboss.solder</groupId>
+                <artifactId>solder-impl</artifactId>
+                <version>${version.solder}</version>
             </dependency>
-
             <dependency>
-                <groupId>org.hibernate.jpql</groupId>
-                <artifactId>hibernate-jpql-parser</artifactId>
-                <version>1.0.0.Alpha1</version>
+                <groupId>org.jboss.solder</groupId>
+                <artifactId>solder-logging</artifactId>
+                <version>${version.solder}</version>
             </dependency>
-
+            <dependency>
+                <groupId>org.jboss.solder</groupId>
+                <artifactId>solder-tooling</artifactId>
+                <scope>provided</scope>
+                <version>${version.solder}</version>
+                <optional>true</optional>
+            </dependency>
 
             <dependency>
                 <groupId>org.picketbox</groupId>

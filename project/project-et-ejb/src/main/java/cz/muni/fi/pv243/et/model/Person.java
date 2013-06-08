@@ -34,12 +34,12 @@ public class Person implements Serializable {
     @Column(unique = true)
     private String email;
 
-    @ElementCollection(targetClass = Role.class)
-    @Enumerated(value = EnumType.ORDINAL)
-    @CollectionTable(name = "PersonRole")
-    @Column(name = "roleId")
-    @LazyCollection(LazyCollectionOption.FALSE)
-    private Set<Role> roles;
+//    @ElementCollection(targetClass = PersonRole.class)
+//    @Enumerated(value = EnumType.ORDINAL)
+//    @CollectionTable(name = "PersonRole")
+//    @Column(name = "roleId")
+//    @LazyCollection(LazyCollectionOption.FALSE)
+//    private Set<PersonRole> roles;
 
     @Digits(integer = 9, fraction = 0)
     private String bankAccount;
@@ -88,13 +88,13 @@ public class Person implements Serializable {
         this.email = email;
     }
 
-    public Set<Role> getRoles() {
-        return roles;
-    }
-
-    public void setRoles(Set<Role> roles) {
-        this.roles = roles;
-    }
+//    public Set<PersonRole> getRoles() {
+//        return roles;
+//    }
+//
+//    public void setRoles(Set<PersonRole> roles) {
+//        this.roles = roles;
+//    }
 
     @Override
     public boolean equals(Object o) {
@@ -108,7 +108,7 @@ public class Person implements Serializable {
         if (firstName != null ? !firstName.equals(person.firstName) : person.firstName != null) return false;
         if (lastName != null ? !lastName.equals(person.lastName) : person.lastName != null) return false;
         if (id != null ? !id.equals(person.id) : person.id != null) return false;
-        if (roles != null ? !roles.equals(person.roles) : person.roles != null) return false;
+//        if (roles != null ? !roles.equals(person.roles) : person.roles != null) return false;
 
         return true;
     }
@@ -119,7 +119,7 @@ public class Person implements Serializable {
         result = 31 * result + (firstName != null ? firstName.hashCode() : 0);
         result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
         result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (roles != null ? roles.hashCode() : 0);
+//        result = 31 * result + (roles != null ? roles.hashCode() : 0);
         result = 31 * result + (bankAccount != null ? bankAccount.hashCode() : 0);
         return result;
     }
@@ -131,7 +131,7 @@ public class Person implements Serializable {
                 ", firstName='" + firstName + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", email='" + email + '\'' +
-                ", roles=" + roles +
+//                ", roles=" + roles +
                 ", bankAccount='" + bankAccount + '\'' +
                 '}';
     }
