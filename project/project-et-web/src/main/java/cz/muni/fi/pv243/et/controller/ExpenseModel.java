@@ -2,8 +2,10 @@ package cz.muni.fi.pv243.et.controller;
 
 import cz.muni.fi.pv243.et.data.ExpenseReportListProducer;
 import cz.muni.fi.pv243.et.data.MoneyTransferListProducer;
+import cz.muni.fi.pv243.et.data.PaymentListProducer;
 import cz.muni.fi.pv243.et.model.ExpenseReport;
 import cz.muni.fi.pv243.et.model.MoneyTransfer;
+import cz.muni.fi.pv243.et.model.Payment;
 import cz.muni.fi.pv243.et.model.Person;
 import org.hibernate.Hibernate;
 
@@ -24,12 +26,17 @@ import java.util.List;
  */
 
 @SessionScoped
+//@Stateful (?)
 public class ExpenseModel implements Serializable {
 
 
     private ExpenseReport report;
-    private List<MoneyTransfer> mts;
 
+    // is it too ugly to set both as "actual" results from which we'll compute other stuff?
+    // we'll always set those 2 variables in JPQL call, so we will not ask DB twice
+    // ??
+    private List<MoneyTransfer> moneyTransfers;
+    private List<Payment> payments;
 
     @Inject
     private ExpenseReportListProducer erlp;
@@ -37,6 +44,8 @@ public class ExpenseModel implements Serializable {
     @Inject
     private MoneyTransferListProducer mtlp;
 
+    @Inject
+    private PaymentListProducer plp;
 
     @Produces
     @Named("expenseReports")
@@ -71,8 +80,35 @@ public class ExpenseModel implements Serializable {
         if (this.report == null) {
             throw new NullPointerException("report is null");
         }
-        return (List) mtlp.get(report);
-
+        moneyTransfers = (List) mtlp.get(report);
+        return moneyTransfers;
     }
 
+    @Produces
+    @RequestScoped
+    @Named("payments")
+    public List<Payment> getPayments() {
+        if (this.report == null) {
+            throw new NullPointerException("report is null");
+        }
+
+        payments = (List) plp.get(report);
+        return payments;
+    }
+
+    public List<Payment> getCurrentPayments() {
+        if (payments == null) {
+            payments = getPayments();
+        }
+        System.out.println("getCurrentPayments=" + payments);
+        return payments;
+    }
+
+    public List<MoneyTransfer> getCurrentMoneyTransfers() {
+        if (moneyTransfers == null) {
+            moneyTransfers = getMoneyTransfers();
+        }
+        System.out.println("getCurrentMoneyTransfer=" + moneyTransfers);
+        return moneyTransfers;
+    }
 }

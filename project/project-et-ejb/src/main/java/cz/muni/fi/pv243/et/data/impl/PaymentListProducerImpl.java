@@ -1,6 +1,7 @@
 package cz.muni.fi.pv243.et.data.impl;
 
 import cz.muni.fi.pv243.et.data.PaymentListProducer;
+import cz.muni.fi.pv243.et.model.ExpenseReport;
 import cz.muni.fi.pv243.et.model.Payment;
 import cz.muni.fi.pv243.et.model.Person;
 import org.hibernate.Session;
@@ -8,12 +9,13 @@ import org.hibernate.Session;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
 @Stateless
-public class PaymentListProducerImpl implements PaymentListProducer {
+public class PaymentListProducerImpl implements PaymentListProducer, Serializable {
 
     @Inject
     private EntityManager em;
@@ -45,4 +47,12 @@ public class PaymentListProducerImpl implements PaymentListProducer {
         return session.createQuery("SELECT payment FROM Payment payment WHERE :fromDate <= payment.date AND payment.date <= :toDate")
                 .setParameter("fromDate", fromDate).setParameter("toDate", toDate).list();
     }
+
+    @Override
+    public List<Payment> get(ExpenseReport report) {
+        return session.createQuery("SELECT payment FROM Payment payment WHERE payment.report.id = :reportId")
+                .setParameter("reportId", report.getId()).list();
+    }
+
+
 }

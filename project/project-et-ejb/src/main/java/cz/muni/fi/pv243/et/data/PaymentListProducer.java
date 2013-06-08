@@ -1,5 +1,6 @@
 package cz.muni.fi.pv243.et.data;
 
+import cz.muni.fi.pv243.et.model.ExpenseReport;
 import cz.muni.fi.pv243.et.model.Payment;
 import cz.muni.fi.pv243.et.model.Person;
 import javax.ejb.Local;
@@ -17,4 +18,6 @@ public interface PaymentListProducer {
     public Collection<Payment> getAllPayments(Person person);
 
     public List<Payment> getPaymentsBetweenDates(Date fromDate, Date toDate);
+
+    public List<Payment> get(ExpenseReport report);
 }

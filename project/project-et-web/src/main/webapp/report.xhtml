@@ -38,27 +38,35 @@
 
     <h:column>
         <f:facet name="header">Submitter</f:facet>
-        #{singleReport.submitter}
+        #{singleReport.submitter.firstName} #{singleReport.submitter.lastName}
     </h:column>
-
-
 
     <h:column>
         <f:facet name="header">Description</f:facet>
         #{singleReport.description}
     </h:column>
 
-</h:dataTable>
-
-<h:dataTable value="#{moneyTransfers}" var="mt">
     <h:column>
-        <f:facet name="header">Creator</f:facet>
-        #{mt.creator}
+        <f:facet name="header">Submitted</f:facet>
+        #{singleReport.lastSubmittedDate}
     </h:column>
 
     <h:column>
-        <f:facet name="header">Report</f:facet>
-        #{mt.report}
+        <f:facet name="header">Last Change</f:facet>
+        #{singleReport.lastChangeDate}
+    </h:column>
+</h:dataTable>
+
+    <hr>Money Transfers</hr>
+<h:dataTable value="#{moneyTransfers}" var="mt">
+    <h:column>
+        <f:facet name="header">Date</f:facet>
+        #{mt.date}
+    </h:column>
+
+    <h:column>
+        <f:facet name="header">Creator</f:facet>
+        #{mt.creator.firstName} #{mt.creator.lastName}
     </h:column>
 
     <h:column>
@@ -67,16 +75,51 @@
     </h:column>
 
     <h:column>
-        <f:facet name="header">Date</f:facet>
-        #{mt.date}
-    </h:column>
-    <h:column>
         <f:facet name="header">Currency</f:facet>
         #{mt.currency}
     </h:column>
 
+    <h:column>
+        <f:facet name="header">Report - testing only</f:facet>
+        #{mt.report.name}
+    </h:column>
 </h:dataTable>
 
+    <hr>Payments</hr>
+<h:dataTable value="#{payments}" var="payment">
+    <h:column>
+        <f:facet name="header">Date</f:facet>
+        #{payment.date}
+    </h:column>
+
+    <h:column>
+        <f:facet name="header">Purpose</f:facet>
+        #{payment.purpose.name}
+    </h:column>
+
+    <h:column>
+        <f:facet name="header">Receipt</f:facet>
+        #{payment.receipt.documentName}
+    </h:column>
+
+    <h:column>
+        <f:facet name="header">Value</f:facet>
+        #{payment.value}
+    </h:column>
+
+    <h:column>
+        <f:facet name="header">Currency</f:facet>
+        #{payment.currency}
+    </h:column>
+
+    <h:column>
+        <f:facet name="header">Report - testing only</f:facet>
+        #{payment.report.name}
+    </h:column>
+</h:dataTable>
+
+     <h:outputText value="Total:#{totalReportValue}"/>
+    <br/>
 
 <h:commandLink action="reports" value="Back"/>
 </h:form>
