@@ -91,13 +91,14 @@ public class Transaction {
         return true;
     }
 
+
     @Override
     public String toString() {
         return "Transaction{" +
                 "date=" + date +
                 ", value=" + value +
                 ", currency=" + currency +
-                ", report=" + report +
+//                ", report=" + report +
                 '}';
     }
 }

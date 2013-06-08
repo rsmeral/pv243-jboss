@@ -5,6 +5,7 @@ import cz.muni.fi.pv243.et.data.MoneyTransferListProducer;
 import cz.muni.fi.pv243.et.model.ExpenseReport;
 import cz.muni.fi.pv243.et.model.MoneyTransfer;
 import cz.muni.fi.pv243.et.model.Person;
+import org.hibernate.Hibernate;
 
 import javax.ejb.Singleton;
 import javax.ejb.Stateful;
@@ -59,8 +60,8 @@ public class ExpenseModel implements Serializable {
     @RequestScoped
     @Named("singleReport")
     public ExpenseReport getExpenseReport(){
-        System.out.println("Producing single report " + this.report);
-        return this.report;
+        System.out.println("Producing single report " + report);
+        return report;
     }
 
     @Produces

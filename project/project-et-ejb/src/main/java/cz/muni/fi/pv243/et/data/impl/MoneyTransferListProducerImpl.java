@@ -42,14 +42,16 @@ public class MoneyTransferListProducerImpl implements MoneyTransferListProducer,
             throw new IllegalArgumentException("expenseReport is null");
         }
 
-        System.out.println("search MT for entity " + expenseReport);
+        System.out.println("\n\nsearch MT for entity " + expenseReport + "\n");
 
-        Collection<MoneyTransfer> result = session.createQuery("SELECT mt FROM MoneyTransfer mt WHERE mt.report = :report")
-                .setParameter("report", expenseReport).list();
+        List<MoneyTransfer> all = session.createQuery("SELECT mt FROM MoneyTransfer mt").list();
 
-        Collection<MoneyTransfer> all = session.createQuery("SELECT mt FROM MoneyTransfer mt").list();
+        System.out.println("\nall=" + all + "\n\n");
 
-        System.out.println("\nall=" + all);
+
+        List<MoneyTransfer> result = session.createQuery("SELECT mt FROM MoneyTransfer mt WHERE mt.report.name = :reportId")
+                .setParameter("reportId", expenseReport.getName()).list();
+
         System.out.println("\nresult=" + result);
         return result;
     }

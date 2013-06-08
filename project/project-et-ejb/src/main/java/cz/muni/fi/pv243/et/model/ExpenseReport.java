@@ -1,5 +1,7 @@
 package cz.muni.fi.pv243.et.model;
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 import org.hibernate.search.annotations.Indexed;
 
 import java.io.Serializable;
@@ -28,10 +30,12 @@ public class ExpenseReport implements Serializable {
     @ManyToOne
     private Person verifier;
 
+    @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(mappedBy = "report")
     private List<Payment> payments;
 
     @OneToMany(mappedBy = "report")
+    @LazyCollection(LazyCollectionOption.FALSE)
     private List<MoneyTransfer> moneyTransfers;
 
     @Temporal(TemporalType.TIMESTAMP)
@@ -136,69 +140,56 @@ public class ExpenseReport implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
         ExpenseReport that = (ExpenseReport) o;
 
-        if (approvedDate != null ? !approvedDate.equals(that.approvedDate) : that.approvedDate != null) {
+        if (approvedDate != null ? !approvedDate.equals(that.approvedDate) : that.approvedDate != null) return false;
+        if (description != null ? !description.equals(that.description) : that.description != null) return false;
+        if (lastChangeDate != null ? !lastChangeDate.equals(that.lastChangeDate) : that.lastChangeDate != null)
             return false;
-        }
-        if (!id.equals(that.id)) {
+        if (lastSubmittedDate != null ? !lastSubmittedDate.equals(that.lastSubmittedDate) : that.lastSubmittedDate != null)
             return false;
-        }
-        if (!lastSubmittedDate.equals(that.lastSubmittedDate)) {
+        if (moneyTransfers != null ? !moneyTransfers.equals(that.moneyTransfers) : that.moneyTransfers != null)
             return false;
-        }
-        if (moneyTransfers != null ? !moneyTransfers.equals(that.moneyTransfers) : that.moneyTransfers != null) {
-            return false;
-        }
-        if (payments != null ? !payments.equals(that.payments) : that.payments != null) {
-            return false;
-        }
-        if (status != that.status) {
-            return false;
-        }
-        if (!submitter.equals(that.submitter)) {
-            return false;
-        }
-        if (verifier != null ? !verifier.equals(that.verifier) : that.verifier != null) {
-            return false;
-        }
+        if (!name.equals(that.name)) return false;
+        if (payments != null ? !payments.equals(that.payments) : that.payments != null) return false;
+        if (status != that.status) return false;
+        if (!submitter.equals(that.submitter)) return false;
+        if (verifier != null ? !verifier.equals(that.verifier) : that.verifier != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
-        hash = 89 * hash + (this.id != null ? this.id.hashCode() : 0);
-        hash = 89 * hash + (this.submitter != null ? this.submitter.hashCode() : 0);
-        hash = 89 * hash + (this.verifier != null ? this.verifier.hashCode() : 0);
-        hash = 89 * hash + (this.payments != null ? this.payments.hashCode() : 0);
-        hash = 89 * hash + (this.moneyTransfers != null ? this.moneyTransfers.hashCode() : 0);
-        hash = 89 * hash + (this.lastSubmittedDate != null ? this.lastSubmittedDate.hashCode() : 0);
-        hash = 89 * hash + (this.approvedDate != null ? this.approvedDate.hashCode() : 0);
-        hash = 89 * hash + (this.status != null ? this.status.hashCode() : 0);
-        return hash;
+        int result = name.hashCode();
+        result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + submitter.hashCode();
+        result = 31 * result + (verifier != null ? verifier.hashCode() : 0);
+        result = 31 * result + (payments != null ? payments.hashCode() : 0);
+        result = 31 * result + (moneyTransfers != null ? moneyTransfers.hashCode() : 0);
+        result = 31 * result + (lastSubmittedDate != null ? lastSubmittedDate.hashCode() : 0);
+        result = 31 * result + (approvedDate != null ? approvedDate.hashCode() : 0);
+        result = 31 * result + (lastChangeDate != null ? lastChangeDate.hashCode() : 0);
+        result = 31 * result + (status != null ? status.hashCode() : 0);
+        return result;
     }
-
-    
 
     @Override
     public String toString() {
         return "ExpenseReport{" +
                 "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
                 ", submitter=" + submitter +
-//                ", verifier=" + verifier +
-//                ", payments=" + payments +
-//                ", moneyTransfers=" + moneyTransfers +
+                ", verifier=" + verifier +
+                ", payments=" + payments +
+                ", moneyTransfers=" + moneyTransfers +
                 ", lastSubmittedDate=" + lastSubmittedDate +
-//                ", approvedDate=" + approvedDate +
+                ", approvedDate=" + approvedDate +
+                ", lastChangeDate=" + lastChangeDate +
                 ", status=" + status +
                 '}';
     }

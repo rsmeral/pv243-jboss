@@ -3,6 +3,7 @@ package cz.muni.fi.pv243.et.model;
 import org.hibernate.search.annotations.Indexed;
 
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Date;
 import javax.persistence.*;
 
@@ -12,7 +13,7 @@ public class Receipt implements Serializable {
 
     @Id
     @GeneratedValue
-    private Long receiptId;
+    private Long id;
 
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date importDate;
@@ -24,12 +25,12 @@ public class Receipt implements Serializable {
 
     private String documentName;
 
-    public Long getReceiptId() {
-        return receiptId;
+    public Long getId() {
+        return id;
     }
 
-    public void setReceiptId(Long id) {
-        this.receiptId = id;
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public Date getImportDate() {
@@ -65,46 +66,38 @@ public class Receipt implements Serializable {
     }
 
     @Override
-    public int hashCode() {
-        int hash = 5;
-        hash = 59 * hash + (this.receiptId != null ? this.receiptId.hashCode() : 0);
-        hash = 59 * hash + (this.importDate != null ? this.importDate.hashCode() : 0);
-        hash = 59 * hash + (this.importedBy != null ? this.importedBy.hashCode() : 0);
-        hash = 59 * hash + (this.document != null ? this.document.hashCode() : 0);
-        return hash;
-    }
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
-    @Override
-    public boolean equals(Object obj) {
-        if (obj == null) {
+        Receipt receipt = (Receipt) o;
+
+        if (!Arrays.equals(document, receipt.document)) return false;
+        if (documentName != null ? !documentName.equals(receipt.documentName) : receipt.documentName != null)
             return false;
-        }
-        if (getClass() != obj.getClass()) {
-            return false;
-        }
-        final Receipt other = (Receipt) obj;
-        if (this.receiptId != other.receiptId && (this.receiptId == null || !this.receiptId.equals(other.receiptId))) {
-            return false;
-        }
-        if (this.importDate != other.importDate && (this.importDate == null || !this.importDate.equals(other.importDate))) {
-            return false;
-        }
-        if (this.importedBy != other.importedBy && (this.importedBy == null || !this.importedBy.equals(other.importedBy))) {
-            return false;
-        }
-        if ((this.document == null) ? (other.document != null) : !this.document.equals(other.document)) {
-            return false;
-        }
+        if (importDate != null ? !importDate.equals(receipt.importDate) : receipt.importDate != null) return false;
+        if (importedBy != null ? !importedBy.equals(receipt.importedBy) : receipt.importedBy != null) return false;
+
         return true;
     }
 
     @Override
+    public int hashCode() {
+        int result = importDate != null ? importDate.hashCode() : 0;
+        result = 31 * result + (importedBy != null ? importedBy.hashCode() : 0);
+        result = 31 * result + (document != null ? Arrays.hashCode(document) : 0);
+        result = 31 * result + (documentName != null ? documentName.hashCode() : 0);
+        return result;
+    }
+
+    @Override
     public String toString() {
-        return "Receipt{"
-                + "receiptId=" + receiptId
-                + ", importDate=" + importDate
-                + ", importedBy=" + importedBy.getEmail()
-                + ", document='" + document + '\''
-                + '}';
+        return "Receipt{" +
+                "id=" + id +
+                ", importDate=" + importDate +
+                ", importedBy=" + importedBy +
+                ", document=" + Arrays.toString(document) +
+                ", documentName='" + documentName + '\'' +
+                '}';
     }
 }
