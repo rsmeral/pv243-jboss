@@ -27,14 +27,14 @@ public class ExpenseReport implements Serializable {
     @ManyToOne
     private Person submitter;
 
-    @ManyToOne
+    @ManyToOne(cascade= CascadeType.MERGE)
     private Person verifier;
 
     @LazyCollection(LazyCollectionOption.FALSE)
-    @OneToMany(mappedBy = "report")
+    @OneToMany(mappedBy = "report", cascade= CascadeType.MERGE)
     private List<Payment> payments;
 
-    @OneToMany(mappedBy = "report")
+    @OneToMany(mappedBy = "report", cascade= CascadeType.MERGE)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<MoneyTransfer> moneyTransfers;
 

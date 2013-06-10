@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xml:lang="en" lang="en">
+
+<head>
+    <title>Edit Payment</title>
+    <style type="text/css">
+        table {
+            border: 1px solid #CCCCCC;
+        }
+
+        th, td {
+            border: 1px solid #CCCCCC;
+        }
+    </style>
+
+</head>
+
+<body>
+
+
+ <h:form>
+<hr>Edit Payment details for report #{payment.report.name}</hr>
+<h:dataTable value="#{singlePayment}" var="payment">
+
+
+    <h:column>
+        <f:facet name="header">Date</f:facet>
+        #{payment.date}
+    </h:column>
+
+    <h:column>
+        <f:facet name="header">Purpose</f:facet>
+        <h:inputText value="#{payment.purpose.name}" />
+    </h:column>
+
+    <h:column>
+        <f:facet name="header">Receipt</f:facet>
+        <h:inputText value="#{payment.receipt.documentName}" />
+    </h:column>
+
+    <h:column>
+        <f:facet name="header">Value</f:facet>
+        <h:inputText value="#{payment.value}"/>
+    </h:column>
+
+    <h:column>
+        <f:facet name="header">Currency</f:facet>
+        <h:selectOneMenu value="#{payment.currency}">
+            <f:selectItems value="#{currencies}" />
+        </h:selectOneMenu>
+    </h:column>
+
+
+</h:dataTable>
+
+    <h:commandButton value="Update" action="#{expenseController.updatePayment()}" />
+<br/>
+
+
+<h:commandLink action="report" value="Back"/>
+</h:form>
+
+
+</body>
+</html>

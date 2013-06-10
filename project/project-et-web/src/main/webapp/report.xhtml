@@ -4,6 +4,7 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
       xml:lang="en" lang="en">
+
 <head>
     <title>Report Details</title>
     <style type="text/css">
@@ -23,105 +24,115 @@
 <h1>#{singleReport.name}</h1>
 
 <h:form>
-<h:dataTable value="#{singleReport}">
+    <h:dataTable value="#{singleReport}">
 
-    <h:column>
-        <f:facet name="header">Status</f:facet>
-        #{singleReport.status}
-    </h:column>
+        <h:column>
+            <f:facet name="header">Status</f:facet>
+            #{singleReport.status}
+        </h:column>
 
-    <h:column>
-        <f:facet name="header">Verifier</f:facet>
-        #{singleReport.verifier.firstName} #{singleReport.verifier.lastName}
-    </h:column>
+        <h:column>
+            <f:facet name="header">Verifier</f:facet>
+            #{singleReport.verifier.firstName} #{singleReport.verifier.lastName}
+        </h:column>
 
 
-    <h:column>
-        <f:facet name="header">Submitter</f:facet>
-        #{singleReport.submitter.firstName} #{singleReport.submitter.lastName}
-    </h:column>
+        <h:column>
+            <f:facet name="header">Submitter</f:facet>
+            #{singleReport.submitter.firstName} #{singleReport.submitter.lastName}
+        </h:column>
 
-    <h:column>
-        <f:facet name="header">Description</f:facet>
-        #{singleReport.description}
-    </h:column>
+        <h:column>
+            <f:facet name="header">Description</f:facet>
+            #{singleReport.description}
+        </h:column>
 
-    <h:column>
-        <f:facet name="header">Submitted</f:facet>
-        #{singleReport.lastSubmittedDate}
-    </h:column>
+        <h:column>
+            <f:facet name="header">Submitted</f:facet>
+            #{singleReport.lastSubmittedDate}
+        </h:column>
 
-    <h:column>
-        <f:facet name="header">Last Change</f:facet>
-        #{singleReport.lastChangeDate}
-    </h:column>
-</h:dataTable>
+        <h:column>
+            <f:facet name="header">Last Change</f:facet>
+            #{singleReport.lastChangeDate}
+        </h:column>
+    </h:dataTable>
 
     <hr>Money Transfers</hr>
-<h:dataTable value="#{moneyTransfers}" var="mt">
-    <h:column>
-        <f:facet name="header">Date</f:facet>
-        #{mt.date}
-    </h:column>
+    <h:dataTable value="#{moneyTransfers}" var="mt">
+        <h:column>
+            <f:facet name="header">Date</f:facet>
+            #{mt.date}
+        </h:column>
 
-    <h:column>
-        <f:facet name="header">Creator</f:facet>
-        #{mt.creator.firstName} #{mt.creator.lastName}
-    </h:column>
+        <h:column>
+            <f:facet name="header">Creator</f:facet>
+            #{mt.creator.firstName} #{mt.creator.lastName}
+        </h:column>
 
-    <h:column>
-        <f:facet name="header">Value</f:facet>
-        #{mt.value}
-    </h:column>
+        <h:column>
+            <f:facet name="header">Value</f:facet>
+            #{mt.value}
+        </h:column>
 
-    <h:column>
-        <f:facet name="header">Currency</f:facet>
-        #{mt.currency}
-    </h:column>
+        <h:column>
+            <f:facet name="header">Currency</f:facet>
+            #{mt.currency}
+        </h:column>
 
-    <h:column>
-        <f:facet name="header">Report - testing only</f:facet>
-        #{mt.report.name}
-    </h:column>
-</h:dataTable>
+        <h:column>
+            <f:facet name="header">Report - testing only</f:facet>
+            #{mt.report.name}
+        </h:column>
+    </h:dataTable>
 
     <hr>Payments</hr>
-<h:dataTable value="#{payments}" var="payment">
-    <h:column>
-        <f:facet name="header">Date</f:facet>
-        #{payment.date}
-    </h:column>
+    <h:dataTable value="#{payments}" var="payment">
 
-    <h:column>
-        <f:facet name="header">Purpose</f:facet>
-        #{payment.purpose.name}
-    </h:column>
+        <h:column>
+            <f:facet name="header">Edit</f:facet>
+            <h:commandLink action="#{expenseController.editPayment(payment.id)}" value="edit">
+                <!--<f:param name="paymentId" value="#{payment.id}"/>-->
+            </h:commandLink>
 
-    <h:column>
-        <f:facet name="header">Receipt</f:facet>
-        #{payment.receipt.documentName}
-    </h:column>
+        </h:column>
 
-    <h:column>
-        <f:facet name="header">Value</f:facet>
-        #{payment.value}
-    </h:column>
+        <h:column>
+            <f:facet name="header">Date</f:facet>
+            #{payment.date}
+        </h:column>
 
-    <h:column>
-        <f:facet name="header">Currency</f:facet>
-        #{payment.currency}
-    </h:column>
+        <h:column>
+            <f:facet name="header">Purpose</f:facet>
+            #{payment.purpose.name}
+        </h:column>
 
-    <h:column>
-        <f:facet name="header">Report - testing only</f:facet>
-        #{payment.report.name}
-    </h:column>
-</h:dataTable>
+        <h:column>
+            <f:facet name="header">Receipt</f:facet>
+            #{payment.receipt.documentName}
+        </h:column>
 
-     <h:outputText value="Total:#{totalReportValue}"/>
+        <h:column>
+            <f:facet name="header">Value</f:facet>
+            #{payment.value}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Currency</f:facet>
+            #{payment.currency}
+        </h:column>
+
+        <h:column>
+            <f:facet name="header">Report - testing only</f:facet>
+            #{payment.report.name}
+        </h:column>
+    </h:dataTable>
+
+    <h:outputText value="Total:#{totalReportValue}"/>
     <br/>
 
-<h:commandLink action="reports" value="Back"/>
+
+    <h:commandLink action="reports" value="Back"/>
 </h:form>
 </body>
 </html>

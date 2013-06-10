@@ -33,6 +33,8 @@ public class PaymentRepositoryImpl implements PaymentRepository {
         if (payment.getId() == null) {
             throw new IllegalArgumentException("payment.id is null - not persisted");
         }
+
+        System.out.println("\n\n" + payment + "\n\n");
         em.merge(payment);
 //        em.flush();
     }
@@ -47,6 +49,5 @@ public class PaymentRepositoryImpl implements PaymentRepository {
         }
 //        em.remove(em.find(Payment.class, payment.getId()));
         em.remove(payment);
-//        em.flush();
     }
 }

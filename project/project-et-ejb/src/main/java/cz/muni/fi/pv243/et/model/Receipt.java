@@ -18,7 +18,7 @@ public class Receipt implements Serializable {
     @Temporal(javax.persistence.TemporalType.DATE)
     private Date importDate;
 
-    @OneToOne(optional = false)//, targetEntity = Person.class)
+    @ManyToOne(optional = false)//, targetEntity = Person.class) (cascade= CascadeType.MERGE)
     private Person importedBy;
 
     private byte[] document;

@@ -19,6 +19,7 @@ public class ReportComputing {
     private List<MoneyTransfer> moneyTransfers;
     private List<Payment> payments;
     private BigDecimal totalValue;
+
     @Inject
     private ExpenseModel expenseModel;
 
@@ -41,6 +42,7 @@ public class ReportComputing {
         // PAYMENT = money from employee to company
         // MONEY_TRANSFER = money from company to employee
         BigDecimal moneyReceived = BigDecimal.ZERO; // from EMP perspective
+
         for (MoneyTransfer mt : moneyTransfers) {
             moneyReceived = mt.getValue().add(moneyReceived);
         }

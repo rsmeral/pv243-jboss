@@ -1,11 +1,9 @@
 package cz.muni.fi.pv243.et.model;
 
+
 import org.hibernate.search.annotations.Indexed;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
 @Entity
@@ -16,12 +14,13 @@ public class Payment extends Transaction {
     @GeneratedValue
     private Long id;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, cascade= CascadeType.MERGE)
     @NotNull
     private Purpose purpose;
 
-    @ManyToOne
+    @ManyToOne(cascade= CascadeType.MERGE)
     private Receipt receipt;
+
 
     public Long getId() {
         return id;

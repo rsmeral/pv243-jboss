@@ -3,10 +3,8 @@ package cz.muni.fi.pv243.et.controller;
 import cz.muni.fi.pv243.et.data.ExpenseReportListProducer;
 import cz.muni.fi.pv243.et.data.MoneyTransferListProducer;
 import cz.muni.fi.pv243.et.data.PaymentListProducer;
-import cz.muni.fi.pv243.et.model.ExpenseReport;
-import cz.muni.fi.pv243.et.model.MoneyTransfer;
-import cz.muni.fi.pv243.et.model.Payment;
-import cz.muni.fi.pv243.et.model.Person;
+import cz.muni.fi.pv243.et.model.*;
+import cz.muni.fi.pv243.et.model.Currency;
 import org.hibernate.Hibernate;
 
 import javax.ejb.Singleton;
@@ -17,8 +15,7 @@ import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 
 /**
@@ -29,8 +26,9 @@ import java.util.List;
 //@Stateful (?)
 public class ExpenseModel implements Serializable {
 
-
     private ExpenseReport report;
+    private Payment payment;
+    private MoneyTransfer moneyTransfer;
 
     // is it too ugly to set both as "actual" results from which we'll compute other stuff?
     // we'll always set those 2 variables in JPQL call, so we will not ask DB twice
@@ -68,7 +66,7 @@ public class ExpenseModel implements Serializable {
     @Produces
     @RequestScoped
     @Named("singleReport")
-    public ExpenseReport getExpenseReport(){
+    public ExpenseReport getExpenseReport() {
         System.out.println("Producing single report " + report);
         return report;
     }
@@ -110,5 +108,45 @@ public class ExpenseModel implements Serializable {
         }
         System.out.println("getCurrentMoneyTransfer=" + moneyTransfers);
         return moneyTransfers;
+    }
+
+    @Produces
+    @RequestScoped
+    @Named("singlePayment")
+    public Payment getPayment() {
+        return payment;
+    }
+
+    public void setPayment(Long id) {
+        for (Payment p : getCurrentPayments()) {
+            if (p.getId() == id) {
+                this.payment = p;
+            }
+        }
+    }
+
+    @Produces
+    @RequestScoped
+    @Named("singleMoneyTransfer")
+    public MoneyTransfer getMoneyTransfer() {
+        return moneyTransfer;
+    }
+
+    public void setMoneyTransfer(Long id) {
+        for (MoneyTransfer mt : getCurrentMoneyTransfers()) {
+            if (mt.getId() == id) {
+                this.moneyTransfer = mt;
+            }
+        }
+    }
+
+    @Produces
+    @Named("currencies")
+    public List<Currency> getCurrencies() {
+        List<Currency> currencies = new ArrayList<Currency>();
+        for (Currency c : Currency.values()) {
+            currencies.add(c);
+        }
+        return currencies;
     }
 }
