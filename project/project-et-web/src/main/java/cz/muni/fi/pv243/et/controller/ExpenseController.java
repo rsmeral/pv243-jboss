@@ -4,15 +4,12 @@ import cz.muni.fi.pv243.et.data.ExpenseReportListProducer;
 import cz.muni.fi.pv243.et.data.MoneyTransferListProducer;
 import cz.muni.fi.pv243.et.data.PaymentRepository;
 import cz.muni.fi.pv243.et.data.PersonListProducer;
-import cz.muni.fi.pv243.et.data.impl.PaymentRepositoryImpl;
 import cz.muni.fi.pv243.et.model.Payment;
 import cz.muni.fi.pv243.et.util.ReportComputing;
 
 import javax.faces.bean.SessionScoped;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
-import javax.validation.Validation;
 import java.io.Serializable;
 
 @SessionScoped
@@ -57,7 +54,15 @@ public class ExpenseController implements Serializable {
 //    @Validation(Validation = )
     public String updatePayment() {
         paymentRepository.update(expenseModel.getPayment());
+        return "report";
+    }
 
+    public String addPayment() {
+        return "newPayment";
+    }
+
+    public String createPayment(Payment payment) {
+        paymentRepository.create(payment);
         return "report";
     }
 

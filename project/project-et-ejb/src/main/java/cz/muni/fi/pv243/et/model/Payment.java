@@ -2,13 +2,17 @@ package cz.muni.fi.pv243.et.model;
 
 
 import org.hibernate.search.annotations.Indexed;
+import org.jboss.solder.util.collections.Serialization;
 
+import javax.inject.Named;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 
 @Entity
 @Indexed
-public class Payment extends Transaction {
+@Named("Payment")
+public class Payment extends Transaction implements Serializable {
 
     @Id
     @GeneratedValue

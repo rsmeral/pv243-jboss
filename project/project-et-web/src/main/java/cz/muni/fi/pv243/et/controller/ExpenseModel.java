@@ -3,6 +3,7 @@ package cz.muni.fi.pv243.et.controller;
 import cz.muni.fi.pv243.et.data.ExpenseReportListProducer;
 import cz.muni.fi.pv243.et.data.MoneyTransferListProducer;
 import cz.muni.fi.pv243.et.data.PaymentListProducer;
+import cz.muni.fi.pv243.et.data.ReceiptListProducer;
 import cz.muni.fi.pv243.et.model.*;
 import cz.muni.fi.pv243.et.model.Currency;
 import org.hibernate.Hibernate;
@@ -45,6 +46,9 @@ public class ExpenseModel implements Serializable {
     @Inject
     private PaymentListProducer plp;
 
+    @Inject
+    private ReceiptListProducer rlp;
+
     @Produces
     @Named("expenseReports")
     public Collection<ExpenseReport> getExpenseReports() {
@@ -58,7 +62,6 @@ public class ExpenseModel implements Serializable {
     }
 
     public void setExpenseReport(Long id) {
-        System.out.println("Setting report to id=" + id);
         ExpenseReport rep = erlp.get(id);
         this.report = rep;
     }
@@ -67,7 +70,6 @@ public class ExpenseModel implements Serializable {
     @RequestScoped
     @Named("singleReport")
     public ExpenseReport getExpenseReport() {
-        System.out.println("Producing single report " + report);
         return report;
     }
 
@@ -138,6 +140,13 @@ public class ExpenseModel implements Serializable {
                 this.moneyTransfer = mt;
             }
         }
+    }
+
+
+    @Produces
+    @Named("receipts")
+    public List<Receipt> getReceipts() {
+        return (List) rlp.getAllReceipts();
     }
 
     @Produces

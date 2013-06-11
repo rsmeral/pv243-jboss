@@ -8,12 +8,13 @@ import org.hibernate.Session;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
 @Stateless
-public class ReceiptListProducerImpl implements ReceiptListProducer {
+public class ReceiptListProducerImpl implements ReceiptListProducer, Serializable {
 
     @Inject
     private EntityManager em;

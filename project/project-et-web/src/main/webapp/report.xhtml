@@ -127,10 +127,10 @@
             #{payment.report.name}
         </h:column>
     </h:dataTable>
+    <h:commandLink action="#{expenseController.addPayment()}" value="Add Payment"/>
 
     <h:outputText value="Total:#{totalReportValue}"/>
     <br/>
-
 
     <h:commandLink action="reports" value="Back"/>
 </h:form>

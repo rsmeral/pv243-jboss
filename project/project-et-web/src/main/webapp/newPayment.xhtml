@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xml:lang="en" lang="en">
+
+<head>
+    <title>Create new payment for report #{singleReport.name}</title>
+</head>
+<body>
+
+<h:form>
+    <hr>Create Payment</hr>
+    <h:panelGrid id="paymentForm" columns="2" styleClass="formTable">
+        Date: <h:inputText id="date" value="#{Payment.date}" size="20"/>
+        Purpose: <h:inputText id="purpose" value="#{Payment.purpose}" label="purpose"/>
+        Receipt:
+        <h:panelGroup>
+            <h:selectOneMenu id="receipt" value="#{Payment.receipt}">
+                <f:selectItems value="#{receipts}" var="r" itemLabel="#{r.documentName}" itemValue="#{r.id}"/>
+            </h:selectOneMenu>
+            <h:commandButton action="#{expenseController.addReceipt()}" value="Create new"/>
+        </h:panelGroup>
+
+        Value:<h:inputText id="value" value="#{Payment.value}"/>
+
+        Currency:
+        <h:selectOneMenu id="currency" value="#{Payment.currency}">
+            <f:selectItems value="#{currencies}"/>
+        </h:selectOneMenu>
+
+    </h:panelGrid>
+    <h:commandButton action="#{expenseController.createPayment(Payment)}" value="Create"/>
+</h:form>
+
+</body>
+</html>
