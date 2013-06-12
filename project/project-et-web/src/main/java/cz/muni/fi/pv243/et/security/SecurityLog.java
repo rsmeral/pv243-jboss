@@ -6,7 +6,6 @@ import org.jboss.solder.logging.MessageLogger;
 import org.jboss.solder.messages.Cause;
 import org.jboss.solder.messages.Message;
 
-import javax.inject.Inject;
 @MessageLogger
 public interface SecurityLog {
 

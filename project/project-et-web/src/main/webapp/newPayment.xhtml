@@ -5,36 +5,72 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
       xml:lang="en" lang="en">
 
-<head>
+<h:head>
     <title>Create new payment for report #{singleReport.name}</title>
-</head>
-<body>
+</h:head>
+<h:body>
 
-<h:form>
-    <hr>Create Payment</hr>
-    <h:panelGrid id="paymentForm" columns="2" styleClass="formTable">
-        Date: <h:inputText id="date" value="#{Payment.date}" size="20"/>
-        Purpose: <h:inputText id="purpose" value="#{Payment.purpose}" label="purpose"/>
-        Receipt:
-        <h:panelGroup>
-            <h:selectOneMenu id="receipt" value="#{Payment.receipt}">
-                <f:selectItems value="#{receipts}" var="r" itemLabel="#{r.documentName}" itemValue="#{r.id}"/>
-            </h:selectOneMenu>
-            <h:commandButton action="#{expenseController.addReceipt()}" value="Create new"/>
-        </h:panelGroup>
+    <ui:composition template="resources/templates/common/commonTemplate.xhtml">
+        <ui:define name="content">
+            <h3>Create payment</h3>
+            <h:form styleClass="form-horizontal">
+                <div class="control-group">
+                    <h:outputLabel value="Date:" for="date" styleClass="control-label"/>
 
-        Value:<h:inputText id="value" value="#{Payment.value}"/>
+                    <div class="controls">
+                        <h:inputText id="date" value="#{Payment.date}" size="20"/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <h:outputLabel value="Purpose:" for="purposes" styleClass="control-label"/>
 
-        Currency:
-        <h:selectOneMenu id="currency" value="#{Payment.currency}">
-            <f:selectItems value="#{currencies}"/>
-        </h:selectOneMenu>
+                    <div class="controls">
+                        <h:selectOneMenu id="purposes" value="#{Payment.purpose}">
+                            <f:selectItems value="#{purposes}" var="r" itemLabel="#{r.name}" itemValue="#{r.id}"/>
+                        </h:selectOneMenu>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <h:outputLabel value="Receipt:" for="receipt" styleClass="control-label"/>
 
-    </h:panelGrid>
-    <h:commandButton action="#{expenseController.createPayment(Payment)}" value="Create"/>
-</h:form>
+                    <div class="controls">
+                        <h:selectOneMenu id="receipt" value="#{Payment.receipt}">
+                            <f:selectItems value="#{receipts}" var="r" itemLabel="#{r.documentName}"
+                                           itemValue="#{r.id}"/>
+                        </h:selectOneMenu>
+                        <h:commandButton action="#{expenseController.addReceipt()}" value="Create new"
+                                         styleClass="btn btn-mini" style="margin-left: 20px;"/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <h:outputLabel value="Value:" for="value" styleClass="control-label"/>
 
-</body>
+                    <div class="controls">
+                        <h:inputText id="value" value="#{Payment.value}" label="Value"/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <h:outputLabel value="Currency:" for="currency" styleClass="control-label"/>
+
+                    <div class="controls">
+                        <h:selectOneMenu id="currency" value="#{Payment.currency}">
+                            <f:selectItems value="#{currencies}"/>
+                        </h:selectOneMenu>
+                    </div>
+                </div>
+
+                <div class="control-group">
+                    <div class="controls">
+                        <h:commandButton action="#{expenseController.createPayment(Payment)}" value="Create"
+                                         styleClass="btn btn-primary"/>
+                    </div>
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</h:body>
 </html>

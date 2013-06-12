@@ -2,137 +2,145 @@
 <!DOCTYPE html
         PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml" xmlns:h="http://java.sun.com/jsf/html" xmlns:f="http://java.sun.com/jsf/core"
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
       xml:lang="en" lang="en">
 
 <head>
     <title>Report Details</title>
-    <style type="text/css">
-        table {
-            border: 1px solid #CCCCCC;
-        }
-
-        th, td {
-            border: 1px solid #CCCCCC;
-        }
-    </style>
-
 </head>
 
 
 <body>
-<h1>#{singleReport.name}</h1>
+<ui:composition template="resources/templates/common/commonTemplate.xhtml">
+    <ui:define name="content">
+        <h2>#{singleReport.name}</h2>
 
-<h:form>
-    <h:dataTable value="#{singleReport}">
+        <h:form>
+            <h:dataTable value="#{singleReport}" styleClass="table table-bordered table-striped table-hover">
 
-        <h:column>
-            <f:facet name="header">Status</f:facet>
-            #{singleReport.status}
-        </h:column>
+                <h:column>
+                    <f:facet name="header">Status</f:facet>
+                    #{singleReport.status}
+                </h:column>
 
-        <h:column>
-            <f:facet name="header">Verifier</f:facet>
-            #{singleReport.verifier.firstName} #{singleReport.verifier.lastName}
-        </h:column>
+                <h:column>
+                    <f:facet name="header">Verifier</f:facet>
+                    #{singleReport.verifier.firstName} #{singleReport.verifier.lastName}
+                </h:column>
 
 
-        <h:column>
-            <f:facet name="header">Submitter</f:facet>
-            #{singleReport.submitter.firstName} #{singleReport.submitter.lastName}
-        </h:column>
+                <h:column>
+                    <f:facet name="header">Submitter</f:facet>
+                    #{singleReport.submitter.firstName} #{singleReport.submitter.lastName}
+                </h:column>
 
-        <h:column>
-            <f:facet name="header">Description</f:facet>
-            #{singleReport.description}
-        </h:column>
+                <h:column>
+                    <f:facet name="header">Description</f:facet>
+                    #{singleReport.description}
+                </h:column>
 
-        <h:column>
-            <f:facet name="header">Submitted</f:facet>
-            #{singleReport.lastSubmittedDate}
-        </h:column>
+                <h:column>
+                    <f:facet name="header">Submitted</f:facet>
+                    #{singleReport.lastSubmittedDate}
+                </h:column>
 
-        <h:column>
-            <f:facet name="header">Last Change</f:facet>
-            #{singleReport.lastChangeDate}
-        </h:column>
-    </h:dataTable>
+                <h:column>
+                    <f:facet name="header">Last Change</f:facet>
+                    #{singleReport.lastChangeDate}
+                </h:column>
+            </h:dataTable>
 
-    <hr>Money Transfers</hr>
-    <h:dataTable value="#{moneyTransfers}" var="mt">
-        <h:column>
-            <f:facet name="header">Date</f:facet>
-            #{mt.date}
-        </h:column>
+            <hr/>
+            <h3>Money Transfers</h3>
+            <h:dataTable value="#{moneyTransfers}" var="mt" styleClass="table table-bordered table-striped table-hover">
+                <h:column>
+                    <f:facet name="header">Date</f:facet>
+                    #{mt.date}
+                </h:column>
 
-        <h:column>
-            <f:facet name="header">Creator</f:facet>
-            #{mt.creator.firstName} #{mt.creator.lastName}
-        </h:column>
+                <h:column>
+                    <f:facet name="header">Creator</f:facet>
+                    #{mt.creator.firstName} #{mt.creator.lastName}
+                </h:column>
 
-        <h:column>
-            <f:facet name="header">Value</f:facet>
-            #{mt.value}
-        </h:column>
+                <h:column>
+                    <f:facet name="header">Value</f:facet>
+                    #{mt.value}
+                </h:column>
 
-        <h:column>
-            <f:facet name="header">Currency</f:facet>
-            #{mt.currency}
-        </h:column>
+                <h:column>
+                    <f:facet name="header">Currency</f:facet>
+                    #{mt.currency}
+                </h:column>
 
-        <h:column>
-            <f:facet name="header">Report - testing only</f:facet>
-            #{mt.report.name}
-        </h:column>
-    </h:dataTable>
+                <h:column>
+                    <f:facet name="header">Report - testing only</f:facet>
+                    #{mt.report.name}
+                </h:column>
+            </h:dataTable>
 
-    <hr>Payments</hr>
-    <h:dataTable value="#{payments}" var="payment">
+            <hr/>
+            <h3>Payments</h3>
+            <h:dataTable value="#{payments}" var="payment" styleClass="table table-bordered table-striped table-hover">
 
-        <h:column>
-            <f:facet name="header">Edit</f:facet>
-            <h:commandLink action="#{expenseController.editPayment(payment.id)}" value="edit">
-                <!--<f:param name="paymentId" value="#{payment.id}"/>-->
-            </h:commandLink>
+                <h:column>
+                    <f:facet name="header">Date</f:facet>
+                    #{payment.date}
+                </h:column>
 
-        </h:column>
+                <h:column>
+                    <f:facet name="header">Purpose</f:facet>
+                    #{payment.purpose.name}
+                </h:column>
 
-        <h:column>
-            <f:facet name="header">Date</f:facet>
-            #{payment.date}
-        </h:column>
+                <h:column>
+                    <f:facet name="header">Receipt</f:facet>
+                    #{payment.receipt.documentName}
+                </h:column>
 
-        <h:column>
-            <f:facet name="header">Purpose</f:facet>
-            #{payment.purpose.name}
-        </h:column>
+                <h:column>
+                    <f:facet name="header">Value</f:facet>
+                    #{payment.value}
+                </h:column>
 
-        <h:column>
-            <f:facet name="header">Receipt</f:facet>
-            #{payment.receipt.documentName}
-        </h:column>
+                <h:column>
+                    <f:facet name="header">Currency</f:facet>
+                    #{payment.currency}
+                </h:column>
 
-        <h:column>
-            <f:facet name="header">Value</f:facet>
-            #{payment.value}
-        </h:column>
+                <h:column>
+                    <f:facet name="header">Report - testing only</f:facet>
+                    #{payment.report.name}
+                </h:column>
 
-        <h:column>
-            <f:facet name="header">Currency</f:facet>
-            #{payment.currency}
-        </h:column>
+                <h:column>
+                    <f:facet name="header">Edit</f:facet>
+                    <h:commandLink action="#{expenseController.editPayment(payment.id)}" styleClass="btn btn-mini">
+                        <i class="icon-pencil"></i>
+                    </h:commandLink>
 
-        <h:column>
-            <f:facet name="header">Report - testing only</f:facet>
-            #{payment.report.name}
-        </h:column>
-    </h:dataTable>
-    <h:commandLink action="#{expenseController.addPayment()}" value="Add Payment"/>
+                </h:column>
 
-    <h:outputText value="Total:#{totalReportValue}"/>
-    <br/>
+            </h:dataTable>
+            <span class="well" style="float: right;">
+                Total:
+                <h:outputText value="${totalReportValue}">
+                    <f:convertNumber/>
+                </h:outputText>
+            </span>
+            <div class="row">
+                <div class="span2 btn-group">
+                    <h:commandLink action="#{expenseController.addPayment()}" styleClass="btn" value="Add Payment"/>
+                    <h:link outcome="reports" styleClass="btn"><i class="icon-backward"></i> Reports</h:link>
+                </div>
+            </div>
+            <br/>
 
-    <h:commandLink action="reports" value="Back"/>
-</h:form>
+        </h:form>
+    </ui:define>
+</ui:composition>
 </body>
 </html>

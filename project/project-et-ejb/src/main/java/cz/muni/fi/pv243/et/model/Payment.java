@@ -2,7 +2,6 @@ package cz.muni.fi.pv243.et.model;
 
 
 import org.hibernate.search.annotations.Indexed;
-import org.jboss.solder.util.collections.Serialization;
 
 import javax.inject.Named;
 import javax.persistence.*;

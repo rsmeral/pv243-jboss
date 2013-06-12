@@ -34,6 +34,7 @@
         <version.war.plugin>2.1.1</version.war.plugin>
         <version.infinispan>5.2.6.Final</version.infinispan>
         <version.solder>3.2.0.Final</version.solder>
+        <version.deltaspike>0.3-incubating</version.deltaspike>
         
         <version.hibernate.ogm>4.0.0.Beta2</version.hibernate.ogm>
         
@@ -96,6 +97,36 @@
                 <artifactId>infinispan-core</artifactId>
                 <groupId>org.infinispan</groupId>
                 <version>${version.infinispan}</version>
+            </dependency>
+
+
+            <!-- deltaspike core -->
+            <dependency>
+                <groupId>org.apache.deltaspike.core</groupId>
+                <artifactId>deltaspike-core-api</artifactId>
+                <version>${version.deltaspike}</version>
+                <!--<scope>compile</scope>-->
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.deltaspike.core</groupId>
+                <artifactId>deltaspike-core-impl</artifactId>
+                <version>${version.deltaspike}</version>
+                <!--<scope>runtime</scope>-->
+            </dependency>
+            <!-- deltaspike jsf -->
+            <dependency>
+                <groupId>org.apache.deltaspike.modules</groupId>
+                <artifactId>deltaspike-jsf-module-api</artifactId>
+                <version>${version.deltaspike}</version>
+                <scope>compile</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.apache.deltaspike.modules</groupId>
+                <artifactId>deltaspike-jsf-module-impl</artifactId>
+                <version>${version.deltaspike}</version>
+                <scope>runtime</scope>
             </dependency>
 
             <dependency>

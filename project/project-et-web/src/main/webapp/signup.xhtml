@@ -1,34 +1,70 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 <h:head>
     <title>SignUp Form</title>
 </h:head>
 <h:body>
-    <h:form>
-        <h:messages/>
-        <h:panelGrid>
-            <h:outputText value="Username: " styleClass="label"/>
-            <h:inputText value="#{newUser.userName}" label="Username"/>
-            <h:outputText value="First name: " styleClass="label"/>
-            <h:inputText value="#{newUser.firstName}" label="First name"/>
-            <h:outputText value="Last name: " styleClass="label"/>
-            <h:inputText value="#{newUser.lastName}" label="Last name"/>
-            <h:outputText value="Bank account: " styleClass="label"/>
-            <h:inputText value="#{newUser.bankAccount}" label="Bank account"/>
-            <h:outputText value="Email: " styleClass="label"/>
-            <h:inputText value="#{newUser.email}" label="Email"/>
-            <h:outputText value="Password: " styleClass="label"/>
-            <h:inputSecret value="#{newUser.password}" label="Password"/>
-            <h:outputText value="Password Confirmation: " styleClass="label"/>
-            <h:inputSecret value="#{newUser.passwordConfirmation}" label="Password Confirmation"/>
-        </h:panelGrid>
+    <ui:composition template="resources/templates/common/commonTemplate.xhtml">
+        <ui:define name="header"/>
+        <ui:define name="content">
+            <div style="margin-left: 180px; margin-bottom: 80px;">
+                <h2>Sign up</h2>
+                <h:form styleClass="form-horizontal">
+                    <h:messages/>
+                    <div class="control-group">
+                        <h:outputLabel value="Username:" styleClass="control-label" for="username"/>
+                        <div class="controls">
+                            <h:inputText value="#{newUser.userName}" label="Username" id="username"/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <h:outputLabel value="First name:" styleClass="control-label" for="firstName"/>
+                        <div class="controls">
+                            <h:inputText value="#{newUser.firstName}" label="First name" id="firstName"/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <h:outputLabel value="Last name:" styleClass="control-label" for="lastName"/>
+                        <div class="controls">
+                            <h:inputText value="#{newUser.lastName}" label="Last name" id="lastName"/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <h:outputLabel value="Bank account:" styleClass="control-label" for="bankAccount"/>
+                        <div class="controls">
+                            <h:inputText value="#{newUser.bankAccount}" label="Bank account" id="bankAccount"/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <h:outputLabel value="Email:" styleClass="control-label" for="email"/>
+                        <div class="controls">
+                            <h:inputText value="#{newUser.email}" label="Email" id="email"/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <h:outputLabel value="Password:" styleClass="control-label" for="password"/>
+                        <div class="controls">
+                            <h:inputSecret value="#{newUser.password}" label="Password" id="password"/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <h:outputLabel value="Password confirmation:" styleClass="control-label" for="passwordConfirm"/>
+                        <div class="controls">
+                            <h:inputSecret value="#{newUser.passwordConfirmation}" label="Password Confirmation" id="passwordConfirm"/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <h:commandButton value="Ok" action="#{signUpBean.signUp()}" styleClass="btn btn-primary"/>
+                        </div>
+                    </div>
 
-        <div id="loginBtnContainer">
-            <h:commandButton value="Ok" action="#{signUpBean.signUp()}" styleClass="loginBtn"/>
-        </div>
-
-    </h:form>
+                </h:form>
+            </div>
+        </ui:define>
+    </ui:composition>
 </h:body>
 </html>

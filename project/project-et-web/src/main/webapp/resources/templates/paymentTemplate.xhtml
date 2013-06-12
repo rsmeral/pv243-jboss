@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Created by IntelliJ IDEA.
+  User: dusan
+  Date: 6/12/13
+  Time: 4:58 PM
+-->
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<h:head>
+    <title>Simple JSF Facelets page</title>
+</h:head>
+
+<h:body>
+    <ui:composition template="common/commonTemplate.xhtml">
+        <ui:define name="content">
+            <h:form>
+                <ui:insert name="title"/>
+                <div class="row">
+                    <div class="span2">Date:</div>
+                    <div class="span4"><h:inputText id="date" value="#{Payment.date}" size="20"/></div>
+
+                    <div class="span2">Purpose:</div>
+                    <div class="span4"><h:inputText id="purpose" value="#{Payment.purpose}" label="Purpose"/></div>
+
+                    <div class="span2">Receipt:</div>
+                    <div class="span4">
+                        <h:panelGroup>
+                            <h:selectOneMenu id="receipt" value="#{Payment.receipt}">
+                                <f:selectItems value="#{receipts}" var="r" itemLabel="#{r.documentName}" itemValue="#{r.id}"/>
+                            </h:selectOneMenu>
+                            <h:commandButton action="#{expenseController.addReceipt()}" value="Create new"/>
+                        </h:panelGroup>
+                    </div>
+
+                    <div class="span2">Value:</div>
+                    <div class="span4"><h:inputText id="value" value="#{Payment.value}" label="Value"/></div>
+
+                    <div class="span2">Purpose:</div>
+                    <div class="span4"><h:inputText id="currency" value="#{Payment.purpose}" label="Currency"/></div>
+
+                    <h:commandButton action="#{expenseController.createPayment(Payment)}" value="Create"/>
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
+
+</html>

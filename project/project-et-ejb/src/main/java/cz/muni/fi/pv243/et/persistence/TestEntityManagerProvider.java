@@ -1,10 +1,10 @@
 package cz.muni.fi.pv243.et.persistence;
 
 import javax.ejb.Stateless;
-import javax.enterprise.inject.Disposes;
 import javax.enterprise.inject.Produces;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+
 import org.apache.deltaspike.core.api.exclude.annotation.Exclude;
 import org.apache.deltaspike.core.api.projectstage.ProjectStage.Development;
 import org.hibernate.Session;

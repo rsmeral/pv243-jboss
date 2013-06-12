@@ -39,6 +39,7 @@
             <from-action>#{testController.initialize}</from-action>
             <from-outcome>created</from-outcome>
             <to-view-id>/reports.xhtml</to-view-id>
+            <redirect/>
         </navigation-case>
     </navigation-rule>
 

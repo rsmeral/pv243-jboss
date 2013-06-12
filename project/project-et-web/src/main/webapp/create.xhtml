@@ -1,17 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
--->
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
-    <head>
-        <title>Person</title>
-    </head>
-    <body>
-        <h:form>
-            <h:commandButton value="submit" type="submit" action="#{testController.initialize}" />
-        </h:form>
-    </body>
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+    <title>Testovacie data</title>
+</h:head>
+<h:body>
+    <ui:composition template="resources/templates/common/commonTemplate.xhtml">
+        <ui:define name="content">
+            <h:form>
+                <h1>Vytvor testovacie data</h1>
+                <h:commandButton value="Vytvorit" type="submit" action="#{testController.initialize}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+</h:body>
 </html>

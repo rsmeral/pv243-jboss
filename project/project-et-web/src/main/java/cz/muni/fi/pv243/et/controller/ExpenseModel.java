@@ -1,15 +1,9 @@
 package cz.muni.fi.pv243.et.controller;
 
-import cz.muni.fi.pv243.et.data.ExpenseReportListProducer;
-import cz.muni.fi.pv243.et.data.MoneyTransferListProducer;
-import cz.muni.fi.pv243.et.data.PaymentListProducer;
-import cz.muni.fi.pv243.et.data.ReceiptListProducer;
+import cz.muni.fi.pv243.et.data.*;
 import cz.muni.fi.pv243.et.model.*;
 import cz.muni.fi.pv243.et.model.Currency;
-import org.hibernate.Hibernate;
 
-import javax.ejb.Singleton;
-import javax.ejb.Stateful;
 import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Produces;
@@ -24,7 +18,6 @@ import java.util.*;
  */
 
 @SessionScoped
-//@Stateful (?)
 public class ExpenseModel implements Serializable {
 
     private ExpenseReport report;
@@ -38,31 +31,34 @@ public class ExpenseModel implements Serializable {
     private List<Payment> payments;
 
     @Inject
-    private ExpenseReportListProducer erlp;
+    private ExpenseReportListProducer expenseReportListProducer;
 
     @Inject
-    private MoneyTransferListProducer mtlp;
+    private MoneyTransferListProducer moneyTransferListProducer;
 
     @Inject
-    private PaymentListProducer plp;
+    private PaymentListProducer paymentListProducer;
 
     @Inject
-    private ReceiptListProducer rlp;
+    private ReceiptListProducer receiptListProducer;
+
+    @Inject
+    private PurposeListProducer purposeListProducer;
 
     @Produces
     @Named("expenseReports")
     public Collection<ExpenseReport> getExpenseReports() {
-        return erlp.getAll();
+        return expenseReportListProducer.getAll();
     }
 
     @Produces
     @Named("submitterExpenseReports")
     public Collection<ExpenseReport> getSubmitterExpenseReports(Person submitter) {
-        return erlp.getAllForSubmitter(submitter);
+        return expenseReportListProducer.getAllForSubmitter(submitter);
     }
 
     public void setExpenseReport(Long id) {
-        ExpenseReport rep = erlp.get(id);
+        ExpenseReport rep = expenseReportListProducer.get(id);
         this.report = rep;
     }
 
@@ -80,7 +76,7 @@ public class ExpenseModel implements Serializable {
         if (this.report == null) {
             throw new NullPointerException("report is null");
         }
-        moneyTransfers = (List) mtlp.get(report);
+        moneyTransfers = (List) moneyTransferListProducer.get(report);
         return moneyTransfers;
     }
 
@@ -92,7 +88,7 @@ public class ExpenseModel implements Serializable {
             throw new NullPointerException("report is null");
         }
 
-        payments = (List) plp.get(report);
+        payments = (List) paymentListProducer.get(report);
         return payments;
     }
 
@@ -145,17 +141,19 @@ public class ExpenseModel implements Serializable {
 
     @Produces
     @Named("receipts")
-    public List<Receipt> getReceipts() {
-        return (List) rlp.getAllReceipts();
+    public Collection<Receipt> getReceipts() {
+        return receiptListProducer.getAllReceipts();
+    }
+
+    @Produces
+    @Named("purposes")
+    public Collection<Purpose> getPurposes() {
+        return purposeListProducer.getAll();
     }
 
     @Produces
     @Named("currencies")
-    public List<Currency> getCurrencies() {
-        List<Currency> currencies = new ArrayList<Currency>();
-        for (Currency c : Currency.values()) {
-            currencies.add(c);
-        }
-        return currencies;
+    public Currency[] getCurrencies() {
+        return Currency.values();
     }
 }

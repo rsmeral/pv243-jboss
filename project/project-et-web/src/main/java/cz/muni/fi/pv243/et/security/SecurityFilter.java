@@ -4,6 +4,7 @@ import javax.inject.Inject;
 import javax.servlet.*;
 import javax.servlet.annotation.WebFilter;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.picketlink.Identity;
 
@@ -27,7 +28,8 @@ public class SecurityFilter implements Filter {
             HttpServletRequest request = (HttpServletRequest) req;
 
             if (request.getRequestURI().startsWith(request.getContextPath() + "/secured")) {
-                req.getRequestDispatcher("/login.jsf").forward(req, response);
+                ((HttpServletResponse) response).sendRedirect(request.getContextPath() + "/login.jsf");
+                //req.getRequestDispatcher("/login.jsf").forward(req, response);
             } else {
                 chain.doFilter(request, response);
             }

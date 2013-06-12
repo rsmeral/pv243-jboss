@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+<head>
+</head>
+
+<body>
+    <ui:composition>
+        <div class="navbar navbar-fixed-top">
+            <div class="navbar-inner">
+                <div class="container">
+                    <h:form>
+                        <ul class="nav">
+                            <li>
+                                <h:link outcome="/secured/index"><i class="icon-white icon-home"></i> Domov</h:link>
+                            </li>
+                            <li>
+                                <h:link outcome="/create">Inicializuj</h:link>
+                            </li>
+                            <li>
+                                <h:link outcome="/reports">Reporty</h:link>
+                            </li>
+                            <!--<li>-->
+                                <!--<h:link outcome="/profile" value="Profil"></h:link>-->
+                            <!--</li>-->
+                            <!--<li>-->
+                                <!--<h:link outcome="/admin" value="Profil"></h:link>-->
+                            <!--</li>-->
+                            <li>
+                                <h:commandLink action="#{logoutBean.logout()}" value="Logout"/>
+                            </li>
+                    </ul>
+                    </h:form>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="jumbotron subhead" id="overview">
+                <div class="row">
+                    <div class="span6">
+                        <h1>Expense tracking</h1>
+                        <p class="lead">M(išo)R(on)D(ušan)</p>
+                    </div>
+                    <div class="span4 offset2">
+                        <div class="well">
+                            LogoLogoLogoLogoLogoLogoLogo
+                            <br/>
+                            LogoLogoLogoLogoLogoLogoLogo
+                            <br/>
+                            LogoLogoLogoLogoLogoLogoLogo
+                            <br/>
+                            LogoLogoLogoLogoLogoLogoLogo
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <hr/>
+    </ui:composition>
+</body>
+
+</html>

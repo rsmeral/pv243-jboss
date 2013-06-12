@@ -8,7 +8,6 @@ import org.apache.deltaspike.core.api.message.annotation.MessageTemplate;
 @MessageContextConfig(messageSource = {"messages"})
 public interface WebMessage {
 
-
     @MessageTemplate("{error.loginFailed}")
     String loginFailed();
 
