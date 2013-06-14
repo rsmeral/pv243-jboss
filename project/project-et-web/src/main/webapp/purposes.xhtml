@@ -14,23 +14,23 @@
     <ui:define name="content">
         <h:form>
             <h2>Purposes</h2>
-            <h:dataTable value="#{purposes}" var="p" styleClass="table table-bordered table-striped table-hover">
+            <h:dataTable value="#{purposes}" var="r" styleClass="table table-bordered table-striped table-hover">
                 <h:column>
                     <f:facet name="header">Name</f:facet>
-                    ${p.name}
+                    ${r.name}
                 </h:column>
 
                 <h:column>
                     <f:facet name="header">Short description</f:facet>
-                    #{p.description}
+                    #{r.description}
                 </h:column>
 
                 <h:column>
                     <f:facet name="header">Action</f:facet>
-                    <h:commandLink action="#{purposeController.editPurpose(p.id)}" styleClass="btn btn-mini">
+                    <h:commandLink action="#{purposeController.editPurpose(r.id)}" styleClass="btn btn-mini">
                         <i class="icon-pencil"></i>
                     </h:commandLink>
-                    <h:commandLink action="#{purposeController.removePurpose(p.id)}" styleClass="btn btn-mini">
+                    <h:commandLink action="#{purposeController.removePurpose(r.id)}" styleClass="btn btn-mini">
                         <i class="icon-trash"></i>
                     </h:commandLink>
 

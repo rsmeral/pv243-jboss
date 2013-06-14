@@ -14,7 +14,7 @@ import java.util.Date;
 import java.util.List;
 
 @Stateless
-public class ReceiptListProducerImpl implements ReceiptListProducer, Serializable {
+public class ReceiptListProducerImpl implements ReceiptListProducer {
 
     @Inject
     private EntityManager em;

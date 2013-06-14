@@ -10,7 +10,7 @@ public interface PurposeListProducer {
 
     public Purpose get(Long id);
 
-    public Purpose get(Payment payment);
+    public Object getForPayment(Payment payment);
 
     public Collection<Purpose> getAll();
 

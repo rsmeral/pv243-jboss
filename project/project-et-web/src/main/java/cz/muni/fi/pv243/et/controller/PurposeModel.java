@@ -8,7 +8,6 @@ import javax.inject.Named;
 import java.io.Serializable;
 
 @SessionScoped
-@Named
 public class PurposeModel implements Serializable {
 
     private Purpose purpose;

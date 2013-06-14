@@ -28,11 +28,12 @@ public class PurposeListProducerImpl implements PurposeListProducer {
     }
 
     @Override
-    public Purpose get(Payment payment) {
+    public Purpose getForPayment(Payment payment) {
         if (payment == null) {
             throw new IllegalArgumentException("payment is null");
         }
-        return em.find(Purpose.class, payment);
+        return (Purpose) session.createQuery("SELECT payment.purpose FROM Payment payment WHERE payment.id = :id")
+                .setParameter("id", payment.getId()).uniqueResult();
     }
 
     @Override

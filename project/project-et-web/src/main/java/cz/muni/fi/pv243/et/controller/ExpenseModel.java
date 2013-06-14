@@ -51,11 +51,11 @@ public class ExpenseModel implements Serializable {
         return expenseReportListProducer.getAll();
     }
 
-    @Produces
-    @Named("submitterExpenseReports")
-    public Collection<ExpenseReport> getSubmitterExpenseReports(Person submitter) {
-        return expenseReportListProducer.getAllForSubmitter(submitter);
-    }
+//    @Produces
+//    @Named("submitterExpenseReports")
+//    public Collection<ExpenseReport> getSubmitterExpenseReports(Person submitter) {
+//        return expenseReportListProducer.getAllForSubmitter(submitter);
+//    }
 
     public void setExpenseReport(Long id) {
         ExpenseReport rep = expenseReportListProducer.get(id);

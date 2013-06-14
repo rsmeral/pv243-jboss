@@ -21,6 +21,7 @@ public class Receipt implements Serializable {
     @ManyToOne(optional = false)//, targetEntity = Person.class) (cascade= CascadeType.MERGE)
     private Person importedBy;
 
+    @Lob
     private byte[] document;
 
     private String documentName;

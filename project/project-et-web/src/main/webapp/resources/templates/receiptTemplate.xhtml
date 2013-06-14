@@ -6,6 +6,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:t="http://myfaces.apache.org/tomahawk"
       xml:lang="en" lang="en">
 
 <h:head>
@@ -16,24 +17,24 @@
     <ui:composition template="/resources/templates/common/commonTemplate.xhtml">
         <ui:define name="content">
             <ui:insert name="title"/>
-            <h:form styleClass="form-horizontal">
+            <h:form styleClass="form-horizontal" enctype="multipart/form-data">
+                <!--<div class="control-group">-->
+                    <!--<h:outputLabel value="Name:" for="name" styleClass="control-label"/>-->
+
+                    <!--<div class="controls">-->
+                        <!--<h:inputText id="name" value="#{receipt.documentName}" size="20"/>-->
+                    <!--</div>-->
+                <!--</div>-->
                 <div class="control-group">
-                    <h:outputLabel value="Name:" for="name" styleClass="control-label"/>
+                    <h:outputLabel value="Receipt:" for="fileUpload" styleClass="control-label"/>
 
                     <div class="controls">
-                        <h:inputText id="name" value="#{purpose.name}" size="20"/>
+                        <t:inputFileUpload id="fileUpload" value="#{receiptController.uploadedFile}" />
                     </div>
                 </div>
                 <div class="control-group">
-                    <h:outputLabel value="Description:" for="description" styleClass="control-label"/>
-
                     <div class="controls">
-                        <h:inputTextarea id="description" value="#{purpose.description}" rows="5" cols="30"/>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <div class="controls">
-                        <h:commandButton action="#{purposeController.savePurpose()}" value="Save"
+                        <h:commandButton action="#{receiptController.saveReceipt()}" value="Save"
                                          styleClass="btn btn-primary"/>
                     </div>
                 </div>

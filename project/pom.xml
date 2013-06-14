@@ -162,6 +162,19 @@
                 <artifactId>picketlink-extensions-core</artifactId>
                 <version>${version.picketlink.ext}</version>
             </dependency>
+
+            <!-- file upload-->
+            <dependency>
+                <groupId>org.apache.myfaces.tomahawk</groupId>
+                <artifactId>tomahawk20</artifactId>
+                <version>1.1.14</version>
+            </dependency>
+            <dependency>
+                <groupId>commons-io</groupId>
+                <artifactId>commons-io</artifactId>
+                <version>2.4</version>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
