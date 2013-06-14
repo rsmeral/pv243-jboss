@@ -4,7 +4,7 @@ import cz.muni.fi.pv243.et.data.PersonRepository;
 import cz.muni.fi.pv243.et.message.WebMessage;
 import cz.muni.fi.pv243.et.model.Person;
 import cz.muni.fi.pv243.et.model.PersonRole;
-import cz.muni.fi.pv243.et.security.model.NewUser;
+import cz.muni.fi.pv243.et.model.UserModel;
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.credential.internal.Password;
 import org.picketlink.idm.model.*;
@@ -26,7 +26,8 @@ public class SignUpBean {
     private PersonRepository personRepository;
 
     @Inject
-    private NewUser newUser;
+    @Named("userModel")
+    private UserModel userModel;
 
     @Inject
     private FacesContext facesContext;
@@ -46,30 +47,30 @@ public class SignUpBean {
             this.facesContext.addMessage(null, new FacesMessage(message.userEmailInUse()));
             return null;
         }
-        if (!newUser.getPassword().equals(newUser.getPasswordConfirmation())) {
+        if (!userModel.getPassword().equals(userModel.getPasswordConfirmation())) {
             this.facesContext.addMessage(null, new FacesMessage(message.passwordMismatch()));
             return null;
         }
 
         Person person = new Person();
-        person.setBankAccount(this.newUser.getBankAccount());
-        person.setEmail(this.newUser.getEmail());
-        person.setFirstName(this.newUser.getFirstName());
-        person.setLastName(this.newUser.getLastName());
+        person.setBankAccount(this.userModel.getBankAccount());
+        person.setEmail(this.userModel.getEmail());
+        person.setFirstName(this.userModel.getFirstName());
+        person.setLastName(this.userModel.getLastName());
 
         this.personRepository.create(person);
         log.logPersonCreated(person.getId());
 
-        User user = new SimpleUser(this.newUser.getUserName());
+        User user = new SimpleUser(this.userModel.getUserName());
 
-        user.setFirstName(this.newUser.getFirstName());
-        user.setLastName(this.newUser.getLastName());
-        user.setEmail(this.newUser.getEmail());
+        user.setFirstName(this.userModel.getFirstName());
+        user.setLastName(this.userModel.getLastName());
+        user.setEmail(this.userModel.getEmail());
         user.setAttribute(new Attribute<String>("personId", person.getId().toString()));
 
         this.identityManager.add(user);
 
-        Password password = new Password(this.newUser.getPassword().toCharArray());
+        Password password = new Password(this.userModel.getPassword().toCharArray());
 
         this.identityManager.updateCredential(user, password);
 
@@ -86,13 +87,13 @@ public class SignUpBean {
     }
 
     private boolean isUserNameInUser() {
-        return this.identityManager.getUser(this.newUser.getUserName()) != null;
+        return this.identityManager.getUser(this.userModel.getUserName()) != null;
     }
 
     private boolean isEmailUsed() {
         return this.identityManager
                 .createIdentityQuery(User.class)
-                .setParameter(User.EMAIL, this.newUser.getEmail())
+                .setParameter(User.EMAIL, this.userModel.getEmail())
                 .getResultCount() > 0;
     }
 

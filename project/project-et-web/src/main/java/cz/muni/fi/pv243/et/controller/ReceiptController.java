@@ -5,13 +5,10 @@ import cz.muni.fi.pv243.et.data.ReceiptListProducer;
 import cz.muni.fi.pv243.et.data.ReceiptRepository;
 import cz.muni.fi.pv243.et.model.Person;
 import cz.muni.fi.pv243.et.model.Receipt;
-import cz.muni.fi.pv243.et.util.LongHolder;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.myfaces.custom.fileupload.UploadedFile;
 import org.picketlink.Identity;
-import org.picketlink.idm.model.Attribute;
 
-import javax.enterprise.inject.Instance;
 import javax.enterprise.inject.Model;
 import javax.enterprise.inject.Produces;
 import javax.faces.context.ExternalContext;
@@ -20,7 +17,6 @@ import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 

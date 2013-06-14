@@ -1,4 +1,4 @@
-package cz.muni.fi.pv243.et.security.model;
+package cz.muni.fi.pv243.et.model;
 
 import org.hibernate.validator.constraints.Email;
 
@@ -11,7 +11,11 @@ import javax.validation.constraints.Size;
 
 @RequestScoped
 @Named
-public class NewUser {
+public class UserModel {
+
+    private Long id;
+
+    private String identityId;
 
     @NotNull
     private String userName;
@@ -93,5 +97,21 @@ public class NewUser {
 
     public void setBankAccount(String bankAccount) {
         this.bankAccount = bankAccount;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public String getIdentityId() {
+        return identityId;
+    }
+
+    public void setIdentityId(String identityId) {
+        this.identityId = identityId;
     }
 }

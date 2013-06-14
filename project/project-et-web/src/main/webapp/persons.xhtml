@@ -1,21 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<!--
-To change this template, choose Tools | Templates
-and open the template in the editor.
--->
-<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:ui="http://java.sun.com/jsf/facelets">
-<h:head>
-    <title>Person</title>
-</h:head>
-<h:body>
-    <ui:composition template="resources/templates/common/commonTemplate.xhtml">
-        <ui:define name="content">
-            <h1>Created people:</h1>
-            #{testController.persons}
-        </ui:define>
-    </ui:composition>
-</h:body>
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+        >
+
+<head>
+    <title>Expense Purposes</title>
+</head>
+<body>
+
+<ui:composition template="resources/templates/common/commonTemplate.xhtml">
+    <ui:define name="content">
+        <h:form>
+            <h2>People</h2>
+            <h:dataTable value="#{allPersons}" var="p" styleClass="table table-bordered table-striped table-hover">
+                <h:column>
+                    <f:facet name="header">Username</f:facet>
+                    #{p.userName}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Name</f:facet>
+                    #{p.firstName} #{p.lastName}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Email</f:facet>
+                    #{p.email}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Action</f:facet>
+                    <h:commandLink action="#{personController.editPerson(p.userName)}" styleClass="btn btn-mini">
+                        <i class="icon-pencil"></i>
+                    </h:commandLink>
+                    <h:commandLink action="#{personController.removePerson(p.userName)}" styleClass="btn btn-mini">
+                        <i class="icon-trash"></i>
+                    </h:commandLink>
+
+                </h:column>
+            </h:dataTable>
+
+            <div class="row">
+                <div class="span2">
+                    <h:commandLink action="#{personController.createPerson()}" styleClass="btn" value="Add person"/>
+                </div>
+            </div>
+        </h:form>
+    </ui:define>
+</ui:composition>
+
+</body>
 </html>

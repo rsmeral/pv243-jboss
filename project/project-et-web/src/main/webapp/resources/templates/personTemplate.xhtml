@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:t="http://myfaces.apache.org/tomahawk"
+      xml:lang="en" lang="en">
+
+<h:head>
+    <title>Purpose</title>
+</h:head>
+<h:body>
+
+    <ui:composition template="/resources/templates/common/commonTemplate.xhtml">
+        <ui:define name="content">
+            <ui:insert name="title"/>
+            <h:form styleClass="form-horizontal" enctype="multipart/form-data">
+                <h:messages/>
+                <div class="control-group">
+                    <h:outputLabel value="Username:" styleClass="control-label" for="username"/>
+                    <div class="controls">
+                        <h:inputText value="#{userPerson.userName}" label="Username" id="username"/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <h:outputLabel value="First name:" styleClass="control-label" for="firstName"/>
+                    <div class="controls">
+                        <h:inputText value="#{userPerson.firstName}" label="First name" id="firstName"/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <h:outputLabel value="Last name:" styleClass="control-label" for="lastName"/>
+                    <div class="controls">
+                        <h:inputText value="#{userPerson.lastName}" label="Last name" id="lastName"/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <h:outputLabel value="Bank account:" styleClass="control-label" for="bankAccount"/>
+                    <div class="controls">
+                        <h:inputText value="#{userPerson.bankAccount}" label="Bank account" id="bankAccount"/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <h:outputLabel value="Email:" styleClass="control-label" for="email"/>
+                    <div class="controls">
+                        <h:inputText value="#{userPerson.email}" label="Email" id="email"/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <h:outputLabel value="Password:" styleClass="control-label" for="password"/>
+                    <div class="controls">
+                        <h:inputSecret value="#{userPerson.password}" label="Password" id="password"/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <h:outputLabel value="Password confirmation:" styleClass="control-label" for="passwordConfirm"/>
+                    <div class="controls">
+                        <h:inputSecret value="#{userPerson.passwordConfirmation}" label="Password Confirmation" id="passwordConfirm"/>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <h:commandButton value="Save" action="#{personController.savePerson()}" styleClass="btn btn-primary"/>
+                    </div>
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</h:body>
+</html>
