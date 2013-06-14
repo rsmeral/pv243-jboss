@@ -46,7 +46,6 @@ public class PurposeRepositoryImpl implements PurposeRepository {
         if (purpose == null) {
             throw new IllegalArgumentException("not persisted entity");
         }
-//        em.remove(em.find(Purpose.class, purpose));
-        em.remove(purpose);
+        em.remove(em.find(Purpose.class, purpose.getId()));
     }
 }

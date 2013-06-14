@@ -43,6 +43,6 @@ public class ReceiptRepositoryImpl implements ReceiptRepository {
         if (receipt.getId() == null) {
             throw new IllegalArgumentException("receipt.id is null -> not persisted");
         }
-        em.remove(receipt);
+        em.remove(em.find(Receipt.class, receipt.getId()));
     }
 }

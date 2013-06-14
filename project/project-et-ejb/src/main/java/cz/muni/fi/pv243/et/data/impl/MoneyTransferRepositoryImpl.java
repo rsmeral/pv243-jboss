@@ -43,6 +43,6 @@ public class MoneyTransferRepositoryImpl implements MoneyTransferRepository {
         if (moneyTransfer.getId() == null) {
             throw new IllegalArgumentException("moneyTransfer.id is null");
         }
-        em.remove(moneyTransfer);
+        em.remove(em.find(MoneyTransfer.class, moneyTransfer.getId()));
     }
 }

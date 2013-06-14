@@ -7,15 +7,13 @@ import cz.muni.fi.pv243.et.data.PersonListProducer;
 import cz.muni.fi.pv243.et.model.Payment;
 import cz.muni.fi.pv243.et.util.ReportComputing;
 
-import javax.faces.bean.SessionScoped;
+import javax.enterprise.inject.Model;
 import javax.inject.Inject;
-import javax.inject.Named;
 import java.io.Serializable;
 
-@SessionScoped
-@Named
-public class ExpenseController implements Serializable {
-    private static long serialVersionUID = 1234243242343424L; //not generated value!!
+@Model
+public class ExpenseController {
+//    private static long serialVersionUID = 1234243242343424L; //not generated value!!
 
     @Inject
     private PersonListProducer plp;

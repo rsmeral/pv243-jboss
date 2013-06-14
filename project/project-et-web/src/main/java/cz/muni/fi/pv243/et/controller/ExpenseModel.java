@@ -146,12 +146,6 @@ public class ExpenseModel implements Serializable {
     }
 
     @Produces
-    @Named("purposes")
-    public Collection<Purpose> getPurposes() {
-        return purposeListProducer.getAll();
-    }
-
-    @Produces
     @Named("currencies")
     public Currency[] getCurrencies() {
         return Currency.values();

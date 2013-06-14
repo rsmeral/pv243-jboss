@@ -33,7 +33,6 @@ public class ExpenseReportRepositoryImpl implements ExpenseReportRepository {
             throw new IllegalArgumentException("payment.id is null - not persisted");
         }
         em.merge(report);
-//        em.flush();
     }
 
     @Override
@@ -44,7 +43,6 @@ public class ExpenseReportRepositoryImpl implements ExpenseReportRepository {
         if (report.getId() == null) {
             throw new IllegalArgumentException("payment.id is null - not persisted");
         }
-        em.remove(report);
-//        em.flush()
+        em.remove(em.find(ExpenseReport.class, report.getId()));
     }
 }
