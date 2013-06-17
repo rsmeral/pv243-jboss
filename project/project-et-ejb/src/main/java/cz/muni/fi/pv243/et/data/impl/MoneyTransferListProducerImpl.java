@@ -3,12 +3,20 @@ package cz.muni.fi.pv243.et.data.impl;
 import cz.muni.fi.pv243.et.data.MoneyTransferListProducer;
 import cz.muni.fi.pv243.et.model.ExpenseReport;
 import cz.muni.fi.pv243.et.model.MoneyTransfer;
+import org.apache.lucene.search.Query;
 import org.hibernate.Session;
+import org.hibernate.search.jpa.FullTextEntityManager;
+import org.hibernate.search.jpa.FullTextQuery;
+import org.hibernate.search.jpa.Search;
+import org.hibernate.search.query.DatabaseRetrievalMethod;
+import org.hibernate.search.query.ObjectLookupMethod;
+import org.hibernate.search.query.dsl.QueryBuilder;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
@@ -42,18 +50,14 @@ public class MoneyTransferListProducerImpl implements MoneyTransferListProducer,
             throw new IllegalArgumentException("expenseReport is null");
         }
 
-        System.out.println("\n\nsearch MT for entity " + expenseReport + "\n");
+        FullTextEntityManager ftem = Search.getFullTextEntityManager(em);
+        QueryBuilder queryBuilder = ftem.getSearchFactory().buildQueryBuilder().forEntity(MoneyTransfer.class).get();
+        Query query = queryBuilder.keyword().onField("report.id").matching(expenseReport.getId()).createQuery();
 
-        List<MoneyTransfer> all = session.createQuery("SELECT mt FROM MoneyTransfer mt").list();
+        FullTextQuery fullTextQuery = ftem.createFullTextQuery(query, MoneyTransfer.class);
+        fullTextQuery.initializeObjectsWith(ObjectLookupMethod.SKIP, DatabaseRetrievalMethod.FIND_BY_ID);
 
-        System.out.println("\nall=" + all + "\n\n");
-
-
-        List<MoneyTransfer> result = session.createQuery("SELECT mt FROM MoneyTransfer mt WHERE mt.report.name = :reportId")
-                .setParameter("reportId", expenseReport.getName()).list();
-
-        System.out.println("\nresult=" + result);
-        return result;
+        return fullTextQuery.getResultList();
     }
 
     /**

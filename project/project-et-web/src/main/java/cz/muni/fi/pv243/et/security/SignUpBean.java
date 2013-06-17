@@ -38,6 +38,9 @@ public class SignUpBean {
     @Inject
     private WebMessage message;
 
+    @Inject
+    private UserManager userManager;
+
     public String signUp() {
         if (isUserNameInUser()) {
             this.facesContext.addMessage(null, new FacesMessage(message.userIdInUse()));
@@ -52,38 +55,9 @@ public class SignUpBean {
             return null;
         }
 
-        Person person = new Person();
-        person.setBankAccount(this.userModel.getBankAccount());
-        person.setEmail(this.userModel.getEmail());
-        person.setFirstName(this.userModel.getFirstName());
-        person.setLastName(this.userModel.getLastName());
+        userManager.add(this.userModel);
 
-        this.personRepository.create(person);
-        log.logPersonCreated(person.getId());
-
-        User user = new SimpleUser(this.userModel.getUserName());
-
-        user.setFirstName(this.userModel.getFirstName());
-        user.setLastName(this.userModel.getLastName());
-        user.setEmail(this.userModel.getEmail());
-        user.setAttribute(new Attribute<String>("personId", person.getId().toString()));
-
-        this.identityManager.add(user);
-
-        Password password = new Password(this.userModel.getPassword().toCharArray());
-
-        this.identityManager.updateCredential(user, password);
-
-        Role applicant = this.identityManager.getRole(PersonRole.APPLICANT.toString());
-
-        if (applicant == null) {
-            applicant = new SimpleRole(PersonRole.APPLICANT.toString());
-            this.identityManager.add(applicant);
-        }
-
-        this.identityManager.grantRole(user, applicant);
-
-        return "/login.xhtml";
+        return "/login?faces-redirect=true";
     }
 
     private boolean isUserNameInUser() {

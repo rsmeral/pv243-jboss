@@ -10,6 +10,8 @@ import javax.validation.constraints.Size;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.validator.constraints.Email;
 
@@ -19,19 +21,24 @@ public class Person implements Serializable {
 
     @Id
     @GeneratedValue
+    @DocumentId
+    @Field
     private Long id;
 
     @Size(min = 2, max = 50)
     @Pattern(regexp = "[A-Z][a-z]*")
+    @Field
     private String firstName;
 
     @Size(min = 2, max = 50)
     @Pattern(regexp = "[A-Z][a-z]*")
+    @Field
     private String lastName;
 
     @Email
     @NotNull
     @Column(unique = true)
+    @Field
     private String email;
 
 //    @ElementCollection(targetClass = PersonRole.class)
@@ -42,6 +49,7 @@ public class Person implements Serializable {
 //    private Set<PersonRole> roles;
 
     @Digits(integer = 9, fraction = 0)
+    @Field
     private String bankAccount;
 
     public Person() {

@@ -2,6 +2,7 @@ package cz.muni.fi.pv243.et.model;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Indexed;
 
 import java.io.Serializable;
@@ -14,6 +15,7 @@ import javax.validation.constraints.NotNull;
 @Indexed
 public class ExpenseReport implements Serializable {
 
+    @DocumentId
     @Id
     @GeneratedValue
     private Long id;

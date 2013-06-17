@@ -1,6 +1,9 @@
 package cz.muni.fi.pv243.et.model;
 
+import org.hibernate.search.annotations.DocumentId;
+import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.IndexedEmbedded;
 
 import java.io.Serializable;
 import javax.persistence.*;
@@ -11,8 +14,11 @@ public class MoneyTransfer extends Transaction implements Serializable {
 
     @Id
     @GeneratedValue
+    @DocumentId
+    @Field
     private Long id;
 
+    @IndexedEmbedded
     @ManyToOne(optional = false)
     private Person creator;
 
@@ -55,8 +61,8 @@ public class MoneyTransfer extends Transaction implements Serializable {
         return true;
     }
 
-    public String getExpenseReport(ExpenseReport report) {
-        return "  reportId =" + report.getId() + " name=" + report.getName();
+    private String getExpenseReport() {
+        return "  reportId =" + getReport().getId() + " name=" + getReport().getName();
     }
 
     @Override
@@ -64,7 +70,7 @@ public class MoneyTransfer extends Transaction implements Serializable {
         return "\nMoneyTransfer{" +
                 "id=" + id +
                 ", creator=" + creator +
-                getExpenseReport(super.getReport()) +
+                getExpenseReport() +
                 "}\t";
     }
 }

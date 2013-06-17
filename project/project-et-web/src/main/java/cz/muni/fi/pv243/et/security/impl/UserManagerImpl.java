@@ -108,18 +108,52 @@ public class UserManagerImpl implements UserManager {
     }
 
     @Override
+    public void grantRole(String username, PersonRole role) {
+        User u = this.getUser(username);
+        if (u == null) {
+            throw new IllegalArgumentException("user with given username (" + username + ") doesn't exist");
+        }
+        Role plRole = this.identityManager.getRole(role.toString());
+
+        if (plRole == null) {
+            plRole = new SimpleRole(role.toString());
+            this.identityManager.add(plRole);
+        }
+
+        this.identityManager.grantRole(u, plRole);
+    }
+
+    @Override
+    public void revokeRole(String username, PersonRole role) {
+        User u = this.getUser(username);
+        if (u == null) {
+            throw new IllegalArgumentException("user with given username (" + username + ") doesn't exist");
+        }
+        Role plRole = this.identityManager.getRole(role.toString());
+
+        if (plRole == null) {
+            plRole = new SimpleRole(role.toString());
+            this.identityManager.add(plRole);
+        }
+
+        this.identityManager.revokeRole(u, plRole);
+    }
+
+    @Override
     public UserModel get(Long id) {
         throw new UnsupportedOperationException("implement");
     }
 
     @Override
     public UserModel get(String username) {
-        List<User> resultList = identityManager.createIdentityQuery(User.class).setParameter(Agent.LOGIN_NAME, username).getResultList();
-        if (resultList.isEmpty()) {
+        User u = this.getUser(username);
+        if (u == null) {
             return null;
         }
-        User u = resultList.get(0);
         Person p = personListProducer.getPerson(Long.valueOf(u.<String>getAttribute("personId").getValue()));
+        if (p == null) {
+            return null;
+        }
 
         return toUserModel(p, u);
     }
@@ -169,5 +203,15 @@ public class UserManagerImpl implements UserManager {
             allPersons.add(toUserModel(personMap.get(Long.valueOf(personId.getValue())), u));
         }
         return allPersons;
+    }
+
+    private User getUser(String username) {
+        List<User> resultList = identityManager.createIdentityQuery(User.class).setParameter(Agent.LOGIN_NAME, username).getResultList();
+        if (resultList.isEmpty()) {
+            return null;
+        }
+        User u = resultList.get(0);
+
+        return u;
     }
 }

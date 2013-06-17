@@ -1,5 +1,8 @@
 package cz.muni.fi.pv243.et.model;
 
+import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.IndexedEmbedded;
+
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.*;
@@ -9,6 +12,7 @@ import javax.validation.constraints.NotNull;
  * Money transaction. Used in cz.muni.fi.pv243.et.model.MoneyTransfer or
  * cz.muni.fi.pv243.et.model.Payment
  */
+@Indexed
 @MappedSuperclass
 public class Transaction {
 
@@ -25,6 +29,7 @@ public class Transaction {
     @Enumerated(EnumType.ORDINAL)
     private Currency currency;
 
+    @IndexedEmbedded
     @ManyToOne(optional = false)
     private ExpenseReport report;
 
