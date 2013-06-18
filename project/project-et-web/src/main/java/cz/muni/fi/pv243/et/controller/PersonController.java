@@ -1,6 +1,7 @@
 package cz.muni.fi.pv243.et.controller;
 
 import cz.muni.fi.pv243.et.message.WebMessage;
+import cz.muni.fi.pv243.et.model.PersonRole;
 import cz.muni.fi.pv243.et.model.UserModel;
 import cz.muni.fi.pv243.et.security.SecurityLog;
 import cz.muni.fi.pv243.et.security.UserManager;
@@ -11,6 +12,8 @@ import javax.faces.application.FacesMessage;
 import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 import java.util.*;
 
 @Model
@@ -31,9 +34,17 @@ public class PersonController {
     @Inject
     private UserManager userManager;
 
+    @NotNull
+    @Size(min = 2, max = 50)
     private String password;
 
+    @NotNull
+    @Size(min = 2, max = 50)
     private String confirmPassword;
+
+    private boolean roleAdmin;
+    private boolean roleApplicant;
+    private boolean roleVerifier;
 
     @Produces
     @Named
@@ -62,8 +73,51 @@ public class PersonController {
     }
 
     public String changePassword(String username) {
-        // implement
-        return null;
+        personModel.setUserModel(userManager.get(username));
+
+        return "/secured/changePassword";
+    }
+
+    public String saveNewPassword() {
+        if (!password.equals(confirmPassword)) {
+            this.facesContext.addMessage(null, new FacesMessage(message.passwordMismatch()));
+            return null;
+        }
+
+        userManager.changePassword(personModel.getUserModel().getUserName(), password);
+
+        return "/secured/persons?faces-redirect=true";
+    }
+
+    public String changeRoles(String username) {
+        personModel.setUserModel(userManager.get(username));
+
+        this.roleAdmin = userManager.hasRole(username, PersonRole.ADMIN);
+        this.roleApplicant = userManager.hasRole(username, PersonRole.APPLICANT);
+        this.roleVerifier = userManager.hasRole(username, PersonRole.VERIFIER);
+
+        return "/secured/changeRoles";
+    }
+
+    public String saveRoles() {
+        String username = personModel.getUserModel().getUserName();
+        if (isRoleAdmin()) {
+            userManager.grantRole(username, PersonRole.ADMIN);
+        } else {
+            userManager.revokeRole(username, PersonRole.ADMIN);
+        }
+        if (isRoleApplicant()) {
+            userManager.grantRole(username, PersonRole.APPLICANT);
+        } else {
+            userManager.revokeRole(username, PersonRole.APPLICANT);
+        }
+        if (isRoleVerifier()) {
+            userManager.grantRole(username, PersonRole.VERIFIER);
+        } else {
+            userManager.revokeRole(username, PersonRole.VERIFIER);
+        }
+
+        return "/secured/persons?faces-redirect=true";
     }
 
     public String savePerson() {
@@ -101,4 +155,43 @@ public class PersonController {
         return false;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getConfirmPassword() {
+        return confirmPassword;
+    }
+
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
+    }
+
+    public boolean isRoleAdmin() {
+        return roleAdmin;
+    }
+
+    public void setRoleAdmin(boolean roleAdmin) {
+        this.roleAdmin = roleAdmin;
+    }
+
+    public boolean isRoleApplicant() {
+        return roleApplicant;
+    }
+
+    public void setRoleApplicant(boolean roleApplicant) {
+        this.roleApplicant = roleApplicant;
+    }
+
+    public boolean isRoleVerifier() {
+        return roleVerifier;
+    }
+
+    public void setRoleVerifier(boolean roleVerifier) {
+        this.roleVerifier = roleVerifier;
+    }
 }

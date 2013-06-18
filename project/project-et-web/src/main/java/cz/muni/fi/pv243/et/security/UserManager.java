@@ -12,6 +12,8 @@ public interface UserManager {
     void remove(String username);
     void grantRole(String username, PersonRole role);
     void revokeRole(String username, PersonRole role);
+    void changePassword(String username, String password);
+    boolean hasRole(String username, PersonRole role);
     UserModel get(Long id);
     UserModel get(String username);
     Collection<UserModel> findByEmail(String email);

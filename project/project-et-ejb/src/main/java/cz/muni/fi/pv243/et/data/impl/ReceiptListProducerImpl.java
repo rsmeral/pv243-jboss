@@ -8,6 +8,8 @@ import org.hibernate.Session;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.FullTextQuery;
 import org.hibernate.search.jpa.Search;
+import org.hibernate.search.query.DatabaseRetrievalMethod;
+import org.hibernate.search.query.ObjectLookupMethod;
 import org.hibernate.search.query.dsl.QueryBuilder;
 import org.hibernate.search.query.dsl.TermTermination;
 
@@ -44,6 +46,8 @@ public class ReceiptListProducerImpl implements ReceiptListProducer {
         Query query = queryBuilder.keyword().onField("importedBy.id").matching(importedBy.getId()).createQuery();
 
         FullTextQuery fullTextQuery = ftem.createFullTextQuery(query, Receipt.class);
+        fullTextQuery.initializeObjectsWith(ObjectLookupMethod.SKIP, DatabaseRetrievalMethod.FIND_BY_ID);
+
         return fullTextQuery.getResultList();
 //
 //        return session.createQuery("SELECT receipt FROM Receipt receipt WHERE receipt.importedBy.id = :personId")

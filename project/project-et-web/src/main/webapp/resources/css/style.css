@@ -10,3 +10,7 @@
     text-align: center;
     height: 60px;
 }
+
+input[type="checkbox"] {
+    height: 25px;
+}

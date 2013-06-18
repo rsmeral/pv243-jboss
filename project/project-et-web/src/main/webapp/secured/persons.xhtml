@@ -32,12 +32,18 @@
 
                 <h:column>
                     <f:facet name="header">Action</f:facet>
-                    <h:commandLink action="#{personController.editPerson(p.userName)}" styleClass="btn btn-mini">
+                    <h:commandLink action="#{personController.editPerson(p.userName)}" styleClass="btn btn-mini" title="Edit person">
                         <i class="icon-pencil"></i>
                     </h:commandLink>
-                    <h:commandLink action="#{personController.removePerson(p.userName)}" styleClass="btn btn-mini">
-                        <i class="icon-trash"></i>
+                    <h:commandLink action="#{personController.changePassword(p.userName)}" styleClass="btn btn-mini" title="Change password">
+                        <i class="icon-lock"></i>
                     </h:commandLink>
+                    <h:commandLink action="#{personController.changeRoles(p.userName)}" styleClass="btn btn-mini" title="Change roles">
+                        <i class="icon-th-list"></i>
+                    </h:commandLink>
+                    <!--<h:commandLink action="#{personController.removePerson(p.userName)}" styleClass="btn btn-mini" title="Remove person">-->
+                        <!--<i class="icon-trash"></i>-->
+                    <!--</h:commandLink>-->
 
                 </h:column>
             </h:dataTable>

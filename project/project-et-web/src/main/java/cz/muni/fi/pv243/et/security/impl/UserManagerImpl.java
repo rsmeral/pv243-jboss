@@ -50,19 +50,6 @@ public class UserManagerImpl implements UserManager {
         user.setAttribute(new Attribute<String>("personId", person.getId().toString()));
 
         this.identityManager.add(user);
-
-        Password password = new Password(model.getPassword().toCharArray());
-
-        this.identityManager.updateCredential(user, password);
-
-        Role applicant = this.identityManager.getRole(PersonRole.APPLICANT.toString());
-    
-        if (applicant == null) {
-            applicant = new SimpleRole(PersonRole.APPLICANT.toString());
-            this.identityManager.add(applicant);
-        }
-    
-        this.identityManager.grantRole(user, applicant);
     }
 
     @Override
@@ -92,19 +79,14 @@ public class UserManagerImpl implements UserManager {
         user.setAttribute(new Attribute<String>("personId", person.getId().toString()));
 
         this.identityManager.update(user);
-
-        Password password = new Password(model.getPassword().toCharArray());
-
-        this.identityManager.updateCredential(user, password);
     }
 
     @Override
     public void remove(String username) {
         List<User> resultList = identityManager.createIdentityQuery(User.class).setParameter(Agent.LOGIN_NAME, username).getResultList();
         User u = resultList.get(0);
-        Person p = personListProducer.getPerson(Long.valueOf(u.<String>getAttribute("personId").getValue()));
-        personRepository.remove(p);
-        identityManager.remove(u);
+        u.setEnabled(false);
+        identityManager.update(u);
     }
 
     @Override
@@ -137,6 +119,30 @@ public class UserManagerImpl implements UserManager {
         }
 
         this.identityManager.revokeRole(u, plRole);
+    }
+
+    @Override
+    public void changePassword(String username, String password) {
+        Password passwd = new Password(password.toCharArray());
+
+        final User user = getUser(username);
+
+        this.identityManager.updateCredential(user, passwd);
+    }
+
+    @Override
+    public boolean hasRole(String username, PersonRole role) {
+        if (username == null || role == null) {
+            throw new IllegalArgumentException();
+        }
+
+        final User user = getUser(username);
+        final Role sRole = this.identityManager.getRole(role.toString());
+        if (sRole == null) {
+            return false;
+        }
+
+        return this.identityManager.hasRole(user, sRole);
     }
 
     @Override

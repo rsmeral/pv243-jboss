@@ -56,6 +56,8 @@ public class SignUpBean {
         }
 
         userManager.add(this.userModel);
+        userManager.changePassword(this.userModel.getUserName(), this.userModel.getPassword());
+        userManager.grantRole(this.userModel.getUserName(), PersonRole.APPLICANT);
 
         return "/login?faces-redirect=true";
     }

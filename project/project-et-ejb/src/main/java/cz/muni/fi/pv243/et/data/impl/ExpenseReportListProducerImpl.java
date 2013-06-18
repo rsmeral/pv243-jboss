@@ -9,6 +9,8 @@ import org.hibernate.Session;
 import org.hibernate.search.jpa.FullTextEntityManager;
 import org.hibernate.search.jpa.FullTextQuery;
 import org.hibernate.search.jpa.Search;
+import org.hibernate.search.query.DatabaseRetrievalMethod;
+import org.hibernate.search.query.ObjectLookupMethod;
 import org.hibernate.search.query.dsl.QueryBuilder;
 
 import javax.ejb.Stateless;
@@ -40,6 +42,8 @@ public class ExpenseReportListProducerImpl implements ExpenseReportListProducer 
         Query query = queryBuilder.keyword().onField("submitter.id").matching(submitter.getId()).createQuery();
 
         FullTextQuery fullTextQuery = ftem.createFullTextQuery(query, ExpenseReport.class);
+        fullTextQuery.initializeObjectsWith(ObjectLookupMethod.SKIP, DatabaseRetrievalMethod.FIND_BY_ID);
+
         return fullTextQuery.getResultList();
 //        return session.createQuery("SELECT report FROM ExpenseReport report WHERE report.submitter.id = :submitterId")
 //                .setParameter("submitterId", submitter.getId()).list();
@@ -52,6 +56,8 @@ public class ExpenseReportListProducerImpl implements ExpenseReportListProducer 
         Query query = queryBuilder.keyword().onField("verifier.id").matching(verifier.getId()).createQuery();
 
         FullTextQuery fullTextQuery = ftem.createFullTextQuery(query, ExpenseReport.class);
+        fullTextQuery.initializeObjectsWith(ObjectLookupMethod.SKIP, DatabaseRetrievalMethod.FIND_BY_ID);
+
         return fullTextQuery.getResultList();
     }
 
@@ -79,6 +85,8 @@ public class ExpenseReportListProducerImpl implements ExpenseReportListProducer 
                 .createQuery();
 
         FullTextQuery fullTextQuery = ftem.createFullTextQuery(query, ExpenseReport.class);
+        fullTextQuery.initializeObjectsWith(ObjectLookupMethod.SKIP, DatabaseRetrievalMethod.FIND_BY_ID);
+
         return fullTextQuery.getResultList();
     }
 
@@ -94,6 +102,8 @@ public class ExpenseReportListProducerImpl implements ExpenseReportListProducer 
                 .createQuery();
 
         FullTextQuery fullTextQuery = ftem.createFullTextQuery(query, ExpenseReport.class);
+        fullTextQuery.initializeObjectsWith(ObjectLookupMethod.SKIP, DatabaseRetrievalMethod.FIND_BY_ID);
+
         return fullTextQuery.getResultList();
     }
 
