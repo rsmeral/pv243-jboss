@@ -48,18 +48,6 @@
                     </div>
                 </div>
                 <div class="control-group">
-                    <h:outputLabel value="Password:" styleClass="control-label" for="password"/>
-                    <div class="controls">
-                        <h:inputSecret value="#{userPerson.password}" label="Password" id="password"/>
-                    </div>
-                </div>
-                <div class="control-group">
-                    <h:outputLabel value="Password confirmation:" styleClass="control-label" for="passwordConfirm"/>
-                    <div class="controls">
-                        <h:inputSecret value="#{userPerson.passwordConfirmation}" label="Password Confirmation" id="passwordConfirm"/>
-                    </div>
-                </div>
-                <div class="control-group">
                     <div class="controls">
                         <h:commandButton value="Save" action="#{personController.savePerson()}" styleClass="btn btn-primary"/>
                     </div>

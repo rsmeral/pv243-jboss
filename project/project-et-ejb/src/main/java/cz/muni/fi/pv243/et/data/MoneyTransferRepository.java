@@ -6,9 +6,9 @@ import javax.ejb.Local;
 @Local
 public interface MoneyTransferRepository {
 
-    public void create(MoneyTransfer moneyTransfer);
+    void create(MoneyTransfer moneyTransfer);
 
-    public void update(MoneyTransfer moneyTransfer);
+    void update(MoneyTransfer moneyTransfer);
 
-    public void remove(MoneyTransfer moneyTransfer);
+    void remove(MoneyTransfer moneyTransfer);
 }

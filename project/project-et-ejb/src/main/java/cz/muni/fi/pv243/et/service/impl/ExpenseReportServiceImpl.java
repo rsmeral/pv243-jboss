@@ -43,6 +43,27 @@ public class ExpenseReportServiceImpl implements ExpenseReportService {
     }
 
     @Override
+    public void claim(ExpenseReport report, Person verifier) {
+        if (report == null || verifier == null) {
+            throw new IllegalArgumentException();
+        }
+
+        if (report.getVerifier() != null) {
+            throw new RuntimeException("report already has a verifier");
+        }
+
+        if (report.getStatus() == ReportStatus.APPROVED ||
+                report.getStatus() == ReportStatus.REJECTED ||
+                report.getStatus() == ReportStatus.SETTLED) {
+            throw new RuntimeException("report status indicates that it should have already had a verifier assigned");
+        }
+
+        report.setVerifier(verifier);
+
+        this.save(report);
+    }
+
+    @Override
     public ExpenseReport get(Long id) {
         if (id == null) {
             throw new IllegalArgumentException();
@@ -86,5 +107,23 @@ public class ExpenseReportServiceImpl implements ExpenseReportService {
         }
 
         return listProducer.getAllBy(status);
+    }
+
+    @Override
+    public Collection<ExpenseReport> findForSubmitterWithStatus(Person submitter, ReportStatus status) {
+        if (submitter == null || status == null) {
+            throw new IllegalArgumentException();
+        }
+
+        return listProducer.getAllForSubmitterWithStatus(submitter, status);
+    }
+
+    @Override
+    public Collection<ExpenseReport> findForVerifierWithStatus(Person verifier, ReportStatus status) {
+        if (verifier == null || status == null) {
+            throw new IllegalArgumentException();
+        }
+
+        return listProducer.getAllForVerifierWithStatus(verifier, status);
     }
 }

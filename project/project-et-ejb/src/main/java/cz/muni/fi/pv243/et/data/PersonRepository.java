@@ -6,10 +6,10 @@ import javax.ejb.Local;
 @Local
 public interface PersonRepository {
 
-    public void create(Person person);
+    void create(Person person);
 
-    public void update(Person person);
+    void update(Person person);
 
-    public void remove(Person person);
+    void remove(Person person);
 
 }

@@ -8,11 +8,11 @@ import java.util.List;
 @Local
 public interface PaymentRepository {
 
-    public void create(Payment payment);
+    void create(Payment payment);
 
-    public void update(Payment payment);
+    void update(Payment payment);
 
-    public void remove(Payment payment);
+    void remove(Payment payment);
 
 
 }

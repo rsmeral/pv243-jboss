@@ -8,11 +8,11 @@ import java.util.Collection;
 @Local
 public interface PersonListProducer {
 
-    public Person getPerson(Long id);
+    Person getPerson(Long id);
 
-    public Collection<Person> findAll();
+    Collection<Person> findAll();
 
-    public Person findByEmail(String email);
+    Person findByEmail(String email);
 
-    public Collection<Person> findByName(String firstName, String lastName);
+    Collection<Person> findByName(String firstName, String lastName);
 }

@@ -11,13 +11,13 @@ import java.util.List;
 @Local
 public interface PaymentListProducer {
 
-    public Payment getPayment(Long id);
+    Payment getPayment(Long id);
 
-    public Collection<Payment> getAllPayments();
+    Collection<Payment> getAllPayments();
 
-    public Collection<Payment> getAllPayments(Person person);
+    Collection<Payment> getAllPayments(Person person);
 
-    public List<Payment> getPaymentsBetweenDates(Date fromDate, Date toDate);
+    List<Payment> getPaymentsBetweenDates(Date fromDate, Date toDate);
 
-    public List<Payment> get(ExpenseReport report);
+    List<Payment> get(ExpenseReport report);
 }

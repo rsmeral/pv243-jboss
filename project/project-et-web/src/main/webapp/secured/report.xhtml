@@ -50,12 +50,17 @@
 
                 <h:column>
                     <f:facet name="header">Submitted</f:facet>
-                    #{expenseReport.lastSubmittedDate}
+                    <h:outputText value="#{expenseReport.lastSubmittedDate}">
+                        <f:convertDateTime/>
+                    </h:outputText>
                 </h:column>
 
                 <h:column>
                     <f:facet name="header">Last Change</f:facet>
-                    #{expenseReport.lastChangeDate}
+                    <h:outputText value="#{expenseReport.lastChangeDate}">
+                        <f:convertDateTime/>
+                    </h:outputText>
+
                 </h:column>
             </h:dataTable>
 
@@ -64,7 +69,9 @@
             <h:dataTable value="#{expenseReport.moneyTransfers}" var="mt" styleClass="table table-bordered table-striped table-hover">
                 <h:column>
                     <f:facet name="header">Date</f:facet>
-                    #{mt.date}
+                    <h:outputText value="#{mt.date}">
+                        <f:convertDateTime/>
+                    </h:outputText>
                 </h:column>
 
                 <h:column>
@@ -110,7 +117,9 @@
 
                 <h:column>
                     <f:facet name="header">Date</f:facet>
-                    #{pmt.date}
+                    <h:outputText value="#{pmt.date}">
+                        <f:convertDateTime/>
+                    </h:outputText>
                 </h:column>
 
                 <h:column>

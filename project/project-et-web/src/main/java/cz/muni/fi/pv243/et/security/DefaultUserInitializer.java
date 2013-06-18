@@ -53,7 +53,15 @@ public class DefaultUserInitializer {
                 identityManager.add(adminRole);
             }
 
+            Role verifierRole = identityManager.getRole(PersonRole.VERIFIER.toString());
+
+            if (verifierRole == null) {
+                verifierRole = new SimpleRole(PersonRole.VERIFIER.toString());
+                identityManager.add(verifierRole);
+            }
+
             identityManager.grantRole(admin, adminRole);
+            identityManager.grantRole(admin, verifierRole);
         }
     }
 

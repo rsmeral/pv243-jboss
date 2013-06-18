@@ -9,10 +9,15 @@ import java.util.Collection;
 public interface ExpenseReportService {
     void save(ExpenseReport report);
     void remove(ExpenseReport report);
+    void claim(ExpenseReport report, Person verifier);
+
     ExpenseReport get(Long id);
+
     Collection<ExpenseReport> findAll();
     Collection<ExpenseReport> findForSubmitter(Person submitter);
     Collection<ExpenseReport> findForVerifier(Person verifier);
     Collection<ExpenseReport> findWithNoVerifierAssigned();
     Collection<ExpenseReport> findByStatus(ReportStatus status);
+    Collection<ExpenseReport> findForSubmitterWithStatus(Person submitter, ReportStatus status);
+    Collection<ExpenseReport> findForVerifierWithStatus(Person verifier, ReportStatus status);
 }

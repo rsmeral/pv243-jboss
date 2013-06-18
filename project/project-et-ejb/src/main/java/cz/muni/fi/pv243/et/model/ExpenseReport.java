@@ -2,6 +2,7 @@ package cz.muni.fi.pv243.et.model;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
+import org.hibernate.search.annotations.Field;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.IndexedEmbedded;
 
@@ -50,6 +51,7 @@ public class ExpenseReport implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date lastChangeDate;
 
+    @Field
     @Enumerated(EnumType.ORDINAL)
     private ReportStatus status;
 

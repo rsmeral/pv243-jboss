@@ -18,7 +18,7 @@ import java.io.Serializable;
 import java.util.Collection;
 
 @Stateless
-public class ExpenseReportListProducerImpl implements ExpenseReportListProducer, Serializable {
+public class ExpenseReportListProducerImpl implements ExpenseReportListProducer {
 
     @Inject
     private EntityManager em;
@@ -65,6 +65,36 @@ public class ExpenseReportListProducerImpl implements ExpenseReportListProducer,
     public Collection<ExpenseReport> getAllBy(ReportStatus status) {
         return session.createQuery("SELECT report FROM ExpenseReport report WHERE report.status = :status")
                 .setParameter("status", status).list();
+    }
+
+    @Override
+    public Collection<ExpenseReport> getAllForSubmitterWithStatus(Person submitter, ReportStatus status) {
+        FullTextEntityManager ftem = Search.getFullTextEntityManager(em);
+        QueryBuilder queryBuilder = ftem.getSearchFactory().buildQueryBuilder().forEntity(ExpenseReport.class).get();
+        Query forPerson = queryBuilder.keyword().onField("submitter.id").matching(submitter.getId()).createQuery();
+        Query forStatus = queryBuilder.keyword().onField("status").matching(status.ordinal()).createQuery();
+        Query query = queryBuilder.bool()
+                .must(forPerson)
+                .must(forStatus)
+                .createQuery();
+
+        FullTextQuery fullTextQuery = ftem.createFullTextQuery(query, ExpenseReport.class);
+        return fullTextQuery.getResultList();
+    }
+
+    @Override
+    public Collection<ExpenseReport> getAllForVerifierWithStatus(Person verifier, ReportStatus status) {
+        FullTextEntityManager ftem = Search.getFullTextEntityManager(em);
+        QueryBuilder queryBuilder = ftem.getSearchFactory().buildQueryBuilder().forEntity(ExpenseReport.class).get();
+        Query forPerson = queryBuilder.keyword().onField("verifier.id").matching(verifier.getId()).createQuery();
+        Query forStatus = queryBuilder.keyword().onField("status").matching(status.ordinal()).createQuery();
+        Query query = queryBuilder.bool()
+                .must(forPerson)
+                .must(forStatus)
+                .createQuery();
+
+        FullTextQuery fullTextQuery = ftem.createFullTextQuery(query, ExpenseReport.class);
+        return fullTextQuery.getResultList();
     }
 
     @Override

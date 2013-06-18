@@ -8,13 +8,14 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+@Local
 public interface ReceiptListProducer {
 
-    public Receipt getReceipt(Long id);
+    Receipt getReceipt(Long id);
 
-    public Collection<Receipt> getReceipts(Person importedBy);
+    Collection<Receipt> getReceipts(Person importedBy);
 
-    public List<Receipt> getReceiptsFromDate(Date fromDate);
+    List<Receipt> getReceiptsFromDate(Date fromDate);
 
-    public Collection<Receipt> getAllReceipts();
+    Collection<Receipt> getAllReceipts();
 }

@@ -13,6 +13,9 @@
                 <h3>Welcome <strong>#{identity.user.firstName} #{identity.user.lastName}!</strong></h3>
                 <p>
                     Your attributes are: <strong>#{identity.user.attributes}</strong><br/>
+                    Has role ADMIN: <strong>#{identity.userContext.hasRole('ADMIN')}</strong><br/>
+                    Has role APPLICANT: <strong>#{identity.userContext.hasRole('APPLICANT')}</strong><br/>
+                    Has role VERIFIER: <strong>#{identity.userContext.hasRole('VERIFIER')}</strong><br/>
                     Your personRoles are: <strong>#{identity.userContext.roleNames}</strong><br/>
                     Your groups are: <strong>#{identity.userContext.groupNames}</strong><br/>
                     Click here to <h:commandLink value="Logout" action="#{logoutBean.logout()}"/>

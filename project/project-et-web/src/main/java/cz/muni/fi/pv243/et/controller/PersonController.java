@@ -31,6 +31,10 @@ public class PersonController {
     @Inject
     private UserManager userManager;
 
+    private String password;
+
+    private String confirmPassword;
+
     @Produces
     @Named
     public Collection<UserModel> getAllPersons() {
@@ -57,6 +61,11 @@ public class PersonController {
         return "/secured/persons?faces-redirect=true";
     }
 
+    public String changePassword(String username) {
+        // implement
+        return null;
+    }
+
     public String savePerson() {
         UserModel existing = userManager.get(this.personModel.getUserModel().getUserName());
         Long userId = this.personModel.getUserModel().getId();
@@ -67,10 +76,6 @@ public class PersonController {
         Collection<UserModel> mailUsers = userManager.findByEmail(this.personModel.getUserModel().getEmail());
         if (isOtherPersonsEmail(this.personModel.getUserModel(), mailUsers)) {
             this.facesContext.addMessage(null, new FacesMessage(message.userEmailInUse()));
-            return null;
-        }
-        if (!personModel.getUserModel().getPassword().equals(personModel.getUserModel().getPasswordConfirmation())) {
-            this.facesContext.addMessage(null, new FacesMessage(message.passwordMismatch()));
             return null;
         }
 

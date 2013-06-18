@@ -31,7 +31,7 @@ public class ResourceProducer {
     }
 
     @Produces
-    @SessionScoped
+    @RequestScoped
     @CurrentPerson
     public PersonWrapper getCurrentPerson() {
         return new PersonWrapper(identity.getUser().<Person>getAttribute("person").getValue());

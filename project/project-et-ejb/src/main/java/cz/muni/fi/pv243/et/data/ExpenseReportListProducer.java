@@ -8,15 +8,19 @@ import java.util.Collection;
 @Local
 public interface ExpenseReportListProducer {
 
-    public ExpenseReport get(Long id);
+    ExpenseReport get(Long id);
 
-    public Collection<ExpenseReport> getAllForSubmitter(Person submitter);
+    Collection<ExpenseReport> getAllForSubmitter(Person submitter);
 
-    public Collection<ExpenseReport> getAllForVerifier(Person verifier);
+    Collection<ExpenseReport> getAllForVerifier(Person verifier);
 
-    public Collection<ExpenseReport> getAllWithNoVerifierAssigned();
+    Collection<ExpenseReport> getAllWithNoVerifierAssigned();
 
-    public Collection<ExpenseReport> getAllBy(ReportStatus status);
+    Collection<ExpenseReport> getAllBy(ReportStatus status);
+    
+    Collection<ExpenseReport> getAllForSubmitterWithStatus(Person submitter, ReportStatus status);
 
-    public Collection<ExpenseReport> getAll();
+    Collection<ExpenseReport> getAllForVerifierWithStatus(Person verifier, ReportStatus status);
+
+    Collection<ExpenseReport> getAll();
 }

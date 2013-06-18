@@ -7,9 +7,9 @@ import javax.ejb.Local;
 @Local
 public interface PurposeRepository {
 
-    public void create(Purpose purpose);
+    void create(Purpose purpose);
 
-    public void update(Purpose purpose);
+    void update(Purpose purpose);
 
-    public void remove(Purpose purpose);
+    void remove(Purpose purpose);
 }
