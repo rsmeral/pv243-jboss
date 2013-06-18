@@ -6,24 +6,28 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:of="http://omnifaces.org/functions"
+      xmlns:p="http://primefaces.org/ui"
       xml:lang="en" lang="en">
 
 <h:head>
     <title>Payment</title>
 </h:head>
 <h:body>
-
     <ui:composition template="/resources/templates/common/commonTemplate.xhtml">
         <ui:define name="content">
             <ui:insert name="title"/>
-            <h:form styleClass="form-horizontal">
+            <o:form id="form" styleClass="form-horizontal">
                 <h:messages/>
                 <h:inputHidden value="#{payment.report}" converter="#{expenseReportConverter}"/>
+
                 <div class="control-group">
                     <h:outputLabel value="Date:" for="date" styleClass="control-label"/>
 
                     <div class="controls">
                         <h:inputText id="date" value="#{payment.date}" size="20"/>
+                        <!--required="${true and param['form:newReceipt']==null}"/>-->
                     </div>
                 </div>
                 <div class="control-group">
@@ -43,8 +47,11 @@
                             <f:selectItems value="#{currentUserReceipts}" var="r" itemLabel="#{r.documentName}"
                                            itemValue="#{r}"/>
                         </h:selectOneMenu>
-                        <h:commandButton action="#{receiptController.createReceipt()}" immediate="true" value="Create new"
-                                         styleClass="btn btn-mini" style="margin-left: 20px;"/>
+                        <p:commandButton id="newReceipt" action="#{receiptController.createReceipt()}"
+                                         value="Create new" styleClass="btn btn-mini" style="margin-left: 20px;">
+                            <o:ignoreValidationFailed/>
+                            <f:ajax execute="@form"/>
+                        </p:commandButton>
                     </div>
                 </div>
                 <div class="control-group">
@@ -68,11 +75,11 @@
                     <div class="controls">
                         <h:commandButton action="#{paymentController.savePayment()}" value="Save"
                                          styleClass="btn btn-primary"/>
+                        <h:commandButton action="/secured/report" immediate="true" value="Cancel" styleClass="btn btn"/>
                     </div>
                 </div>
-            </h:form>
+            </o:form>
         </ui:define>
     </ui:composition>
-
 </h:body>
 </html>

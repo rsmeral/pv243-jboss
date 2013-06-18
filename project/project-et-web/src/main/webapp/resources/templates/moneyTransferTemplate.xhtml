@@ -36,8 +36,8 @@
 
             <div class="control-group">
                 <div class="controls">
-                    <h:commandButton action="#{moneyTransferController.saveMoneyTransfer()}" value="Save"
-                                     styleClass="btn btn-primary"/>
+                    <h:commandButton action="#{moneyTransferController.saveMoneyTransfer()}" value="Save" styleClass="btn btn-primary"/>
+                    <h:commandButton action="/secured/report" immediate="true"  value="Cancel" styleClass="btn btn"/>
                 </div>
             </div>
         </h:form>

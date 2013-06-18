@@ -35,8 +35,8 @@
 
                 <div class="control-group">
                     <div class="controls">
-                        <h:commandButton action="#{expenseController.saveReport()}" value="Save"
-                                         styleClass="btn btn-primary"/>
+                        <h:commandButton action="/secured/reports" immediate="true"  value="Cancel" styleClass="btn btn"/>
+                        <h:commandButton action="#{expenseController.saveReport()}" value="Save" styleClass="btn btn-primary"/>
                     </div>
                 </div>
             </h:form>

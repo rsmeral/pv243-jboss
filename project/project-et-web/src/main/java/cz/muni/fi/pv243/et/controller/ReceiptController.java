@@ -74,6 +74,8 @@ public class ReceiptController {
         }
         receiptService.save(r);
 
+//        String url = FacesContext.getCurrentInstance().getViewRoot().getViewId();
+//        return "/secured/receipts?faces-redirect=true&backurl=" + url;
         return "/secured/receipts?faces-redirect=true";
     }
 

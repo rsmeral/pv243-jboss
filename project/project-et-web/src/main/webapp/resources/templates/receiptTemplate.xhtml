@@ -18,7 +18,10 @@
         <ui:define name="content">
             <ui:insert name="title"/>
             <h:form styleClass="form-horizontal" enctype="multipart/form-data">
+
+
                 <h:messages/>
+
                 <!--<div class="control-group">-->
                     <!--<h:outputLabel value="Name:" for="name" styleClass="control-label"/>-->
 
@@ -35,8 +38,8 @@
                 </div>
                 <div class="control-group">
                     <div class="controls">
-                        <h:commandButton action="#{receiptController.saveReceipt()}" value="Save"
-                                         styleClass="btn btn-primary"/>
+                        <h:commandButton action="#{receiptController.saveReceipt()}" value="Save" styleClass="btn btn-primary"/>
+                        <h:commandButton action="/secured/createPayment" immediate="true" value="Cancel" styleClass="btn btn"/>
                     </div>
                 </div>
             </h:form>

@@ -34,8 +34,8 @@
                 </div>
                 <div class="control-group">
                     <div class="controls">
-                        <h:commandButton action="#{purposeController.savePurpose()}" value="Save"
-                                         styleClass="btn btn-primary"/>
+                        <h:commandButton action="#{purposeController.savePurpose()}" value="Save" styleClass="btn btn-primary"/>
+                        <h:commandButton action="/secured/purposes" immediate="true"  value="Cancel" styleClass="btn btn"/>
                     </div>
                 </div>
             </h:form>
