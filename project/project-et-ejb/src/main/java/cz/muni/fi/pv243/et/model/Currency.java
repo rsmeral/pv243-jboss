@@ -2,7 +2,8 @@ package cz.muni.fi.pv243.et.model;
 
 public enum Currency {
     CZK,
-    USD,
-    EUR,
-    GBP
+// enable when rate table is implemented
+//    USD,
+//    EUR,
+//    GBP
 }

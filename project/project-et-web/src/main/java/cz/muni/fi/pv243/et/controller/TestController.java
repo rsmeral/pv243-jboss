@@ -87,15 +87,15 @@ public class TestController {
                 createExpenseReport("Non Testing in Arquillian 2012", personJana, personApprover, ReportStatus.REJECTED, "Why are we not testing in Arquillian?" );
 
         // MONEY TRANSFERS
-        MoneyTransfer mt = createMoneyTransfer(personApprover, report2, BigDecimal.valueOf(2400), Currency.USD, new Date(System.currentTimeMillis() + 20));
-        MoneyTransfer mt2 = createMoneyTransfer(personApprover, report3, BigDecimal.valueOf(200), Currency.EUR, new Date(System.currentTimeMillis() - 15000));
-        MoneyTransfer mt3 = createMoneyTransfer(personApprover, report3, BigDecimal.valueOf(100), Currency.EUR, new Date(System.currentTimeMillis() - 14000));
+        MoneyTransfer mt = createMoneyTransfer(personApprover, report2, BigDecimal.valueOf(2400), Currency.CZK, new Date(System.currentTimeMillis() + 20));
+        MoneyTransfer mt2 = createMoneyTransfer(personApprover, report3, BigDecimal.valueOf(200), Currency.CZK, new Date(System.currentTimeMillis() - 15000));
+        MoneyTransfer mt3 = createMoneyTransfer(personApprover, report3, BigDecimal.valueOf(100), Currency.CZK, new Date(System.currentTimeMillis() - 14000));
 
         // PAYMENTS
-        Payment payment = createPayment(report, purp1, rec, BigDecimal.valueOf(1500), Currency.EUR);
-        Payment payment2 = createPayment(report2, purp2, rec, BigDecimal.valueOf(2345), Currency.USD);
-        Payment payment3 = createPayment(report3, purp3, rec2, BigDecimal.valueOf(300), Currency.EUR);
-        Payment payment4 = createPayment(report3, purp3, rec2, BigDecimal.valueOf(100), Currency.EUR);
+        Payment payment = createPayment(report, purp1, rec, BigDecimal.valueOf(1500), Currency.CZK);
+        Payment payment2 = createPayment(report2, purp2, rec, BigDecimal.valueOf(2345), Currency.CZK);
+        Payment payment3 = createPayment(report3, purp3, rec2, BigDecimal.valueOf(300), Currency.CZK);
+        Payment payment4 = createPayment(report3, purp3, rec2, BigDecimal.valueOf(100), Currency.CZK);
 
         return "created";
     }
