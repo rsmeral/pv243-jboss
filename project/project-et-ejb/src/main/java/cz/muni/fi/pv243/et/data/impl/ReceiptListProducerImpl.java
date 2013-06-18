@@ -49,7 +49,7 @@ public class ReceiptListProducerImpl implements ReceiptListProducer {
         fullTextQuery.initializeObjectsWith(ObjectLookupMethod.SKIP, DatabaseRetrievalMethod.FIND_BY_ID);
 
         return fullTextQuery.getResultList();
-//
+
 //        return session.createQuery("SELECT receipt FROM Receipt receipt WHERE receipt.importedBy.id = :personId")
 //                .setParameter("personId", importedBy.getId()).list();
     }

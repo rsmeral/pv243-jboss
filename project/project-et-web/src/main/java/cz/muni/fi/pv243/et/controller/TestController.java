@@ -71,7 +71,7 @@ public class TestController {
 
 
         // RECEIPTS
-        Receipt rec = createReceipt(personTom, new Date(System.currentTimeMillis() - 100000), "Platba za vlak a autobus");
+        Receipt rec = createReceipt(personTom, new Date(System.currentTimeMillis() - 100000), "Platba za vlak a autobus NULL");
         Receipt rec2 = createReceipt(personJana, new Date(System.currentTimeMillis() - 20000), "Way there and back");
 
 

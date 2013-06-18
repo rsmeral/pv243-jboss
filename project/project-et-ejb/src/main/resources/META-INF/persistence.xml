@@ -25,11 +25,12 @@
         <!-- property optional if you plan and use Infinispan, otherwise adjust to your favorite
         NoSQL Datastore provider. -->
         <properties>
-            <property name="hibernate.ogm.datastore.provider"
-                      value="infinispan"/>
+
+            <!-- Properties for Hibernate Search - ogm settings -->
+            <property name="hibernate.ogm.datastore.provider" value="infinispan"/>
             <property name="hibernate.ogm.infinispan.configuration_resourcename" value="infinispan-ogm-config.xml"/>
 
-            <!-- Properties for Hibernate Search -->
+            <!-- Properties for Hibernate Search - lucene indexes settings -->
             <property name="hibernate.search.default.directory_provider" value="infinispan"/>
             <property name="hibernate.search.infinispan.configuration_resourcename" value="infinispan.xml"/>
 
@@ -53,12 +54,9 @@
             <!--<property name="hibernate.hbm2ddl.auto" value="create-drop" />-->
             <property name="hibernate.hbm2ddl.auto" value="update" />
             <property name="hibernate.show_sql" value="false" />
-
             <!-- Properties for Hibernate Search -->
             <!--<property name="hibernate.search.default.directory_provider" value="infinispan"/>-->
             <!--<property name="hibernate.search.infinispan.configuration_resourcename" value="infinispan.xml"/>-->
-
-
         </properties>
     </persistence-unit>
 

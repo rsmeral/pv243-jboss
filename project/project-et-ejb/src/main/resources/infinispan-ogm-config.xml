@@ -37,13 +37,12 @@
         <globalJmxStatistics
                 enabled="true"
                 cacheManagerName="HibernateOGM"
-                allowDuplicateDomains="true" />
+                allowDuplicateDomains="true"/>
 
         <!-- Used to register JVM shutdown hooks. hookBehavior: DEFAULT, REGISTER, DONT_REGISTER.
             Hibernate OGM takes care to stop the CacheManager so registering is not needed -->
         <shutdown
-                hookBehavior="DONT_REGISTER" />
-
+                hookBehavior="DONT_REGISTER"/>
     </global>
 
     <!-- *************************** -->
@@ -58,16 +57,29 @@
         </transaction>
 
         <jmxStatistics
-                enabled="true" />
+                enabled="true"/>
 
         <eviction
-                strategy="NONE" />
+                strategy="NONE"/>
 
         <expiration
                 wakeUpInterval="-1"
-                reaperEnabled="false" />
+                reaperEnabled="false"/>
 
+        <loaders shared="false">
+            <loader class="org.infinispan.loaders.file.FileCacheStore"
+                    fetchPersistentState="false" ignoreModifications="false"
+                    purgeOnStartup="false">
+                <properties>
+                    <!--<property name="location" value="${java.io.tmpdir}" />-->
+                    <property name="location" value="/tmp/mrd-cache/"/>
+                </properties>
+            </loader>
+        </loaders>
     </default>
+
+
+
 
     <!-- **************************************************************** -->
     <!-- Individually configured "named" caches.                          -->
@@ -99,5 +111,6 @@
     <namedCache
             name="IDENTIFIERS">
     </namedCache>
+
 
 </infinispan>

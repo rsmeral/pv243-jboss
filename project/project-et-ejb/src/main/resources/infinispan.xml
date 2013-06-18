@@ -78,6 +78,17 @@
         <expiration
                 maxIdle="-1" />
 
+        <loaders shared="false">
+            <loader class="org.infinispan.loaders.file.FileCacheStore"
+                    fetchPersistentState="true" ignoreModifications="false"
+                    purgeOnStartup="false">
+                <properties>
+                    <!--<property name="location" value="${java.io.tmpdir}" />-->
+                    <property name="location" value="/tmp/mrd-cache/"/>
+                </properties>
+            </loader>
+        </loaders>
+
     </default>
 
     <!-- ******************************************************************************* -->
@@ -110,5 +121,4 @@
     <namedCache
             name="LuceneIndexesLocking">
     </namedCache>
-
 </infinispan>
