@@ -45,7 +45,7 @@ public class PersonListProducerImpl implements PersonListProducer {
     @Override
     public Collection<Person> findByName(String firstName, String lastName) {
         List<Person> result = session.createQuery(
-                "SELECT p from Person p where p.firstName like :firstName and p.lastName like :lastName")
+                "SELECT p from Person p where p.firstName = :firstName and p.lastName = :lastName")
                 .setParameter("firstName", firstName).setParameter("lastName", lastName).list();
         return result;
     }

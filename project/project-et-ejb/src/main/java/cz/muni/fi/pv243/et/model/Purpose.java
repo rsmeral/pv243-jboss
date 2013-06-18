@@ -1,5 +1,6 @@
 package cz.muni.fi.pv243.et.model;
 
+import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Indexed;
 
 import java.io.Serializable;
@@ -11,15 +12,15 @@ import javax.validation.constraints.Size;
 @Indexed
 public class Purpose implements Serializable {
 
+    @DocumentId
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Size(max = 25)
+    @Size(max = 25, min = 2)
     @NotNull
     private String name;
 
-    @Size(max = 100)
     private String description;
 
     public Long getId() {

@@ -18,31 +18,29 @@
                     <h:form>
                         <ul class="nav">
                             <li>
-                                <h:link outcome="/secured/index"><i class="icon-white icon-home"></i> Domov</h:link>
+                                <h:link outcome="/secured/index"><i class="icon-white icon-home"></i> Home</h:link>
                             </li>
                             <li>
-                                <h:link outcome="/create">Inicializuj</h:link>
+                                <h:link outcome="/create">Initialize</h:link>
                             </li>
                             <li>
-                                <h:link outcome="/reports">Reporty</h:link>
+                                <h:link outcome="/reports">Reports</h:link>
                             </li>
                             <li>
-                                <h:link outcome="/purposes">Účely</h:link>
+                                <h:link outcome="/purposes">Purposes</h:link>
                             </li>
                             <li>
-                                <h:link outcome="/receipts">Potvrdenky</h:link>
+                                <h:link outcome="/secured/receipts">Receipts</h:link>
                             </li>
                             <li>
-                                <h:link outcome="/persons">Užívatelia</h:link>
+                                <h:link outcome="/persons">Users</h:link>
                             </li>
-                            <!--<li>-->
-                                <!--<h:link outcome="/profile" value="Profil"></h:link>-->
-                            <!--</li>-->
-                            <!--<li>-->
-                                <!--<h:link outcome="/admin" value="Profil"></h:link>-->
-                            <!--</li>-->
+                        </ul>
+                        <ul class="nav pull-right">
                             <li>
-                                <h:commandLink action="#{logoutBean.logout()}" value="Logout"/>
+                                <h:commandLink action="#{logoutBean.logout()}" styleClass="pull-right">
+                                    <i class="icon-white icon-off"></i> Logout
+                                </h:commandLink>
                             </li>
                     </ul>
                     </h:form>

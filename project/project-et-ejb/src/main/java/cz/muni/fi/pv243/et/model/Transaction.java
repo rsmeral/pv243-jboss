@@ -31,6 +31,7 @@ public class Transaction {
 
     @IndexedEmbedded
     @ManyToOne(optional = false)
+    @JoinColumn(name = "reportId")
     private ExpenseReport report;
 
 

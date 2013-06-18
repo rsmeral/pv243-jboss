@@ -2,8 +2,8 @@ package cz.muni.fi.pv243.et.model;
 
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
-import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Indexed;
+import org.hibernate.search.annotations.IndexedEmbedded;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -15,7 +15,6 @@ import javax.validation.constraints.NotNull;
 @Indexed
 public class ExpenseReport implements Serializable {
 
-    @DocumentId
     @Id
     @GeneratedValue
     private Long id;
@@ -27,16 +26,18 @@ public class ExpenseReport implements Serializable {
 
     @NotNull
     @ManyToOne
+    @IndexedEmbedded
     private Person submitter;
 
     @ManyToOne(cascade= CascadeType.MERGE)
+    @IndexedEmbedded
     private Person verifier;
 
+    @OneToMany(mappedBy = "report", cascade = CascadeType.MERGE)
     @LazyCollection(LazyCollectionOption.FALSE)
-    @OneToMany(mappedBy = "report", cascade= CascadeType.MERGE)
     private List<Payment> payments;
 
-    @OneToMany(mappedBy = "report", cascade= CascadeType.MERGE)
+    @OneToMany(mappedBy = "report", cascade = CascadeType.MERGE)
     @LazyCollection(LazyCollectionOption.FALSE)
     private List<MoneyTransfer> moneyTransfers;
 

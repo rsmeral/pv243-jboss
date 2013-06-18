@@ -9,27 +9,29 @@
       xml:lang="en" lang="en">
 
 <h:head>
-    <title>Create new payment for report #{singleReport.name}</title>
+    <title>Payment</title>
 </h:head>
 <h:body>
 
-    <ui:composition template="resources/templates/common/commonTemplate.xhtml">
+    <ui:composition template="/resources/templates/common/commonTemplate.xhtml">
         <ui:define name="content">
-            <h3>Create payment</h3>
+            <ui:insert name="title"/>
             <h:form styleClass="form-horizontal">
+                <h:messages/>
+                <h:inputHidden value="#{payment.report}" converter="#{expenseReportConverter}"/>
                 <div class="control-group">
                     <h:outputLabel value="Date:" for="date" styleClass="control-label"/>
 
                     <div class="controls">
-                        <h:inputText id="date" value="#{Payment.date}" size="20"/>
+                        <h:inputText id="date" value="#{payment.date}" size="20"/>
                     </div>
                 </div>
                 <div class="control-group">
                     <h:outputLabel value="Purpose:" for="purposes" styleClass="control-label"/>
 
                     <div class="controls">
-                        <h:selectOneMenu id="purposes" value="#{Payment.purpose}">
-                            <f:selectItems value="#{purposes}" var="r" itemLabel="#{r.name}" itemValue="#{r.id}"/>
+                        <h:selectOneMenu id="purposes" value="#{payment.purpose}" converter="#{purposeConverter}">
+                            <f:selectItems value="#{purposes}" var="p" itemLabel="#{p.name}" itemValue="#{p}"/>
                         </h:selectOneMenu>
                     </div>
                 </div>
@@ -37,11 +39,11 @@
                     <h:outputLabel value="Receipt:" for="receipt" styleClass="control-label"/>
 
                     <div class="controls">
-                        <h:selectOneMenu id="receipt" value="#{Payment.receipt}">
-                            <f:selectItems value="#{receipts}" var="r" itemLabel="#{r.documentName}"
-                                           itemValue="#{r.id}"/>
+                        <h:selectOneMenu id="receipt" value="#{payment.receipt}" converter="#{receiptConverter}">
+                            <f:selectItems value="#{currentUserReceipts}" var="r" itemLabel="#{r.documentName}"
+                                           itemValue="#{r}"/>
                         </h:selectOneMenu>
-                        <h:commandButton action="#{expenseController.addReceipt()}" value="Create new"
+                        <h:commandButton action="#{receiptController.createReceipt()}" immediate="true" value="Create new"
                                          styleClass="btn btn-mini" style="margin-left: 20px;"/>
                     </div>
                 </div>
@@ -49,14 +51,14 @@
                     <h:outputLabel value="Value:" for="value" styleClass="control-label"/>
 
                     <div class="controls">
-                        <h:inputText id="value" value="#{Payment.value}" label="Value"/>
+                        <h:inputText id="value" value="#{payment.value}" label="Value"/>
                     </div>
                 </div>
                 <div class="control-group">
                     <h:outputLabel value="Currency:" for="currency" styleClass="control-label"/>
 
                     <div class="controls">
-                        <h:selectOneMenu id="currency" value="#{Payment.currency}">
+                        <h:selectOneMenu id="currency" value="#{payment.currency}">
                             <f:selectItems value="#{currencies}"/>
                         </h:selectOneMenu>
                     </div>
@@ -64,7 +66,7 @@
 
                 <div class="control-group">
                     <div class="controls">
-                        <h:commandButton action="#{expenseController.createPayment(Payment)}" value="Create"
+                        <h:commandButton action="#{paymentController.savePayment()}" value="Save"
                                          styleClass="btn btn-primary"/>
                     </div>
                 </div>

@@ -3,6 +3,7 @@ package cz.muni.fi.pv243.et.controller;
 import cz.muni.fi.pv243.et.data.PurposeListProducer;
 import cz.muni.fi.pv243.et.data.PurposeRepository;
 import cz.muni.fi.pv243.et.model.Purpose;
+import cz.muni.fi.pv243.et.service.PurposeService;
 
 import javax.enterprise.inject.Model;
 import javax.enterprise.inject.Produces;
@@ -14,10 +15,7 @@ import java.util.Collection;
 public class PurposeController {
 
     @Inject
-    private PurposeListProducer purposeListProducer;
-
-    @Inject
-    private PurposeRepository purposeRepository;
+    private PurposeService purposeService;
 
     @Inject
     private PurposeModel purposeModel;
@@ -25,21 +23,17 @@ public class PurposeController {
     @Produces
     @Named("purposes")
     public Collection<Purpose> getAllPurposes() {
-        return purposeListProducer.getAll();
+        return purposeService.findAll();
     }
 
     public String savePurpose() {
-        if (purposeModel.getPurpose().getId() == null) {
-            purposeRepository.create(purposeModel.getPurpose());
-        } else {
-            purposeRepository.update(purposeModel.getPurpose());
-        }
+        purposeService.save(purposeModel.getPurpose());
 
         return "purposes?faces-redirect=true";
     }
 
     public String editPurpose(Long id) {
-        Purpose p = purposeListProducer.get(id);
+        Purpose p = purposeService.get(id);
         purposeModel.setPurpose(p);
 
         return "editPurpose";
@@ -54,8 +48,8 @@ public class PurposeController {
     public String removePurpose(Long id) {
         purposeModel.setPurpose(null);
 
-        Purpose toRemove = purposeListProducer.get(id);
-        purposeRepository.remove(toRemove);
+        Purpose toRemove = purposeService.get(id);
+        purposeService.remove(toRemove);
 
         return "purposes?faces-redirect=true";
     }

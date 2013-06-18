@@ -16,46 +16,46 @@
 <body>
 <ui:composition template="resources/templates/common/commonTemplate.xhtml">
     <ui:define name="content">
-        <h2>#{singleReport.name}</h2>
+        <h2>#{expenseReport.name}</h2>
 
         <h:form>
-            <h:dataTable value="#{singleReport}" styleClass="table table-bordered table-striped table-hover">
+            <h:dataTable value="#{expenseReport}" styleClass="table table-bordered table-striped table-hover">
 
                 <h:column>
                     <f:facet name="header">Status</f:facet>
-                    #{singleReport.status}
+                    #{expenseReport.status}
                 </h:column>
 
                 <h:column>
                     <f:facet name="header">Verifier</f:facet>
-                    #{singleReport.verifier.firstName} #{singleReport.verifier.lastName}
+                    #{expenseReport.verifier.firstName} #{expenseReport.verifier.lastName}
                 </h:column>
 
 
                 <h:column>
                     <f:facet name="header">Submitter</f:facet>
-                    #{singleReport.submitter.firstName} #{singleReport.submitter.lastName}
+                    #{expenseReport.submitter.firstName} #{expenseReport.submitter.lastName}
                 </h:column>
 
                 <h:column>
                     <f:facet name="header">Description</f:facet>
-                    #{singleReport.description}
+                    #{expenseReport.description}
                 </h:column>
 
                 <h:column>
                     <f:facet name="header">Submitted</f:facet>
-                    #{singleReport.lastSubmittedDate}
+                    #{expenseReport.lastSubmittedDate}
                 </h:column>
 
                 <h:column>
                     <f:facet name="header">Last Change</f:facet>
-                    #{singleReport.lastChangeDate}
+                    #{expenseReport.lastChangeDate}
                 </h:column>
             </h:dataTable>
 
             <hr/>
             <h3>Money Transfers</h3>
-            <h:dataTable value="#{moneyTransfers}" var="mt" styleClass="table table-bordered table-striped table-hover">
+            <h:dataTable value="#{expenseReport.moneyTransfers}" var="mt" styleClass="table table-bordered table-striped table-hover">
                 <h:column>
                     <f:facet name="header">Date</f:facet>
                     #{mt.date}
@@ -84,42 +84,47 @@
 
             <hr/>
             <h3>Payments</h3>
-            <h:dataTable value="#{payments}" var="payment" styleClass="table table-bordered table-striped table-hover">
+            <h:dataTable value="#{expenseReport.payments}" var="pmt" styleClass="table table-bordered table-striped table-hover">
 
                 <h:column>
                     <f:facet name="header">Date</f:facet>
-                    #{payment.date}
+                    #{pmt.date}
                 </h:column>
 
                 <h:column>
                     <f:facet name="header">Purpose</f:facet>
-                    #{payment.purpose.name}
+                    #{pmt.purpose.name}
                 </h:column>
 
                 <h:column>
                     <f:facet name="header">Receipt</f:facet>
-                    #{payment.receipt.documentName}
+                    <h:commandLink action="#{receiptController.showFile(pmt.receipt.id)}">
+                        #{pmt.receipt.documentName}
+                    </h:commandLink>
                 </h:column>
 
                 <h:column>
                     <f:facet name="header">Value</f:facet>
-                    #{payment.value}
+                    #{pmt.value}
                 </h:column>
 
                 <h:column>
                     <f:facet name="header">Currency</f:facet>
-                    #{payment.currency}
+                    #{pmt.currency}
                 </h:column>
 
                 <h:column>
                     <f:facet name="header">Report - testing only</f:facet>
-                    #{payment.report.name}
+                    #{pmt.report.name}
                 </h:column>
 
                 <h:column>
-                    <f:facet name="header">Edit</f:facet>
-                    <h:commandLink action="#{expenseController.editPayment(payment.id)}" styleClass="btn btn-mini">
+                    <f:facet name="header">Action</f:facet>
+                    <h:commandLink action="#{paymentController.editPayment(pmt.id)}" styleClass="btn btn-mini">
                         <i class="icon-pencil"></i>
+                    </h:commandLink>
+                    <h:commandLink action="#{paymentController.removePayment(pmt)}" styleClass="btn btn-mini">
+                        <i class="icon-trash"></i>
                     </h:commandLink>
 
                 </h:column>
@@ -127,13 +132,13 @@
             </h:dataTable>
             <span class="well" style="float: right;">
                 Total:
-                <h:outputText value="${totalReportValue}">
+                <h:outputText value="#{reportComputing.getTotalValue(expenseReport)}">
                     <f:convertNumber/>
                 </h:outputText>
             </span>
             <div class="row">
                 <div class="span2 btn-group">
-                    <h:commandLink action="#{expenseController.addPayment()}" styleClass="btn" value="Add Payment"/>
+                    <h:commandLink action="#{paymentController.createPayment(expenseReport)}" styleClass="btn" value="Add Payment"/>
                     <h:link outcome="reports" styleClass="btn"><i class="icon-backward"></i> Reports</h:link>
                 </div>
             </div>

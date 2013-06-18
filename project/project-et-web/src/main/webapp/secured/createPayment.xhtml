@@ -4,17 +4,18 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
       xml:lang="en" lang="en">
 
 <h:head>
-    <title>Edit purpose</title>
+    <title>Create new payment</title>
 </h:head>
 <h:body>
 
-    <ui:composition template="resources/templates/receiptTemplate.xhtml">
+    <ui:composition template="../resources/templates/paymentTemplate.xhtml">
         <ui:define name="title">
-            <h3>Edit receipt</h3>
+            <h2>Create payment details for report #{payment.report.name}</h2>
         </ui:define>
     </ui:composition>
 

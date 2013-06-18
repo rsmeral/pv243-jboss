@@ -1,18 +1,18 @@
 package cz.muni.fi.pv243.et.model;
 
 
+import org.hibernate.search.annotations.DocumentId;
 import org.hibernate.search.annotations.Indexed;
 
-import javax.inject.Named;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 @Entity
 @Indexed
-@Named("Payment")
 public class Payment extends Transaction implements Serializable {
 
+    @DocumentId
     @Id
     @GeneratedValue
     private Long id;

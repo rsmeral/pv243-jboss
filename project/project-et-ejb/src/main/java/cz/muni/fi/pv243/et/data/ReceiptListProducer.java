@@ -8,7 +8,6 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
-@Local
 public interface ReceiptListProducer {
 
     public Receipt getReceipt(Long id);

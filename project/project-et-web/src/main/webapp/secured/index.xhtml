@@ -12,7 +12,7 @@
             <h:form>
                 <h3>Welcome <strong>#{identity.user.firstName} #{identity.user.lastName}!</strong></h3>
                 <p>
-                    Your attributes are: <strong>${identity.user.attributes}</strong><br/>
+                    Your attributes are: <strong>#{identity.user.attributes}</strong><br/>
                     Your personRoles are: <strong>#{identity.userContext.roleNames}</strong><br/>
                     Your groups are: <strong>#{identity.userContext.groupNames}</strong><br/>
                     Click here to <h:commandLink value="Logout" action="#{logoutBean.logout()}"/>

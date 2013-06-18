@@ -7,6 +7,7 @@ import org.hibernate.search.annotations.IndexedEmbedded;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Indexed
@@ -20,6 +21,7 @@ public class MoneyTransfer extends Transaction implements Serializable {
 
     @IndexedEmbedded
     @ManyToOne(optional = false)
+    @NotNull
     private Person creator;
 
     public Long getId() {

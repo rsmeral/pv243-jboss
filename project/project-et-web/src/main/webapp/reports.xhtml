@@ -14,60 +14,59 @@
     <ui:define name="content">
         <h:form>
             <h2>My Expense reports</h2>
-            <h:dataTable value="#{expenseReports}" var="reports" styleClass="table table-bordered table-striped table-hover">
-                <h:column>
-                    <f:facet name="header">Selected</f:facet>
-                    <h:selectBooleanCheckbox/>
-                </h:column>
+            <h:dataTable value="#{expenseReports}" var="report" styleClass="table table-bordered table-striped table-hover">
 
                 <h:column>
                     <f:facet name="header">Name</f:facet>
-                    <h:commandLink action="#{expenseController.showSingleReport(reports.id)}" value="#{reports.name}"/>
+                    <h:commandLink action="#{expenseController.showSingleReport(report.id)}" value="#{report.name}"/>
                 </h:column>
 
                 <h:column>
                     <f:facet name="header">Short description</f:facet>
-                    #{reports.description}
+                    #{report.description}
                 </h:column>
 
                 <h:column>
                     <f:facet name="header">Last submitted</f:facet>
-                    <h:outputText value="#{reports.lastSubmittedDate}">
-                        <f:convertDateTime/>
+                    <h:outputText value="#{report.lastSubmittedDate}">
+                        <f:convertDateTime dateStyle="medium" timeStyle="medium"/>
                     </h:outputText>
                 </h:column>
 
                 <h:column>
                     <f:facet name="header">Status</f:facet>
-                    #{reports.status}
+                    #{report.status}
                 </h:column>
 
                 <!-- IF ROLE IS VERIFIER SHOW THIS -->
                 <h:column>
                     <f:facet name="header">Submitter</f:facet>
-                    #{reports.submitter.firstName} #{reports.submitter.lastName}
+                    #{report.submitter.firstName} #{report.submitter.lastName}
                 </h:column>
 
                 <h:column>
                     <f:facet name="header">Last changed</f:facet>
-                    <h:outputText value="#{reports.lastChangeDate}">
-                        <f:convertDateTime/>
+                    <h:outputText value="#{report.lastChangeDate}">
+                        <f:convertDateTime dateStyle="medium" timeStyle="medium"/>
                     </h:outputText>
                 </h:column>
 
                 <h:column>
                     <f:facet name="header">Verifier</f:facet>
-                    #{reports.verifier.firstName} #{reports.verifier.lastName}
+                    #{report.verifier.firstName} #{report.verifier.lastName}
                 </h:column>
 
                 <h:column>
                     <f:facet name="header">Approved</f:facet>
-                    #{reports.approvedDate}
+                    <h:outputText value="#{report.approvedDate}">
+                        <f:convertDateTime dateStyle="medium" timeStyle="medium"/>
+                    </h:outputText>
                 </h:column>
 
+                <!--TODO hide eventually -->
                 <h:column>
                     <f:facet name="header">ID</f:facet>
-                    #{reports.id}
+                    #{report.id}
                 </h:column>
             </h:dataTable>
 

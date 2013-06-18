@@ -14,7 +14,6 @@ import org.hibernate.search.query.dsl.TermTermination;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import java.io.Serializable;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
