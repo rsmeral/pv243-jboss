@@ -24,9 +24,9 @@ public class PaymentController {
     @Inject
     private PaymentModel model;
 
-    public String createPayment(ExpenseReport report) {
+    public String createPayment() {
         Payment p = new Payment();
-        p.setReport(report);
+        p.setReport(expenseModel.getReport());
         model.setPayment(p);
 
         return "/secured/createPayment";

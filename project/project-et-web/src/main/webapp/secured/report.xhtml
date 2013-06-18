@@ -86,7 +86,23 @@
                     <f:facet name="header">Report - testing only</f:facet>
                     #{mt.report.name}
                 </h:column>
+
+                <h:column>
+                    <f:facet name="header">Action</f:facet>
+                    <h:commandLink action="#{moneyTransferController.editMoneyTransfer(mt.id)}" styleClass="btn btn-mini">
+                        <i class="icon-pencil"></i>
+                    </h:commandLink>
+                    <h:commandLink action="#{moneyTransferController.removeMoneyTransfer(mt)}" styleClass="btn btn-mini">
+                        <i class="icon-trash"></i>
+                    </h:commandLink>
+
+                </h:column>
             </h:dataTable>
+            <div class="row">
+                <div class="span2 btn-group">
+                    <h:commandLink action="#{moneyTransferController.createMoneyTransfer()}" styleClass="btn" value="Add money transfer"/>
+                </div>
+            </div>
 
             <hr/>
             <h3>Payments</h3>
@@ -144,11 +160,10 @@
             </span>
             <div class="row">
                 <div class="span2 btn-group">
-                    <h:commandLink action="#{paymentController.createPayment(expenseReport)}" styleClass="btn" value="Add Payment"/>
+                    <h:commandLink action="#{paymentController.createPayment()}" styleClass="btn" value="Add Payment"/>
                     <h:link outcome="reports" styleClass="btn"><i class="icon-backward"></i> Reports</h:link>
                 </div>
             </div>
-            <br/>
 
         </h:form>
     </ui:define>
