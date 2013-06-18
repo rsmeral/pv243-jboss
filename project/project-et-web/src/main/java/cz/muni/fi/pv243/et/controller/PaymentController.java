@@ -45,7 +45,7 @@ public class PaymentController {
         // refresh current report
         refreshReport(p);
 
-        return "/report?faces-redirect=true";
+        return "/secured/report?faces-redirect=true";
     }
 
     public String removePayment(Payment p) {
@@ -55,7 +55,7 @@ public class PaymentController {
         // refresh current report
         refreshReport(p);
 
-        return "/report?faces-redirect=true";
+        return "/secured/report?faces-redirect=true";
     }
 
     private void refreshReport(Payment p) {

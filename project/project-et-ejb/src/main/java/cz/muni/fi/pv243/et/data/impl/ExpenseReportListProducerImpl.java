@@ -45,6 +45,21 @@ public class ExpenseReportListProducerImpl implements ExpenseReportListProducer,
 //                .setParameter("submitterId", submitter.getId()).list();
     }
 
+    @Override
+    public Collection<ExpenseReport> getAllForVerifier(Person verifier) {
+        FullTextEntityManager ftem = Search.getFullTextEntityManager(em);
+        QueryBuilder queryBuilder = ftem.getSearchFactory().buildQueryBuilder().forEntity(ExpenseReport.class).get();
+        Query query = queryBuilder.keyword().onField("verifier.id").matching(verifier.getId()).createQuery();
+
+        FullTextQuery fullTextQuery = ftem.createFullTextQuery(query, ExpenseReport.class);
+        return fullTextQuery.getResultList();
+    }
+
+    @Override
+    public Collection<ExpenseReport> getAllWithNoVerifierAssigned() {
+        return session.createQuery("SELECT report FROM ExpenseReport report WHERE report.verifier IS NULL").list();
+    }
+
 
     @Override
     public Collection<ExpenseReport> getAllBy(ReportStatus status) {

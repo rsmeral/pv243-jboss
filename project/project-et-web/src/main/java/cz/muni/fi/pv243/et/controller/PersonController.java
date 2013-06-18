@@ -40,13 +40,13 @@ public class PersonController {
     public String editPerson(String username) {
         personModel.setUserModel(userManager.get(username));
 
-        return "editPerson";
+        return "/secured/editPerson";
     }
 
     public String createPerson() {
         personModel.setUserModel(new UserModel());
 
-        return "createPerson";
+        return "/secured/createPerson";
     }
 
     public String removePerson(String username) {
@@ -54,7 +54,7 @@ public class PersonController {
 
         userManager.remove(username);
 
-        return "persons?faces-redirect=true";
+        return "/secured/persons?faces-redirect=true";
     }
 
     public String savePerson() {
@@ -81,7 +81,7 @@ public class PersonController {
             userManager.update(this.personModel.getUserModel());
         }
 
-        return "persons?faces-redirect=true";
+        return "/secured/persons?faces-redirect=true";
     }
 
     private boolean isOtherPersonsEmail(UserModel model, Collection<UserModel> mailed) {

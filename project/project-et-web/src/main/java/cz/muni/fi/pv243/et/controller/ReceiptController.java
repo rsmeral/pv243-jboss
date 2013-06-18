@@ -4,8 +4,10 @@ import cz.muni.fi.pv243.et.data.PersonListProducer;
 import cz.muni.fi.pv243.et.data.ReceiptListProducer;
 import cz.muni.fi.pv243.et.data.ReceiptRepository;
 import cz.muni.fi.pv243.et.model.Person;
+import cz.muni.fi.pv243.et.model.PersonWrapper;
 import cz.muni.fi.pv243.et.model.Receipt;
 import cz.muni.fi.pv243.et.service.ReceiptService;
+import cz.muni.fi.pv243.et.util.CurrentPerson;
 import org.apache.commons.io.FilenameUtils;
 import org.apache.myfaces.custom.fileupload.UploadedFile;
 import org.picketlink.Identity;
@@ -40,6 +42,10 @@ public class ReceiptController {
     @Inject
     private FacesContext facesContext;
 
+    @Inject
+    @CurrentPerson
+    private PersonWrapper currentPerson;
+
     @Produces
     @Named("allReceipts")
     public Collection<Receipt> getAllReceipts() {
@@ -64,7 +70,7 @@ public class ReceiptController {
 
         if (r.getId() == null) {
             r.setImportDate(new Date());
-            r.setImportedBy(getCurrentPerson());
+            r.setImportedBy(currentPerson.getPerson());
         }
         receiptService.save(r);
 
@@ -117,7 +123,4 @@ public class ReceiptController {
         this.uploadedFile = uploadedFile;
     }
 
-    private Person getCurrentPerson() {
-        return identity.getUser().<Person>getAttribute("person").getValue();
-    }
 }

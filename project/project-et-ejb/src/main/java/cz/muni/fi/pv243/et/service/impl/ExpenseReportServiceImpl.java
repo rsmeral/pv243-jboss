@@ -66,6 +66,20 @@ public class ExpenseReportServiceImpl implements ExpenseReportService {
     }
 
     @Override
+    public Collection<ExpenseReport> findForVerifier(Person verifier) {
+        if (verifier == null) {
+            throw new IllegalArgumentException();
+        }
+
+        return listProducer.getAllForVerifier(verifier);
+    }
+
+    @Override
+    public Collection<ExpenseReport> findWithNoVerifierAssigned() {
+        return listProducer.getAllWithNoVerifierAssigned();
+    }
+
+    @Override
     public Collection<ExpenseReport> findByStatus(ReportStatus status) {
         if (status == null) {
             throw new IllegalArgumentException();

@@ -12,5 +12,7 @@ public interface ExpenseReportService {
     ExpenseReport get(Long id);
     Collection<ExpenseReport> findAll();
     Collection<ExpenseReport> findForSubmitter(Person submitter);
+    Collection<ExpenseReport> findForVerifier(Person verifier);
+    Collection<ExpenseReport> findWithNoVerifierAssigned();
     Collection<ExpenseReport> findByStatus(ReportStatus status);
 }

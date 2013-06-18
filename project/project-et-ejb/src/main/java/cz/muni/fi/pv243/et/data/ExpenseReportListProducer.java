@@ -12,6 +12,10 @@ public interface ExpenseReportListProducer {
 
     public Collection<ExpenseReport> getAllForSubmitter(Person submitter);
 
+    public Collection<ExpenseReport> getAllForVerifier(Person verifier);
+
+    public Collection<ExpenseReport> getAllWithNoVerifierAssigned();
+
     public Collection<ExpenseReport> getAllBy(ReportStatus status);
 
     public Collection<ExpenseReport> getAll();

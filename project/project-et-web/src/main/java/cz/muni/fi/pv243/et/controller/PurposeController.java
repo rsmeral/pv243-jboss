@@ -29,20 +29,20 @@ public class PurposeController {
     public String savePurpose() {
         purposeService.save(purposeModel.getPurpose());
 
-        return "purposes?faces-redirect=true";
+        return "/secured/purposes?faces-redirect=true";
     }
 
     public String editPurpose(Long id) {
         Purpose p = purposeService.get(id);
         purposeModel.setPurpose(p);
 
-        return "editPurpose";
+        return "/secured/editPurpose";
     }
 
     public String createPurpose() {
         purposeModel.setPurpose(new Purpose());
 
-        return "createPurpose";
+        return "/secured/createPurpose";
     }
 
     public String removePurpose(Long id) {
@@ -51,6 +51,6 @@ public class PurposeController {
         Purpose toRemove = purposeService.get(id);
         purposeService.remove(toRemove);
 
-        return "purposes?faces-redirect=true";
+        return "/secured/purposes?faces-redirect=true";
     }
 }

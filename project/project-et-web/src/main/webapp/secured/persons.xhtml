@@ -10,27 +10,32 @@
 </head>
 <body>
 
-<ui:composition template="resources/templates/common/commonTemplate.xhtml">
+<ui:composition template="../resources/templates/common/commonTemplate.xhtml">
     <ui:define name="content">
         <h:form>
-            <h2>Purposes</h2>
-            <h:dataTable value="#{purposes}" var="r" styleClass="table table-bordered table-striped table-hover">
+            <h2>People</h2>
+            <h:dataTable value="#{allPersons}" var="p" styleClass="table table-bordered table-striped table-hover">
                 <h:column>
-                    <f:facet name="header">Name</f:facet>
-                    ${r.name}
+                    <f:facet name="header">Username</f:facet>
+                    #{p.userName}
                 </h:column>
 
                 <h:column>
-                    <f:facet name="header">Short description</f:facet>
-                    #{r.description}
+                    <f:facet name="header">Name</f:facet>
+                    #{p.firstName} #{p.lastName}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Email</f:facet>
+                    #{p.email}
                 </h:column>
 
                 <h:column>
                     <f:facet name="header">Action</f:facet>
-                    <h:commandLink action="#{purposeController.editPurpose(r.id)}" styleClass="btn btn-mini">
+                    <h:commandLink action="#{personController.editPerson(p.userName)}" styleClass="btn btn-mini">
                         <i class="icon-pencil"></i>
                     </h:commandLink>
-                    <h:commandLink action="#{purposeController.removePurpose(r.id)}" styleClass="btn btn-mini">
+                    <h:commandLink action="#{personController.removePerson(p.userName)}" styleClass="btn btn-mini">
                         <i class="icon-trash"></i>
                     </h:commandLink>
 
@@ -39,7 +44,7 @@
 
             <div class="row">
                 <div class="span2">
-                    <h:commandLink action="#{purposeController.createPurpose()}" styleClass="btn" value="Add purpose"/>
+                    <h:commandLink action="#{personController.createPerson()}" styleClass="btn" value="Add person"/>
                 </div>
             </div>
         </h:form>

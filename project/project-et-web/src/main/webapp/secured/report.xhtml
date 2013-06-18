@@ -14,11 +14,17 @@
 
 
 <body>
-<ui:composition template="resources/templates/common/commonTemplate.xhtml">
+<ui:composition template="../resources/templates/common/commonTemplate.xhtml">
     <ui:define name="content">
-        <h2>#{expenseReport.name}</h2>
-
         <h:form>
+            <div class="row">
+                <div class="span10"><h2>#{expenseReport.name}</h2></div>
+                <div class="span2" style="margin-top: 20px;"><div class="pull-right">
+                    <h:commandLink action="#{expenseController.editReport(expenseReport.id)}" styleClass="btn btn-mini" title="Edit report">
+                        <i class="icon-pencil"></i>
+                    </h:commandLink>
+                </div></div>
+            </div>
             <h:dataTable value="#{expenseReport}" styleClass="table table-bordered table-striped table-hover">
 
                 <h:column>

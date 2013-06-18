@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<ui:composition template="resources/templates/common/commonTemplate.xhtml">
+<ui:composition template="../resources/templates/common/commonTemplate.xhtml">
     <ui:define name="content">
         <h:form>
             <h2>My Expense reports</h2>
@@ -69,6 +69,12 @@
                     #{report.id}
                 </h:column>
             </h:dataTable>
+
+            <div class="row">
+                <div class="span2 btn-group">
+                    <h:commandLink action="#{expenseController.createReport()}" styleClass="btn" value="Create report"/>
+                </div>
+            </div>
 
         </h:form>
     </ui:define>
