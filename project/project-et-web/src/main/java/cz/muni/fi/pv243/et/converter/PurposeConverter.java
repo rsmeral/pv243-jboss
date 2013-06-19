@@ -22,6 +22,9 @@ public class PurposeConverter implements Converter {
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
+        if (value == null) {
+            return "";
+        }
         Purpose p = (Purpose) value;
         return p.getId().toString();
     }

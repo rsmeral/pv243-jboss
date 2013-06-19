@@ -39,7 +39,7 @@
                 <div class="control-group">
                     <div class="controls">
                         <h:commandButton action="#{receiptController.saveReceipt()}" value="Save" styleClass="btn btn-primary"/>
-                        <h:commandButton action="/secured/receipts" immediate="true" value="Cancel" styleClass="btn btn"/>
+                        <h:commandButton action="#{receiptController.cancel}" immediate="true" value="Cancel" styleClass="btn btn"/>
                     </div>
                 </div>
             </h:form>

@@ -12,6 +12,16 @@ public class PurposeModel implements Serializable {
 
     private Purpose purpose;
 
+    private String backUrl;
+
+    public String getBackUrl() {
+        return backUrl;
+    }
+
+    public void setBackUrl(String backUrl) {
+        this.backUrl = backUrl;
+    }
+
     public void setPurpose(Purpose purpose) {
         this.purpose = purpose;
     }

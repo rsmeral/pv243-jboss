@@ -14,7 +14,17 @@ public class ReceiptModel implements Serializable {
 
     private Long receiptId;
 
-//    @Produces
+    private String backUrl;
+
+
+    public String getBackUrl() {
+        return backUrl;
+    }
+
+    public void setBackUrl(String backUrl) {
+        this.backUrl = backUrl;
+    }
+    //    @Produces
 //    @Named("receipt")
 //    public Receipt getReceipt() {
 //        return receipt;

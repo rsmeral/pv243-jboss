@@ -83,7 +83,9 @@ public class ReceiptController {
 
 //        String url = FacesContext.getCurrentInstance().getViewRoot().getViewId();
 //        return "/secured/receipts?faces-redirect=true&backurl=" + url;
-        return "/secured/receipts?faces-redirect=true";
+//        return "/secured/receipts?faces-redirect=true";
+//        System.out.println("saveReceipt() =" + receiptModel.getBackUrl());
+        return receiptModel.getBackUrl();
     }
 
     public String editReceipt(Long id) {
@@ -92,8 +94,9 @@ public class ReceiptController {
         return "/secured/editReceipt";
     }
 
-    public String createReceipt() {
+    public String createReceipt(String fromUrl) {
         receiptModel.setReceiptId(null);
+        receiptModel.setBackUrl(fromUrl);
 
         return "/secured/createReceipt";
     }
@@ -104,6 +107,11 @@ public class ReceiptController {
         receiptService.remove(receiptService.get(id));
 
         return "/secured/receipts?faces-redirect=true";
+    }
+
+    public String cancel() {
+        System.out.println("cancel=" + receiptModel.getBackUrl());
+        return receiptModel.getBackUrl();
     }
 
     public void showFile(Long receiptId) throws IOException {

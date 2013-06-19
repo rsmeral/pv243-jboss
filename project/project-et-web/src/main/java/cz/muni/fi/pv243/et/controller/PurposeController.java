@@ -29,7 +29,9 @@ public class PurposeController {
     public String savePurpose() {
         purposeService.save(purposeModel.getPurpose());
 
-        return "/secured/purposes?faces-redirect=true";
+//        return "/secured/purposes?faces-redirect=true";
+        System.out.println("savePurpose() = " + purposeModel.getBackUrl());
+        return purposeModel.getBackUrl();
     }
 
     public String editPurpose(Long id) {
@@ -39,10 +41,14 @@ public class PurposeController {
         return "/secured/editPurpose";
     }
 
-    public String createPurpose() {
+    public String createPurpose(String fromUrl) {
+        purposeModel.setBackUrl(fromUrl);
         purposeModel.setPurpose(new Purpose());
 
+        System.out.println("createPurpose() = " + fromUrl);
+
         return "/secured/createPurpose";
+//        return purposeModel.getBackUrl();
     }
 
     public String removePurpose(Long id) {
@@ -52,5 +58,9 @@ public class PurposeController {
         purposeService.remove(toRemove);
 
         return "/secured/purposes?faces-redirect=true";
+    }
+
+    public String cancel() {
+        return purposeModel.getBackUrl();
     }
 }

@@ -23,6 +23,9 @@ public class ReceiptConverter implements Converter {
 
     @Override
     public String getAsString(FacesContext context, UIComponent component, Object value) {
+        if (value == null) {
+            return "";
+        }
         Receipt r = (Receipt) value;
         return r.getId().toString();
     }
