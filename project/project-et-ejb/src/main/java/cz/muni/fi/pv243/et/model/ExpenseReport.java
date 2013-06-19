@@ -25,6 +25,17 @@ public class ExpenseReport implements Serializable {
 
     private String description;
 
+    public ExpenseReport() {
+    }
+    
+    public ExpenseReport(String name, String description, Person submitter, Person verifier, ReportStatus status) {
+        this.name = name;
+        this.description = description;
+        this.submitter = submitter;
+        this.verifier = verifier;
+        this.status = status;
+    }
+    
     @NotNull
     @ManyToOne
     @IndexedEmbedded

@@ -10,8 +10,8 @@
     <ui:composition template="resources/templates/common/commonTemplate.xhtml">
         <ui:define name="content">
             <h:form>
-                <h1>Vytvor testovacie data</h1>
-                <h:commandButton value="Vytvorit" type="submit" action="#{testController.initialize}"/>
+                <h1>Create initial data</h1>
+                <h:commandButton value="Initialize" type="submit" action="#{appInitializer.initialize()}"/>
             </h:form>
         </ui:define>
     </ui:composition>

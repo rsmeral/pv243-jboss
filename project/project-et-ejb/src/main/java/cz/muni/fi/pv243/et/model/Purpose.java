@@ -23,6 +23,14 @@ public class Purpose implements Serializable {
 
     private String description;
 
+    public Purpose(String name, String description) {
+        this.name = name;
+        this.description = description;
+    }
+
+    public Purpose() {
+    }
+    
     public Long getId() {
         return id;
     }

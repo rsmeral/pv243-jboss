@@ -37,18 +37,18 @@ public class Person implements Serializable {
     @Column(unique = true)
     @Field
     private String email;
-
-//    @ElementCollection(targetClass = PersonRole.class)
-//    @Enumerated(value = EnumType.ORDINAL)
-//    @CollectionTable(name = "PersonRole")
-//    @Column(name = "roleId")
-//    @LazyCollection(LazyCollectionOption.FALSE)
-//    private Set<PersonRole> roles;
-
+    
     @Digits(integer = 9, fraction = 0)
     @Field
     private String bankAccount;
 
+    public Person(String firstName, String lastName, String email, String bankAccount) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.bankAccount = bankAccount;
+    }
+    
     public Person() {
     }
 
@@ -92,15 +92,6 @@ public class Person implements Serializable {
     public void setEmail(String email) {
         this.email = email;
     }
-
-//    public Set<PersonRole> getRoles() {
-//        return roles;
-//    }
-//
-//    public void setRoles(Set<PersonRole> roles) {
-//        this.roles = roles;
-//    }
-
 
     @Override
     public final boolean equals(Object o) {
