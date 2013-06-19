@@ -48,20 +48,20 @@ public class Purpose implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Purpose)) return false;
 
         Purpose purpose = (Purpose) o;
 
-        if (id != null ? !id.equals(purpose.id) : purpose.id != null) return false;
+        if (getId() != null ? !getId().equals(purpose.getId()) : purpose.getId() != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+        return getId() != null ? getId().hashCode() : 0;
     }
 
     @Override

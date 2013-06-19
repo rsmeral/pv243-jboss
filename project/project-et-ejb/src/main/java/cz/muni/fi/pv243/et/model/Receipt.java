@@ -75,29 +75,29 @@ public class Receipt implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof Receipt)) return false;
 
         Receipt receipt = (Receipt) o;
 
-        if (id != null ? !id.equals(receipt.id) : receipt.id != null) return false;
+        if (getId() != null ? !getId().equals(receipt.getId()) : receipt.getId() != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+        return getId() != null ? getId().hashCode() : 0;
     }
 
     @Override
     public String toString() {
         return "Receipt{" +
-                "id=" + id +
-                ", importDate=" + importDate +
-                ", importedBy=" + importedBy +
-                ", documentName='" + documentName + '\'' +
+                "id=" + getId() +
+                ", importDate=" + getImportDate() +
+                ", importedBy=" + getImportedBy() +
+                ", documentName='" + getDocumentName() + '\'' +
                 '}';
     }
 }

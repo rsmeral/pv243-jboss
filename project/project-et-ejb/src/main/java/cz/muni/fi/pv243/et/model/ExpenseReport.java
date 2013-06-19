@@ -144,20 +144,20 @@ public class ExpenseReport implements Serializable {
     }
 
     @Override
-    public boolean equals(Object o) {
+    public final boolean equals(Object o) {
         if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (!(o instanceof ExpenseReport)) return false;
 
         ExpenseReport report = (ExpenseReport) o;
 
-        if (id != null ? !id.equals(report.id) : report.id != null) return false;
+        if (getId() != null ? !getId().equals(report.getId()) : report.getId() != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        return id != null ? id.hashCode() : 0;
+        return getId() != null ? getId().hashCode() : 0;
     }
 
     @Override
