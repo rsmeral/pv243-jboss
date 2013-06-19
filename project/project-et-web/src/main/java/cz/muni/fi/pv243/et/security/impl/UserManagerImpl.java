@@ -40,6 +40,7 @@ public class UserManagerImpl implements UserManager {
         person.setLastName(model.getLastName());
 
         this.personRepository.create(person);
+        model.setId(person.getId());
 
         log.logPersonCreated(person.getId());
 
@@ -50,6 +51,7 @@ public class UserManagerImpl implements UserManager {
         user.setAttribute(new Attribute<String>("personId", person.getId().toString()));
 
         this.identityManager.add(user);
+        model.setIdentityId(user.getId());
     }
 
     @Override

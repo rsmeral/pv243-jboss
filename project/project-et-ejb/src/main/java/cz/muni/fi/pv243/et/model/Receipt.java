@@ -81,22 +81,14 @@ public class Receipt implements Serializable {
 
         Receipt receipt = (Receipt) o;
 
-        if (!Arrays.equals(document, receipt.document)) return false;
-        if (documentName != null ? !documentName.equals(receipt.documentName) : receipt.documentName != null)
-            return false;
-        if (importDate != null ? !importDate.equals(receipt.importDate) : receipt.importDate != null) return false;
-        if (importedBy != null ? !importedBy.equals(receipt.importedBy) : receipt.importedBy != null) return false;
+        if (id != null ? !id.equals(receipt.id) : receipt.id != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = importDate != null ? importDate.hashCode() : 0;
-        result = 31 * result + (importedBy != null ? importedBy.hashCode() : 0);
-        result = 31 * result + (document != null ? Arrays.hashCode(document) : 0);
-        result = 31 * result + (documentName != null ? documentName.hashCode() : 0);
-        return result;
+        return id != null ? id.hashCode() : 0;
     }
 
     @Override
@@ -105,7 +97,6 @@ public class Receipt implements Serializable {
                 "id=" + id +
                 ", importDate=" + importDate +
                 ", importedBy=" + importedBy +
-                ", document=" + Arrays.toString(document) +
                 ", documentName='" + documentName + '\'' +
                 '}';
     }

@@ -3,6 +3,7 @@ package cz.muni.fi.pv243.et.controller;
 import cz.muni.fi.pv243.et.data.*;
 import cz.muni.fi.pv243.et.model.*;
 import cz.muni.fi.pv243.et.model.Currency;
+import cz.muni.fi.pv243.et.security.UserManager;
 import org.apache.deltaspike.core.api.exception.control.event.ExceptionToCatchEvent;
 
 import java.math.BigDecimal;
@@ -56,6 +57,9 @@ public class TestController {
 
     @Inject
     private MoneyTransferListProducer moneyList;
+
+    @Inject
+    private UserManager userManager;
 
     public String initialize() {
         Person personTom = createPerson("Tomas", "Applicantovic", "test@test.cz", "123456789");
@@ -121,12 +125,23 @@ public class TestController {
     }
 
     private Person createPerson(String firstName, String lastName, String email, String bankAccount) {
+        UserModel model = new UserModel();
+        model.setFirstName(firstName);
+        model.setLastName(lastName);
+        model.setEmail(email);
+        model.setBankAccount(bankAccount);
+        model.setUserName(firstName.toLowerCase());
+        userManager.add(model);
+
+        // firstname.tolowercase == username == password
+        userManager.changePassword(model.getUserName(), model.getUserName());
+
         Person person = new Person();
+        person.setId(model.getId());
         person.setFirstName(firstName);
         person.setLastName(lastName);
         person.setEmail(email);
         person.setBankAccount(bankAccount);
-        pd.create(person);
 
         return person;
     }

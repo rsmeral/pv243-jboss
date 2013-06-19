@@ -49,31 +49,19 @@ public class Purpose implements Serializable {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
 
         Purpose purpose = (Purpose) o;
 
-        if (description != null ? !description.equals(purpose.description) : purpose.description != null) {
-            return false;
-        }
-        if (!name.equals(purpose.name)) {
-            return false;
-        }
+        if (id != null ? !id.equals(purpose.id) : purpose.id != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 53 * hash + (this.name != null ? this.name.hashCode() : 0);
-        hash = 53 * hash + (this.description != null ? this.description.hashCode() : 0);
-        return hash;
+        return id != null ? id.hashCode() : 0;
     }
 
     @Override

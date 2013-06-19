@@ -17,8 +17,6 @@
 
         <class>cz.muni.fi.pv243.et.model.Payment</class>
         <class>cz.muni.fi.pv243.et.model.MoneyTransfer</class>
-        <class>cz.muni.fi.pv243.et.model.ReportStatus</class>
-        <class>cz.muni.fi.pv243.et.model.PersonRole</class>
         <class>cz.muni.fi.pv243.et.model.Transaction</class>
 
 

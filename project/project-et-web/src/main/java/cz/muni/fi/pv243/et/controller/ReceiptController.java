@@ -60,7 +60,14 @@ public class ReceiptController {
     }
 
     public String saveReceipt() throws IOException {
-        Receipt r = receiptModel.getReceipt();
+        Receipt r = null;
+        Long id = receiptModel.getReceiptId();
+        if (id == null) {
+            r = new Receipt();
+        } else {
+            r = receiptService.get(id);
+        }
+
 
         String fileName = FilenameUtils.getName(uploadedFile.getName());
         byte[] bytes = uploadedFile.getBytes();
@@ -80,20 +87,19 @@ public class ReceiptController {
     }
 
     public String editReceipt(Long id) {
-        Receipt r = receiptService.get(id);
-        receiptModel.setReceipt(r);
+        receiptModel.setReceiptId(id);
 
         return "/secured/editReceipt";
     }
 
     public String createReceipt() {
-        receiptModel.setReceipt(new Receipt());
+        receiptModel.setReceiptId(null);
 
         return "/secured/createReceipt";
     }
 
     public String removeReceipt(Long id) {
-        receiptModel.setReceipt(null);
+        receiptModel.setReceiptId(null);
 
         receiptService.remove(receiptService.get(id));
 

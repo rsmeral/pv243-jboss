@@ -17,7 +17,8 @@ public class ReceiptConverter implements Converter {
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {
-        return receiptService.get(Long.valueOf(value));
+        Receipt r = receiptService.get(Long.valueOf(value));
+        return r;
     }
 
     @Override
