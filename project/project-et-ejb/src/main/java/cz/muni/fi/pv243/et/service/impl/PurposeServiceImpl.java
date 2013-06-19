@@ -4,6 +4,7 @@ import cz.muni.fi.pv243.et.data.PurposeListProducer;
 import cz.muni.fi.pv243.et.data.PurposeRepository;
 import cz.muni.fi.pv243.et.model.Payment;
 import cz.muni.fi.pv243.et.model.Purpose;
+import cz.muni.fi.pv243.et.security.annotation.Authenticated;
 import cz.muni.fi.pv243.et.service.PurposeService;
 
 import javax.ejb.Stateless;
@@ -11,6 +12,7 @@ import javax.inject.Inject;
 import java.util.Collection;
 
 @Stateless
+@Authenticated
 public class PurposeServiceImpl implements PurposeService {
 
     @Inject

@@ -7,7 +7,7 @@ import org.jboss.solder.messages.Cause;
 import org.jboss.solder.messages.Message;
 
 @MessageLogger
-public interface SecurityLog {
+public interface EventLog {
 
     @Log @Message("Access denied.")
     void logAccessDenied(@Cause Throwable t);
@@ -20,4 +20,7 @@ public interface SecurityLog {
 
     @Log() @Message("Initializing users.")
     void logInitializingUsers();
+
+    @Log() @Message("General error")
+    void logGeneralError(@Cause Throwable t);
 }

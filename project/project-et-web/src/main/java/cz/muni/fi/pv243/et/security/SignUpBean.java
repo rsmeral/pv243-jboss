@@ -2,11 +2,9 @@ package cz.muni.fi.pv243.et.security;
 
 import cz.muni.fi.pv243.et.data.PersonRepository;
 import cz.muni.fi.pv243.et.message.WebMessage;
-import cz.muni.fi.pv243.et.model.Person;
 import cz.muni.fi.pv243.et.model.PersonRole;
 import cz.muni.fi.pv243.et.model.UserModel;
 import org.picketlink.idm.IdentityManager;
-import org.picketlink.idm.credential.internal.Password;
 import org.picketlink.idm.model.*;
 
 import javax.ejb.Stateless;
@@ -33,7 +31,7 @@ public class SignUpBean {
     private FacesContext facesContext;
 
     @Inject
-    private SecurityLog log;
+    private EventLog log;
 
     @Inject
     private WebMessage message;

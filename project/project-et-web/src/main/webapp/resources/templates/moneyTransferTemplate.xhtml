@@ -14,7 +14,7 @@
                 <h:outputLabel value="Date:" for="date" styleClass="control-label"/>
 
                 <div class="controls">
-                    <h:inputText id="date" value="#{moneyTransfer.date}" size="20"/>
+                    <h:inputText id="date" value="#{moneyTransfer.date}" size="20" label="Date"/>
                 </div>
             </div>
             <div class="control-group">
@@ -28,7 +28,7 @@
                 <h:outputLabel value="Currency:" for="currency" styleClass="control-label"/>
 
                 <div class="controls">
-                    <h:selectOneMenu id="currency" value="#{moneyTransfer.currency}">
+                    <h:selectOneMenu id="currency" value="#{moneyTransfer.currency}" label="Currency">
                         <f:selectItems value="#{currencies}"/>
                     </h:selectOneMenu>
                 </div>

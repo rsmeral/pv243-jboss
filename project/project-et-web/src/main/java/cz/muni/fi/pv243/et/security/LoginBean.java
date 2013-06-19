@@ -3,6 +3,7 @@ package cz.muni.fi.pv243.et.security;
 import cz.muni.fi.pv243.et.data.PersonListProducer;
 import cz.muni.fi.pv243.et.message.WebMessage;
 import cz.muni.fi.pv243.et.model.Person;
+import cz.muni.fi.pv243.et.service.ReceiptService;
 import org.picketbox.core.authentication.credential.UsernamePasswordCredential;
 import org.picketlink.Identity;
 import org.picketlink.authentication.AuthenticationException;
@@ -34,9 +35,15 @@ public class LoginBean {
     private PersonListProducer personListProducer;
 
     @Inject
+    private ReceiptService receiptService;
+
+    @Inject
     private WebMessage webMessage;
 
     public String login(String userName, String password) throws AuthenticationException {
+        if (userName.equals("tomas")) {
+            receiptService.findFromDate(new java.util.Date());
+        }
         this.credential.setCredential(new UsernamePasswordCredential(userName, password));
 
         this.identity.login();

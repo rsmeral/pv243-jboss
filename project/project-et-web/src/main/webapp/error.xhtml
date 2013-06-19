@@ -1,11 +1,9 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://java.sun.com/jsf/html">
-<h:head>
-    <title>Error</title>
-</h:head>
-<h:body>
-    <h:outputText value="#{sessionScope['errorMessage']}"/>
-</h:body>
-</html>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:ui="http://java.sun.com/jsf/facelets" template="resources/templates/common/commonTemplate.xhtml">
+    <ui:define name="header"/>
+    <ui:define name="content">
+        <h2>Error</h2>
+        <h:outputText value="#{sessionScope['errorMessage']}"/>
+    </ui:define>
+</ui:composition>

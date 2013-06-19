@@ -26,14 +26,14 @@
                     <h:outputLabel value="Date:" for="date" styleClass="control-label"/>
 
                     <div class="controls">
-                        <h:inputText id="date" value="#{payment.date}" size="20"/>
+                        <h:inputText id="date" label="Date" value="#{payment.date}" size="20"/>
                     </div>
                 </div>
                 <div class="control-group">
                     <h:outputLabel value="Purpose:" for="purposes" styleClass="control-label"/>
 
                     <div class="controls">
-                        <h:selectOneMenu id="purposes" value="#{payment.purpose}" converter="#{purposeConverter}">
+                        <h:selectOneMenu id="purposes" label="Purpose" value="#{payment.purpose}" converter="#{purposeConverter}">
                             <f:selectItems value="#{purposes}" var="p" itemLabel="#{p.name}" itemValue="#{p}"/>
                         </h:selectOneMenu>
                     </div>
@@ -42,7 +42,7 @@
                     <h:outputLabel value="Receipt:" for="receipt" styleClass="control-label"/>
 
                     <div class="controls">
-                        <h:selectOneMenu id="receipt" value="#{payment.receipt}" converter="#{receiptConverter}">
+                        <h:selectOneMenu id="receipt" label="Receipt" value="#{payment.receipt}" converter="#{receiptConverter}">
                             <f:selectItems value="#{currentUserReceipts}" var="r" itemLabel="#{r.documentName}"
                                            itemValue="#{r}"/>
                         </h:selectOneMenu>
@@ -64,7 +64,7 @@
                     <h:outputLabel value="Currency:" for="currency" styleClass="control-label"/>
 
                     <div class="controls">
-                        <h:selectOneMenu id="currency" value="#{payment.currency}">
+                        <h:selectOneMenu id="currency" label="Currency" value="#{payment.currency}">
                             <f:selectItems value="#{currencies}"/>
                         </h:selectOneMenu>
                     </div>

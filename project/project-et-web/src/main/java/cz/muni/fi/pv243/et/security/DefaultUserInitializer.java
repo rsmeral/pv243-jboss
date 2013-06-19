@@ -11,14 +11,13 @@ import javax.annotation.PostConstruct;
 import javax.ejb.Singleton;
 import javax.ejb.Startup;
 import javax.inject.Inject;
-import java.io.Serializable;
 
 @Startup
 @Singleton
 public class DefaultUserInitializer {
 
     @Inject
-    private SecurityLog log;
+    private EventLog log;
 
     @Inject
     private IdentityManager identityManager;

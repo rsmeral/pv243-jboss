@@ -5,7 +5,7 @@ import cz.muni.fi.pv243.et.data.PersonRepository;
 import cz.muni.fi.pv243.et.model.Person;
 import cz.muni.fi.pv243.et.model.PersonRole;
 import cz.muni.fi.pv243.et.model.UserModel;
-import cz.muni.fi.pv243.et.security.SecurityLog;
+import cz.muni.fi.pv243.et.security.EventLog;
 import cz.muni.fi.pv243.et.security.UserManager;
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.credential.internal.Password;
@@ -19,7 +19,7 @@ import java.util.*;
 public class UserManagerImpl implements UserManager {
 
     @Inject
-    private SecurityLog log;
+    private EventLog log;
 
     @Inject
     private IdentityManager identityManager;

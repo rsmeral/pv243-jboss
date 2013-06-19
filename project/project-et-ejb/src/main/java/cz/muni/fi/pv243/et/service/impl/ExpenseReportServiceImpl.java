@@ -4,7 +4,10 @@ import cz.muni.fi.pv243.et.data.ExpenseReportListProducer;
 import cz.muni.fi.pv243.et.data.ExpenseReportRepository;
 import cz.muni.fi.pv243.et.model.ExpenseReport;
 import cz.muni.fi.pv243.et.model.Person;
+import cz.muni.fi.pv243.et.model.PersonRole;
 import cz.muni.fi.pv243.et.model.ReportStatus;
+import cz.muni.fi.pv243.et.security.annotation.Authenticated;
+import cz.muni.fi.pv243.et.security.annotation.Roles;
 import cz.muni.fi.pv243.et.service.ExpenseReportService;
 
 import javax.ejb.Stateless;
@@ -12,6 +15,7 @@ import javax.inject.Inject;
 import java.util.Collection;
 
 @Stateless
+@Authenticated
 public class ExpenseReportServiceImpl implements ExpenseReportService {
 
     @Inject
@@ -42,6 +46,7 @@ public class ExpenseReportServiceImpl implements ExpenseReportService {
         repository.remove(report);
     }
 
+    @Roles({PersonRole.VERIFIER})
     @Override
     public void claim(ExpenseReport report, Person verifier) {
         if (report == null || verifier == null) {
@@ -72,6 +77,7 @@ public class ExpenseReportServiceImpl implements ExpenseReportService {
         return listProducer.get(id);
     }
 
+    @Roles({PersonRole.VERIFIER})
     @Override
     public Collection<ExpenseReport> findAll() {
         return listProducer.getAll();
@@ -86,6 +92,7 @@ public class ExpenseReportServiceImpl implements ExpenseReportService {
         return listProducer.getAllForSubmitter(submitter);
     }
 
+    @Roles({PersonRole.VERIFIER})
     @Override
     public Collection<ExpenseReport> findForVerifier(Person verifier) {
         if (verifier == null) {
@@ -95,11 +102,13 @@ public class ExpenseReportServiceImpl implements ExpenseReportService {
         return listProducer.getAllForVerifier(verifier);
     }
 
+    @Roles({PersonRole.VERIFIER})
     @Override
     public Collection<ExpenseReport> findWithNoVerifierAssigned() {
         return listProducer.getAllWithNoVerifierAssigned();
     }
 
+    @Roles({PersonRole.VERIFIER})
     @Override
     public Collection<ExpenseReport> findByStatus(ReportStatus status) {
         if (status == null) {
@@ -109,6 +118,7 @@ public class ExpenseReportServiceImpl implements ExpenseReportService {
         return listProducer.getAllBy(status);
     }
 
+    @Roles({PersonRole.VERIFIER, PersonRole.APPLICANT})
     @Override
     public Collection<ExpenseReport> findForSubmitterWithStatus(Person submitter, ReportStatus status) {
         if (submitter == null || status == null) {
@@ -118,6 +128,7 @@ public class ExpenseReportServiceImpl implements ExpenseReportService {
         return listProducer.getAllForSubmitterWithStatus(submitter, status);
     }
 
+    @Roles({PersonRole.VERIFIER})
     @Override
     public Collection<ExpenseReport> findForVerifierWithStatus(Person verifier, ReportStatus status) {
         if (verifier == null || status == null) {

@@ -5,6 +5,7 @@ import cz.muni.fi.pv243.et.data.PaymentRepository;
 import cz.muni.fi.pv243.et.model.ExpenseReport;
 import cz.muni.fi.pv243.et.model.Payment;
 import cz.muni.fi.pv243.et.model.Person;
+import cz.muni.fi.pv243.et.security.annotation.Authenticated;
 import cz.muni.fi.pv243.et.service.PaymentService;
 
 import javax.ejb.Stateless;
@@ -12,6 +13,7 @@ import javax.inject.Inject;
 import java.util.Collection;
 
 @Stateless
+@Authenticated
 public class PaymentServiceImpl implements PaymentService {
     
     @Inject

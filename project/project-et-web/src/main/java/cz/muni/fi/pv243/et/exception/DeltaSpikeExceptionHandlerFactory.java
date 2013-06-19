@@ -27,7 +27,7 @@ import javax.faces.context.ExceptionHandlerFactory;
 
 /**
  * <p>
- * {@link javax.faces.context.ExceptionHandlerFactory} implementation that delegates to the {@link DeltaSpikeExceptionHandler} the exception
+ * {@link javax.faces.context.ExceptionHandlerFactory} implementation that delegates to the {@link DeltaSpikeExceptionHandlerWrapper} the exception
  * handling logic.
  * </p>
  * 
@@ -44,7 +44,7 @@ public class DeltaSpikeExceptionHandlerFactory extends ExceptionHandlerFactory {
 
     @Override
     public ExceptionHandler getExceptionHandler() {
-        return new DeltaSpikeExceptionHandler(this.parent.getExceptionHandler());
+        return new DeltaSpikeExceptionHandlerWrapper(this.parent.getExceptionHandler());
     }
 
 }

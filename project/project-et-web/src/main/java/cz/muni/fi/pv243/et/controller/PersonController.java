@@ -3,7 +3,7 @@ package cz.muni.fi.pv243.et.controller;
 import cz.muni.fi.pv243.et.message.WebMessage;
 import cz.muni.fi.pv243.et.model.PersonRole;
 import cz.muni.fi.pv243.et.model.UserModel;
-import cz.muni.fi.pv243.et.security.SecurityLog;
+import cz.muni.fi.pv243.et.security.EventLog;
 import cz.muni.fi.pv243.et.security.UserManager;
 
 import javax.enterprise.inject.Model;
@@ -26,7 +26,7 @@ public class PersonController {
     private FacesContext facesContext;
 
     @Inject
-    private SecurityLog log;
+    private EventLog log;
 
     @Inject
     private WebMessage message;

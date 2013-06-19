@@ -27,13 +27,13 @@
                                 <h:link outcome="/secured/reports">Reports</h:link>
                             </li>
                             <li>
-                                <h:link outcome="/secured/purposes">Purposes</h:link>
+                                <h:link outcome="/secured/purposes" rendered="#{identityHelper.hasAnyRole('ADMIN,VERIFIER')}">Purposes</h:link>
                             </li>
                             <li>
                                 <h:link outcome="/secured/receipts">Receipts</h:link>
                             </li>
                             <li>
-                                <h:link outcome="/secured/persons">Users</h:link>
+                                <h:link outcome="/secured/persons" rendered="#{identityHelper.hasRole('ADMIN')}">Users</h:link>
                             </li>
                         </ul>
                         <ul class="nav pull-right">

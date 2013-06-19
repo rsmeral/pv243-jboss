@@ -117,14 +117,14 @@
             <!-- deltaspike jsf -->
             <dependency>
                 <groupId>org.apache.deltaspike.modules</groupId>
-                <artifactId>deltaspike-jsf-module-api</artifactId>
+                <artifactId>deltaspike-security-module-api</artifactId>
                 <version>${version.deltaspike}</version>
                 <scope>compile</scope>
             </dependency>
 
             <dependency>
                 <groupId>org.apache.deltaspike.modules</groupId>
-                <artifactId>deltaspike-jsf-module-impl</artifactId>
+                <artifactId>deltaspike-security-module-impl</artifactId>
                 <version>${version.deltaspike}</version>
                 <scope>runtime</scope>
             </dependency>

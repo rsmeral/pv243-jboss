@@ -33,13 +33,13 @@
                     <h:outputLabel value="Receipt:" for="fileUpload" styleClass="control-label"/>
 
                     <div class="controls">
-                        <t:inputFileUpload id="fileUpload" value="#{receiptController.uploadedFile}" style="padding: 5px 0px;" />
+                        <t:inputFileUpload id="fileUpload" value="#{receiptController.uploadedFile}" style="padding: 5px 0px;" label="Receipt"/>
                     </div>
                 </div>
                 <div class="control-group">
                     <div class="controls">
                         <h:commandButton action="#{receiptController.saveReceipt()}" value="Save" styleClass="btn btn-primary"/>
-                        <h:commandButton action="/secured/createPayment" immediate="true" value="Cancel" styleClass="btn btn"/>
+                        <h:commandButton action="/secured/receipts" immediate="true" value="Cancel" styleClass="btn btn"/>
                     </div>
                 </div>
             </h:form>

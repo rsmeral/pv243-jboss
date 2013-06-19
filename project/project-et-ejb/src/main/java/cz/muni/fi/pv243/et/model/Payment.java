@@ -57,8 +57,7 @@ public class Payment extends Transaction implements Serializable {
 
         Payment payment = (Payment) o;
 
-        if (purpose != null ? !purpose.equals(payment.purpose) : payment.purpose != null) return false;
-        if (receipt != null ? !receipt.equals(payment.receipt) : payment.receipt != null) return false;
+        if (id != null ? !id.equals(payment.id) : payment.id != null) return false;
 
         return true;
     }
@@ -66,8 +65,7 @@ public class Payment extends Transaction implements Serializable {
     @Override
     public int hashCode() {
         int result = super.hashCode();
-        result = 31 * result + (purpose != null ? purpose.hashCode() : 0);
-        result = 31 * result + (receipt != null ? receipt.hashCode() : 0);
+        result = 31 * result + (id != null ? id.hashCode() : 0);
         return result;
     }
 

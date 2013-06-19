@@ -6,6 +6,7 @@ import cz.muni.fi.pv243.et.data.ReceiptRepository;
 import cz.muni.fi.pv243.et.model.Person;
 import cz.muni.fi.pv243.et.model.PersonWrapper;
 import cz.muni.fi.pv243.et.model.Receipt;
+import cz.muni.fi.pv243.et.security.IdentityHelper;
 import cz.muni.fi.pv243.et.service.ReceiptService;
 import cz.muni.fi.pv243.et.util.CurrentPerson;
 import org.apache.commons.io.FilenameUtils;
@@ -55,8 +56,7 @@ public class ReceiptController {
     @Produces
     @Named("currentUserReceipts")
     public Collection<Receipt> getCurrentUserReceipts() {
-        Person currentPerson = identity.getUser().<Person>getAttribute("person").getValue();
-        return receiptService.findForPerson(currentPerson);
+        return receiptService.findForPerson(currentPerson.getPerson());
     }
 
     public String saveReceipt() throws IOException {

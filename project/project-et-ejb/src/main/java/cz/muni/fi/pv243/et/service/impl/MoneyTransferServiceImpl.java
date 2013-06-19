@@ -4,6 +4,7 @@ import cz.muni.fi.pv243.et.data.MoneyTransferListProducer;
 import cz.muni.fi.pv243.et.data.MoneyTransferRepository;
 import cz.muni.fi.pv243.et.model.ExpenseReport;
 import cz.muni.fi.pv243.et.model.MoneyTransfer;
+import cz.muni.fi.pv243.et.security.annotation.Authenticated;
 import cz.muni.fi.pv243.et.service.MoneyTransferService;
 
 import javax.ejb.Stateless;
@@ -12,6 +13,7 @@ import java.util.Collection;
 import java.util.Date;
 
 @Stateless
+@Authenticated
 public class MoneyTransferServiceImpl implements MoneyTransferService {
 
     @Inject

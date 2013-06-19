@@ -109,21 +109,14 @@ public class Person implements Serializable {
 
         Person person = (Person) o;
 
-        if (bankAccount != null ? !bankAccount.equals(person.bankAccount) : person.bankAccount != null) return false;
-        if (email != null ? !email.equals(person.email) : person.email != null) return false;
-        if (firstName != null ? !firstName.equals(person.firstName) : person.firstName != null) return false;
-        if (lastName != null ? !lastName.equals(person.lastName) : person.lastName != null) return false;
+        if (id != null ? !id.equals(person.id) : person.id != null) return false;
 
         return true;
     }
 
     @Override
     public int hashCode() {
-        int result = firstName != null ? firstName.hashCode() : 0;
-        result = 31 * result + (lastName != null ? lastName.hashCode() : 0);
-        result = 31 * result + (email != null ? email.hashCode() : 0);
-        result = 31 * result + (bankAccount != null ? bankAccount.hashCode() : 0);
-        return result;
+        return id != null ? id.hashCode() : 0;
     }
 
     @Override

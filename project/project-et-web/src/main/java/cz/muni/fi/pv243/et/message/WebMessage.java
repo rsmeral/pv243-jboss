@@ -19,4 +19,13 @@ public interface WebMessage {
 
     @MessageTemplate("{error.passwordMismatch}")
     String passwordMismatch();
+
+    @MessageTemplate("{exception.accessDenied}")
+    String accessDenied(String reasons);
+
+    @MessageTemplate("{exception.authenticationFailed}")
+    String authenticationFailed();
+
+    @MessageTemplate("{exception.generalError}")
+    String generalError();
 }

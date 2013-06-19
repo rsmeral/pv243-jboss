@@ -3,7 +3,10 @@ package cz.muni.fi.pv243.et.service.impl;
 import cz.muni.fi.pv243.et.data.ReceiptListProducer;
 import cz.muni.fi.pv243.et.data.ReceiptRepository;
 import cz.muni.fi.pv243.et.model.Person;
+import cz.muni.fi.pv243.et.model.PersonRole;
 import cz.muni.fi.pv243.et.model.Receipt;
+import cz.muni.fi.pv243.et.security.annotation.Authenticated;
+import cz.muni.fi.pv243.et.security.annotation.Roles;
 import cz.muni.fi.pv243.et.service.ReceiptService;
 
 import javax.ejb.Stateless;
@@ -12,6 +15,7 @@ import java.util.Collection;
 import java.util.Date;
 
 @Stateless
+@Authenticated
 public class ReceiptServiceImpl implements ReceiptService {
 
     @Inject
@@ -50,6 +54,7 @@ public class ReceiptServiceImpl implements ReceiptService {
         return receiptListProducer.getReceipt(id);
     }
 
+    @Roles(value = {PersonRole.ADMIN, PersonRole.VERIFIER}, anyRole = true)
     @Override
     public Collection<Receipt> findAll() {
         return receiptListProducer.getAllReceipts();

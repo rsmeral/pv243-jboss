@@ -45,13 +45,13 @@ import java.util.Iterator;
  * @author Pedro Silva
  * 
  */
-public class DeltaSpikeExceptionHandler extends ExceptionHandlerWrapper {
+public class DeltaSpikeExceptionHandlerWrapper extends ExceptionHandlerWrapper {
 
     private BeanManager beanManager;
 
     private ExceptionHandler wrapped;
 
-    public DeltaSpikeExceptionHandler(ExceptionHandler wrapped) {
+    public DeltaSpikeExceptionHandlerWrapper(ExceptionHandler wrapped) {
         this.wrapped = wrapped;
         this.beanManager = BeanManagerProvider.getInstance().getBeanManager();
     }
