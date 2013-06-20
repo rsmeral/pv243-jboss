@@ -12,12 +12,14 @@ import org.hibernate.search.jpa.Search;
 import org.hibernate.search.query.DatabaseRetrievalMethod;
 import org.hibernate.search.query.ObjectLookupMethod;
 import org.hibernate.search.query.dsl.QueryBuilder;
+import org.jboss.solder.logging.Logger;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import java.io.Serializable;
 import java.util.Collection;
+import java.util.List;
 
 @Stateless
 public class ExpenseReportListProducerImpl implements ExpenseReportListProducer {
@@ -44,6 +46,10 @@ public class ExpenseReportListProducerImpl implements ExpenseReportListProducer 
         FullTextQuery fullTextQuery = ftem.createFullTextQuery(query, ExpenseReport.class);
         fullTextQuery.initializeObjectsWith(ObjectLookupMethod.SKIP, DatabaseRetrievalMethod.FIND_BY_ID);
 
+
+        for (ExpenseReport er : (List<ExpenseReport>) fullTextQuery.getResultList()) {
+            System.out.println("getAllForSubmitter() = "+ er.getId() + " " + er.getName());
+        }
         return fullTextQuery.getResultList();
 //        return session.createQuery("SELECT report FROM ExpenseReport report WHERE report.submitter.id = :submitterId")
 //                .setParameter("submitterId", submitter.getId()).list();
@@ -63,7 +69,13 @@ public class ExpenseReportListProducerImpl implements ExpenseReportListProducer 
 
     @Override
     public Collection<ExpenseReport> getAllWithNoVerifierAssigned() {
-        return session.createQuery("SELECT report FROM ExpenseReport report WHERE report.verifier IS NULL").list();
+        Collection<ExpenseReport> result = session.createQuery("SELECT report FROM ExpenseReport report WHERE report.verifier IS NULL").list();
+
+        for (ExpenseReport er : result) {
+            System.out.println("getAllWithNoVerifierAssigned()=" + er.getName() + " " + er.getId());
+        }
+
+        return result;
     }
 
 

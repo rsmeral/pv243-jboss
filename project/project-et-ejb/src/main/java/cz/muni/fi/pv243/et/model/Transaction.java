@@ -6,6 +6,7 @@ import org.hibernate.search.annotations.IndexedEmbedded;
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 
 /**
@@ -23,6 +24,7 @@ public class Transaction {
 
     @NotNull
     @Column(name = "val")
+    @Min(value = 0)
     private BigDecimal value;
 
     @NotNull

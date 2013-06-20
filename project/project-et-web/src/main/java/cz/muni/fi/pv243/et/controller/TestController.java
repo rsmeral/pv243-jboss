@@ -62,9 +62,16 @@ public class TestController {
     private UserManager userManager;
 
     public String initialize() {
-        Person personTom = createPerson("Tomas", "Applicantovic", "test@test.cz", "123456789");
-        Person personJana = createPerson("Jana", "Nova", "nova.jana@test.cz", "789313244");
-        Person personApprover = createPerson("Hermiona", "Approverova", "herim@ona.cz", "120313244");
+
+        List<PersonRole> roles = new ArrayList<PersonRole>();
+        roles.add(PersonRole.APPLICANT);
+
+        Person personApplicant = createPerson("Alice", "Applicantovic", "test@test.cz", "123456789", roles);
+        roles.add(PersonRole.VERIFIER);
+        Person personBoth = createPerson("Bob", "Both", "nova.jana@test.cz", "789313244", roles);
+        roles.clear();
+        roles.add(PersonRole.VERIFIER);
+        Person personApprover = createPerson("Vera", "Approverova", "herim@ona.cz", "120313244", roles);
 
         System.out.println("created Persons");
 
@@ -75,20 +82,20 @@ public class TestController {
 
 
         // RECEIPTS
-        Receipt rec = createReceipt(personTom, new Date(System.currentTimeMillis() - 100000), "Platba za vlak a autobus NULL");
-        Receipt rec2 = createReceipt(personJana, new Date(System.currentTimeMillis() - 20000), "Way there and back");
+        Receipt rec = createReceipt(personApplicant, new Date(System.currentTimeMillis() - 100000), "Platba za vlak a autobus NULL");
+        Receipt rec2 = createReceipt(personBoth, new Date(System.currentTimeMillis() - 20000), "Way there and back NULL");
 
 
         // REPORTS
         ExpenseReport report =
-                createExpenseReport("Berlin 2013 Bienale", personTom, personJana, ReportStatus.OPEN, "Visit of some stupid Conference" );
+                createExpenseReport("Berlin 2013 Bienale", personApplicant, personBoth, ReportStatus.OPEN, "Visit of some stupid Conference" );
 //        report.setApprovedDate(new Date(System.currentTimeMillis() + 1000000000));
         ExpenseReport report2 =
-                createExpenseReport("Munich 2012 FUD Conference", personTom, null, ReportStatus.APPROVED, "Conference in Munich" );
+                createExpenseReport("Munich 2012 FUD Conference", personApplicant, null, ReportStatus.APPROVED, "Conference in Munich" );
 
 
         ExpenseReport report3 =
-                createExpenseReport("Non Testing in Arquillian 2012", personJana, personApprover, ReportStatus.REJECTED, "Why are we not testing in Arquillian?" );
+                createExpenseReport("Non Testing in Arquillian 2012", personBoth, personApprover, ReportStatus.REJECTED, "Why are we not testing in Arquillian?" );
 
         // MONEY TRANSFERS
         MoneyTransfer mt = createMoneyTransfer(personApprover, report2, BigDecimal.valueOf(2400), Currency.CZK, new Date(System.currentTimeMillis() + 20));
@@ -105,26 +112,8 @@ public class TestController {
     }
 
 
-    public Collection<Object> getPersons() {
 
-        Collection<Object> entities = new ArrayList<Object>();
-
-        //entities.add(plp.findByEmail("test2@test.com"));
-        entities.add(expenseList.getAll());
-//        entities.add(plp.findAll());
-        System.out.println("Person=" + entities);
-        System.out.println("Purpose=" + purposeList.get(1L));
-
-        System.out.println("All purposes " + purposeList.getAll());
-//        entities.add(purposeList.getAll());
-
-
-        System.out.println("\nReceipt=" + receiptList.getAllReceipts() + "\n");
-
-        return entities;
-    }
-
-    private Person createPerson(String firstName, String lastName, String email, String bankAccount) {
+    private Person createPerson(String firstName, String lastName, String email, String bankAccount, List<PersonRole> roles) {
         UserModel model = new UserModel();
         model.setFirstName(firstName);
         model.setLastName(lastName);
@@ -135,6 +124,12 @@ public class TestController {
 
         // firstname.tolowercase == username == password
         userManager.changePassword(model.getUserName(), model.getUserName());
+
+        for (PersonRole role : roles) {
+            System.out.println(model.getUserName() + " role=" + role);
+            userManager.grantRole(model.getUserName(), role);
+        }
+
 
         Person person = new Person();
         person.setId(model.getId());

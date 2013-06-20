@@ -34,7 +34,8 @@ public class PurposeController {
         return purposeModel.getBackUrl();
     }
 
-    public String editPurpose(Long id) {
+    public String editPurpose(Long id, String fromUrl) {
+        purposeModel.setBackUrl(fromUrl);
         Purpose p = purposeService.get(id);
         purposeModel.setPurpose(p);
 

@@ -27,7 +27,7 @@
 
                 <h:column>
                     <f:facet name="header">Action</f:facet>
-                    <h:commandLink action="#{purposeController.editPurpose(r.id)}" styleClass="btn btn-mini">
+                    <h:commandLink action="#{purposeController.editPurpose(r.id, '/secured/purposes')}" styleClass="btn btn-mini">
                         <i class="icon-pencil"></i>
                     </h:commandLink>
                     <h:commandLink action="#{purposeController.removePurpose(r.id)}" styleClass="btn btn-mini">

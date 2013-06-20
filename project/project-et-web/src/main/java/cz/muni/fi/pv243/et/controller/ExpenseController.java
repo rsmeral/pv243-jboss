@@ -31,6 +31,21 @@ public class ExpenseController {
         return service.findAll();
     }
 
+    @Produces
+    public Collection<ExpenseReport> getAllforVerifier() {
+        return service.findForVerifier(currentPerson.getPerson());
+    }
+
+    @Produces
+    public Collection<ExpenseReport> getAllforSubmitter() {
+        return service.findForSubmitter(currentPerson.getPerson());
+    }
+
+    @Produces
+    public Collection<ExpenseReport> getAllWithNoVerifierAssigned() {
+        return service.findWithNoVerifierAssigned();
+    }
+
     public String showSingleReport(Long id) {
         model.setReport(service.get(id));
 
