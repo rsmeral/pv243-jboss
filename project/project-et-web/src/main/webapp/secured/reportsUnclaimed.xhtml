@@ -91,7 +91,6 @@
                 <h:outputText rendered="#{empty expenseController.allWithNoVerifierAssigned}" value="No unassigned reports" />
 
                 <div class="control-group">
-                    <!--FIX CLAIM CANCEL/BACK-->
                     <div class="controls">
                         <h:commandButton action="#{expenseController.claimReports()}" value="Claim" styleClass="btn btn-primary"/>
                         <h:commandButton action="/secured/reports" immediate="true"  value="Cancel" styleClass="btn btn"/>

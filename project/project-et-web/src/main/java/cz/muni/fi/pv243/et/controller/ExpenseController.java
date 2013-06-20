@@ -113,7 +113,7 @@ public class ExpenseController {
                 logger.debug("Report selected=" + er.getName());
                 service.claim(er, currentPerson.getPerson());
             } else {
-                System.out.println("Report NOT selected=" + er.getName());
+                logger.debug("Report NOT selected=" + er.getName());
             }
         }
         return "/secured/reports";

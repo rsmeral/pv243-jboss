@@ -6,6 +6,7 @@ import cz.muni.fi.pv243.et.security.annotation.Roles;
 import org.apache.deltaspike.security.api.authorization.AccessDecisionVoter;
 import org.apache.deltaspike.security.api.authorization.AccessDecisionVoterContext;
 import org.apache.deltaspike.security.api.authorization.SecurityViolation;
+import org.jboss.solder.logging.Logger;
 import org.picketlink.extensions.core.pbox.PicketBoxIdentity;
 
 import javax.enterprise.context.ApplicationScoped;
@@ -21,6 +22,9 @@ public class RoleAccessDecisionVoter implements AccessDecisionVoter {
 
     @Inject
     private SecurityMessage secMessage;
+
+    @Inject
+    private Logger logger;
 
     @Override
     public Set<SecurityViolation> checkPermission(AccessDecisionVoterContext accessDecisionVoterContext) {
@@ -41,7 +45,7 @@ public class RoleAccessDecisionVoter implements AccessDecisionVoter {
                 }
             }
         }
-        System.out.println("validation ok> " + ok);
+        logger.debug("validation ok> " + ok);
         if (!ok) {
             final String msg = secMessage.roleMissing();
             result.add(new SecurityViolation() {

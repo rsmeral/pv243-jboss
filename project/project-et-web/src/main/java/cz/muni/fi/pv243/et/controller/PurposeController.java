@@ -4,6 +4,7 @@ import cz.muni.fi.pv243.et.data.PurposeListProducer;
 import cz.muni.fi.pv243.et.data.PurposeRepository;
 import cz.muni.fi.pv243.et.model.Purpose;
 import cz.muni.fi.pv243.et.service.PurposeService;
+import org.jboss.solder.logging.Logger;
 
 import javax.enterprise.inject.Model;
 import javax.enterprise.inject.Produces;
@@ -20,6 +21,9 @@ public class PurposeController {
     @Inject
     private PurposeModel purposeModel;
 
+    @Inject
+    private Logger logger;
+
     @Produces
     @Named("purposes")
     public Collection<Purpose> getAllPurposes() {
@@ -28,9 +32,7 @@ public class PurposeController {
 
     public String savePurpose() {
         purposeService.save(purposeModel.getPurpose());
-
-//        return "/secured/purposes?faces-redirect=true";
-        System.out.println("savePurpose() = " + purposeModel.getBackUrl());
+        logger.debug("savePurpose() = " + purposeModel.getBackUrl());
         return purposeModel.getBackUrl();
     }
 
@@ -46,7 +48,7 @@ public class PurposeController {
         purposeModel.setBackUrl(fromUrl);
         purposeModel.setPurpose(new Purpose());
 
-        System.out.println("createPurpose() = " + fromUrl);
+        logger.debug("createPurpose() = " + fromUrl);
 
         return "/secured/createPurpose";
 //        return purposeModel.getBackUrl();
