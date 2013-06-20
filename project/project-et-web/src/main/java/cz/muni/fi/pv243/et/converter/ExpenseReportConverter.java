@@ -2,6 +2,7 @@ package cz.muni.fi.pv243.et.converter;
 
 import cz.muni.fi.pv243.et.model.ExpenseReport;
 import cz.muni.fi.pv243.et.service.ExpenseReportService;
+import org.jboss.solder.logging.Logger;
 
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -14,6 +15,9 @@ public class ExpenseReportConverter implements Converter {
 
     @Inject
     private ExpenseReportService service;
+
+    @Inject
+    private Logger log;
 
     @Override
     public Object getAsObject(FacesContext context, UIComponent component, String value) {

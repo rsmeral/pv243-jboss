@@ -8,6 +8,7 @@ import cz.muni.fi.pv243.et.model.PersonRole;
 import cz.muni.fi.pv243.et.model.ReportStatus;
 import cz.muni.fi.pv243.et.security.annotation.Authenticated;
 import cz.muni.fi.pv243.et.security.annotation.Roles;
+import cz.muni.fi.pv243.et.security.annotation.Test;
 import cz.muni.fi.pv243.et.service.ExpenseReportService;
 
 import javax.ejb.Stateless;
@@ -148,12 +149,14 @@ public class ExpenseReportServiceImpl implements ExpenseReportService {
         return listProducer.get(id);
     }
 
+    @Test
     @Roles({PersonRole.VERIFIER})
     @Override
     public Collection<ExpenseReport> findAll() {
         return listProducer.getAll();
     }
 
+    @Roles({PersonRole.VERIFIER, PersonRole.APPLICANT})
     @Override
     public Collection<ExpenseReport> findForSubmitter(Person submitter) {
         if (submitter == null) {

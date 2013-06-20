@@ -1,10 +1,9 @@
 package cz.muni.fi.pv243.et.security.annotation;
 
 import cz.muni.fi.pv243.et.model.PersonRole;
-import cz.muni.fi.pv243.et.security.RoleAccessDecisionVoter;
-import org.apache.deltaspike.security.api.authorization.annotation.Secured;
 
-import javax.enterprise.inject.Stereotype;
+import javax.enterprise.util.Nonbinding;
+import javax.interceptor.InterceptorBinding;
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -12,11 +11,12 @@ import java.lang.annotation.Target;
 
 @Target({ElementType.METHOD, ElementType.TYPE})
 @Retention(RetentionPolicy.RUNTIME)
-@Stereotype
-@Secured(RoleAccessDecisionVoter.class)
+@InterceptorBinding
 public @interface Roles {
 
+    @Nonbinding
     boolean anyRole() default true;
 
+    @Nonbinding
     PersonRole[] value() default {};
 }

@@ -9,18 +9,18 @@ import org.jboss.solder.messages.Message;
 @MessageLogger
 public interface EventLog {
 
-    @Log @Message("Access denied.")
+    @Log(level = Logger.Level.ERROR) @Message("Access denied.")
     void logAccessDenied(@Cause Throwable t);
 
-    @Log @Message("Authentication failed.")
+    @Log(level = Logger.Level.ERROR) @Message("Authentication failed.")
     void logAuthenticationFailed(@Cause Throwable t);
 
     @Log(level = Logger.Level.DEBUG) @Message("Person created: ID=%d")
     void logPersonCreated(Long personId);
 
-    @Log() @Message("Initializing users.")
+    @Log(level = Logger.Level.DEBUG) @Message("Initializing users.")
     void logInitializingUsers();
 
-    @Log() @Message("General error")
+    @Log(level = Logger.Level.ERROR) @Message("General error")
     void logGeneralError(@Cause Throwable t);
 }
