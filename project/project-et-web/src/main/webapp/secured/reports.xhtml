@@ -23,7 +23,7 @@
                 </c:when>
 
                 <c:when test="#{identityHelper.hasRole('APPLICANT')}">
-                    <ui:param name="showReports" value="#{expenseController.allforSubmitter}"/>
+                    <ui:param name="showReports" value="#{expenseController.allForSubmitter}"/>
                 </c:when>
             </c:choose>
 

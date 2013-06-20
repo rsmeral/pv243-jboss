@@ -26,8 +26,7 @@
                 </c:otherwise>
             </c:choose>
 
-
-            <h:dataTable value="${receipts}" var="r" styleClass="table table-bordered table-striped table-hover">
+            <h:dataTable value="#{receipts}" var="r" styleClass="table table-bordered table-striped table-hover">
                 <h:column>
                     <f:facet name="header">Name</f:facet>
                     <h:commandLink action="#{receiptController.showFile(r.id)}">
@@ -49,7 +48,7 @@
 
                 <h:column>
                     <f:facet name="header">Action</f:facet>
-                    <h:commandLink action="#{receiptController.editReceipt(r.id)}" styleClass="btn btn-mini">
+                    <h:commandLink action="#{receiptController.editReceipt(r.id, '/secured/receipts')}" styleClass="btn btn-mini">
                         <i class="icon-pencil"></i>
                     </h:commandLink>
                     <h:commandLink action="#{receiptController.removeReceipt(r.id)}" styleClass="btn btn-mini">

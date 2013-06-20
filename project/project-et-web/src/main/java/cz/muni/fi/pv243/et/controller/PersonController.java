@@ -34,6 +34,9 @@ public class PersonController {
     @Inject
     private UserManager userManager;
 
+    @Inject
+    private NavigationHolder navigationHolder;
+
     @NotNull
     @Size(min = 2, max = 50)
     private String password;

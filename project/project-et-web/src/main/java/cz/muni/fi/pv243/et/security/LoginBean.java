@@ -29,10 +29,13 @@ public class LoginBean {
 
     public String login(String userName, String password) throws AuthenticationException {
 
-        if (!identity.isLoggedIn()) {
-            loginService.login(userName, password);
-        }
-        return "/secured/index.xhtml";
+        loginService.login(userName, password);
 
+        if (!identity.isLoggedIn()) {
+            this.facesContext.addMessage(null, new FacesMessage(webMessage.loginFailed()));
+            return null;
+        }
+
+        return "/secured/index.xhtml";
     }
 }

@@ -15,6 +15,8 @@ public class PersonModel implements Serializable {
 
     private UserModel userModel;
 
+    private String backUrl;
+
     @Produces
     @Named("userPerson")
     public UserModel getUserModel() {

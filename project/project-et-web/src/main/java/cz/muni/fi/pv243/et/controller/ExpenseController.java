@@ -50,7 +50,7 @@ public class ExpenseController {
         return service.findForVerifierWithStatus(currentPerson.getPerson(), ReportStatus.SUBMITTED);
     }
 
-    public Collection<ExpenseReport> getAllforSubmitter() {
+    public Collection<ExpenseReport> getAllForSubmitter() {
         return service.findForSubmitter(currentPerson.getPerson());
     }
 
@@ -146,6 +146,7 @@ public class ExpenseController {
     }
 
     public String sendMoney() {
+        //TODO -- maybe create automatic money-transfer?
         service.setStatus(model.getReport(), ReportStatus.SETTLED);
         return "/secured/report";
     }

@@ -10,6 +10,7 @@ import cz.muni.fi.pv243.et.security.annotation.Authenticated;
 import cz.muni.fi.pv243.et.security.annotation.Roles;
 import cz.muni.fi.pv243.et.security.annotation.Test;
 import cz.muni.fi.pv243.et.service.ExpenseReportService;
+import cz.muni.fi.pv243.et.service.IllegalVerifierException;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -60,7 +61,7 @@ public class ExpenseReportServiceImpl implements ExpenseReportService {
         }
 
         if (report.getSubmitter().equals(verifier)) {
-            throw new IllegalStateException("you can't verify your own report");
+            throw new IllegalVerifierException("you can't verify your own report");
         }
 
         if (report.getStatus() == ReportStatus.APPROVED ||

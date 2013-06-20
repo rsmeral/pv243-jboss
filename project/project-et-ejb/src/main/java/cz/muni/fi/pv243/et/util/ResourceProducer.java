@@ -6,6 +6,7 @@ import org.jboss.solder.logging.Logger;
 import org.picketlink.Identity;
 
 import javax.enterprise.context.RequestScoped;
+import javax.enterprise.inject.Model;
 import javax.enterprise.inject.Produces;
 import javax.enterprise.inject.spi.InjectionPoint;
 import javax.inject.Inject;
@@ -21,7 +22,7 @@ public class ResourceProducer {
 //    }
 
     @Produces
-    @RequestScoped
+    @Model
     @CurrentPerson
     public PersonWrapper getCurrentPerson() {
         return new PersonWrapper(identity.getUser().<Person>getAttribute("person").getValue());

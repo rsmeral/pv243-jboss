@@ -40,7 +40,7 @@
 
 
     <persistence-unit name="TestPU">
-        <jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source>
+        <jta-data-source>java:jboss/datasources/ProjectEtIdentityDS</jta-data-source>
 
         <!-- If you are running in a production environment, add a managed
            data source, this example data source is just for development and testing! -->
@@ -50,7 +50,7 @@
             <!-- Properties for Hibernate -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
             <!--<property name="hibernate.hbm2ddl.auto" value="create-drop" />-->
-            <property name="hibernate.hbm2ddl.auto" value="create-drop" />
+            <property name="hibernate.hbm2ddl.auto" value="update" />
             <property name="hibernate.show_sql" value="false" />
             <!-- Properties for Hibernate Search -->
             <property name="hibernate.search.default.indexBase" value="data/lucene-indexes"/>
@@ -76,7 +76,7 @@
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
             <!--<property name="hibernate.hbm2ddl.auto" value="update" />-->
-            <property name="hibernate.hbm2ddl.auto" value="create-drop" />
+            <property name="hibernate.hbm2ddl.auto" value="update" />
             <property name="hibernate.show_sql" value="false" />
         </properties>
     </persistence-unit>

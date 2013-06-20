@@ -24,6 +24,7 @@ package cz.muni.fi.pv243.et.exception;
 
 import cz.muni.fi.pv243.et.message.WebMessage;
 import cz.muni.fi.pv243.et.security.EventLog;
+import cz.muni.fi.pv243.et.service.IllegalVerifierException;
 import org.apache.deltaspike.core.api.exception.control.annotation.ExceptionHandler;
 import org.apache.deltaspike.core.api.exception.control.annotation.Handles;
 import org.apache.deltaspike.core.api.exception.control.event.ExceptionEvent;
@@ -74,8 +75,8 @@ public class DefaultExceptionHandler {
         event.handledAndContinue();
     }
 
-    public void verifierIsSubmitterException(@Handles ExceptionEvent<IllegalStateException> event) {
-        log.logGeneralError(event.getException() );
+    public void verifierIsSubmitterException(@Handles ExceptionEvent<IllegalVerifierException> event) {
+        log.logGeneralError(event.getException());
 
         this.facesContext.getExternalContext().getSessionMap()
                 .put(ERROR_MESSAGE, "Verifier can not verify his own reports!");

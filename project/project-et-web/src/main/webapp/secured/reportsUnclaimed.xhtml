@@ -30,7 +30,8 @@
 
                 <h:dataTable value="#{expenseController.allWithNoVerifierAssigned}" rendered="#{not empty expenseController.allWithNoVerifierAssigned}" var="report" styleClass="table table-bordered table-striped table-hover">
                     <h:column>
-                        <h:selectBooleanCheckbox value="#{expenseController.checked[report.id]}" />
+                        <h:selectBooleanCheckbox value="#{expenseController.checked[report.id]}"
+                                                 disabled="#{report.submitter eq currentPerson.person}"/>
                     </h:column>
 
                     <h:column>
@@ -91,8 +92,8 @@
 
                 <h:outputText rendered="#{empty expenseController.allWithNoVerifierAssigned}" value="No unassigned reports" />
 
-                <div class="control-group">
-                    <div class="controls">
+                <div class="row">
+                    <div class="span2 btn-group">
                         <h:commandButton action="#{expenseController.claimReports()}" value="Claim" styleClass="btn btn-primary"/>
                         <h:commandButton action="/secured/reports" immediate="true"  value="Cancel" styleClass="btn btn"/>
                     </div>

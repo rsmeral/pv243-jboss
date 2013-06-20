@@ -79,7 +79,8 @@ public class ReceiptController {
         return receiptModel.getBackUrl();
     }
 
-    public String editReceipt(Long id) {
+    public String editReceipt(Long id, String fromUrl) {
+        receiptModel.setBackUrl(fromUrl);
         receiptModel.setReceiptId(id);
 
         return "/secured/editReceipt";
