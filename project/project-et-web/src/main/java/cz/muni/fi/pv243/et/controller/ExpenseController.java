@@ -102,7 +102,7 @@ public class ExpenseController {
         for (Long k : checked.keySet()) {
             if (checked.get(k)) {
                 for (ExpenseReport er : model.getReports()) {
-                    if (er.getId() == k) {
+                    if (er.getId().equals(k)) {
                         service.claim(er, currentPerson.getPerson() );
                     }
                 }
