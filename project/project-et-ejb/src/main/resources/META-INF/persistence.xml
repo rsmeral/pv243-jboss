@@ -50,7 +50,7 @@
             <!-- Properties for Hibernate -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
             <!--<property name="hibernate.hbm2ddl.auto" value="create-drop" />-->
-            <property name="hibernate.hbm2ddl.auto" value="create-drop" />
+            <property name="hibernate.hbm2ddl.auto" value="update" />
             <property name="hibernate.show_sql" value="false" />
             <!-- Properties for Hibernate Search -->
             <property name="hibernate.search.default.indexBase" value="data/lucene-indexes"/>
@@ -76,7 +76,7 @@
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
             <!--<property name="hibernate.hbm2ddl.auto" value="update" />-->
-            <property name="hibernate.hbm2ddl.auto" value="create-drop" />
+            <property name="hibernate.hbm2ddl.auto" value="update" />
             <property name="hibernate.show_sql" value="false" />
         </properties>
     </persistence-unit>

@@ -32,20 +32,16 @@ public class LoginBean {
 
     @Inject
     private WebMessage webMessage;
-    
-    @Inject 
+
+    @Inject
     private LoginService loginService;
 
     public String login(String userName, String password) throws AuthenticationException {
 
-        loginService.login(userName, password);
-        
-        if (identity.isLoggedIn()) {
-            return "/secured/index.xhtml";
+        if (!identity.isLoggedIn()) {
+            loginService.login(userName, password);
         }
+        return "/secured/index.xhtml";
 
-        this.facesContext.addMessage(null, new FacesMessage(webMessage.loginFailed()));
-
-        return null;
     }
 }
