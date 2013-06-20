@@ -43,6 +43,9 @@ public class UserModel {
     @Digits(integer = 9, fraction = 0)
     private String bankAccount;
 
+    public UserModel() {
+    }
+    
     public String getUserName() {
         return userName;
     }

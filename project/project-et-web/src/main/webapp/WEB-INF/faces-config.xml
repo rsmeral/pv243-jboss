@@ -36,7 +36,7 @@
     <navigation-rule>
         <from-view-id>/create.xhtml</from-view-id>
         <navigation-case>
-            <from-action>#{testController.initialize}</from-action>
+            <from-action>#{appInitializer.initialize()}</from-action>
             <from-outcome>created</from-outcome>
             <to-view-id>/secured/reports.xhtml</to-view-id>
             <redirect/>

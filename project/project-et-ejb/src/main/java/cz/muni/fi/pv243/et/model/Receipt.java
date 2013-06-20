@@ -19,6 +19,16 @@ public class Receipt implements Serializable {
     @DocumentId
     private Long id;
 
+    public Receipt(Date importDate, Person importedBy, byte[] document, String documentName) {
+        this.importDate = importDate;
+        this.importedBy = importedBy;
+        this.document = document;
+        this.documentName = documentName;
+    }
+
+    public Receipt() {
+    }
+    
     @Temporal(javax.persistence.TemporalType.DATE)
     @NotNull
     private Date importDate;
