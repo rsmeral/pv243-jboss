@@ -72,7 +72,11 @@ public class ExpenseReportListProducerImpl implements ExpenseReportListProducer 
         FullTextEntityManager ftem = Search.getFullTextEntityManager(em);
         QueryBuilder queryBuilder = ftem.getSearchFactory().buildQueryBuilder().forEntity(ExpenseReport.class).get();
         Query allAssigned = queryBuilder.range().onField("verifier.id").above(0).createQuery();
-        Query query = queryBuilder.bool().must(allAssigned).not().createQuery();
+        Query statusSubmitted = queryBuilder.keyword().onField("status").matching(ReportStatus.SUBMITTED.ordinal()).createQuery();
+        Query query = queryBuilder.bool()
+                .must(allAssigned).not()
+                .must(statusSubmitted)
+                .createQuery();
 
         FullTextQuery fullTextQuery = ftem.createFullTextQuery(query, ExpenseReport.class);
         fullTextQuery.initializeObjectsWith(ObjectLookupMethod.SKIP, DatabaseRetrievalMethod.FIND_BY_ID);
