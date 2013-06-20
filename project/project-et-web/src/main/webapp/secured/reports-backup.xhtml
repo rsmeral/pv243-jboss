@@ -26,7 +26,7 @@
                 </c:when>
 
                 <c:when test="#{identityHelper.hasRole('VERIFIER')}">
-                    <ui:param name="showReports" value="#{expenseController.allforVerifier}"/>
+                    <ui:param name="showReports" value="#{expenseController.allOpenForVerifier()}"/>
                 </c:when>
             </c:choose>
 

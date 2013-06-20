@@ -66,6 +66,7 @@ public class ExpenseReport implements Serializable {
 
     @Field
     @Enumerated(EnumType.ORDINAL)
+    @IndexedEmbedded
     private ReportStatus status;
 
     public Long getId() {
