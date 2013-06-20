@@ -72,7 +72,7 @@
                     purgeOnStartup="false">
                 <properties>
                     <!--<property name="location" value="${java.io.tmpdir}" />-->
-                    <property name="location" value="/tmp/mrd-cache/"/>
+                    <property name="location" value="data/ispn-mrd-cache"/>
                 </properties>
             </loader>
         </loaders>
