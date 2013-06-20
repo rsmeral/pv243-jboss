@@ -46,10 +46,6 @@ public class ExpenseReportListProducerImpl implements ExpenseReportListProducer 
         FullTextQuery fullTextQuery = ftem.createFullTextQuery(query, ExpenseReport.class);
         fullTextQuery.initializeObjectsWith(ObjectLookupMethod.SKIP, DatabaseRetrievalMethod.FIND_BY_ID);
 
-
-        for (ExpenseReport er : (List<ExpenseReport>) fullTextQuery.getResultList()) {
-            System.out.println("getAllForSubmitter() = "+ er.getId() + " " + er.getName());
-        }
         return fullTextQuery.getResultList();
 //        return session.createQuery("SELECT report FROM ExpenseReport report WHERE report.submitter.id = :submitterId")
 //                .setParameter("submitterId", submitter.getId()).list();
@@ -72,11 +68,13 @@ public class ExpenseReportListProducerImpl implements ExpenseReportListProducer 
         FullTextEntityManager ftem = Search.getFullTextEntityManager(em);
         QueryBuilder queryBuilder = ftem.getSearchFactory().buildQueryBuilder().forEntity(ExpenseReport.class).get();
         Query allAssigned = queryBuilder.range().onField("verifier.id").above(0).createQuery();
-        Query statusSubmitted = queryBuilder.keyword().onField("status").matching(ReportStatus.SUBMITTED.ordinal()).createQuery();
-        Query query = queryBuilder.bool()
-                .must(allAssigned).not()
-                .must(statusSubmitted)
-                .createQuery();
+        Query query = queryBuilder.bool().must(allAssigned).not().createQuery();
+
+//        Query statusSubmitted = queryBuilder.keyword().onField("status").matching(ReportStatus.SUBMITTED.ordinal()).createQuery();
+//        Query query = queryBuilder.bool()
+//                .must(allAssigned).not()
+//                .must(statusSubmitted)
+//                .createQuery();
 
         FullTextQuery fullTextQuery = ftem.createFullTextQuery(query, ExpenseReport.class);
         fullTextQuery.initializeObjectsWith(ObjectLookupMethod.SKIP, DatabaseRetrievalMethod.FIND_BY_ID);

@@ -6,6 +6,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
       xml:lang="en" lang="en">
 <head>
     <title>New reports with no verifier</title>
@@ -23,8 +24,9 @@
         <ui:define name="content">
             <ui:insert name="title"/>
             <h:form styleClass="form-horizontal">
-                <h:messages/>
-                <h:dataTable value="#{expenseController.allWithNoVerifierAssigned}" var="report" styleClass="table table-bordered table-striped table-hover">
+
+
+                <h:dataTable value="#{expenseController.allWithNoVerifierAssigned}" rendered="#{not empty expenseController.allWithNoVerifierAssigned}" var="report" styleClass="table table-bordered table-striped table-hover">
                     <h:column>
                         <!--<h:selectBooleanCheckbox value="#{expenseController.checked}"/>-->
                         <h:selectBooleanCheckbox value="#{report.selected}"/>
@@ -32,7 +34,7 @@
 
                     <h:column>
                         <f:facet name="header">Name</f:facet>
-                        <h:commandLink action="#{expenseController.showSingleReport(report.id)}" value="#{report.name}"/>
+                        <h:commandLink action="#{expenseController.showSingleReport(report.id, '/secured/reportsUnclaimed')}" value="#{report.name}"/>
                     </h:column>
 
                     <h:column>
@@ -86,6 +88,7 @@
                     </h:column>
                 </h:dataTable>
 
+                <h:outputText rendered="#{empty expenseController.allWithNoVerifierAssigned}" value="No unassigned reports" />
 
                 <div class="control-group">
                     <!--FIX CLAIM CANCEL/BACK-->

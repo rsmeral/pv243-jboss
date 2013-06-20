@@ -13,6 +13,7 @@ import cz.muni.fi.pv243.et.service.ExpenseReportService;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.Collection;
+import java.util.Date;
 
 @Stateless
 @Authenticated
@@ -80,7 +81,7 @@ public class ExpenseReportServiceImpl implements ExpenseReportService {
             throw new RuntimeException("report has already been submitted");
         }
 
-        if (report.getVerifier() != null) {
+        if (report.getVerifier() != null && status != ReportStatus.REJECTED ) {
             throw new RuntimeException("report already has a verifier");
         }
 
@@ -99,7 +100,18 @@ public class ExpenseReportServiceImpl implements ExpenseReportService {
         this.setStatus(report, ReportStatus.REJECTED);
     }
 
+    @Override
+    public void sendMoney(ExpenseReport report) {
+        if (report == null) {
+            throw new IllegalArgumentException("null");
+        }
+        if (report.getStatus() != ReportStatus.APPROVED) {
+            throw new RuntimeException("Report is not approved!");
+        }
 
+        this.setStatus(report, ReportStatus.SETTLED);
+
+    }
 
     @Override
     public void approve(ExpenseReport report) {
@@ -119,6 +131,7 @@ public class ExpenseReportServiceImpl implements ExpenseReportService {
             throw new IllegalArgumentException("null");
         }
         report.setStatus(status);
+        report.setLastChangeDate(new Date(System.currentTimeMillis()));
         repository.update(report);
     }
 

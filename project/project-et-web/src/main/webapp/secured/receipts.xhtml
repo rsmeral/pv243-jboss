@@ -3,6 +3,7 @@
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
         >
 
 <head>
@@ -14,7 +15,19 @@
     <ui:define name="content">
         <h:form>
             <h2>Receipts</h2>
-            <h:dataTable value="#{allReceipts}" var="r" styleClass="table table-bordered table-striped table-hover">
+
+
+            <c:choose>
+                <c:when test="#{identityHelper.hasRole('ADMIN')}">
+                    <c:set var="receipts" value="#{allReceipts}"/>
+                </c:when>
+                <c:otherwise>
+                    <c:set var="receipts" value="#{currentUserReceipts}"/>
+                </c:otherwise>
+            </c:choose>
+
+
+            <h:dataTable value="${receipts}" var="r" styleClass="table table-bordered table-striped table-hover">
                 <h:column>
                     <f:facet name="header">Name</f:facet>
                     <h:commandLink action="#{receiptController.showFile(r.id)}">
@@ -48,7 +61,8 @@
 
             <div class="row">
                 <div class="span2">
-                    <h:commandLink action="#{receiptController.createReceipt('/secured/receipts')}" styleClass="btn" value="Add receipt"/>
+                    <h:commandLink action="#{receiptController.createReceipt('/secured/receipts')}" styleClass="btn"
+                                   value="Add receipt"/>
                 </div>
             </div>
         </h:form>

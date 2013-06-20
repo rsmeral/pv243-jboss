@@ -40,12 +40,12 @@
 
                     </ul>
                     <ul class="nav pull-right">
-                        <li>
-                            Logged as:<h:outputText value="#{identity.user.loginName}"/>
-                        </li>
+                        <!--<li>-->
+                            <!--Logged as:<h:outputText value="#{identity.user.loginName}"/>-->
+                        <!--</li>-->
                         <li>
                             <h:commandLink action="#{logoutBean.logout()}" styleClass="pull-right">
-                                <i class="icon-white icon-off"></i> Logout
+                                <i class="icon-white icon-off"></i> Logout #{identity.user.loginName}
                             </h:commandLink>
                         </li>
                     </ul>

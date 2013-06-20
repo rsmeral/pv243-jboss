@@ -15,6 +15,7 @@ public interface ExpenseReportService {
     void submit(ExpenseReport report);
     void approve(ExpenseReport report);
     void reject(ExpenseReport report);
+    void sendMoney(ExpenseReport report);
     void setStatus(ExpenseReport report, ReportStatus status);
 
     ExpenseReport get(Long id);

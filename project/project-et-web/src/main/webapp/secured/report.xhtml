@@ -22,6 +22,7 @@
                 <div class="span2" style="margin-top: 20px;">
                     <div class="pull-right">
                         <h:commandLink action="#{expenseController.editReport(expenseReport.id)}"
+                                       rendered="#{identityHelper.hasRole('ADMIN') or identityHelper.isReportOwner(expenseReport.id)}"
                                        styleClass="btn btn-mini" title="Edit report">
                             <i class="icon-pencil"></i>
                         </h:commandLink>
@@ -96,7 +97,7 @@
                     #{mt.currency}
                 </h:column>
 
-                <h:column rendered="#{identityHelper.hasAnyRole('ADMIN,VERIFIER')}">
+                <h:column rendered="#{identityHelper.hasAnyRole('ADMIN,VERIFIER') and not identityHelper.isReportOwner(expenseReport.id)}">
                     <f:facet name="header">Action</f:facet>
                     <h:commandLink action="#{moneyTransferController.editMoneyTransfer(mt.id)}"
                                    styleClass="btn btn-mini">
@@ -110,13 +111,14 @@
                 </h:column>
             </h:dataTable>
 
+            <h:panelGroup rendered="#{identityHelper.hasAnyRole('ADMIN,VERIFIER') and not identityHelper.isReportOwner(expenseReport.id)}">
             <div class="row">
                 <div class="span2 btn-group">
                     <h:commandLink action="#{moneyTransferController.createMoneyTransfer()}"
-                                   rendered="#{identityHelper.hasAnyRole('ADMIN,VERIFIER') and not identityHelper.isReportOwner(expenseReport.id)}"
                                    styleClass="btn" value="Add money transfer"/>
                 </div>
             </div>
+            </h:panelGroup>
 
 
             <!-- PAYMENTS -->
@@ -189,9 +191,12 @@
                         <h:commandLink action="#{expenseController.rejectReport()}" styleClass="btn btn-primary" value="Reject"/>
                         <h:commandLink action="#{expenseController.approveReport()}" styleClass="btn btn-primary" value="Approve"/>
                     </h:panelGroup>
-
+                    <h:panelGroup rendered="#{identityHelper.hasAnyRole('ADMIN,VERIFIER') and expenseController.isApproved()}">
+                        <h:commandLink action="#{expenseController.sendMoney()}" styleClass="btn btn-primary" value="Send money"/>
+                    </h:panelGroup>
 
                     <h:link rendered="#{true}" outcome="reports" styleClass="btn"><i class="icon-backward"></i> Reports</h:link>
+                    <h:commandButton action="#{expenseController.cancel()}" rendered="#{true}" value="Back" styleClass="btn btn"/>
                 </div>
             </div>
 

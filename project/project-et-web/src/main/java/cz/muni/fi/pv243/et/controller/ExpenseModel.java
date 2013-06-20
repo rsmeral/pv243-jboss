@@ -24,6 +24,17 @@ public class ExpenseModel implements Serializable {
 
     private List<ExpenseReport> reports;
 
+    private String backUrl;
+
+
+    public String getBackUrl() {
+        return backUrl;
+    }
+
+    public void setBackUrl(String backUrl) {
+        this.backUrl = backUrl;
+    }
+
     @Produces
     @Named("expenseReport")
     public ExpenseReport getReport() {

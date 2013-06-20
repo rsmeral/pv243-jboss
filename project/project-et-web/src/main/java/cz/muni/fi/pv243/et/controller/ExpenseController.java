@@ -68,7 +68,8 @@ public class ExpenseController {
         return reports;
     }
 
-    public String showSingleReport(Long id) {
+    public String showSingleReport(Long id, String fromUrl) {
+        model.setBackUrl(fromUrl);
         model.setReport(service.get(id));
 
         return "/secured/report";
@@ -125,7 +126,10 @@ public class ExpenseController {
 
     public boolean isSubmittable() {
         ReportStatus status = model.getReport().getStatus();
-        return !(status == ReportStatus.SUBMITTED || status == ReportStatus.APPROVED || status == ReportStatus.SETTLED );
+        boolean submittableByStatus = !(status == ReportStatus.SUBMITTED || status == ReportStatus.APPROVED || status == ReportStatus.SETTLED);
+        boolean submittableByPayment = !(model.getReport().getPayments().isEmpty());
+
+        return (submittableByPayment && submittableByStatus);
     }
 
     public boolean isSubmitted() {
@@ -133,14 +137,28 @@ public class ExpenseController {
         return (status == ReportStatus.SUBMITTED);
     }
 
+    public boolean isApproved() {
+        ReportStatus status = model.getReport().getStatus();
+        return (status == ReportStatus.APPROVED);
+    }
+
     public String rejectReport() {
         service.setStatus(model.getReport(), ReportStatus.REJECTED);
-        return "/secured/reports";
+        return "/secured/report";
     }
 
     public String approveReport() {
-        service.setStatus(model.getReport(), ReportStatus.APPROVED);
-        return "/secured/reports";
+        service.approve(model.getReport());
+        return "/secured/report";
+    }
+
+    public String sendMoney() {
+        service.setStatus(model.getReport(), ReportStatus.SETTLED);
+        return "/secured/report";
+    }
+
+    public String cancel() {
+        return model.getBackUrl();
     }
 
 }

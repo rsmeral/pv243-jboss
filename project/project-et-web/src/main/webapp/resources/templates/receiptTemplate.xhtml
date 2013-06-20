@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE html
-    PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
@@ -9,42 +9,44 @@
       xmlns:t="http://myfaces.apache.org/tomahawk"
       xml:lang="en" lang="en">
 
-    <h:head>
-        <title>Purpose</title>
-    </h:head>
-    <h:body>
+<h:head>
+    <title>Purpose</title>
+</h:head>
+<h:body>
 
-        <ui:composition template="/resources/templates/common/commonTemplate.xhtml">
-            <ui:define name="content">
-                <ui:insert name="title"/>
-                <h:form styleClass="form-horizontal" enctype="multipart/form-data">
+    <ui:composition template="/resources/templates/common/commonTemplate.xhtml">
+        <ui:define name="content">
+            <ui:insert name="title"/>
+            <h:form styleClass="form-horizontal" enctype="multipart/form-data">
 
 
-                    <h:messages/>
+                <!--<h:messages/>-->
+                <!--<div class="control-group">-->
+                <!--<h:outputLabel value="Name:" for="name" styleClass="control-label"/>-->
 
-                    <!--<div class="control-group">-->
-                    <!--<h:outputLabel value="Name:" for="name" styleClass="control-label"/>-->
+                <!--<div class="controls">-->
+                <!--<h:inputText id="name" value="#{receipt.documentName}" size="20"/>-->
+                <!--</div>-->
+                <!--</div>-->
+                <div class="control-group">
+                    <h:outputLabel value="Receipt:" for="fileUpload" styleClass="control-label"/>
 
-                    <!--<div class="controls">-->
-                        <!--<h:inputText id="name" value="#{receipt.documentName}" size="20"/>-->
-                    <!--</div>-->
-                    <!--</div>-->
-                    <div class="control-group">
-                        <h:outputLabel value="Receipt:" for="fileUpload" styleClass="control-label"/>
-
-                        <div class="controls">
-                            <t:inputFileUpload id="fileUpload" value="#{receiptController.uploadedFile}" style="padding: 5px 0px;" label="Receipt"/>
-                        </div>
+                    <div class="controls">
+                        <t:inputFileUpload id="fileUpload" value="#{receiptController.uploadedFile}"
+                                           style="padding: 5px 0px;" label="Receipt"/>
                     </div>
-                    <div class="control-group">
-                        <div class="controls">
-                            <h:commandButton action="#{receiptController.saveReceipt()}" value="Save" styleClass="btn btn-primary"/>
-                            <h:commandButton action="#{receiptController.cancel}" immediate="true" value="Cancel" styleClass="btn btn"/>
-                        </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <h:commandButton action="#{receiptController.saveReceipt()}" value="Save"
+                                         styleClass="btn btn-primary"/>
+                        <h:commandButton action="#{receiptController.cancel}" immediate="true" value="Cancel"
+                                         styleClass="btn btn"/>
                     </div>
-                </h:form>
-            </ui:define>
-        </ui:composition>
+                </div>
+            </h:form>
+        </ui:define>
+    </ui:composition>
 
-    </h:body>
+</h:body>
 </html>
