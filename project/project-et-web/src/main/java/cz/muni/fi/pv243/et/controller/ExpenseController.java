@@ -51,17 +51,14 @@ public class ExpenseController {
         return service.findAll();
     }
 
-    @Produces
-    public Collection<ExpenseReport> getAllforVerifier() {
-        return service.findForVerifier(currentPerson.getPerson());
+    public Collection<ExpenseReport> allOpenForVerifier() {
+        return service.findForVerifierWithStatus(currentPerson.getPerson(), ReportStatus.OPEN);
     }
 
-    @Produces
     public Collection<ExpenseReport> getAllforSubmitter() {
         return service.findForSubmitter(currentPerson.getPerson());
     }
 
-    @Produces
     public Collection<ExpenseReport> getAllWithNoVerifierAssigned() {
         List<ExpenseReport> reports = (List<ExpenseReport>) service.findWithNoVerifierAssigned();
         model.setReports(reports);

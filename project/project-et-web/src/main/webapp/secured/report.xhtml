@@ -182,7 +182,7 @@
                     <!-- SUBMITTER OPTIONS -->
                     <h:panelGroup rendered="#{identityHelper.isReportOwner(expenseReport.id) or identityHelper.hasRole('ADMIN')}">
                         <h:commandLink action="#{expenseController.submitReport()}" rendered="#{expenseController.isSubmittable()}" styleClass="btn btn-primary" value="Submit"/>
-                        <h:commandLink action="#{paymentController.createPayment()}" styleClass="btn" value="Add Payment"/>
+                        <h:commandLink action="#{paymentController.createPayment()}" rendered="#{expenseController.isSubmittable()}" styleClass="btn" value="Add Payment"/>
                     </h:panelGroup>
 
                     <!-- VERIFIER OPTIONS -->
