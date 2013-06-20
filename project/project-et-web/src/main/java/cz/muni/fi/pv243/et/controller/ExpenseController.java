@@ -8,9 +8,7 @@ import javax.enterprise.inject.Model;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
+import java.util.*;
 
 @Model
 public class ExpenseController {
@@ -24,6 +22,13 @@ public class ExpenseController {
     @Inject
     @CurrentPerson
     private PersonWrapper currentPerson;
+
+    private Map<Long, Boolean> checked = new HashMap<Long, Boolean>();
+
+    @Produces
+    public Map<Long, Boolean> getChecked() {
+        return checked;
+    }
 
     @Produces
     @Named("expenseReports")

@@ -95,7 +95,7 @@
 
         <!--MY VERIFY EXPENSE REPORTS -->
         <h:form rendered="#{identityHelper.hasAnyRole('ADMIN,VERIFIER')}">
-            <h2>My Verify expense reports</h2>
+            <h2>My reports to verify</h2>
             <h:dataTable value="#{expenseController.allforVerifier}" var="report"
                          styleClass="table table-bordered table-striped table-hover">
                 <h:column>

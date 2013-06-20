@@ -34,7 +34,9 @@ import javax.ejb.Startup;
 import javax.inject.Inject;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.enterprise.event.Event;
 import javax.inject.Named;
 import org.apache.deltaspike.core.api.exception.control.event.ExceptionToCatchEvent;
@@ -45,16 +47,10 @@ import org.apache.deltaspike.core.api.exception.control.event.ExceptionToCatchEv
 public class AppInitializer {
 
     @Inject
-    private EventLog log;
-
-    @Inject
-    private IdentityManager identityManager;
-
-    @Inject
-    private PersonRepository personRepository;
-
-    @Inject
     private Event<ExceptionToCatchEvent> exceptionEvent;
+
+    @Inject
+    private PersonRepository pd;
 
     @Inject
     private PersonListProducer plp;
@@ -63,107 +59,75 @@ public class AppInitializer {
     private PaymentRepository paymentRepo;
 
     @Inject
+    private PaymentListProducer paymentListProducer;
+
+    @Inject
     private PurposeRepository purposeRepo;
+
+    @Inject
+    private PurposeListProducer purposeList;
 
     @Inject
     private ReceiptRepository receiptRepo;
 
     @Inject
+    private ReceiptListProducer receiptList;
+
+    @Inject
     private ExpenseReportRepository expenseRepo;
+
+    @Inject
+    private ExpenseReportListProducer expenseList;
 
     @Inject
     private MoneyTransferRepository moneyRepo;
 
     @Inject
+    private MoneyTransferListProducer moneyList;
+
+    @Inject
     private UserManager userManager;
 
-    @PostConstruct
-    private void initAdmin() {
-        log.logInitializingUsers();
-
-        // create admin if none exists
-        if (identityManager
-                .createIdentityQuery(User.class)
-                .setParameter(User.LOGIN_NAME, "admin")
-                .getResultCount() == 0) {
-
-            Person adminPerson = new Person("Admin", "Admin", "admin@admin.sk", "000000000");
-            personRepository.create(adminPerson);
-            Long id = adminPerson.getId();
-
-            User admin = new SimpleUser();
-            admin.setLoginName("admin");
-            admin.setFirstName("admin");
-            admin.setLastName("admin");
-            admin.setAttribute(new Attribute<String>("personId", id.toString()));
-
-            identityManager.add(admin);
-
-            Password password = new Password("admin".toCharArray());
-            this.identityManager.updateCredential(admin, password);
-
-            Role adminRole = identityManager.getRole(PersonRole.ADMIN.toString());
-
-            if (adminRole == null) {
-                adminRole = new SimpleRole(PersonRole.ADMIN.toString());
-                identityManager.add(adminRole);
-            }
-
-            Role verifierRole = identityManager.getRole(PersonRole.VERIFIER.toString());
-
-            if (verifierRole == null) {
-                verifierRole = new SimpleRole(PersonRole.VERIFIER.toString());
-                identityManager.add(verifierRole);
-            }
-
-            identityManager.grantRole(admin, adminRole);
-            identityManager.grantRole(admin, verifierRole);
-        }
-    }
-
     public String initialize() {
-        // create persons
-        Person personTom = createPerson("Tomas", "Submitterovic", "test@test.cz", "123456789");
-        
-        Person personJana = createPerson("Jana", "Submitterova", "nova.jana@test.cz", "789313244");
 
-        Person personVerifier = createPerson("Hermiona", "Verifierova", "herim@ona.cz", "120313244");
+        List<PersonRole> roles = new ArrayList<PersonRole>();
+        roles.add(PersonRole.APPLICANT);
+
+        Person personApplicant = createPerson("Alice", "Applicantovic", "test@test.cz", "123456789", roles);
+        roles.add(PersonRole.VERIFIER);
+        Person personBoth = createPerson("Bob", "Both", "nova.jana@test.cz", "789313244", roles);
+        roles.clear();
+        roles.add(PersonRole.VERIFIER);
+        Person personApprover = createPerson("Vera", "Approverova", "herim@ona.cz", "120313244", roles);
+
+        System.out.println("created Persons");
 
         // PURPOSES
-        Purpose purp1 = new Purpose("TestPurp", "Purpose 2 Desctipriton");
-        purposeRepo.create(purp1);
-
-        Purpose purp2 = new Purpose("Purpose 2", "Purpose of not writing nice Java code");
-        purposeRepo.create(purp2);
-
-        Purpose purp3 = new Purpose("Purpose 3", "Arquillian not testing purpose - give us some money bicth!");
-        purposeRepo.create(purp3);
+        Purpose purp1 = createPurpose("TestPurp", "Purpose 2 Desctipriton");
+        Purpose purp2 = createPurpose("Purpose 2", "Purpose of not writing nice Java code");
+        Purpose purp3 = createPurpose("Purpose 3", "Arquillian not testing purpose - give us some money bicth!");
 
 
         // RECEIPTS
-        Receipt rec = new Receipt(new Date(System.currentTimeMillis() - 100000), personTom, null, "Platba za vlak a autobus");
-        receiptRepo.create(rec);
+        Receipt rec = createReceipt(personApplicant, new Date(System.currentTimeMillis() - 100000), "Platba za vlak a autobus NULL");
+        Receipt rec2 = createReceipt(personBoth, new Date(System.currentTimeMillis() - 20000), "Way there and back NULL");
 
-        Receipt rec2 = new Receipt(new Date(System.currentTimeMillis() - 20000), personJana, null, "Way there and back");
-        receiptRepo.create(rec2);
 
         // REPORTS
-        ExpenseReport report = new ExpenseReport("Berlin 2013 Bienale", "Visit of some stupid Conference", personTom, personJana, ReportStatus.OPEN);
-        report.setLastSubmittedDate(new Date(System.currentTimeMillis()));
-        expenseRepo.create(report);
+        ExpenseReport report =
+                createExpenseReport("Berlin 2013 Bienale", personApplicant, personBoth, ReportStatus.OPEN, "Visit of some stupid Conference" );
+//        report.setApprovedDate(new Date(System.currentTimeMillis() + 1000000000));
+        ExpenseReport report2 =
+                createExpenseReport("Munich 2012 FUD Conference", personApplicant, null, ReportStatus.APPROVED, "Conference in Munich" );
 
-        ExpenseReport report2 = new ExpenseReport("Munich 2012 FUD Conference", "Conference in Munich", personTom, null, ReportStatus.APPROVED);
-        report2.setLastSubmittedDate(new Date(System.currentTimeMillis()));
-        expenseRepo.create(report2);
 
-        ExpenseReport report3 = new ExpenseReport("Non Testing in Arquillian 2012", "Why are we not testing in Arquillian?", personJana, personVerifier, ReportStatus.REJECTED);
-        report3.setLastSubmittedDate(new Date(System.currentTimeMillis()));
-        expenseRepo.create(report3);
+        ExpenseReport report3 =
+                createExpenseReport("Non Testing in Arquillian 2012", personBoth, personApprover, ReportStatus.REJECTED, "Why are we not testing in Arquillian?" );
 
         // MONEY TRANSFERS
-        MoneyTransfer mt = createMoneyTransfer(personVerifier, report2, BigDecimal.valueOf(2400), Currency.CZK, new Date(System.currentTimeMillis() + 20));
-        MoneyTransfer mt2 = createMoneyTransfer(personVerifier, report3, BigDecimal.valueOf(200), Currency.CZK, new Date(System.currentTimeMillis() - 15000));
-        MoneyTransfer mt3 = createMoneyTransfer(personVerifier, report3, BigDecimal.valueOf(100), Currency.CZK, new Date(System.currentTimeMillis() - 14000));
+        MoneyTransfer mt = createMoneyTransfer(personApprover, report2, BigDecimal.valueOf(2400), Currency.CZK, new Date(System.currentTimeMillis() + 20));
+        MoneyTransfer mt2 = createMoneyTransfer(personApprover, report3, BigDecimal.valueOf(200), Currency.CZK, new Date(System.currentTimeMillis() - 15000));
+        MoneyTransfer mt3 = createMoneyTransfer(personApprover, report3, BigDecimal.valueOf(100), Currency.CZK, new Date(System.currentTimeMillis() - 14000));
 
         // PAYMENTS
         Payment payment = createPayment(report, purp1, rec, BigDecimal.valueOf(1500), Currency.CZK);
@@ -174,7 +138,9 @@ public class AppInitializer {
         return "created";
     }
 
-    private Person createPerson(String firstName, String lastName, String email, String bankAccount) {
+
+
+    private Person createPerson(String firstName, String lastName, String email, String bankAccount, List<PersonRole> roles) {
         UserModel model = new UserModel();
         model.setFirstName(firstName);
         model.setLastName(lastName);
@@ -186,7 +152,57 @@ public class AppInitializer {
         // firstname.tolowercase == username == password
         userManager.changePassword(model.getUserName(), model.getUserName());
 
-        return plp.getPerson(model.getId());
+        for (PersonRole role : roles) {
+            System.out.println(model.getUserName() + " role=" + role);
+            userManager.grantRole(model.getUserName(), role);
+        }
+
+
+        Person person = new Person();
+        person.setId(model.getId());
+        person.setFirstName(firstName);
+        person.setLastName(lastName);
+        person.setEmail(email);
+        person.setBankAccount(bankAccount);
+
+        return person;
+    }
+
+    private Purpose createPurpose(String name, String description) {
+        Purpose purpose = new Purpose();
+        purpose.setDescription(description);
+        purpose.setName(name);
+        purposeRepo.create(purpose);
+
+        return purpose;
+    }
+
+    private Receipt createReceipt(Person importedBy, Date date, String documentName) {
+        Receipt receipt = new Receipt();
+        receipt.setImportDate(date);
+        receipt.setImportedBy(importedBy);
+        receipt.setDocumentName(documentName);
+//        receipt.setDocument();
+        receiptRepo.create(receipt);
+
+        return receipt;
+    }
+
+
+    private ExpenseReport createExpenseReport(String name, Person submitter, Person verifier, ReportStatus status, String description) {
+        ExpenseReport report = new ExpenseReport();
+        report.setName(name);
+        report.setSubmitter(submitter);
+        report.setVerifier(verifier);
+        report.setStatus(status);
+        report.setDescription(description);
+        report.setLastSubmittedDate(new Date(System.currentTimeMillis()));
+//        report.setApprovedDate();
+//        report.setPayments();           -- REMOVE IT ?? How do we track this thing? We set payments to reports (?)
+//        report.setMoneyTransfers();
+        expenseRepo.create(report);
+
+        return report;
     }
 
     private Payment createPayment(ExpenseReport report, Purpose purpose, Receipt receipt, BigDecimal value, Currency currency) {
