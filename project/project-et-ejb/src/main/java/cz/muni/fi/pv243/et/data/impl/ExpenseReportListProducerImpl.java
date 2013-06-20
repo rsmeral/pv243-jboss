@@ -69,13 +69,15 @@ public class ExpenseReportListProducerImpl implements ExpenseReportListProducer 
 
     @Override
     public Collection<ExpenseReport> getAllWithNoVerifierAssigned() {
-        Collection<ExpenseReport> result = session.createQuery("SELECT report FROM ExpenseReport report WHERE report.verifier IS NULL").list();
+        FullTextEntityManager ftem = Search.getFullTextEntityManager(em);
+        QueryBuilder queryBuilder = ftem.getSearchFactory().buildQueryBuilder().forEntity(ExpenseReport.class).get();
+        Query allAssigned = queryBuilder.range().onField("verifier.id").above(0).createQuery();
+        Query query = queryBuilder.bool().must(allAssigned).not().createQuery();
 
-        for (ExpenseReport er : result) {
-            System.out.println("getAllWithNoVerifierAssigned()=" + er.getName() + " " + er.getId());
-        }
+        FullTextQuery fullTextQuery = ftem.createFullTextQuery(query, ExpenseReport.class);
+        fullTextQuery.initializeObjectsWith(ObjectLookupMethod.SKIP, DatabaseRetrievalMethod.FIND_BY_ID);
 
-        return result;
+        return fullTextQuery.getResultList();
     }
 
 
