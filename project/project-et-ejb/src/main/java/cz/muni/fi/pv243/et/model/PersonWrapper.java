@@ -1,5 +1,6 @@
 package cz.muni.fi.pv243.et.model;
 
+import cz.muni.fi.pv243.et.model.Person;
 import java.io.Serializable;
 
 public class PersonWrapper implements Serializable {

@@ -8,7 +8,6 @@
         <!-- Use Hibernate OGM provider: configuration will be transparent -->
         <provider>org.hibernate.ogm.jpa.HibernateOgmPersistence</provider>
 
-        <!--UGLY SHIT!! HOW TO REMOVE IT!?-->
         <class>cz.muni.fi.pv243.et.model.Person</class>
         <class>cz.muni.fi.pv243.et.model.Purpose</class>
         <class>cz.muni.fi.pv243.et.model.Receipt</class>
@@ -50,7 +49,7 @@
             <!-- Properties for Hibernate -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
             <!--<property name="hibernate.hbm2ddl.auto" value="create-drop" />-->
-            <property name="hibernate.hbm2ddl.auto" value="update" />
+            <property name="hibernate.hbm2ddl.auto" value="create-drop" />
             <property name="hibernate.show_sql" value="false" />
             <!-- Properties for Hibernate Search -->
             <!--<property name="hibernate.search.default.directory_provider" value="infinispan"/>-->
@@ -74,7 +73,7 @@
         <exclude-unlisted-classes>true</exclude-unlisted-classes>
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
-            <property name="hibernate.hbm2ddl.auto" value="update" />
+            <property name="hibernate.hbm2ddl.auto" value="create-drop" />
             <property name="hibernate.show_sql" value="false" />
         </properties>
     </persistence-unit>
