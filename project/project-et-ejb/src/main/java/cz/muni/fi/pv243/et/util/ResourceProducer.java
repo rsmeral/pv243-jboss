@@ -15,10 +15,10 @@ public class ResourceProducer {
     @Inject
     private Identity identity;
 
-    @Produces
-    public Logger produceLogger(InjectionPoint injectionPoint) {
-        return Logger.getLogger(injectionPoint.getMember().getDeclaringClass());
-    }
+//    @Produces
+//    public Logger produceLogger(InjectionPoint injectionPoint) {
+//        return Logger.getLogger(injectionPoint.getMember().getDeclaringClass());
+//    }
 
     @Produces
     @RequestScoped

@@ -25,9 +25,11 @@
             <h:form styleClass="form-horizontal">
                 <h:messages/>
                 <h:dataTable value="#{expenseController.allWithNoVerifierAssigned}" var="report" styleClass="table table-bordered table-striped table-hover">
-                    <!--<h:column>-->
+                    <h:column>
                         <!--<h:selectBooleanCheckbox value="#{expenseController.checked}"/>-->
-                    <!--</h:column>-->
+                        <h:selectBooleanCheckbox value="#{report.selected}"/>
+                    </h:column>
+
                     <h:column>
                         <f:facet name="header">Name</f:facet>
                         <h:commandLink action="#{expenseController.showSingleReport(report.id)}" value="#{report.name}"/>
@@ -88,7 +90,7 @@
                 <div class="control-group">
                     <!--FIX CLAIM CANCEL/BACK-->
                     <div class="controls">
-                        <!--<h:commandButton action="#{expenseController.saveReport()}" value="Save" styleClass="btn btn-primary"/>-->
+                        <h:commandButton action="#{expenseController.claimReports()}" value="Claim" styleClass="btn btn-primary"/>
                         <h:commandButton action="/secured/reports" immediate="true"  value="Cancel" styleClass="btn btn"/>
                     </div>
                 </div>

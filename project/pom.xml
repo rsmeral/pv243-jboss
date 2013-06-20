@@ -18,7 +18,7 @@
     </modules>
 
     <properties>
-        <version.jboss.bom>1.0.5.CR4</version.jboss.bom>
+        <version.jboss.bom>1.0.7.CR5</version.jboss.bom>
         
         <!-- Explicitly declaring the source encoding eliminates the following 
         message: -->

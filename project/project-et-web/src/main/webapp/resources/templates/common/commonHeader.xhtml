@@ -11,65 +11,72 @@
 </head>
 
 <body>
-    <ui:composition>
-        <div class="navbar navbar-fixed-top">
-            <div class="navbar-inner">
-                <div class="container">
-                    <h:form>
-                        <ul class="nav">
-                            <li>
-                                <h:link outcome="/secured/index"><i class="icon-white icon-home"></i> Home</h:link>
-                            </li>
-                            <li>
-                                <h:link outcome="/create">Initialize</h:link>
-                            </li>
-                            <li>
-                                <h:link outcome="/secured/reports">Reports</h:link>
-                            </li>
-                            <li>
-                                <h:link outcome="/secured/purposes" rendered="#{identityHelper.hasAnyRole('ADMIN,VERIFIER')}">Purposes</h:link>
-                            </li>
-                            <li>
-                                <h:link outcome="/secured/receipts">Receipts</h:link>
-                            </li>
-                            <li>
-                                <h:link outcome="/secured/persons" rendered="#{identityHelper.hasRole('ADMIN')}">Users</h:link>
-                            </li>
-                        </ul>
-                        <ul class="nav pull-right">
-                            <li>
-                                <h:commandLink action="#{logoutBean.logout()}" styleClass="pull-right">
-                                    <i class="icon-white icon-off"></i> Logout
-                                </h:commandLink>
-                            </li>
+<ui:composition>
+    <div class="navbar navbar-fixed-top">
+        <div class="navbar-inner">
+            <div class="container">
+                <h:form>
+                    <ul class="nav">
+                        <li>
+                            <h:link outcome="/secured/index"><i class="icon-white icon-home"></i> Home</h:link>
+                        </li>
+                        <li>
+                            <h:link outcome="/create">Initialize</h:link>
+                        </li>
+                        <li>
+                            <h:link outcome="/secured/reports">Reports</h:link>
+                        </li>
+                        <li>
+                            <h:link outcome="/secured/purposes"
+                                    rendered="#{identityHelper.hasAnyRole('ADMIN,VERIFIER')}">Purposes</h:link>
+                        </li>
+                        <li>
+                            <h:link outcome="/secured/receipts">Receipts</h:link>
+                        </li>
+                        <li>
+                            <h:link outcome="/secured/persons"
+                                    rendered="#{identityHelper.hasRole('ADMIN')}">Users</h:link>
+                        </li>
+
                     </ul>
-                    </h:form>
+                    <ul class="nav pull-right">
+                        <li>
+                            Logged as:<h:outputText value="#{identity.user.loginName}"/>
+                        </li>
+                        <li>
+                            <h:commandLink action="#{logoutBean.logout()}" styleClass="pull-right">
+                                <i class="icon-white icon-off"></i> Logout
+                            </h:commandLink>
+                        </li>
+                    </ul>
+                </h:form>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="jumbotron subhead" id="overview">
+            <div class="row">
+                <div class="span6">
+                    <h1>Expense tracking</h1>
+
+                    <p class="lead">M(išo)R(on)D(ušan)</p>
+                </div>
+                <div class="span4 offset2">
+                    <div class="well">
+                        LogoLogoLogoLogoLogoLogoLogo
+                        <br/>
+                        LogoLogoLogoLogoLogoLogoLogo
+                        <br/>
+                        LogoLogoLogoLogoLogoLogoLogo
+                        <br/>
+                        LogoLogoLogoLogoLogoLogoLogo
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="container">
-            <div class="jumbotron subhead" id="overview">
-                <div class="row">
-                    <div class="span6">
-                        <h1>Expense tracking</h1>
-                        <p class="lead">M(išo)R(on)D(ušan)</p>
-                    </div>
-                    <div class="span4 offset2">
-                        <div class="well">
-                            LogoLogoLogoLogoLogoLogoLogo
-                            <br/>
-                            LogoLogoLogoLogoLogoLogoLogo
-                            <br/>
-                            LogoLogoLogoLogoLogoLogoLogo
-                            <br/>
-                            LogoLogoLogoLogoLogoLogoLogo
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <hr/>
-    </ui:composition>
+    </div>
+    <hr/>
+</ui:composition>
 </body>
 
 </html>

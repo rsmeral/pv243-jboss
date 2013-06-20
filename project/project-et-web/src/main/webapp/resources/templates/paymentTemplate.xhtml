@@ -25,22 +25,20 @@
                     <h:outputLabel value="Date:" for="date" styleClass="control-label"/>
 
                     <div class="controls">
-                        <h:inputText id="date" label="Date" value="#{payment.date}" size="20"/>
+                        <p:calendar value="#{payment.date}" id="date" label="Date" mode="popup" />
                     </div>
                 </div>
                 <div class="control-group">
                     <h:outputLabel value="Purpose:" for="purposes" styleClass="control-label"/>
 
                     <div class="controls">
-                        <h:selectOneMenu id="purposes" label="Purpose" value="#{payment.purpose}"
-                                         converter="#{purposeConverter}">
-                            <f:selectItem itemValue="#{null}" itemLabel=""/>
+                        <h:selectOneMenu id="purposes" label="Purpose" value="#{payment.purpose}" converter="#{purposeConverter}">
+                            <f:selectItem itemValue="#{null}" itemLabel="" />
                             <f:selectItems value="#{purposes}" var="p" itemLabel="#{p.name}" itemValue="#{p}"/>
                         </h:selectOneMenu>
 
-                        <p:commandButton id="newPurpose"
-                                         action="#{purposeController.createPurpose('/secured/createPayment')}"
-                                         value="Create new" styleClass="btn btn-mini" style="margin-left: 20px;">
+                        <p:commandButton id="newPurpose" action="#{purposeController.createPurpose('/secured/createPayment')}"
+                                         value="Create new" styleClass="btn btn-mini" style="margin-left: 20px;"  >
                             <o:ignoreValidationFailed/>
                             <f:ajax execute="@form"/>
                         </p:commandButton>
@@ -50,15 +48,13 @@
                     <h:outputLabel value="Receipt:" for="receipt" styleClass="control-label"/>
 
                     <div class="controls">
-                        <h:selectOneMenu id="receipt" label="Receipt" value="#{payment.receipt}"
-                                         converter="#{receiptConverter}">
-                            <f:selectItem itemValue="#{null}" itemLabel=""/>
+                        <h:selectOneMenu id="receipt" label="Receipt" value="#{payment.receipt}" converter="#{receiptConverter}">
+                            <f:selectItem itemValue="#{null}" itemLabel="" />
                             <f:selectItems value="#{currentUserReceipts}" var="r" itemLabel="#{r.documentName}"
                                            itemValue="#{r}"/>
                         </h:selectOneMenu>
-                        <p:commandButton id="newReceipt"
-                                         action="#{receiptController.createReceipt('/secured/createPayment')}"
-                                         value="Create new" styleClass="btn btn-mini" style="margin-left: 20px;">
+                        <p:commandButton id="newReceipt" action="#{receiptController.createReceipt('/secured/createPayment')}"
+                                         value="Create new" styleClass="btn btn-mini" style="margin-left: 20px;"  >
                             <o:ignoreValidationFailed/>
                             <f:ajax execute="@form"/>
                         </p:commandButton>

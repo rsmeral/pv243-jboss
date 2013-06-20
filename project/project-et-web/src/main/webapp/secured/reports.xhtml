@@ -13,7 +13,7 @@
 
 <ui:composition template="../resources/templates/common/commonTemplate.xhtml">
     <ui:define name="content">
-        <h:form>
+        <h:form >
             <h2>My Expense reports</h2>
 
             <!--Show applicant expense reports-->
@@ -27,8 +27,7 @@
                 </c:when>
             </c:choose>
 
-            <h:dataTable value="#{showReports}" var="report"
-                         styleClass="table table-bordered table-striped table-hover">
+            <h:dataTable value="#{showReports}" var="report" rendered="#{showReports != null}" styleClass="table table-bordered table-striped table-hover">
                 <h:column>
                     <f:facet name="header">Name</f:facet>
                     <h:commandLink action="#{expenseController.showSingleReport(report.id)}" value="#{report.name}"/>
@@ -54,7 +53,7 @@
                 <!-- IF ROLE IS VERIFIER SHOW THIS -->
 
                 <h:column>
-                    <!--<h:column rendered="#{identityHelper.hasRole('VERIFIER') or identityHelper.hasRole('ADMIN')}">-->
+                    <!--<h:column rendered="#{identityHelper.hasAnyRole('VERIFIER,ADMIN')}">-->
                     <f:facet name="header">Submitter</f:facet>
                     #{report.submitter.firstName} #{report.submitter.lastName}
                 </h:column>
@@ -95,8 +94,8 @@
 
         <!--MY VERIFY EXPENSE REPORTS -->
         <h:form rendered="#{identityHelper.hasAnyRole('ADMIN,VERIFIER')}">
-            <h2>My reports to verify</h2>
-            <h:dataTable value="#{expenseController.allforVerifier}" var="report"
+            <h2>Reports to verify</h2>
+            <h:dataTable value="#{expenseController.allforVerifier}" var="report" rendered="#{expenseController.allforVerifier != null}"
                          styleClass="table table-bordered table-striped table-hover">
                 <h:column>
                     <f:facet name="header">Name</f:facet>
@@ -153,7 +152,7 @@
                     #{report.id}
                 </h:column>
             </h:dataTable>
-            <h:commandLink action="/secured/reportsUnclaimed" styleClass="btn" value="Verified reports"/>
+            <h:commandLink action="/secured/reportsUnclaimed" styleClass="btn" value="Unassigned reports"/>
         </h:form>
 
 

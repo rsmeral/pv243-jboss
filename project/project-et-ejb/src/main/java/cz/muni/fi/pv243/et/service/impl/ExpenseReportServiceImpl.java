@@ -68,6 +68,60 @@ public class ExpenseReportServiceImpl implements ExpenseReportService {
         this.save(report);
     }
 
+
+    @Override
+    public void submit(ExpenseReport report) {
+        if (report == null) {
+            throw new IllegalArgumentException();
+        }
+
+        ReportStatus status = report.getStatus();
+        if (status == ReportStatus.SUBMITTED || status == ReportStatus.APPROVED || status == ReportStatus.SETTLED ) {
+            throw new RuntimeException("report has already been submitted");
+        }
+
+        if (report.getVerifier() != null) {
+            throw new RuntimeException("report already has a verifier");
+        }
+
+        this.setStatus(report, ReportStatus.SUBMITTED);
+    }
+
+    @Override
+    public void reject(ExpenseReport report) {
+        if (report == null) {
+            throw new IllegalArgumentException("null");
+        }
+        if (report.getVerifier() == null) {
+            throw new RuntimeException("no verifier assigned");
+        }
+
+        this.setStatus(report, ReportStatus.REJECTED);
+    }
+
+
+
+    @Override
+    public void approve(ExpenseReport report) {
+        if (report == null) {
+            throw new IllegalArgumentException("null");
+        }
+        if (report.getVerifier() == null) {
+            throw new RuntimeException("no verifier assigned");
+        }
+
+        this.setStatus(report, ReportStatus.APPROVED);
+    }
+
+    @Override
+    public void setStatus(ExpenseReport report, ReportStatus status) {
+        if (report == null || status == null) {
+            throw new IllegalArgumentException("null");
+        }
+        report.setStatus(status);
+        repository.update(report);
+    }
+
     @Override
     public ExpenseReport get(Long id) {
         if (id == null) {

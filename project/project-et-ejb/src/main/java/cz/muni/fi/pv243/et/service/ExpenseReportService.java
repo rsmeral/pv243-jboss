@@ -12,6 +12,10 @@ public interface ExpenseReportService {
     void save(ExpenseReport report);
     void remove(ExpenseReport report);
     void claim(ExpenseReport report, Person verifier);
+    void submit(ExpenseReport report);
+    void approve(ExpenseReport report);
+    void reject(ExpenseReport report);
+    void setStatus(ExpenseReport report, ReportStatus status);
 
     ExpenseReport get(Long id);
 
@@ -22,4 +26,5 @@ public interface ExpenseReportService {
     Collection<ExpenseReport> findByStatus(ReportStatus status);
     Collection<ExpenseReport> findForSubmitterWithStatus(Person submitter, ReportStatus status);
     Collection<ExpenseReport> findForVerifierWithStatus(Person verifier, ReportStatus status);
+
 }

@@ -22,6 +22,8 @@ public class ExpenseModel implements Serializable {
 
     private ExpenseReport report;
 
+    private List<ExpenseReport> reports;
+
     @Produces
     @Named("expenseReport")
     public ExpenseReport getReport() {
@@ -30,5 +32,13 @@ public class ExpenseModel implements Serializable {
 
     public void setReport(ExpenseReport report) {
         this.report = report;
+    }
+
+    public List<ExpenseReport> getReports() {
+        return reports;
+    }
+
+    public void setReports(List<ExpenseReport> reports) {
+        this.reports = reports;
     }
 }
