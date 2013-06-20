@@ -25,7 +25,7 @@ public class ExpenseReport implements Serializable {
 
     private String description;
 
-    private Boolean isSelected;
+    private boolean selected;
 
     public ExpenseReport() {
     }
@@ -157,12 +157,13 @@ public class ExpenseReport implements Serializable {
         this.lastChangeDate = lastChangeDate;
     }
 
-    public Boolean getSelected() {
-        return isSelected;
+
+    public boolean getSelected() {
+        return selected;
     }
 
-    public void setSelected(Boolean selected) {
-        isSelected = selected;
+    public void setSelected(boolean selected) {
+        this.selected = selected;
     }
 
     @Override
@@ -196,6 +197,7 @@ public class ExpenseReport implements Serializable {
                 ", approvedDate=" + approvedDate +
                 ", lastChangeDate=" + lastChangeDate +
                 ", status=" + status +
+                ", selected=" + selected +
                 '}';
     }
 }

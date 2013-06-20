@@ -4,7 +4,6 @@ import cz.muni.fi.pv243.et.model.PersonWrapper;
 import cz.muni.fi.pv243.et.model.*;
 import cz.muni.fi.pv243.et.service.ExpenseReportService;
 import cz.muni.fi.pv243.et.util.CurrentPerson;
-import org.jboss.solder.logging.Log;
 import org.jboss.solder.logging.Logger;
 
 
@@ -51,8 +50,8 @@ public class ExpenseController {
         return service.findAll();
     }
 
-    public Collection<ExpenseReport> allOpenForVerifier() {
-        return service.findForVerifierWithStatus(currentPerson.getPerson(), ReportStatus.OPEN);
+    public Collection<ExpenseReport> allSubmittedForVerifier() {
+        return service.findForVerifierWithStatus(currentPerson.getPerson(), ReportStatus.SUBMITTED);
     }
 
     public Collection<ExpenseReport> getAllforSubmitter() {
@@ -104,11 +103,12 @@ public class ExpenseController {
     }
 
     public String claimReports() {
-        logger.debug("\n=======\n" + model.getReports().get(0) + "\n=======\n");
+        System.out.println("\n=======\n" + model.getReports().get(0) + "\n=======\n");
         List<ExpenseReport> selected = model.getReports();
         for (ExpenseReport er : selected) {
+            System.out.println("Report " + er.getId() + " " + er.getName() + "is selected=" + er.getSelected());
             if (er.getSelected()) {
-                logger.debug("Report selected=" + er.getName());
+//                logger.debug(selected=" + er.getName());
                 service.claim(er, currentPerson.getPerson());
             } else {
                 logger.debug("Report NOT selected=" + er.getName());
