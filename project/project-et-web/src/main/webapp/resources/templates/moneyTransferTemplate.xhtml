@@ -1,45 +1,52 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<ui:composition template="/resources/templates/common/commonTemplate.xhtml" xmlns="http://www.w3.org/1999/xhtml"
-                xmlns:h="http://java.sun.com/jsf/html"
-                xmlns:f="http://java.sun.com/jsf/core"
-                xmlns:ui="http://java.sun.com/jsf/facelets"
-                xml:lang="en" lang="en">
-    <ui:define name="content">
-        <ui:insert name="title"/>
-        <h:form styleClass="form-horizontal">
-            <h:messages/>
-            <h:inputHidden value="#{moneyTransfer.report}" converter="#{expenseReportConverter}"/>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:o="http://omnifaces.org/ui"
+      xmlns:p="http://primefaces.org/ui"
+      xml:lang="en" lang="en">
+    <h:body>
+        <ui:composition template="/resources/templates/common/commonTemplate.xhtml">
 
-            <div class="control-group">
-                <h:outputLabel value="Date:" for="date" styleClass="control-label"/>
+            <ui:define name="content">
+                <ui:insert name="title"/>
+                <h:form styleClass="form-horizontal">
+                    <h:messages/>
+                    <h:inputHidden value="#{moneyTransfer.report}" converter="#{expenseReportConverter}"/>
 
-                <div class="controls">
-                    <h:inputText id="date" value="#{moneyTransfer.date}" size="20" label="Date"/>
-                </div>
-            </div>
-            <div class="control-group">
-                <h:outputLabel value="Value:" for="value" styleClass="control-label"/>
+                    <div class="control-group">
+                        <h:outputLabel value="Date:" for="date" styleClass="control-label"/>
 
-                <div class="controls">
-                    <h:inputText id="value" value="#{moneyTransfer.value}" label="Value"/>
-                </div>
-            </div>
-            <div class="control-group">
-                <h:outputLabel value="Currency:" for="currency" styleClass="control-label"/>
+                        <div class="controls">
+                            <p:calendar value="#{moneyTransfer.date}" id="date" label="Date" mode="popup" />
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <h:outputLabel value="Value:" for="value" styleClass="control-label"/>
 
-                <div class="controls">
-                    <h:selectOneMenu id="currency" value="#{moneyTransfer.currency}" label="Currency">
-                        <f:selectItems value="#{currencies}"/>
-                    </h:selectOneMenu>
-                </div>
-            </div>
+                        <div class="controls">
+                            <h:inputText id="value" value="#{moneyTransfer.value}" label="Value"/>
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <h:outputLabel value="Currency:" for="currency" styleClass="control-label"/>
 
-            <div class="control-group">
-                <div class="controls">
-                    <h:commandButton action="#{moneyTransferController.saveMoneyTransfer()}" value="Save" styleClass="btn btn-primary"/>
-                    <h:commandButton action="/secured/report" immediate="true"  value="Cancel" styleClass="btn btn"/>
-                </div>
-            </div>
-        </h:form>
-    </ui:define>
-</ui:composition>
+                        <div class="controls">
+                            <h:selectOneMenu id="currency" value="#{moneyTransfer.currency}" label="Currency">
+                                <f:selectItems value="#{currencies}"/>
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+
+                    <div class="control-group">
+                        <div class="controls">
+                            <h:commandButton action="#{moneyTransferController.saveMoneyTransfer()}" value="Save" styleClass="btn btn-primary"/>
+                            <h:commandButton action="/secured/report" immediate="true"  value="Cancel" styleClass="btn btn"/>
+                        </div>
+                    </div>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
