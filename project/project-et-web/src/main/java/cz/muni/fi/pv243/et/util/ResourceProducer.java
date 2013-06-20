@@ -30,11 +30,4 @@ public class ResourceProducer {
         return Currency.values();
     }
 
-    @Produces
-    @RequestScoped
-    @CurrentPerson
-    public PersonWrapper getCurrentPerson() {
-        return new PersonWrapper(identity.getUser().<Person>getAttribute("person").getValue());
-    }
-
 }

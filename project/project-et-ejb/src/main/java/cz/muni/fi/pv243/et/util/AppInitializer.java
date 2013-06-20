@@ -141,10 +141,10 @@ public class AppInitializer {
 
 
         // RECEIPTS
-        Receipt rec = new Receipt(new Date(System.currentTimeMillis() - 100000), personTom, null, "Platba za vlak a autobus");
+        Receipt rec = new Receipt(new Date(System.currentTimeMillis() - 100000), personTom, new byte[1], "Platba za vlak a autobus");
         receiptRepo.create(rec);
 
-        Receipt rec2 = new Receipt(new Date(System.currentTimeMillis() - 20000), personJana, null, "Way there and back");
+        Receipt rec2 = new Receipt(new Date(System.currentTimeMillis() - 20000), personJana, new byte[1], "Way there and back");
         receiptRepo.create(rec2);
 
         // REPORTS
