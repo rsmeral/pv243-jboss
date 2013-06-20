@@ -1,5 +1,6 @@
 package cz.muni.fi.pv243.et.security;
 
+import cz.muni.fi.pv243.et.controller.PersonModel;
 import cz.muni.fi.pv243.et.data.PersonRepository;
 import cz.muni.fi.pv243.et.message.WebMessage;
 import cz.muni.fi.pv243.et.model.PersonRole;
@@ -21,11 +22,7 @@ public class SignUpBean {
     private IdentityManager identityManager;
 
     @Inject
-    private PersonRepository personRepository;
-
-    @Inject
-    @Named("userModel")
-    private UserModel userModel;
+    private PersonModel personModel;
 
     @Inject
     private FacesContext facesContext;
@@ -48,26 +45,26 @@ public class SignUpBean {
             this.facesContext.addMessage(null, new FacesMessage(message.userEmailInUse()));
             return null;
         }
-        if (!userModel.getPassword().equals(userModel.getPasswordConfirmation())) {
+        if (!personModel.getUserModel().getPassword().equals(personModel.getUserModel().getPasswordConfirmation())) {
             this.facesContext.addMessage(null, new FacesMessage(message.passwordMismatch()));
             return null;
         }
 
-        userManager.add(this.userModel);
-        userManager.changePassword(this.userModel.getUserName(), this.userModel.getPassword());
-        userManager.grantRole(this.userModel.getUserName(), PersonRole.APPLICANT);
+        userManager.add(this.personModel.getUserModel());
+        userManager.changePassword(this.personModel.getUserModel().getUserName(), this.personModel.getUserModel().getPassword());
+        userManager.grantRole(this.personModel.getUserModel().getUserName(), PersonRole.APPLICANT);
 
         return "/login?faces-redirect=true";
     }
 
     private boolean isUserNameInUser() {
-        return this.identityManager.getUser(this.userModel.getUserName()) != null;
+        return this.identityManager.getUser(this.personModel.getUserModel().getUserName()) != null;
     }
 
     private boolean isEmailUsed() {
         return this.identityManager
                 .createIdentityQuery(User.class)
-                .setParameter(User.EMAIL, this.userModel.getEmail())
+                .setParameter(User.EMAIL, this.personModel.getUserModel().getEmail())
                 .getResultCount() > 0;
     }
 

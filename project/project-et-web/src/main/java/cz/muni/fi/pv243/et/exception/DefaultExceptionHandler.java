@@ -54,7 +54,7 @@ public class DefaultExceptionHandler {
 
         this.facesContext.getExternalContext().getSessionMap()
                 .put(ERROR_MESSAGE, webMessage.accessDenied(getReasons(event.getException())));
-        event.handled();
+        event.handledAndContinue();
     }
 
     public void onAuthenticationException(@Handles ExceptionEvent<AuthenticationException> event) {
@@ -62,7 +62,7 @@ public class DefaultExceptionHandler {
 
         this.facesContext.getExternalContext().getSessionMap()
                 .put(ERROR_MESSAGE, webMessage.authenticationFailed());
-        event.handled();
+        event.handledAndContinue();
     }
 
     public void onEJBException(@Handles ExceptionEvent<EJBException> event) {
@@ -71,7 +71,7 @@ public class DefaultExceptionHandler {
         this.facesContext.getExternalContext().getSessionMap()
                 .put(ERROR_MESSAGE, webMessage.generalError());
 
-        event.handled();
+        event.handledAndContinue();
     }
 
     private String getReasons(AccessDeniedException ex) {

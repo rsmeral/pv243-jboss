@@ -7,6 +7,7 @@ import cz.muni.fi.pv243.et.model.PersonRole;
 import cz.muni.fi.pv243.et.model.UserModel;
 import cz.muni.fi.pv243.et.security.EventLog;
 import cz.muni.fi.pv243.et.security.UserManager;
+import cz.muni.fi.pv243.et.service.PersonService;
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.credential.internal.Password;
 import org.picketlink.idm.model.*;
@@ -25,10 +26,7 @@ public class UserManagerImpl implements UserManager {
     private IdentityManager identityManager;
 
     @Inject
-    private PersonListProducer personListProducer;
-
-    @Inject
-    private PersonRepository personRepository;
+    private PersonService personService;
 
     @Override
     public void add(UserModel model) {
@@ -39,7 +37,7 @@ public class UserManagerImpl implements UserManager {
         person.setFirstName(model.getFirstName());
         person.setLastName(model.getLastName());
 
-        this.personRepository.create(person);
+        this.personService.save(person);
         model.setId(person.getId());
 
         log.logPersonCreated(person.getId());
@@ -63,7 +61,7 @@ public class UserManagerImpl implements UserManager {
         person.setFirstName(model.getFirstName());
         person.setLastName(model.getLastName());
 
-        this.personRepository.update(person);
+        this.personService.save(person);
 
         log.logPersonCreated(person.getId());
 
@@ -158,7 +156,7 @@ public class UserManagerImpl implements UserManager {
         if (u == null) {
             return null;
         }
-        Person p = personListProducer.getPerson(Long.valueOf(u.<String>getAttribute("personId").getValue()));
+        Person p = personService.get(Long.valueOf(u.<String>getAttribute("personId").getValue()));
         if (p == null) {
             return null;
         }
@@ -172,7 +170,7 @@ public class UserManagerImpl implements UserManager {
                 .createIdentityQuery(User.class)
                 .setParameter(User.EMAIL, email)
                 .getResultList();
-        Person p = this.personListProducer.findByEmail(email);
+        Person p = this.personService.findByEmail(email);
         if (p == null) {
             return new ArrayList<UserModel>();
         }
@@ -181,7 +179,7 @@ public class UserManagerImpl implements UserManager {
 
     @Override
     public Collection<UserModel> findAll() {
-        Collection<Person> all = personListProducer.findAll();
+        Collection<Person> all = personService.findAll();
         List<User> users = identityManager.createIdentityQuery(User.class).getResultList();
 
         return join(users, all);
@@ -208,7 +206,10 @@ public class UserManagerImpl implements UserManager {
         }
         for (User u : users) {
             Attribute<String> personId = u.<String>getAttribute("personId");
-            allPersons.add(toUserModel(personMap.get(Long.valueOf(personId.getValue())), u));
+            Person p = personMap.get(Long.valueOf(personId.getValue()));
+            if (p != null) {
+                allPersons.add(toUserModel(p, u));
+            }
         }
         return allPersons;
     }

@@ -1,12 +1,7 @@
 package cz.muni.fi.pv243.et.controller;
 
-import cz.muni.fi.pv243.et.data.PersonListProducer;
-import cz.muni.fi.pv243.et.data.ReceiptListProducer;
-import cz.muni.fi.pv243.et.data.ReceiptRepository;
-import cz.muni.fi.pv243.et.model.Person;
 import cz.muni.fi.pv243.et.model.PersonWrapper;
 import cz.muni.fi.pv243.et.model.Receipt;
-import cz.muni.fi.pv243.et.security.IdentityHelper;
 import cz.muni.fi.pv243.et.service.ReceiptService;
 import cz.muni.fi.pv243.et.util.CurrentPerson;
 import org.apache.commons.io.FilenameUtils;

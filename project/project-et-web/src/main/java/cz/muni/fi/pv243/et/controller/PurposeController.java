@@ -1,7 +1,5 @@
 package cz.muni.fi.pv243.et.controller;
 
-import cz.muni.fi.pv243.et.data.PurposeListProducer;
-import cz.muni.fi.pv243.et.data.PurposeRepository;
 import cz.muni.fi.pv243.et.model.Purpose;
 import cz.muni.fi.pv243.et.service.PurposeService;
 import org.jboss.solder.logging.Logger;
