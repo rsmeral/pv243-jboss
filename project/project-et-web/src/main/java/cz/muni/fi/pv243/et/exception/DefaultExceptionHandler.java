@@ -74,6 +74,14 @@ public class DefaultExceptionHandler {
         event.handled();
     }
 
+    public void verifierIsSubmitterException(@Handles ExceptionEvent<IllegalStateException> event) {
+        log.logGeneralError(event.getException() );
+
+        this.facesContext.getExternalContext().getSessionMap()
+                .put(ERROR_MESSAGE, "Verifier can not verify his own reports!");
+        event.handled();
+    }
+
     private String getReasons(AccessDeniedException ex) {
         StringBuilder sb = new StringBuilder("<br/>");
 

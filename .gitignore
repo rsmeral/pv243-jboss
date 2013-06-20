@@ -36,3 +36,4 @@ bin
 *.swp
 !/wicket-war/src/main/resources/META-INF/MANIFEST.MF
 project/data
+apache-deltaspike.properties

@@ -58,6 +58,10 @@ public class ExpenseReportServiceImpl implements ExpenseReportService {
             throw new RuntimeException("report already has a verifier");
         }
 
+        if (report.getSubmitter().equals(verifier)) {
+            throw new IllegalStateException("you can't verify your own report");
+        }
+
         if (report.getStatus() == ReportStatus.APPROVED ||
                 report.getStatus() == ReportStatus.REJECTED ||
                 report.getStatus() == ReportStatus.SETTLED) {
