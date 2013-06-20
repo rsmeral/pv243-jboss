@@ -15,10 +15,13 @@
 
     <!--<ui:composition template="../resources/templates/reportsTemplate.xhtml">-->
         <!--<ui:param name="showReports" value="#{expenseController.allWithNoVerifierAssigned}"/>-->
+        <!--<ui:param name="fromUrl" value="/secured/reportsUnclaimed"/>-->
+        <!--&lt;!&ndash;<c:set var="showReports" value="#{expenseController.allWithNoVerifierAssigned}"/>&ndash;&gt;-->
         <!--<ui:define name="title">-->
             <!--<h3>All unassigned reports</h3>-->
         <!--</ui:define>-->
     <!--</ui:composition>-->
+
 
     <ui:composition template="/resources/templates/common/commonTemplate.xhtml">
         <ui:define name="content">
@@ -28,7 +31,6 @@
 
                 <h:dataTable value="#{expenseController.allWithNoVerifierAssigned}" rendered="#{not empty expenseController.allWithNoVerifierAssigned}" var="report" styleClass="table table-bordered table-striped table-hover">
                     <h:column>
-                        <!--<h:selectBooleanCheckbox value="#{expenseController.checked}"/>-->
                         <h:selectBooleanCheckbox value="#{report.selected}"/>
                     </h:column>
 
@@ -82,7 +84,7 @@
                     </h:column>
 
                     <!--TODO hide eventually -->
-                    <h:column>
+                    <h:column rendered="#{identityHelper.hasRole('ADMIN')}">
                         <f:facet name="header">ID</f:facet>
                         #{report.id}
                     </h:column>

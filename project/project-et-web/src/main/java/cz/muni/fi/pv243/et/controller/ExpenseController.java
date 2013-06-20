@@ -107,6 +107,7 @@ public class ExpenseController {
     }
 
     public String claimReports() {
+        logger.debug("\n=======\n" + model.getReports().get(0) + "\n=======\n");
         List<ExpenseReport> selected = model.getReports();
         for (ExpenseReport er : selected) {
             if (er.getSelected()) {
