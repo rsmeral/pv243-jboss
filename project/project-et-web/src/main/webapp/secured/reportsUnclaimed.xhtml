@@ -28,10 +28,9 @@
             <ui:insert name="title"/>
             <h:form styleClass="form-horizontal">
 
-
                 <h:dataTable value="#{expenseController.allWithNoVerifierAssigned}" rendered="#{not empty expenseController.allWithNoVerifierAssigned}" var="report" styleClass="table table-bordered table-striped table-hover">
                     <h:column>
-                        <h:selectBooleanCheckbox value="#{report.selected}"/>
+                        <h:selectBooleanCheckbox value="#{expenseController.checked[report.id]}" />
                     </h:column>
 
                     <h:column>

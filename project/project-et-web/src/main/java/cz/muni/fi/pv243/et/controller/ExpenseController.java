@@ -11,10 +11,7 @@ import javax.enterprise.inject.Model;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 import javax.inject.Named;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
 
 
 @Model
@@ -33,15 +30,14 @@ public class ExpenseController {
     @Inject
     Logger logger;
 
-    private List<ExpenseReport> selectedReports;
+    private Map<Long, Boolean> checked = new HashMap<Long, Boolean>();
 
-
-    public List<ExpenseReport> getSelectedReports() {
-        return selectedReports;
+    public Map<Long, Boolean> getChecked() {
+        return checked;
     }
 
-    public void setSelectedReports(List<ExpenseReport> selectedReports) {
-        this.selectedReports = selectedReports;
+    public void setChecked(Map<Long, Boolean> checked) {
+        this.checked = checked;
     }
 
     @Produces
@@ -103,17 +99,16 @@ public class ExpenseController {
     }
 
     public String claimReports() {
-        System.out.println("\n=======\n" + model.getReports().get(0) + "\n=======\n");
-        List<ExpenseReport> selected = model.getReports();
-        for (ExpenseReport er : selected) {
-            System.out.println("Report " + er.getId() + " " + er.getName() + "is selected=" + er.getSelected());
-            if (er.getSelected()) {
-//                logger.debug(selected=" + er.getName());
-                service.claim(er, currentPerson.getPerson());
-            } else {
-                logger.debug("Report NOT selected=" + er.getName());
+        for (Long k : checked.keySet()) {
+            if (checked.get(k)) {
+                for (ExpenseReport er : model.getReports()) {
+                    if (er.getId() == k) {
+                        service.claim(er, currentPerson.getPerson() );
+                    }
+                }
             }
         }
+
         return "/secured/reports";
     }
 

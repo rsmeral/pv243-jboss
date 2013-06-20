@@ -1,13 +1,9 @@
 package cz.muni.fi.pv243.et.controller;
 
-import cz.muni.fi.pv243.et.data.*;
 import cz.muni.fi.pv243.et.model.*;
-import cz.muni.fi.pv243.et.model.Currency;
 
-import javax.enterprise.context.RequestScoped;
 import javax.enterprise.context.SessionScoped;
 import javax.enterprise.inject.Produces;
-import javax.inject.Inject;
 import javax.inject.Named;
 import java.io.Serializable;
 import java.util.*;
@@ -25,7 +21,6 @@ public class ExpenseModel implements Serializable {
     private List<ExpenseReport> reports;
 
     private String backUrl;
-
 
     public String getBackUrl() {
         return backUrl;
