@@ -14,3 +14,7 @@
 input[type="checkbox"] {
     height: 25px;
 }
+
+table.ui-datepicker-calendar {
+    background: #f5f5f5;
+}

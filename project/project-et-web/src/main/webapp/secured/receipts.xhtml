@@ -42,7 +42,7 @@
                 <h:column>
                     <f:facet name="header">Imported on</f:facet>
                     <h:outputText value="#{r.importDate}">
-                        <f:convertDateTime/>
+                        <f:convertDateTime pattern="MMM d, yyyy HH:mm" timeZone="GMT+2"/>
                     </h:outputText>
                 </h:column>
 

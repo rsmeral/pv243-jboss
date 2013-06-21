@@ -37,11 +37,11 @@
                             <f:selectItems value="#{purposes}" var="p" itemLabel="#{p.name}" itemValue="#{p}"/>
                         </h:selectOneMenu>
 
-                        <p:commandButton id="newPurpose" action="#{purposeController.createPurpose('/secured/createPayment')}"
-                                         value="Create new" styleClass="btn btn-mini" style="margin-left: 20px;"  >
-                            <o:ignoreValidationFailed/>
-                            <f:ajax execute="@form"/>
-                        </p:commandButton>
+                        <h:commandButton id="newPurpose" action="#{purposeController.createPurpose('/secured/createPayment')}"
+                                         value="Create new" styleClass="btn btn-mini" style="margin-left: 20px;" immediate="true">
+                            <!--<o:ignoreValidationFailed/>-->
+                            <!--<f:ajax execute="@form" render="@all"/>-->
+                        </h:commandButton>
                     </div>
                 </div>
 
@@ -54,11 +54,11 @@
                             <f:selectItems value="#{currentUserReceipts}" var="r" itemLabel="#{r.documentName}"
                                            itemValue="#{r}"/>
                         </h:selectOneMenu>
-                        <p:commandButton id="newReceipt" action="#{receiptController.createReceipt('/secured/createPayment')}"
-                                         value="Create new" styleClass="btn btn-mini" style="margin-left: 20px;"  >
-                            <o:ignoreValidationFailed/>
-                            <f:ajax execute="@form"/>
-                        </p:commandButton>
+                        <h:commandButton id="newReceipt" action="#{receiptController.createReceipt('/secured/createPayment')}"
+                                         value="Create new" styleClass="btn btn-mini" style="margin-left: 20px;" immediate="true">
+                            <!--<o:ignoreValidationFailed/>-->
+                            <!--<f:ajax execute="@form" render="@all"/>-->
+                        </h:commandButton>
                     </div>
                 </div>
                 <div class="control-group">

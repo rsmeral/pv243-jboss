@@ -9,16 +9,10 @@ import java.io.Serializable;
 import java.util.*;
 
 
-/**
- * Service layer (?)
- */
-
 @SessionScoped
 public class ExpenseModel implements Serializable {
 
     private ExpenseReport report;
-
-    private List<ExpenseReport> reports;
 
     private String backUrl;
 
@@ -40,11 +34,4 @@ public class ExpenseModel implements Serializable {
         this.report = report;
     }
 
-    public List<ExpenseReport> getReports() {
-        return reports;
-    }
-
-    public void setReports(List<ExpenseReport> reports) {
-        this.reports = reports;
-    }
 }

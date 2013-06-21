@@ -61,7 +61,7 @@ public class ExpenseController {
 
     public Collection<ExpenseReport> getAllWithNoVerifierAssigned() {
         List<ExpenseReport> reports = (List<ExpenseReport>) service.findWithNoVerifierAssigned();
-        model.setReports(reports);
+
         return reports;
     }
 
@@ -107,12 +107,12 @@ public class ExpenseController {
         System.out.println("claimReports()" + checked.keySet() + checked.values());
         for (Long k : checked.keySet()) {
             if (checked.get(k)) {
-                for (ExpenseReport er : model.getReports()) {
-                    if (er.getId().equals(k)) {
-                        logger.debug("claimReports()" + er.getId() + er.getName());
-                        System.out.println("claimReports()" + er.getId() + er.getName());
-                        service.claim(er, currentPerson.getPerson() );
-                    }
+                ExpenseReport er = service.get(k);
+                if (er != null) {
+                    logger.debug("claimReports()" + er.getId() + er.getName());
+                    service.claim(er, currentPerson.getPerson() );
+                } else {
+                    logger.debug("unknown report with id: " + k);
                 }
             }
         }

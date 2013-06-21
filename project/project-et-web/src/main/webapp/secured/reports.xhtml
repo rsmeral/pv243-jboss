@@ -12,29 +12,6 @@
 <body>
 
 
-<!--<h:panelGroup rendered="#{identityHelper.hasRole('ADMIN')}">-->
-    <!--<ui:composition template="../resources/templates/reportsTemplate.xhtml">-->
-        <!--<ui:param name="showReports" value="#{expenseController.allReports}"/>-->
-        <!--<ui:param name="fromUrl" value="/secured/reports"/>-->
-        <!--<ui:define name="title">-->
-            <!--<h2>My Expense reports</h2>-->
-        <!--</ui:define>-->
-    <!--</ui:composition>-->
-<!--</h:panelGroup>-->
-
-<!--<h:panelGroup rendered="#{identityHelper.hasAnyRole('APPLICANT,VERIFIER')}">-->
-    <!--<ui:composition template="../resources/templates/reportsTemplate.xhtml">-->
-        <!--<ui:param name="showReports" value="#{expenseController.allForSubmitter}"/>-->
-        <!--<ui:param name="fromUrl" value="/secured/reports"/>-->
-        <!--<ui:define name="title">-->
-            <!--<h2>My Expense reports</h2>-->
-        <!--</ui:define>-->
-    <!--</ui:composition>-->
-<!--</h:panelGroup>-->
-
-
-
-
 <ui:composition template="../resources/templates/common/commonTemplate.xhtml">
     <ui:define name="content">
         <h:form>
@@ -67,7 +44,7 @@
                 <h:column>
                     <f:facet name="header">Last submitted</f:facet>
                     <h:outputText value="#{report.lastSubmittedDate}">
-                        <f:convertDateTime pattern="MMM d, yyyy HH:mm"/>
+                        <f:convertDateTime pattern="MMM d, yyyy HH:mm" timeZone="GMT+2"/>
                     </h:outputText>
                 </h:column>
 
@@ -87,7 +64,7 @@
                 <h:column>
                     <f:facet name="header">Last changed</f:facet>
                     <h:outputText value="#{report.lastChangeDate}">
-                        <f:convertDateTime pattern="MMM d, yyyy HH:mm"/>
+                        <f:convertDateTime pattern="MMM d, yyyy HH:mm" timeZone="GMT+2"/>
                     </h:outputText>
                 </h:column>
 
@@ -99,7 +76,7 @@
                 <h:column>
                     <f:facet name="header">Approved</f:facet>
                     <h:outputText value="#{report.approvedDate}">
-                        <f:convertDateTime pattern="MMM d, yyyy HH:mm"/>
+                        <f:convertDateTime pattern="MMM d, yyyy HH:mm" timeZone="GMT+2"/>
                     </h:outputText>
                 </h:column>
 
@@ -139,7 +116,7 @@
                 <h:column>
                     <f:facet name="header">Last submitted</f:facet>
                     <h:outputText value="#{report.lastSubmittedDate}">
-                        <f:convertDateTime pattern="MMM d, yyyy HH:mm"/>
+                        <f:convertDateTime pattern="MMM d, yyyy HH:mm" timeZone="GMT+2"/>
                     </h:outputText>
                 </h:column>
 
@@ -156,7 +133,7 @@
                 <h:column>
                     <f:facet name="header">Last changed</f:facet>
                     <h:outputText value="#{report.lastChangeDate}">
-                        <f:convertDateTime pattern="MMM d, yyyy HH:mm"/>
+                        <f:convertDateTime pattern="MMM d, yyyy HH:mm" timeZone="GMT+2"/>
                     </h:outputText>
                 </h:column>
 
@@ -168,7 +145,7 @@
                 <h:column>
                     <f:facet name="header">Approved</f:facet>
                     <h:outputText value="#{report.approvedDate}">
-                        <f:convertDateTime pattern="MMM d, yyyy HH:mm"/>
+                        <f:convertDateTime pattern="MMM d, yyyy HH:mm" timeZone="GMT+2"/>
                     </h:outputText>
                 </h:column>
 

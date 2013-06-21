@@ -17,17 +17,10 @@
     <ui:composition template="/resources/templates/common/commonTemplate.xhtml">
         <ui:define name="content">
             <ui:insert name="title"/>
-            <h:form styleClass="form-horizontal" enctype="multipart/form-data">
+            <h:form id="form" styleClass="form-horizontal" enctype="multipart/form-data">
 
+                <h:messages/>
 
-                <!--<h:messages/>-->
-                <!--<div class="control-group">-->
-                <!--<h:outputLabel value="Name:" for="name" styleClass="control-label"/>-->
-
-                <!--<div class="controls">-->
-                <!--<h:inputText id="name" value="#{receipt.documentName}" size="20"/>-->
-                <!--</div>-->
-                <!--</div>-->
                 <div class="control-group">
                     <h:outputLabel value="Receipt:" for="fileUpload" styleClass="control-label"/>
 

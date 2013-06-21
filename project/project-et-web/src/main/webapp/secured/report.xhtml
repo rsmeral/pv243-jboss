@@ -57,14 +57,14 @@
                 <h:column>
                     <f:facet name="header">Submitted</f:facet>
                     <h:outputText value="#{expenseReport.lastSubmittedDate}">
-                        <f:convertDateTime pattern="MMM d, yyyy HH:mm"/>
+                        <f:convertDateTime pattern="MMM d, yyyy HH:mm" timeZone="GMT+2"/>
                     </h:outputText>
                 </h:column>
 
                 <h:column>
                     <f:facet name="header">Last Change</f:facet>
                     <h:outputText value="#{expenseReport.lastChangeDate}">
-                        <f:convertDateTime pattern="MMM d, yyyy HH:mm"/>
+                        <f:convertDateTime pattern="MMM d, yyyy HH:mm" timeZone="GMT+2"/>
                     </h:outputText>
 
                 </h:column>
@@ -80,7 +80,7 @@
                 <h:column>
                     <f:facet name="header">Date</f:facet>
                     <h:outputText value="#{mt.date}">
-                        <f:convertDateTime pattern="MMM d, yyyy HH:mm"/>
+                        <f:convertDateTime pattern="MMM d, yyyy HH:mm" timeZone="GMT+2"/>
                     </h:outputText>
                 </h:column>
 
@@ -137,7 +137,7 @@
                 <h:column>
                     <f:facet name="header">Date</f:facet>
                     <h:outputText value="#{pmt.date}">
-                        <f:convertDateTime/>
+                        <f:convertDateTime pattern="MMM d, yyyy HH:mm" timeZone="GMT+2"/>
                     </h:outputText>
                 </h:column>
 
@@ -177,8 +177,7 @@
             </h:dataTable>
             <span class="well" style="float: right;">
                 <strong>Total:
-                <h:outputText style=""
-                              value="#{reportComputing.getTotalValue(expenseReport)}">
+                <h:outputText value="#{reportComputing.getTotalValue(expenseReport)}">
                     <f:convertNumber/>
                 </h:outputText>
                 </strong>
