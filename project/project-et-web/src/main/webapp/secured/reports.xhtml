@@ -51,7 +51,7 @@
                 </c:when>
             </c:choose>
 
-            <h:dataTable value="#{showReports}" var="report" rendered="#{showReports != null}"
+            <h:dataTable value="#{showReports}" var="report" rendered="#{not empty showReports}"
                          styleClass="table table-bordered table-striped table-hover">
                 <h:column>
                     <f:facet name="header">Name</f:facet>
@@ -67,7 +67,7 @@
                 <h:column>
                     <f:facet name="header">Last submitted</f:facet>
                     <h:outputText value="#{report.lastSubmittedDate}">
-                        <f:convertDateTime/>
+                        <f:convertDateTime pattern="MMM d, yyyy HH:mm"/>
                     </h:outputText>
                 </h:column>
 
@@ -87,7 +87,7 @@
                 <h:column>
                     <f:facet name="header">Last changed</f:facet>
                     <h:outputText value="#{report.lastChangeDate}">
-                        <f:convertDateTime/>
+                        <f:convertDateTime pattern="MMM d, yyyy HH:mm"/>
                     </h:outputText>
                 </h:column>
 
@@ -99,7 +99,7 @@
                 <h:column>
                     <f:facet name="header">Approved</f:facet>
                     <h:outputText value="#{report.approvedDate}">
-                        <f:convertDateTime/>
+                        <f:convertDateTime pattern="MMM d, yyyy HH:mm"/>
                     </h:outputText>
                 </h:column>
 
@@ -115,13 +115,15 @@
                 </div>
             </div>
         </h:form>
-        END OF MY EXPENSE REPORTS
+        <!-- END OF MY EXPENSE REPORTS-->
+
+
 
         <!--MY VERIFY EXPENSE REPORTS -->
         <h:form rendered="#{identityHelper.hasAnyRole('ADMIN,VERIFIER')}">
             <h2>Reports to verify</h2>
-            <h:dataTable value="#{expenseController.allSubmittedForVerifier()}" var="report"
-                         rendered="#{expenseController.allSubmittedForVerifier() != null}"
+            <h:dataTable value="#{expenseController.allOpenForVerifier()}" var="report"
+                         rendered="#{not empty expenseController.allOpenForVerifier()}"
                          styleClass="table table-bordered table-striped table-hover">
                 <h:column>
                     <f:facet name="header">Name</f:facet>
@@ -137,7 +139,7 @@
                 <h:column>
                     <f:facet name="header">Last submitted</f:facet>
                     <h:outputText value="#{report.lastSubmittedDate}">
-                        <f:convertDateTime/>
+                        <f:convertDateTime pattern="MMM d, yyyy HH:mm"/>
                     </h:outputText>
                 </h:column>
 
@@ -154,7 +156,7 @@
                 <h:column>
                     <f:facet name="header">Last changed</f:facet>
                     <h:outputText value="#{report.lastChangeDate}">
-                        <f:convertDateTime/>
+                        <f:convertDateTime pattern="MMM d, yyyy HH:mm"/>
                     </h:outputText>
                 </h:column>
 
@@ -166,7 +168,7 @@
                 <h:column>
                     <f:facet name="header">Approved</f:facet>
                     <h:outputText value="#{report.approvedDate}">
-                        <f:convertDateTime/>
+                        <f:convertDateTime pattern="MMM d, yyyy HH:mm"/>
                     </h:outputText>
                 </h:column>
 

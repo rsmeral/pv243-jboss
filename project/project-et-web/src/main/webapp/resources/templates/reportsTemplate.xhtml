@@ -20,7 +20,7 @@
                 <h:dataTable value="#{showReports}" var="report" rendered="#{not empty showReports}"
                              styleClass="table table-bordered table-striped table-hover">
                     <h:column rendered="#{fromUrl eq '/secured/reportsUnclaimed'}">
-                        <h:selectBooleanCheckbox value="#{expenseController.checked[report.id]}"/>
+                        <h:selectBooleanCheckbox value="#{expenseController.checked[report.id]}" disabled="#{report.submitter eq currentPerson.person}"/>
                     </h:column>
 
                     <h:column>

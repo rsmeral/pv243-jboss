@@ -46,9 +46,14 @@ public class ExpenseController {
         return service.findAll();
     }
 
-    public Collection<ExpenseReport> allSubmittedForVerifier() {
-        return service.findForVerifierWithStatus(currentPerson.getPerson(), ReportStatus.SUBMITTED);
+    public Collection<ExpenseReport> allOpenForVerifier() {
+        Collection<ExpenseReport> list = new ArrayList<ExpenseReport>();
+        list.addAll(service.findForVerifierWithStatus(currentPerson.getPerson(), ReportStatus.SUBMITTED) );
+        list.addAll(service.findForVerifierWithStatus(currentPerson.getPerson(), ReportStatus.APPROVED));
+        return list;
     }
+
+
 
     public Collection<ExpenseReport> getAllForSubmitter() {
         return service.findForSubmitter(currentPerson.getPerson());
@@ -128,6 +133,11 @@ public class ExpenseController {
         return (submittableByPayment && submittableByStatus);
     }
 
+    public boolean isOpen() {
+        ReportStatus status = model.getReport().getStatus();
+        return (status == ReportStatus.OPEN);
+    }
+
     public boolean isSubmitted() {
         ReportStatus status = model.getReport().getStatus();
         return (status == ReportStatus.SUBMITTED);
@@ -141,6 +151,11 @@ public class ExpenseController {
     public boolean isApproved() {
         ReportStatus status = model.getReport().getStatus();
         return (status == ReportStatus.APPROVED);
+    }
+
+    public boolean isRejected() {
+        ReportStatus status = model.getReport().getStatus();
+        return (status == ReportStatus.REJECTED);
     }
 
     public boolean hasVerifier() {
