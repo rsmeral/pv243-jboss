@@ -24,6 +24,7 @@ import cz.muni.fi.pv243.et.model.ReportStatus;
 import cz.muni.fi.pv243.et.model.UserModel;
 import cz.muni.fi.pv243.et.security.EventLog;
 import cz.muni.fi.pv243.et.security.UserManager;
+
 import org.jboss.solder.logging.Logger;
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.credential.internal.Password;
@@ -102,6 +103,7 @@ public class AppInitializer {
             admin.setFirstName("admin");
             admin.setLastName("admin");
             admin.setAttribute(new Attribute<String>("personId", id.toString()));
+//            admin.setAttribute(new Attribute<Person>("person", adminPerson));
 
             identityManager.add(admin);
 

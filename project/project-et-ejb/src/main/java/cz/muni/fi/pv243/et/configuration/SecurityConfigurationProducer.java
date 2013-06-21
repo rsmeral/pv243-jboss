@@ -1,11 +1,12 @@
 package cz.muni.fi.pv243.et.configuration;
 
-import org.picketbox.core.config.ConfigurationBuilder;
+import org.jboss.ejb3.annotation.Clustered;import org.picketbox.core.config.ConfigurationBuilder;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Produces;
 import javax.inject.Inject;
 
+@Clustered
 @ApplicationScoped
 public class SecurityConfigurationProducer {
 

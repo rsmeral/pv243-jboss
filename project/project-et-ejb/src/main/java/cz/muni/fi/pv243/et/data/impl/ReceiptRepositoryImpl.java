@@ -2,11 +2,12 @@ package cz.muni.fi.pv243.et.data.impl;
 
 import cz.muni.fi.pv243.et.data.ReceiptRepository;
 import cz.muni.fi.pv243.et.model.Receipt;
-
+import org.jboss.ejb3.annotation.Clustered;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
+@Clustered
 @Stateless
 public class ReceiptRepositoryImpl implements ReceiptRepository {
 

@@ -3,13 +3,14 @@ package cz.muni.fi.pv243.et.data.impl;
 import cz.muni.fi.pv243.et.data.PersonListProducer;
 import cz.muni.fi.pv243.et.model.Person;
 import org.hibernate.Session;
-
+import org.jboss.ejb3.annotation.Clustered;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import java.util.Collection;
 import java.util.List;
 
+@Clustered
 @Stateless
 public class PersonListProducerImpl implements PersonListProducer {
 

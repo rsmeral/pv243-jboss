@@ -29,7 +29,11 @@
     <!-- *************************** -->
 
     <global>
-
+        <transport>
+            <properties>
+                <property name="configurationFile" value="jgroups.xml"/>
+            </properties>
+        </transport>
         <!-- Duplicate domains are allowed so that multiple deployments with default configuration
             of Hibernate OGM applications work - a better solution would be to use JNDI to share
             the CacheManager across applications, or use a custom configuration.
@@ -50,6 +54,10 @@
     <!-- *************************** -->
 
     <default>
+        <clustering mode="replication">
+            <sync/>
+        </clustering>
+
 
         <transaction
                 transactionMode="TRANSACTIONAL"
@@ -66,16 +74,16 @@
                 wakeUpInterval="-1"
                 reaperEnabled="false"/>
 
-        <loaders shared="false">
-            <loader class="org.infinispan.loaders.file.FileCacheStore"
-                    fetchPersistentState="false" ignoreModifications="false"
-                    purgeOnStartup="false">
-                <properties>
-                    <!--<property name="location" value="${java.io.tmpdir}" />-->
-                    <property name="location" value="data/ispn-mrd-cache"/>
-                </properties>
-            </loader>
-        </loaders>
+        <!--<loaders shared="false">-->
+            <!--<loader class="org.infinispan.loaders.file.FileCacheStore"-->
+                    <!--fetchPersistentState="false" ignoreModifications="false"-->
+                    <!--purgeOnStartup="false">-->
+                <!--<properties>-->
+                    <!--&lt;!&ndash;<property name="location" value="${java.io.tmpdir}" />&ndash;&gt;-->
+                    <!--<property name="location" value="data-clustered/ispn-mrd-cache"/>-->
+                <!--</properties>-->
+            <!--</loader>-->
+        <!--</loaders>-->
     </default>
 
 

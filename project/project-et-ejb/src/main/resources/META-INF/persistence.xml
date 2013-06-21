@@ -29,7 +29,7 @@
 
             <!-- Properties for Hibernate Search - lucene indexes settings -->
             <property name="hibernate.search.default.directory_provider" value="infinispan"/>
-            <property name="hibernate.search.default.indexBase" value="data/lucene-indexes"/>
+            <property name="hibernate.search.default.indexBase" value="data-clustered/lucene-indexes"/>
             <property name="hibernate.search.infinispan.configuration_resourcename" value="infinispan.xml"/>
 
             <property name="hibernate.transaction.jta.platform"
@@ -49,11 +49,11 @@
         <properties>
             <!-- Properties for Hibernate -->
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
-            <!--<property name="hibernate.hbm2ddl.auto" value="create-drop" />-->
-            <property name="hibernate.hbm2ddl.auto" value="update" />
+            <property name="hibernate.hbm2ddl.auto" value="create-drop" />
+            <!--<property name="hibernate.hbm2ddl.auto" value="update" />-->
             <property name="hibernate.show_sql" value="false" />
             <!-- Properties for Hibernate Search -->
-            <property name="hibernate.search.default.indexBase" value="data/lucene-indexes"/>
+            <property name="hibernate.search.default.indexBase" value="data-clustered/lucene-indexes"/>
             <!--<property name="hibernate.search.default.directory_provider" value="infinispan"/>-->
             <!--<property name="hibernate.search.infinispan.configuration_resourcename" value="infinispan.xml"/>-->
         </properties>
@@ -62,6 +62,7 @@
     <persistence-unit name="IdentityManagementPU">
         <provider>org.hibernate.ejb.HibernatePersistence</provider>
         <jta-data-source>java:jboss/datasources/ProjectEtIdentityDS</jta-data-source>
+
 
         <class>org.picketlink.idm.jpa.schema.IdentityObject</class>
         <class>org.picketlink.idm.jpa.schema.PartitionObject</class>
@@ -76,7 +77,7 @@
         <properties>
             <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect"/>
             <!--<property name="hibernate.hbm2ddl.auto" value="update" />-->
-            <property name="hibernate.hbm2ddl.auto" value="update" />
+            <property name="hibernate.hbm2ddl.auto" value="create-drop" />
             <property name="hibernate.show_sql" value="false" />
         </properties>
     </persistence-unit>

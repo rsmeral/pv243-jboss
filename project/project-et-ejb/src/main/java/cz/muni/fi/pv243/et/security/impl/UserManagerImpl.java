@@ -8,16 +8,18 @@ import cz.muni.fi.pv243.et.model.UserModel;
 import cz.muni.fi.pv243.et.security.EventLog;
 import cz.muni.fi.pv243.et.security.UserManager;
 import cz.muni.fi.pv243.et.service.PersonService;
-import org.picketlink.idm.IdentityManager;
+import org.jboss.ejb3.annotation.Clustered;import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.credential.internal.Password;
 import org.picketlink.idm.model.*;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import java.io.Serializable;
 import java.util.*;
 
+@Clustered
 @Stateless
-public class UserManagerImpl implements UserManager {
+public class UserManagerImpl implements UserManager, Serializable {
 
     @Inject
     private EventLog log;

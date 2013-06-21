@@ -9,11 +9,13 @@ import cz.muni.fi.pv243.et.model.PersonRole;
 import cz.muni.fi.pv243.et.security.annotation.Authenticated;
 import cz.muni.fi.pv243.et.security.annotation.Roles;
 import cz.muni.fi.pv243.et.service.PaymentService;
+import org.jboss.ejb3.annotation.Clustered;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.Collection;
 
+@Clustered
 @Stateless
 @Authenticated
 public class PaymentServiceImpl implements PaymentService {

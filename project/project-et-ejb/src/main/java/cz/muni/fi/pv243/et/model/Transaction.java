@@ -3,6 +3,7 @@ package cz.muni.fi.pv243.et.model;
 import org.hibernate.search.annotations.Indexed;
 import org.hibernate.search.annotations.IndexedEmbedded;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 import javax.persistence.*;
@@ -15,7 +16,7 @@ import javax.validation.constraints.NotNull;
  */
 @Indexed
 @MappedSuperclass
-public class Transaction {
+public class Transaction implements Serializable {
 
     @NotNull
     @Temporal(TemporalType.TIMESTAMP)

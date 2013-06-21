@@ -1,11 +1,14 @@
 package cz.muni.fi.pv243.et.security;
 
+
+import org.jboss.ejb3.annotation.Clustered;
 import org.picketlink.Identity;
 
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+@Clustered
 @RequestScoped
 @Named
 public class LogoutBean {

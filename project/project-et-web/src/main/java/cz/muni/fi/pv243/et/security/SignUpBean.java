@@ -5,6 +5,7 @@ import cz.muni.fi.pv243.et.data.PersonRepository;
 import cz.muni.fi.pv243.et.message.WebMessage;
 import cz.muni.fi.pv243.et.model.PersonRole;
 import cz.muni.fi.pv243.et.model.UserModel;
+import org.jboss.ejb3.annotation.Clustered;
 import org.picketlink.idm.IdentityManager;
 import org.picketlink.idm.model.*;
 
@@ -14,6 +15,7 @@ import javax.faces.context.FacesContext;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+@Clustered
 @Stateless
 @Named
 public class SignUpBean {

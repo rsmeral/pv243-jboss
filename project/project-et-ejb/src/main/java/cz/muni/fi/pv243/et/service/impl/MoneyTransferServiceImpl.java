@@ -8,12 +8,14 @@ import cz.muni.fi.pv243.et.model.PersonRole;
 import cz.muni.fi.pv243.et.security.annotation.Authenticated;
 import cz.muni.fi.pv243.et.security.annotation.Roles;
 import cz.muni.fi.pv243.et.service.MoneyTransferService;
+import org.jboss.ejb3.annotation.Clustered;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.Collection;
 import java.util.Date;
 
+@Clustered
 @Stateless
 @Authenticated
 public class MoneyTransferServiceImpl implements MoneyTransferService {

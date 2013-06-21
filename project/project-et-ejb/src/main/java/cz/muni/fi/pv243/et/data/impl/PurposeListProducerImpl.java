@@ -4,12 +4,13 @@ import cz.muni.fi.pv243.et.data.PurposeListProducer;
 import cz.muni.fi.pv243.et.model.Payment;
 import cz.muni.fi.pv243.et.model.Purpose;
 import org.hibernate.Session;
-
+import org.jboss.ejb3.annotation.Clustered;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import java.util.Collection;
 
+@Clustered
 @Stateless
 public class PurposeListProducerImpl implements PurposeListProducer {
 

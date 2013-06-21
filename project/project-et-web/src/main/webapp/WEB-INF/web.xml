@@ -4,6 +4,9 @@
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
          id="WebApp_ID" version="3.0">
 
+    <!-- Application is running in cluster -->
+    <distributable/>
+
     <filter>
         <filter-name>MyFacesExtensionsFilter</filter-name>
         <filter-class>org.apache.myfaces.webapp.filter.ExtensionsFilter</filter-class>

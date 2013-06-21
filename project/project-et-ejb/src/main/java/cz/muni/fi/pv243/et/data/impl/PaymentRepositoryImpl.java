@@ -2,12 +2,13 @@ package cz.muni.fi.pv243.et.data.impl;
 
 import cz.muni.fi.pv243.et.data.PaymentRepository;
 import cz.muni.fi.pv243.et.model.Payment;
-
+import org.jboss.ejb3.annotation.Clustered;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
 
+@Clustered
 @Stateless
 public class PaymentRepositoryImpl implements PaymentRepository {
 

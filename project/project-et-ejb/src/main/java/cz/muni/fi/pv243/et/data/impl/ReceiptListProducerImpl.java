@@ -12,7 +12,7 @@ import org.hibernate.search.query.DatabaseRetrievalMethod;
 import org.hibernate.search.query.ObjectLookupMethod;
 import org.hibernate.search.query.dsl.QueryBuilder;
 import org.hibernate.search.query.dsl.TermTermination;
-
+import org.jboss.ejb3.annotation.Clustered;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -20,6 +20,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
+@Clustered
 @Stateless
 public class ReceiptListProducerImpl implements ReceiptListProducer {
 

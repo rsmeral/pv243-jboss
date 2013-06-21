@@ -12,15 +12,16 @@ import org.hibernate.search.jpa.Search;
 import org.hibernate.search.query.DatabaseRetrievalMethod;
 import org.hibernate.search.query.ObjectLookupMethod;
 import org.hibernate.search.query.dsl.QueryBuilder;
+import org.jboss.ejb3.annotation.Clustered;
 import org.jboss.solder.logging.Logger;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
-import java.io.Serializable;
 import java.util.Collection;
-import java.util.List;
 
+
+@Clustered
 @Stateless
 public class ExpenseReportListProducerImpl implements ExpenseReportListProducer {
 

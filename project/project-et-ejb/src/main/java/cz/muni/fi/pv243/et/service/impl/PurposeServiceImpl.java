@@ -6,11 +6,13 @@ import cz.muni.fi.pv243.et.model.Payment;
 import cz.muni.fi.pv243.et.model.Purpose;
 import cz.muni.fi.pv243.et.security.annotation.Authenticated;
 import cz.muni.fi.pv243.et.service.PurposeService;
+import org.jboss.ejb3.annotation.Clustered;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.Collection;
 
+@Clustered
 @Stateless
 @Authenticated
 public class PurposeServiceImpl implements PurposeService {

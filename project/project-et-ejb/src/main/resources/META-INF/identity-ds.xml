@@ -6,12 +6,14 @@
     <datasource jndi-name="java:jboss/datasources/ProjectEtIdentityDS"
         pool-name="project-et-identity" enabled="true"
         use-java-context="true">
-        <connection-url>jdbc:h2:file:data/identity-db</connection-url>
+        <!--<connection-url>jdbc:h2:file:data/identity-db</connection-url>-->
+        <connection-url>jdbc:h2:tcp://localhost/~/data-clustered/identity-db</connection-url>
         <driver>h2</driver>
         <security>
             <user-name>sa</user-name>
-            <password>sa</password>
+            <!--<password>sa</password>-->
         </security>
     </datasource>
+
 </datasources>
  

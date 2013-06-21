@@ -8,7 +8,8 @@ import javax.persistence.PersistenceContext;
 import org.apache.deltaspike.core.api.exclude.annotation.Exclude;
 import org.apache.deltaspike.core.api.projectstage.ProjectStage.Production;
 import org.hibernate.Session;
-
+import org.jboss.ejb3.annotation.Clustered;
+@Clustered
 @Exclude(exceptIfProjectStage = Production.class)
 @Stateless
 public class ProductionEntityManagerProvider {

@@ -4,6 +4,7 @@ import cz.muni.fi.pv243.et.model.Person;
 import cz.muni.fi.pv243.et.model.PersonRole;
 import cz.muni.fi.pv243.et.model.UserModel;
 
+import java.io.Serializable;
 import java.util.Collection;
 
 public interface UserManager {

@@ -1,13 +1,14 @@
 package cz.muni.fi.pv243.et.configuration;
 
 import cz.muni.fi.pv243.et.persistence.IdentityManagementEntityManager;
-import org.picketbox.core.identity.jpa.EntityManagerLookupStrategy;
+import org.jboss.ejb3.annotation.Clustered;import org.picketbox.core.identity.jpa.EntityManagerLookupStrategy;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.enterprise.inject.Instance;
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 
+@Clustered
 @ApplicationScoped
 public class IdentityManagerLookupStrategy extends EntityManagerLookupStrategy {
 
