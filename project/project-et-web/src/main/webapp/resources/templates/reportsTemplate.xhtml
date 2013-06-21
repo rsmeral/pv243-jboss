@@ -17,14 +17,16 @@
         <ui:define name="content">
             <ui:insert name="title"/>
             <h:form styleClass="form-horizontal">
-                <h:dataTable value="#{showReports}" var="report" rendered="#{not empty showReports}" styleClass="table table-bordered table-striped table-hover">
-                <h:column>
-                        <h:selectBooleanCheckbox value="#{report.selected}"/>
+                <h:dataTable value="#{showReports}" var="report" rendered="#{not empty showReports}"
+                             styleClass="table table-bordered table-striped table-hover">
+                    <h:column rendered="#{fromUrl eq '/secured/reportsUnclaimed'}">
+                        <h:selectBooleanCheckbox value="#{expenseController.checked[report.id]}"/>
                     </h:column>
 
                     <h:column>
                         <f:facet name="header">Name</f:facet>
-                        <h:commandLink action="#{expenseController.showSingleReport(report.id, fromUrl)}" value="#{report.name}"/>
+                        <h:commandLink action="#{expenseController.showSingleReport(report.id, fromUrl)}"
+                                       value="#{report.name}"/>
                     </h:column>
 
                     <h:column>
@@ -44,7 +46,7 @@
                         #{report.status}
                     </h:column>
 
-                    <h:column>
+                    <h:column >
                         <f:facet name="header">Submitter</f:facet>
                         #{report.submitter.firstName} #{report.submitter.lastName}
                     </h:column>
@@ -76,16 +78,29 @@
                 </h:dataTable>
 
 
-                <h:outputText rendered="#{empty showReports}" value="No unassigned reports" />
-
+                <!-- COMMING FROM reportsUnclaimed -->
                 <h:panelGroup rendered="#{fromUrl eq '/secured/reportsUnclaimed'}">
-                <div class="control-group">
-                    <div class="controls">
-                        <h:commandButton action="#{expenseController.claimReports()}" value="Claim" styleClass="btn btn-primary"/>
-                        <h:commandButton action="/secured/reports" immediate="true"  value="Cancel" styleClass="btn btn"/>
+                    <h:outputText rendered="#{empty showReports}" value="No unassigned reports"/>
+
+                    <div class="row">
+                        <div class="span2 btn-group">
+                            <h:commandButton action="#{expenseController.claimReports()}" value="Claim"
+                                             styleClass="btn btn-primary"/>
+                            <h:commandButton action="/secured/reports" immediate="true" value="Cancel"
+                                             styleClass="btn btn"/>
+                        </div>
                     </div>
-                </div>
                 </h:panelGroup>
+
+                <!-- COMMING FROM reports -->
+                <h:panelGroup rendered="#{fromUrl eq '/secured/reports'}">
+                    <div class="row">
+                        <div class="span2 btn-group">
+                            <h:commandLink action="#{expenseController.createReport()}" styleClass="btn" value="Create report"/>
+                        </div>
+                    </div>
+                </h:panelGroup>
+
             </h:form>
         </ui:define>
     </ui:composition>

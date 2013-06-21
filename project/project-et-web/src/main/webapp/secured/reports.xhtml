@@ -11,9 +11,33 @@
 </head>
 <body>
 
+
+<!--<h:panelGroup rendered="#{identityHelper.hasRole('ADMIN')}">-->
+    <!--<ui:composition template="../resources/templates/reportsTemplate.xhtml">-->
+        <!--<ui:param name="showReports" value="#{expenseController.allReports}"/>-->
+        <!--<ui:param name="fromUrl" value="/secured/reports"/>-->
+        <!--<ui:define name="title">-->
+            <!--<h2>My Expense reports</h2>-->
+        <!--</ui:define>-->
+    <!--</ui:composition>-->
+<!--</h:panelGroup>-->
+
+<!--<h:panelGroup rendered="#{identityHelper.hasAnyRole('APPLICANT,VERIFIER')}">-->
+    <!--<ui:composition template="../resources/templates/reportsTemplate.xhtml">-->
+        <!--<ui:param name="showReports" value="#{expenseController.allForSubmitter}"/>-->
+        <!--<ui:param name="fromUrl" value="/secured/reports"/>-->
+        <!--<ui:define name="title">-->
+            <!--<h2>My Expense reports</h2>-->
+        <!--</ui:define>-->
+    <!--</ui:composition>-->
+<!--</h:panelGroup>-->
+
+
+
+
 <ui:composition template="../resources/templates/common/commonTemplate.xhtml">
     <ui:define name="content">
-        <h:form >
+        <h:form>
             <h2>My Expense reports</h2>
 
             <!--Show applicant expense reports-->
@@ -27,10 +51,12 @@
                 </c:when>
             </c:choose>
 
-            <h:dataTable value="#{showReports}" var="report" rendered="#{showReports != null}" styleClass="table table-bordered table-striped table-hover">
+            <h:dataTable value="#{showReports}" var="report" rendered="#{showReports != null}"
+                         styleClass="table table-bordered table-striped table-hover">
                 <h:column>
                     <f:facet name="header">Name</f:facet>
-                    <h:commandLink action="#{expenseController.showSingleReport(report.id, '/secured/reports')}" value="#{report.name}"/>
+                    <h:commandLink action="#{expenseController.showSingleReport(report.id, '/secured/reports')}"
+                                   value="#{report.name}"/>
                 </h:column>
 
                 <h:column>
@@ -89,16 +115,18 @@
                 </div>
             </div>
         </h:form>
-        <!--END OF MY EXPENSE REPORTS -->
+        END OF MY EXPENSE REPORTS
 
         <!--MY VERIFY EXPENSE REPORTS -->
         <h:form rendered="#{identityHelper.hasAnyRole('ADMIN,VERIFIER')}">
             <h2>Reports to verify</h2>
-            <h:dataTable value="#{expenseController.allSubmittedForVerifier()}" var="report" rendered="#{expenseController.allSubmittedForVerifier() != null}"
+            <h:dataTable value="#{expenseController.allSubmittedForVerifier()}" var="report"
+                         rendered="#{expenseController.allSubmittedForVerifier() != null}"
                          styleClass="table table-bordered table-striped table-hover">
                 <h:column>
                     <f:facet name="header">Name</f:facet>
-                    <h:commandLink action="#{expenseController.showSingleReport(report.id, '/secured/reports')}" value="#{report.name}"/>
+                    <h:commandLink action="#{expenseController.showSingleReport(report.id, '/secured/reports')}"
+                                   value="#{report.name}"/>
                 </h:column>
 
                 <h:column>
@@ -155,4 +183,4 @@
 </ui:composition>
 
 </body>
-</html>
+        </html>

@@ -13,96 +13,14 @@
 </head>
 <body>
 
-    <!--<ui:composition template="../resources/templates/reportsTemplate.xhtml">-->
-        <!--<ui:param name="showReports" value="#{expenseController.allWithNoVerifierAssigned}"/>-->
-        <!--<ui:param name="fromUrl" value="/secured/reportsUnclaimed"/>-->
-        <!--&lt;!&ndash;<c:set var="showReports" value="#{expenseController.allWithNoVerifierAssigned}"/>&ndash;&gt;-->
-        <!--<ui:define name="title">-->
-            <!--<h3>All unassigned reports</h3>-->
-        <!--</ui:define>-->
-    <!--</ui:composition>-->
 
-
-    <ui:composition template="/resources/templates/common/commonTemplate.xhtml">
-        <ui:define name="content">
-            <ui:insert name="title"/>
-            <h:form styleClass="form-horizontal">
-
-                <h:dataTable value="#{expenseController.allWithNoVerifierAssigned}" rendered="#{not empty expenseController.allWithNoVerifierAssigned}" var="report" styleClass="table table-bordered table-striped table-hover">
-                    <h:column>
-                        <h:selectBooleanCheckbox value="#{expenseController.checked[report.id]}"
-                                                 disabled="#{report.submitter eq currentPerson.person}"/>
-                    </h:column>
-
-                    <h:column>
-                        <f:facet name="header">Name</f:facet>
-                        <h:commandLink action="#{expenseController.showSingleReport(report.id, '/secured/reportsUnclaimed')}" value="#{report.name}"/>
-                    </h:column>
-
-                    <h:column>
-                        <f:facet name="header">Short description</f:facet>
-                        #{report.description}
-                    </h:column>
-
-                    <h:column>
-                        <f:facet name="header">Last submitted</f:facet>
-                        <h:outputText value="#{report.lastSubmittedDate}">
-                            <f:convertDateTime/>
-                        </h:outputText>
-                    </h:column>
-
-                    <h:column>
-                        <f:facet name="header">Status</f:facet>
-                        #{report.status}
-                    </h:column>
-
-                    <!-- IF ROLE IS VERIFIER SHOW THIS -->
-
-                    <h:column>
-                        <!--<h:column rendered="#{identityHelper.hasRole('VERIFIER') or identityHelper.hasRole('ADMIN')}">-->
-                        <f:facet name="header">Submitter</f:facet>
-                        #{report.submitter.firstName} #{report.submitter.lastName}
-                    </h:column>
-
-                    <h:column>
-                        <f:facet name="header">Last changed</f:facet>
-                        <h:outputText value="#{report.lastChangeDate}">
-                            <f:convertDateTime/>
-                        </h:outputText>
-                    </h:column>
-
-                    <h:column>
-                        <f:facet name="header">Verifier</f:facet>
-                        #{report.verifier.firstName} #{report.verifier.lastName}
-                    </h:column>
-
-                    <h:column>
-                        <f:facet name="header">Approved</f:facet>
-                        <h:outputText value="#{report.approvedDate}">
-                            <f:convertDateTime/>
-                        </h:outputText>
-                    </h:column>
-
-                    <!--TODO hide eventually -->
-                    <h:column rendered="#{identityHelper.hasRole('ADMIN')}">
-                        <f:facet name="header">ID</f:facet>
-                        #{report.id}
-                    </h:column>
-                </h:dataTable>
-
-                <h:outputText rendered="#{empty expenseController.allWithNoVerifierAssigned}" value="No unassigned reports" />
-
-                <div class="row">
-                    <div class="span2 btn-group">
-                        <h:commandButton action="#{expenseController.claimReports()}" value="Claim" styleClass="btn btn-primary"/>
-                        <h:commandButton action="/secured/reports" immediate="true"  value="Cancel" styleClass="btn btn"/>
-                    </div>
-                </div>
-            </h:form>
+    <ui:composition template="../resources/templates/reportsTemplate.xhtml">
+        <ui:param name="showReports" value="#{expenseController.allWithNoVerifierAssigned}"/>
+        <ui:param name="fromUrl" value="/secured/reportsUnclaimed"/>
+        <ui:define name="title">
+            <h3>All unassigned reports</h3>
         </ui:define>
     </ui:composition>
-
-
 
 </body>
 </html>

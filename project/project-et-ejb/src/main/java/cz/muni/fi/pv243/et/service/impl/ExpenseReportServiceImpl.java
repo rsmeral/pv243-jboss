@@ -90,6 +90,7 @@ public class ExpenseReportServiceImpl implements ExpenseReportService {
             throw new RuntimeException("report already has a verifier");
         }
 
+        report.setLastSubmittedDate(new Date(System.currentTimeMillis()));
         this.setStatus(report, ReportStatus.SUBMITTED);
     }
 
@@ -127,6 +128,7 @@ public class ExpenseReportServiceImpl implements ExpenseReportService {
             throw new RuntimeException("no verifier assigned");
         }
 
+        report.setApprovedDate(new Date(System.currentTimeMillis()));
         this.setStatus(report, ReportStatus.APPROVED);
     }
 

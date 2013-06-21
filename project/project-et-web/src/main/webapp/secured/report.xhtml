@@ -56,14 +56,14 @@
                 <h:column>
                     <f:facet name="header">Submitted</f:facet>
                     <h:outputText value="#{expenseReport.lastSubmittedDate}">
-                        <f:convertDateTime/>
+                        <f:convertDateTime pattern="MMM d, yyyy HH:mm"/>
                     </h:outputText>
                 </h:column>
 
                 <h:column>
                     <f:facet name="header">Last Change</f:facet>
                     <h:outputText value="#{expenseReport.lastChangeDate}">
-                        <f:convertDateTime/>
+                        <f:convertDateTime pattern="MMM d, yyyy HH:mm"/>
                     </h:outputText>
 
                 </h:column>
@@ -78,7 +78,7 @@
                 <h:column>
                     <f:facet name="header">Date</f:facet>
                     <h:outputText value="#{mt.date}">
-                        <f:convertDateTime/>
+                        <f:convertDateTime pattern="MMM d, yyyy HH:mm"/>
                     </h:outputText>
                 </h:column>
 
@@ -111,7 +111,7 @@
                 </h:column>
             </h:dataTable>
 
-            <h:panelGroup rendered="#{identityHelper.hasAnyRole('ADMIN,VERIFIER') and not identityHelper.isReportOwner(expenseReport.id)}">
+            <h:panelGroup rendered="#{identityHelper.hasAnyRole('ADMIN,VERIFIER') and not identityHelper.isReportOwner(expenseReport.id) and expenseController.hasVerifier()}">
             <div class="row">
                 <div class="span2 btn-group">
                     <h:commandLink action="#{moneyTransferController.createMoneyTransfer()}"
@@ -186,7 +186,8 @@
                     </h:panelGroup>
 
                     <!-- VERIFIER OPTIONS -->
-                    <h:panelGroup rendered="#{identityHelper.hasAnyRole('ADMIN,VERIFIER') and expenseController.isSubmitted()}">
+
+                    <h:panelGroup rendered="#{identityHelper.hasAnyRole('ADMIN,VERIFIER') and expenseController.isSubmitted() and expenseController.hasVerifier()}">
                         <!-- CHANGE COLOR !!!!!!!!!!! -->
                         <h:commandLink action="#{expenseController.rejectReport()}" styleClass="btn btn-primary" value="Reject"/>
                         <h:commandLink action="#{expenseController.approveReport()}" styleClass="btn btn-primary" value="Approve"/>

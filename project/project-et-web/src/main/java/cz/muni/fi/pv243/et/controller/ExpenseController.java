@@ -1,7 +1,7 @@
 package cz.muni.fi.pv243.et.controller;
 
-import cz.muni.fi.pv243.et.model.PersonWrapper;
 import cz.muni.fi.pv243.et.model.*;
+
 import cz.muni.fi.pv243.et.service.ExpenseReportService;
 import cz.muni.fi.pv243.et.util.CurrentPerson;
 import org.jboss.solder.logging.Logger;
@@ -99,10 +99,13 @@ public class ExpenseController {
     }
 
     public String claimReports() {
+        System.out.println("claimReports()" + checked.keySet() + checked.values());
         for (Long k : checked.keySet()) {
             if (checked.get(k)) {
                 for (ExpenseReport er : model.getReports()) {
                     if (er.getId().equals(k)) {
+                        logger.debug("claimReports()" + er.getId() + er.getName());
+                        System.out.println("claimReports()" + er.getId() + er.getName());
                         service.claim(er, currentPerson.getPerson() );
                     }
                 }
@@ -130,9 +133,18 @@ public class ExpenseController {
         return (status == ReportStatus.SUBMITTED);
     }
 
+    public boolean isSettled() {
+        ReportStatus status = model.getReport().getStatus();
+        return (status == ReportStatus.SETTLED);
+    }
+
     public boolean isApproved() {
         ReportStatus status = model.getReport().getStatus();
         return (status == ReportStatus.APPROVED);
+    }
+
+    public boolean hasVerifier() {
+        return (model.getReport().getVerifier() != null);
     }
 
     public String rejectReport() {
@@ -154,5 +166,7 @@ public class ExpenseController {
     public String cancel() {
         return model.getBackUrl();
     }
+
+
 
 }
