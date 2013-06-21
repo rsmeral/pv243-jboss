@@ -6,13 +6,13 @@
         >
 
 <head>
-    <title>Expense Purposes</title>
+    <title>People</title>
 </head>
 <body>
 
 <ui:composition template="../resources/templates/common/commonTemplate.xhtml">
     <ui:define name="content">
-        <h:form>
+        <h:form rendered="#{identityHelper.hasRole('ADMIN')}">
             <h2>People</h2>
             <h:dataTable value="#{allPersons}" var="p" styleClass="table table-bordered table-striped table-hover">
                 <h:column>
@@ -53,6 +53,13 @@
                     <h:commandLink action="#{personController.createPerson()}" styleClass="btn" value="Add person"/>
                 </div>
             </div>
+        </h:form>
+        <h:form rendered="#{!identityHelper.hasRole('ADMIN')}">
+            <p>
+                Your name: <strong>#{currentPerson.person.firstName} #{currentPerson.person.lastName}</strong><br/>
+                Your roles are: <strong>#{identity.userContext.roleNames}</strong><br/>
+                Click here to <h:commandLink value="Logout" action="#{logoutBean.logout()}"/>
+            </p>
         </h:form>
     </ui:define>
 </ui:composition>
