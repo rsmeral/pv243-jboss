@@ -66,7 +66,7 @@ public class ExpenseReportServiceImpl implements ExpenseReportService {
         if (report.getStatus() == ReportStatus.APPROVED ||
                 report.getStatus() == ReportStatus.REJECTED ||
                 report.getStatus() == ReportStatus.SETTLED) {
-            throw new RuntimeException("report status indicates that it should have already had a verifier assigned");
+            throw new IllegalVerifierException("report status indicates that it should have already had a verifier assigned");
         }
 
         report.setVerifier(verifier);
@@ -94,6 +94,7 @@ public class ExpenseReportServiceImpl implements ExpenseReportService {
         this.setStatus(report, ReportStatus.SUBMITTED);
     }
 
+    @Roles({PersonRole.VERIFIER, PersonRole.ADMIN})
     @Override
     public void reject(ExpenseReport report) {
         if (report == null) {
@@ -106,6 +107,7 @@ public class ExpenseReportServiceImpl implements ExpenseReportService {
         this.setStatus(report, ReportStatus.REJECTED);
     }
 
+    @Roles({PersonRole.VERIFIER, PersonRole.ADMIN})
     @Override
     public void sendMoney(ExpenseReport report) {
         if (report == null) {
@@ -119,6 +121,7 @@ public class ExpenseReportServiceImpl implements ExpenseReportService {
 
     }
 
+    @Roles({PersonRole.VERIFIER, PersonRole.ADMIN})
     @Override
     public void approve(ExpenseReport report) {
         if (report == null) {
@@ -151,13 +154,12 @@ public class ExpenseReportServiceImpl implements ExpenseReportService {
         return listProducer.get(id);
     }
 
-    @Roles({PersonRole.VERIFIER})
+    @Roles({PersonRole.ADMIN, PersonRole.VERIFIER})
     @Override
     public Collection<ExpenseReport> findAll() {
         return listProducer.getAll();
     }
 
-    @Roles({PersonRole.VERIFIER, PersonRole.APPLICANT})
     @Override
     public Collection<ExpenseReport> findForSubmitter(Person submitter) {
         if (submitter == null) {
@@ -167,7 +169,7 @@ public class ExpenseReportServiceImpl implements ExpenseReportService {
         return listProducer.getAllForSubmitter(submitter);
     }
 
-    @Roles({PersonRole.VERIFIER})
+    @Roles({PersonRole.ADMIN, PersonRole.VERIFIER})
     @Override
     public Collection<ExpenseReport> findForVerifier(Person verifier) {
         if (verifier == null) {
@@ -177,13 +179,13 @@ public class ExpenseReportServiceImpl implements ExpenseReportService {
         return listProducer.getAllForVerifier(verifier);
     }
 
-    @Roles({PersonRole.VERIFIER})
+    @Roles({PersonRole.ADMIN, PersonRole.VERIFIER})
     @Override
     public Collection<ExpenseReport> findWithNoVerifierAssigned() {
         return listProducer.getAllWithNoVerifierAssigned();
     }
 
-    @Roles({PersonRole.VERIFIER})
+    @Roles({PersonRole.ADMIN, PersonRole.VERIFIER})
     @Override
     public Collection<ExpenseReport> findByStatus(ReportStatus status) {
         if (status == null) {
@@ -193,7 +195,6 @@ public class ExpenseReportServiceImpl implements ExpenseReportService {
         return listProducer.getAllBy(status);
     }
 
-    @Roles({PersonRole.VERIFIER, PersonRole.APPLICANT})
     @Override
     public Collection<ExpenseReport> findForSubmitterWithStatus(Person submitter, ReportStatus status) {
         if (submitter == null || status == null) {
@@ -203,7 +204,7 @@ public class ExpenseReportServiceImpl implements ExpenseReportService {
         return listProducer.getAllForSubmitterWithStatus(submitter, status);
     }
 
-    @Roles({PersonRole.VERIFIER})
+    @Roles({PersonRole.ADMIN, PersonRole.VERIFIER})
     @Override
     public Collection<ExpenseReport> findForVerifierWithStatus(Person verifier, ReportStatus status) {
         if (verifier == null || status == null) {

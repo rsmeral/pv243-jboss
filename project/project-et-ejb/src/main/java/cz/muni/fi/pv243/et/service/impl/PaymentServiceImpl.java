@@ -5,7 +5,9 @@ import cz.muni.fi.pv243.et.data.PaymentRepository;
 import cz.muni.fi.pv243.et.model.ExpenseReport;
 import cz.muni.fi.pv243.et.model.Payment;
 import cz.muni.fi.pv243.et.model.Person;
+import cz.muni.fi.pv243.et.model.PersonRole;
 import cz.muni.fi.pv243.et.security.annotation.Authenticated;
+import cz.muni.fi.pv243.et.security.annotation.Roles;
 import cz.muni.fi.pv243.et.service.PaymentService;
 
 import javax.ejb.Stateless;
@@ -50,6 +52,7 @@ public class PaymentServiceImpl implements PaymentService {
         return paymentListProducer.getPayment(id);
     }
 
+    @Roles({PersonRole.ADMIN})
     @Override
     public Collection<Payment> findAll() {
         return paymentListProducer.getAllPayments();

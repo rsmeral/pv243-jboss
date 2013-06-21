@@ -4,7 +4,9 @@ import cz.muni.fi.pv243.et.data.MoneyTransferListProducer;
 import cz.muni.fi.pv243.et.data.MoneyTransferRepository;
 import cz.muni.fi.pv243.et.model.ExpenseReport;
 import cz.muni.fi.pv243.et.model.MoneyTransfer;
+import cz.muni.fi.pv243.et.model.PersonRole;
 import cz.muni.fi.pv243.et.security.annotation.Authenticated;
+import cz.muni.fi.pv243.et.security.annotation.Roles;
 import cz.muni.fi.pv243.et.service.MoneyTransferService;
 
 import javax.ejb.Stateless;
@@ -53,6 +55,7 @@ public class MoneyTransferServiceImpl implements MoneyTransferService {
         return listProducer.get(id);
     }
 
+    @Roles({PersonRole.ADMIN})
     @Override
     public Collection<MoneyTransfer> findAll() {
         return listProducer.getAll();
