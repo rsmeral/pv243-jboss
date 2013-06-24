@@ -3,15 +3,11 @@ Project ET
 A simple expense tracker built upon Java EE 6 and DeltaSpike.
 Data is persisted in Infinispan through Hibernate OGM.
 
-Hibernate OGM requires a custom AS module for hibernate. 
-Use `ogm-module-installer`to install it.
 
-
-
-Default users: 
-admin/admin
+### Default users: 
+`admin/admin`
 
 After initialization:
-alice/alice [applicant role]
-bob/bob	    [applicant & approver role]
-vera/vera   [approver role]
+`alice/alice` [applicant role]
+`bob/bob`	  [applicant & approver role]
+`vera/vera`   [approver role]
