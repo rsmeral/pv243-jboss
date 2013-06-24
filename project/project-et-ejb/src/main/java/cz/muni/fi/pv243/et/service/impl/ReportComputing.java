@@ -1,16 +1,12 @@
-package cz.muni.fi.pv243.et.util;
+package cz.muni.fi.pv243.et.service.impl;
 
-import cz.muni.fi.pv243.et.controller.ExpenseModel;
 import cz.muni.fi.pv243.et.model.ExpenseReport;
 import cz.muni.fi.pv243.et.model.MoneyTransfer;
 import cz.muni.fi.pv243.et.model.Payment;
 
 import javax.ejb.Stateful;
-import javax.enterprise.inject.Produces;
-import javax.inject.Inject;
 import javax.inject.Named;
 import java.math.BigDecimal;
-import java.util.List;
 
 
 @Stateful
@@ -33,7 +29,4 @@ public class ReportComputing {
 
         return moneyReceived.subtract(moneyPaid);
     }
-
-
-
 }
