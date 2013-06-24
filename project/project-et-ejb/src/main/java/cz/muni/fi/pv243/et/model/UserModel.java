@@ -1,15 +1,14 @@
 package cz.muni.fi.pv243.et.model;
 
+import java.io.Serializable;
 import org.hibernate.validator.constraints.Email;
 
-import javax.enterprise.context.RequestScoped;
-import javax.inject.Named;
 import javax.validation.constraints.Digits;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 
-public class UserModel {
+public class UserModel implements Serializable {
 
     private Long id;
 
@@ -42,6 +41,15 @@ public class UserModel {
     private String bankAccount;
 
     public UserModel() {
+    }
+
+    public UserModel(String userName, String firstName, String lastName, String email, String password, String bankAccount) {
+        this.userName = userName;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.bankAccount = bankAccount;
     }
     
     public String getUserName() {
