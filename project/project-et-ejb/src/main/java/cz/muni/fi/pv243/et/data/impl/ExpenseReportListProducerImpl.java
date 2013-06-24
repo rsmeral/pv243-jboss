@@ -85,8 +85,14 @@ public class ExpenseReportListProducerImpl implements ExpenseReportListProducer 
 
     @Override
     public Collection<ExpenseReport> getAllBy(ReportStatus status) {
-        return session.createQuery("SELECT report FROM ExpenseReport report WHERE report.status = :status")
-                .setParameter("status", status).list();
+        FullTextEntityManager ftem = Search.getFullTextEntityManager(em);
+        QueryBuilder queryBuilder = ftem.getSearchFactory().buildQueryBuilder().forEntity(ExpenseReport.class).get();
+        Query query = queryBuilder.keyword().onField("status").matching(status).createQuery();
+
+        FullTextQuery fullTextQuery = ftem.createFullTextQuery(query, ExpenseReport.class);
+        fullTextQuery.initializeObjectsWith(ObjectLookupMethod.SKIP, DatabaseRetrievalMethod.FIND_BY_ID);
+
+        return fullTextQuery.getResultList();
     }
 
     @Override
@@ -94,7 +100,7 @@ public class ExpenseReportListProducerImpl implements ExpenseReportListProducer 
         FullTextEntityManager ftem = Search.getFullTextEntityManager(em);
         QueryBuilder queryBuilder = ftem.getSearchFactory().buildQueryBuilder().forEntity(ExpenseReport.class).get();
         Query forPerson = queryBuilder.keyword().onField("submitter.id").matching(submitter.getId()).createQuery();
-        Query forStatus = queryBuilder.keyword().onField("status").matching(status.ordinal()).createQuery();
+        Query forStatus = queryBuilder.keyword().onField("status").matching(status).createQuery();
         Query query = queryBuilder.bool()
                 .must(forPerson)
                 .must(forStatus)
