@@ -146,16 +146,9 @@
             <artifactId>hibernate-entitymanager</artifactId>
         </dependency>
 
-
         <dependency>
             <groupId>org.apache.deltaspike.core</groupId>
             <artifactId>deltaspike-core-impl</artifactId>
-        </dependency>
-
-        <dependency>
-            <artifactId>infinispan-core</artifactId>
-            <groupId>org.infinispan</groupId>
-            <scope>provided</scope>
         </dependency>
 
         <dependency>
@@ -176,11 +169,6 @@
         <dependency>
             <groupId>org.picketbox</groupId>
             <artifactId>picketbox-core</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.picketbox</groupId>
-            <artifactId>picketbox-http</artifactId>
         </dependency>
 
         <dependency>
@@ -221,13 +209,6 @@
             <scope>test</scope>
         </dependency>
         
-        <dependency>
-            <groupId>org.jboss.shrinkwrap.resolver</groupId>
-            <artifactId>shrinkwrap-resolver-depchain</artifactId>
-            <scope>test</scope>
-            <type>pom</type>
-        </dependency>
-        
 
     </dependencies>
 
@@ -256,9 +237,6 @@
                         <artifactId>maven-surefire-plugin</artifactId>
                         <version>${version.surefire.plugin}</version>
                         <configuration>
-                            <systemPropertyVariables>
-                                <org.apache.maven.user-settings>${org.apache.maven.user-settings}</org.apache.maven.user-settings>
-                            </systemPropertyVariables>
                             <skip>true</skip>
                         </configuration>
                     </plugin>
