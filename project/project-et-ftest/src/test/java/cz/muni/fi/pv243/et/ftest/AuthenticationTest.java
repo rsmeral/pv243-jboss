@@ -47,12 +47,8 @@ public class AuthenticationTest {
     @FindBy(id = "navbar")
     Navigation nav;
     
-    @FindBy(id="btn-login")
-    WebElement loginBtn;
-    
     @Test
     public void testCorrectLogin() {
-        loginBtn.click();
         loginForm.login(ADMIN, ADMIN);
         assertTrue(nav.getLoggedInName().contains(ADMIN));
     }
