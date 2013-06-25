@@ -18,7 +18,7 @@
         <ui:define name="content">
             <ui:insert name="title"/>
             <o:form id="form" styleClass="form-horizontal">
-                <h:messages/>
+                <h:messages id="error-messages" />
                 <h:inputHidden value="#{payment.report}" converter="#{expenseReportConverter}"/>
 
                 <div class="control-group">

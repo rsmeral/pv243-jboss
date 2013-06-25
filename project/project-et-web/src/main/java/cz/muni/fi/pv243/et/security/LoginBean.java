@@ -36,6 +36,6 @@ public class LoginBean {
             return null;
         }
 
-        return "/secured/index.xhtml";
+        return "/secured/index.xhtml?faces-redirect=true";
     }
 }

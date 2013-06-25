@@ -16,49 +16,49 @@
         <div class="navbar-inner">
             <div class="container">
                 <h:form>
-                    <ul class="nav">
+                    <ul class="nav" id="navbar">
                         <li>
-                            <h:link outcome="/secured/index"><i class="icon-white icon-home"></i> Home</h:link>
+                            <h:link outcome="/secured/index" id="nav-home"><i class="icon-white icon-home"></i> Home</h:link>
                         </li>
                         <li>
-                            <h:link outcome="/create">Initialize</h:link>
+                            <h:link outcome="/create" id="nav-init">Initialize</h:link>
                         </li>
                         <li>
-                            <h:link outcome="/secured/reports">Reports</h:link>
+                            <h:link outcome="/secured/reports" id="nav-reports">Reports</h:link>
                         </li>
                         <li>
                             <h:link outcome="/secured/purposes"
-                                    rendered="#{identityHelper.hasAnyRole('ADMIN,VERIFIER')}">Purposes</h:link>
+                                    rendered="#{identityHelper.hasAnyRole('ADMIN,VERIFIER')}" id="nav-purposes">Purposes</h:link>
                         </li>
                         <li>
-                            <h:link outcome="/secured/receipts">Receipts</h:link>
+                            <h:link outcome="/secured/receipts" id="nav-receipts">Receipts</h:link>
                         </li>
                         <li>
                             <h:link outcome="/secured/persons"
-                                    rendered="#{identityHelper.hasRole('ADMIN')}">Users</h:link>
+                                    rendered="#{identityHelper.hasRole('ADMIN')}" id="nav-users">Users</h:link>
                         </li>
 
                     </ul>
-                    <ul class="nav pull-right">
+                    <ul class="nav pull-right" >
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" id="nav-identity">
                                 <i class="icon-user icon-white"></i> #{identity.user.firstName} #{identity.user.lastName}
                                 <b class="caret"></b>
                             </a>
                             <ul class="dropdown-menu">
                                 <li>
-                                    <h:commandLink action="#{personController.editPerson(identity.user.loginName)}">
+                                    <h:commandLink action="#{personController.editPerson(identity.user.loginName)}" id="nav-drop-edit">
                                         <i class="icon-book"></i> Edit profile
                                     </h:commandLink>
                                 </li>
                                 <li>
-                                    <h:commandLink action="#{personController.changePassword(identity.user.loginName)}">
+                                    <h:commandLink action="#{personController.changePassword(identity.user.loginName)}" id="nav-drop-change-password">
                                         <i class="icon-lock"></i> Change password
                                     </h:commandLink>
                                 </li>
                                 <li class="divider"></li>
                                 <li>
-                                    <h:commandLink action="#{logoutBean.logout()}">
+                                    <h:commandLink action="#{logoutBean.logout()}" id="nav-drop-logout">
                                         <i class="icon-off"></i> Logout
                                     </h:commandLink>
                                 </li>

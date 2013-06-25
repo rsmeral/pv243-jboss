@@ -12,7 +12,7 @@
             <ui:define name="content">
                 <ui:insert name="title"/>
                 <h:form styleClass="form-horizontal">
-                    <h:messages/>
+                    <h:messages id="error-messages" />
                     <h:inputHidden value="#{moneyTransfer.report}" converter="#{expenseReportConverter}"/>
 
                     <div class="control-group">

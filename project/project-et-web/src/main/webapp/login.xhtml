@@ -12,7 +12,7 @@
         <ui:define name="content">
             <div style="margin-left: 180px; margin-bottom: 80px;">
             <h2>Login</h2>
-            <h:messages styleClass="error"/>
+            <h:messages id="error-messages"  styleClass="error"/>
             <h:form id="login" styleClass="form-horizontal">
                 <div class="control-group">
                     <h:outputLabel value="Username:" for="username" styleClass="control-label"/>
@@ -31,11 +31,11 @@
                     <div class="controls">
                         <h:commandButton value="Login"
                                      action="#{loginBean.login(username, password)}"
-                                     styleClass="btn btn-primary"/>
+                                     styleClass="btn btn-primary" id="btn-login"/>
                         <br/><br/>
                         <p>
                             First access? Please
-                            <h:link outcome="signup" value="Sign Up"/>
+                            <h:link outcome="signup" value="Sign Up" id="btn-signup"/>
                             now.
                         </p>
                     </div>
